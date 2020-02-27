@@ -1,0 +1,12 @@
+.sign-in-bg{
+    height: 92.5vh;
+    background-image: linear-gradient(-71deg,#4c7af1,#15c39a 95%);
+}
+
+.sign-in-gradient-line{
+    height: 6px;
+    background-image: linear-gradient(-71deg,#4c7af1,#15c39a 95%);
+    border-radius: 3px 3px 0 0;
+    margin: 0;
+}
+
