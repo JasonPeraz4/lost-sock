@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Dashboard');
+Page::headerTemplate('Costos de envio');
 ?>
 
 <?php

@@ -20,21 +20,13 @@
     SIDEBAR STYLE
 */
 
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
-}
-
 a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.3s;
 }
 
-.navbar {
+.top-bar {
     padding: 15px 10px;
     background: #fff;
     border: none;
@@ -234,3 +226,27 @@ a.article, a.article:hover {
 
 }
 
+/*
+    SETTINGS STYLES
+*/
+
+.profile-photo-settings{
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+
+.photo-admin-list{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+
+.header-1{
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}

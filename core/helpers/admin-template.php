@@ -27,7 +27,7 @@ class Page {
         
                     <ul class="list-unstyled components">
                         <li class="active">
-                            <a href="#">
+                            <a href="dashboard.php">
                                 <i class="fas fa-image"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
@@ -39,21 +39,24 @@ class Page {
                             </a>
                             <ul class="collapse list-unstyled" id="productoSubmenu">
                                 <li>
-                                    <a href="#">Inventario</a>
+                                    <a href="product-inventoy.php">Inventario</a>
                                 </li>
                                 <li>
-                                    <a href="#">Categorias</a>
+                                    <a href="product-category.php">Categorias</a>
                                 </li>
                                 <li>
-                                    <a href="#">Tallas</a>
+                                    <a href="product-colors.php">Colores</a>
                                 </li>
                                 <li>
-                                    <a href="#">Tipos</a>
+                                    <a href="product-sizes.php">Tallas</a>
+                                </li>
+                                <li>
+                                    <a href="product-type.php">Tipos</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="orders.php">
                                 <i class="fas fa-image"></i>
                                 <span class="menu-title">Pedidos</span>
                             </a>
@@ -65,18 +68,21 @@ class Page {
                             </a>
                             <ul class="collapse list-unstyled" id="suscripcionSubmenu">
                                 <li>
-                                    <a href="#">Listado</a>
+                                    <a href="suscriptions.php">Listado</a>
                                 </li>
                                 <li>
-                                    <a href="#">Frecuencia</a>
+                                    <a href="suscription-frecuency.php">Frecuencia</a>
                                 </li>
                                 <li>
-                                    <a href="#">Costo de envio</a>
+                                    <a href="suscription-plans.php">Planes</a>
+                                </li>
+                                <li>
+                                    <a href="shipping-costs.php">Costo de envio</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="clients.php">
                                 <i class="fas fa-image"></i>
                                 <span class="menu-title">Clientes</span>
                             </a>
@@ -88,10 +94,10 @@ class Page {
                             </a>
                             <ul class="collapse list-unstyled" id="adminSubmenu">
                                 <li>
-                                    <a href="#">Listado</a>
+                                    <a href="admin-list.php">Listado</a>
                                 </li>
                                 <li>
-                                    <a href="#">Tipo de usuario</a>
+                                    <a href="admin-type.php">Tipo de usuario</a>
                                 </li>
                             </ul>
                         </li>
@@ -99,17 +105,17 @@ class Page {
         
                     <ul class="list-unstyled CTAs">
                         <li>
-                            <a href="#" class="download">Ajustes</a>
+                            <a href="admin-settings.php" class="download">Ajustes</a>
                         </li>
                         <li>
-                            <a href="#" class="article">Cerrar sesión</a>
+                            <a href="index.html" class="article">Cerrar sesión</a>
                         </li>
                     </ul>
                 </nav>
         
                 <!-- Page Content Holder -->
                 <div id="content">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
                         <div class="container-fluid">
                             <!-- Left Toogle-->
                             <button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -126,7 +132,7 @@ class Page {
                                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                       Dropdown link
                                     </a>
-                                    <div class="dropdown-menu">
+                                    <div class="dropdown-menu dropdown-menu-right">
                                       <a class="dropdown-item" href="#">Ajustes</a>
                                       <a class="dropdown-item" href="#">Cerrar sesión</a>
                                     </div>
@@ -149,20 +155,24 @@ class Page {
                                 </ul>
                             </div> --> 
                         </div>
-                    </nav>');
+                    </nav>
+                    <!-- Contenido principal -->
+                    <div class="container">');
     }
 
     public static function footerTemplate(){
         print('</div>
-        </div>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
-        <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-        <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
-        <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../../resources/js/script.js" type="text/javascript"></script>
-    </body>
-    </html>');
+                </div>
+            </div>
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
+            <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+            <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
+            <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="../../resources/js/font-awesome.js" type="text/javascript"></script>
+            <script src="../../resources/js/script.js" type="text/javascript"></script>
+        </body>
+        </html>');
     }
 }
 ?>
