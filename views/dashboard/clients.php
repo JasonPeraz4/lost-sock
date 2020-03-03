@@ -27,19 +27,19 @@ Page::headerTemplate('Clientes');
                         <span class="fas fa-user fa-3x mr-3"></span>
                         <h3 class="my-auto">Laura Navas</h3>
                     </div>
-                    <div class="d-flex flow-row flex-wrap align-items-center">
+                    <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Nombre completo:</strong></p>
                         <p class="col-md-6">Ana Laura Navas</p>
                     </div>
-                    <div class="d-flex flow-row flex-wrap align-items-center">
+                    <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Correo electrónico:</strong></p>
                         <p class="col-md-6">laura@navas.com</p>
                     </div>
-                    <div class="d-flex flow-row flex-wrap align-items-center">
+                    <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Dirección:</strong></p>
                         <p class="col-md-6">Milan, Italia. Calle Mirabello Depto. N.14</p>
                     </div>
-                    <div class="d-flex flow-row flex-wrap align-items-center">
+                    <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Teléfono:</strong></p>
                         <p class="col-md-6">75481236</p>
                     </div>
@@ -62,7 +62,6 @@ Page::headerTemplate('Clientes');
         </div>
     </div>
 </div>
-
 <?php
 Page::footerTemplate();
 ?>

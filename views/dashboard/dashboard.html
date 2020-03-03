@@ -18,20 +18,21 @@
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
+            <!-- Sidebar Header -->
             <div class="sidebar-header">
                 <h3>Lost Sock</h3>
             </div>
-
-            <ul class="list-unstyled components">
+            <!-- Sidebar elements -->
+            <ul class="list-unstyled components pb-3">
                 <li class="active">
                     <a href="dashboard.php">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-chart-line"></i>
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="#productoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-socks"></i>
                         <span class="menu-title">Productos</span>
                     </a>
                     <ul class="collapse list-unstyled" id="productoSubmenu">
@@ -54,13 +55,13 @@
                 </li>
                 <li>
                     <a href="orders.php">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-shopping-cart"></i>
                         <span class="menu-title">Pedidos</span>
                     </a>
                 </li>
                 <li>
                     <a href="#suscripcionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-shipping-fast"></i>
                         <span class="menu-title">Suscripciones</span>
                     </a>
                     <ul class="collapse list-unstyled" id="suscripcionSubmenu">
@@ -80,13 +81,13 @@
                 </li>
                 <li>
                     <a href="clients.php">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-user"></i>
                         <span class="menu-title">Clientes</span>
                     </a>
                 </li>
                 <li>
                     <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-user-shield"></i>
                         <span class="menu-title">Administradores</span>
                     </a>
                     <ul class="collapse list-unstyled" id="adminSubmenu">
@@ -99,58 +100,44 @@
                     </ul>
                 </li>
             </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="admin-settings.php" class="download">Ajustes</a>
+            <ul class="list-unstyled components pb-3">
+                <li class="">
+                    <a href="admin-settings.php">
+                        <i class="fas fa-cog"></i>
+                        <span class="menu-title">Ajustes</span>
+                    </a>
                 </li>
-                <li>
-                    <a href="index.html" class="article">Cerrar sesión</a>
+                <li class="">
+                    <a href="index.html">
+                        <i class="fas fa-power-off"></i>
+                        <span class="menu-title">Cerrar sesión</span>
+                    </a>
                 </li>
             </ul>
         </nav>
 
         <!-- Page Content Holder -->
         <div id="content">
+            <!-- Topbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
                 <div class="container-fluid">
                     <!-- Left Toogle-->
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn btn-light">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                    <!-- Left Toggle-->
-                    <!-- <button class="btn btn-light d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>-->
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                              Dropdown link
+                                <i class="fas fa-user-circle fa-2x"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                              <a class="dropdown-item" href="#">Ajustes</a>
-                              <a class="dropdown-item" href="#">Cerrar sesión</a>
+                                <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
+                                <a class="dropdown-item" href="index.html">Cerrar sesión</a>
                             </div>
-                          </li>
-                    </ul>                   
-                    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                        </ul>
-                    </div> --> 
+                        </li>
+                    </ul>                    
                 </div>
             </nav>
             <!-- Contenido principal -->
