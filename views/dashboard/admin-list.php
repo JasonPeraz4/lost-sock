@@ -29,7 +29,7 @@ Page::headerTemplate('Administradores');
 <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">
         <div class="d-flex flex-row my-auto">
-            <span class="photo-admin-list mr-3"></span>
+            <i class="fas fa-user-circle fa-3x mr-3 text-primary"></i>
             <div class="">
             <p class="my-auto">Jason Anthony Peraza Cruz</p>
             <p class="my-auto">jason@peraza.com</p>
@@ -45,7 +45,7 @@ Page::headerTemplate('Administradores');
     </a>
     <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">
         <div class="d-flex flex-row my-auto">
-            <span class="photo-admin-list mr-3"></span>
+            <i class="fas fa-user-circle fa-3x mr-3 text-primary"></i>
             <div class="">
             <p class="my-auto">Jason Anthony Peraza Cruz</p>
             <p class="my-auto">jason@peraza.com</p>

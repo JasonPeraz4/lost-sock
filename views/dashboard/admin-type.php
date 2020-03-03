@@ -5,12 +5,10 @@ Page::headerTemplate('Tipos de usuario');
 <div class="d-flex flex-row align-items-center mb-4">
     <h2>Tipo de usuario</h2>
     <p class="mr-auto ml-2 my-auto">4 en total</p>
-    <button type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#modalNewUserType">
-        Agregar
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
     </button>
-    
-</div>
-    <div class="modal fade" id="modalNewUserType" tabindex="-10" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -28,8 +26,8 @@ Page::headerTemplate('Tipos de usuario');
             </div>
             </div>
         </div>
-    </div>
-
+    </div>    
+</div>
 <div class="row">
     <div class="col-4">
         <form action="searchTypeUser" class="my-4">
@@ -56,180 +54,180 @@ Page::headerTemplate('Tipos de usuario');
     </div>
     <div class="col-8 p-4">
         <div class="tab-content tab-1" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-superadministrador" role="tabpanel" aria-labelledby="list-home-list">
-            <div class="d-flex flex-row align-items-center">
-                <h4 class="my-auto mx-2">Superadministrador</h4>
-                <span class="fas fa-edit fa-lg mx-2"></span>
-                <span class="fas fa-user fa-3x mx-4"></span>
+            <div class="tab-pane fade show active" id="list-superadministrador" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="d-flex flex-row align-items-center">
+                    <h4 class="my-auto mx-2">Superadministrador</h4>
+                    <span class="fas fa-edit fa-lg mx-2"></span>
+                    <span class="fas fa-user fa-3x mx-4"></span>
+                </div>
+                <h5 class="my-4 p-1">Permisos</h5>
+                <div class="my-2 p-1">
+                    <ul class="list-group checked-list-box">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                                <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                                <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                                <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                                <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary my-3">Guardar</button>
+                </div>
             </div>
-            <h5 class="my-4 p-1">Permisos</h5>
-            <div class="my-2 p-1">
-        		<ul class="list-group checked-list-box">
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
-                            <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-                            <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
-                            <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
-                            <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit" class="btn btn-primary my-3">Guardar</button>
+            <div class="tab-pane fade show" id="list-administrador" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="d-flex flex-row align-items-center">
+                    <h4 class="my-auto mx-2">Administrador</h4>
+                    <span class="fas fa-edit fa-lg mx-2"></span>
+                    <span class="fas fa-user fa-3x mx-4"></span>
+                </div>
+                <h5 class="my-4 p-1">Permisos</h5>
+                <div class="my-2 p-1">
+                    <ul class="list-group checked-list-box">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                                <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                                <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                                <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                                <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary my-3">Guardar</button>
+                </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="list-administrador" role="tabpanel" aria-labelledby="list-profile-list">
-            <div class="d-flex flex-row align-items-center">
-                <h4 class="my-auto mx-2">Administrador</h4>
-                <span class="fas fa-edit fa-lg mx-2"></span>
-                <span class="fas fa-user fa-3x mx-4"></span>
+            <div class="tab-pane fade show" id="list-gerente" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="d-flex flex-row align-items-center">
+                    <h4 class="my-auto mx-2">Gerente</h4>
+                    <span class="fas fa-edit fa-lg mx-2"></span>
+                    <span class="fas fa-user fa-3x mx-4"></span>
+                </div>
+                <h5 class="my-4 p-1">Permisos</h5>
+                <div class="my-2 p-1">
+                    <ul class="list-group checked-list-box">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                                <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                                <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                                <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                                <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary my-3">Guardar</button>
+                </div>
             </div>
-            <h5 class="my-4 p-1">Permisos</h5>
-            <div class="my-2 p-1">
-        		<ul class="list-group checked-list-box">
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
-                            <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-                            <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
-                            <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
-                            <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit" class="btn btn-primary my-3">Guardar</button>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="list-gerente" role="tabpanel" aria-labelledby="list-messages-list">
-            <div class="d-flex flex-row align-items-center">
-                <h4 class="my-auto mx-2">Gerente</h4>
-                <span class="fas fa-edit fa-lg mx-2"></span>
-                <span class="fas fa-user fa-3x mx-4"></span>
-            </div>
-            <h5 class="my-4 p-1">Permisos</h5>
-            <div class="my-2 p-1">
-        		<ul class="list-group checked-list-box">
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
-                            <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-                            <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
-                            <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
-                            <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit" class="btn btn-primary my-3">Guardar</button>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="list-empleado" role="tabpanel" aria-labelledby="list-settings-list">
-            <div class="d-flex flex-row align-items-center">
-                <h4 class="my-auto mx-2">Empleado</h4>
-                <span class="fas fa-edit fa-lg mx-2"></span>
-                <span class="fas fa-user fa-3x mx-4"></span>
-            </div>
-            <h5 class="my-4 p-1">Permisos</h5>
-            <div class="my-2 p-1">
-        		<ul class="list-group checked-list-box">
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
-                            <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
-                            <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
-                            <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
-                            <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit" class="btn btn-primary my-3">Guardar</button>
+            <div class="tab-pane fade show" id="list-empleado" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="d-flex flex-row align-items-center">
+                    <h4 class="my-auto mx-2">Empleado</h4>
+                    <span class="fas fa-edit fa-lg mx-2"></span>
+                    <span class="fas fa-user fa-3x mx-4"></span>
+                </div>
+                <h5 class="my-4 p-1">Permisos</h5>
+                <div class="my-2 p-1">
+                    <ul class="list-group checked-list-box">
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                                <label class="custom-control-label" for="defaultChecked1">Dashboard</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                                <label class="custom-control-label" for="defaultUnchecked1">Pedidos</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                                <label class="custom-control-label" for="defaultUnchecked2">Suscripciones</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                                <label class="custom-control-label" for="defaultUnchecked3">Clientes</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                                <label class="custom-control-label" for="defaultUnchecked4">Administradores</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary my-3">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
-  </div>
 </div>
 <?php
 Page::footerTemplate();

@@ -157,6 +157,7 @@ class Page {
             <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
             <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
             <script src="../../resources/js/font-awesome.js" type="text/javascript"></script>
+            <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
             <script src="../../resources/js/script.js" type="text/javascript"></script>
         </body>
         </html>');
@@ -219,7 +220,7 @@ class Page {
     }
 
     public static function footerSignIn(){
-        print('</div>
+                print('</div>
                 </div>
         </div>
         </div>

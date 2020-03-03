@@ -5,10 +5,10 @@ Page::headerTemplate('Configuración');
 <h2>Configuración de la cuenta</h2>
 <p>Cambia tu foto de perfil y ajustes de la cuenta</p>
 
-<form class="mt-4 mb-4">
+<form class="m-md-4 p-md-4">
     <div class="d-flex flex-row align-items-center">
         <h4 class="">Información general</h4>
-        <div class="profile-photo-settings ml-auto"></div>
+        <i class="fas fa-user-circle fa-3x ml-auto text-primary"></i>
     </div>
     
     <div class="form-row">
@@ -34,7 +34,7 @@ Page::headerTemplate('Configuración');
     <button type="submit" class="btn btn-primary">Cancelar</button>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
-<form action="cambiarClave" class="mt-4 mb-4">
+<form action="cambiarClave" class="m-md-4 p-md-4">
     <h4>Contraseña</h4>
     <div class="form-row">
         <div class="form-group col-md-6">

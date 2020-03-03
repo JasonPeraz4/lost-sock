@@ -17,6 +17,20 @@
     margin: 0;
 }
 
+/*
+    Dashboard styles
+*/
+
+.card-dashboard{
+    max-width: 18rem;
+}
+
+/*
+    Styles
+*/
+.body{
+    color: #202124;
+}
 .btn-purple{
     color: #fff;
     background-color: #a044ff;
@@ -74,7 +88,6 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
     display: flex;
     width: 100%;
     align-items: stretch;
-    perspective: 1500px;
 }
 
 
@@ -241,3 +254,12 @@ ul ul a {
     flex-flow: row nowrap;
     align-items: center;
 }
+
+.card-columns {
+    @include media-breakpoint-only(lg) {
+      column-count: 4;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 5;
+    }
+  }
