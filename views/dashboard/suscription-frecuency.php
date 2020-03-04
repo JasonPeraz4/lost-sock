@@ -11,9 +11,57 @@ Page::headerTemplate('Frecuencias de suscripción');
         <form action="searchAdmin" class="mx-md-2">
             <input type="text" class="form-control" placeholder="Buscar frecuencia" id="searchAdmin">
         </form>
-        <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#modalNewUserType">
+        <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#nuevaFrecuencia">
             Agregar
         </button>
+    </div>
+    <!-- Modal agregar frecuencia -->
+    <div class="modal fade" id="nuevaFrecuencia" tabindex="-1" role="dialog" aria-labelledby="nuevoTIpoUlLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-plus fa-lg my-auto mx-2"></i>
+                <h5 class="modal-title" id="exampleModalLabel">Nueva frecuencia de envio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-md-4">
+                <p>Ingresa el nombre de la nueva frecuencia de envio</p>
+                <form action="addUser">
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Frecuencia de envio" id="inputUsuario">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-purple">Agregar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal agregar frecuencia -->
+    <div class="modal fade" id="eliminarFrecuencia" tabindex="-1" role="dialog" aria-labelledby="eliminarTIpoUlLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-trash fa-lg my-auto mx-2"></i>
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar frecuencia de envio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-md-4">
+                <p>¿Estas seguro que deseas eliminar la frecuencia "Quincenalmente"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-purple">Eliminar</button>
+            </div>
+            </div>
+        </div>
     </div>       
 </div>
 <div class="row">
@@ -22,7 +70,7 @@ Page::headerTemplate('Frecuencias de suscripción');
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Bimensualmente
                 <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarFrecuencia"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Quincenalmente

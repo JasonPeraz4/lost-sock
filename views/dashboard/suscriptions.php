@@ -22,6 +22,27 @@ Page::headerTemplate('Suscripciones');
                 <a class="dropdown-item" href="#">Bimensualmente</a>
             </div>
         </div>
+        <!-- Modal cancelar suscripciòn -->
+        <div class="modal fade" id="cancelarSub" tabindex="-1" role="dialog" aria-labelledby="eliminarClienteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fas fa-exclamation fa-lg my-auto mx-2"></i>
+                        <h5 class="modal-title" id="exampleModalLabel">Cancelar suscripción</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-md-4">
+                        <p>¿Estas seguro que deseas cancelar esta suscripción?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-purple">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>       
 </div>
 <div class="list-group">
@@ -33,7 +54,7 @@ Page::headerTemplate('Suscripciones');
         <p class="my-auto col-md-3">Av. Aguilares. Chalatenango Depto. 14</p>
         <div class="d-flex flex-row align-items-center col-md-2">
             <p class="my-auto">Mensualmente</p>
-            <span class="fas fa-ban fa-sm mx-3"></span>
+            <span class="fas fa-ban fa-sm mx-3" data-toggle="modal" data-target="#cancelarSub"></span>
         </div>
     </a>
     <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">

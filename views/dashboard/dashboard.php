@@ -33,8 +33,7 @@ Page::headerTemplate('Dashboard');
             </div>
         </div>
     </div>
-</div>
-<div class="row p-md-4 m-md-4">
+</div><div class="row p-md-4 m-md-4">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
