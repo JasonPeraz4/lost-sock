@@ -43,12 +43,11 @@ Page::headerTemplate('Pedidos');
                         <span class="fas fa-image fa-sm mr-4"></span>
                         Calcetines de corazones
                     </div>
-                    <div class="my-3 d-flex align-items-center justify-content-between">
+                    <div class="my-3 d-flex flex-wrap align-items-center justify-content-between">
                         <p class="my-auto">Cliente</p>
-                        <h5 class="my-auto">Juan Melchor</h5>
-                        <span class="fas fa-user fa-lg"></span> 
+                        <h5 class="my-auto">Juan Melchor</h5> 
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <p class="my-auto text-uppercase">Enviada</p>
                         <p class="my-auto">01-01-2020</p>
                     </div>                     
@@ -68,12 +67,11 @@ Page::headerTemplate('Pedidos');
                         <span class="fas fa-image fa-sm mr-4"></span>
                         Calcetines de corazones azules
                     </div>
-                    <div class="my-3 d-flex align-items-center justify-content-between">
+                    <div class="my-3 d-flex flex-wrap align-items-center justify-content-between">
                         <p class="my-auto">Cliente</p>
-                        <h5 class="my-auto">Pedro Ricaldone</h5>
-                        <span class="fas fa-user fa-lg"></span> 
+                        <h5 class="my-auto">Pedro Ricaldone</h5> 
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <p class="my-auto text-uppercase">Enviada</p>
                         <p class="my-auto">02-02-2020</p>
                     </div>                     
@@ -89,7 +87,7 @@ Page::headerTemplate('Pedidos');
                         <h3 class="my-auto">Juan Melchor</h3>
                         <span class="fas fa-user fa-3x mr-3"></span>
                     </div>
-                    <div class="d-flex flow-row justify-content-between align-items-center m-4">
+                    <div class="d-flex flow-row justify-content-between align-items-center m-1 m-sm-2 m-md-4">
                         <div class="custom-control custom-checkbox d-flex flex-column">
                             <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
                             <label class="custom-control-label" for="defaultChecked1">Enviada</label>
@@ -115,7 +113,6 @@ Page::headerTemplate('Pedidos');
                     <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Detalle:</strong></p>
                         <div class="col-md-6 d-flex align-items-center">
-                            <span class="fas fa-image fa-sm mb-3"></span>
                             <p class="mx-3">Calcetines navideños</p>
                             <p class="mx-3">$4.60</p>
                             <p class="">2</p>
@@ -141,7 +138,7 @@ Page::headerTemplate('Pedidos');
                         <h3 class="my-auto">Pedro Ricaldone</h3>
                         <span class="fas fa-user fa-3x mr-3"></span>
                     </div>
-                    <div class="d-flex flow-row justify-content-between align-items-center m-4">
+                    <div class="d-flex flow-row justify-content-between align-items-center m-1 m-sm-2 m-md-4">
                         <div class="custom-control custom-checkbox d-flex flex-column">
                             <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
                             <label class="custom-control-label" for="defaultChecked1">Enviada</label>
@@ -154,7 +151,7 @@ Page::headerTemplate('Pedidos');
                             <input type="checkbox" class="custom-control-input" id="defaultChecked3" checked>
                             <label class="custom-control-label" for="defaultChecked3">Entregada</label>
                         </div>
-                        <span class="fas fa-ban fa-lg mr-3" data-toggle="modal" data-target="#cancelarPedido"></span>
+                        <span class="fas fa-ban fa-lg mx-2" data-toggle="modal" data-target="#cancelarPedido"></span>
                     </div>
                     <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Fecha:</strong></p>
@@ -167,7 +164,6 @@ Page::headerTemplate('Pedidos');
                     <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Detalle:</strong></p>
                         <div class="col-md-6 d-flex align-items-center">
-                            <span class="fas fa-image fa-sm mb-3"></span>
                             <p class="mx-3">Calcetines navideños</p>
                             <p class="mx-3">$4.60</p>
                             <p class="">2</p>

@@ -5,10 +5,10 @@ Page::headerTemplate('Configuración');
 <h2>Configuración de la cuenta</h2>
 <p>Cambia tu foto de perfil y ajustes de la cuenta</p>
 
-<form class="m-md-4 p-md-4">
+<form class="m-md-4 p-md-4 sombra">
     <div class="d-flex flex-row align-items-center">
         <h4 class="">Información general</h4>
-        <i class="fas fa-user-circle fa-3x ml-auto text-primary"></i>
+        <i class="fas fa-user-circle fa-3x ml-auto text-purple"></i>
     </div>
     
     <div class="form-row">
@@ -31,10 +31,10 @@ Page::headerTemplate('Configuración');
             <input type="text" class="form-control" placeholder="Usuario" id="inputUsuario">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Cancelar</button>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-outline-purple">Cancelar</button>
+    <button type="submit" class="btn btn-purple">Guardar</button>
 </form>
-<form action="cambiarClave" class="m-md-4 p-md-4">
+<form action="cambiarClave" class="m-md-4 p-md-4 sombra">
     <h4>Contraseña</h4>
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -52,8 +52,8 @@ Page::headerTemplate('Configuración');
             <input type="password" class="form-control" placeholder="Repetir contraseña" id="inputClave3">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Cancelar</button>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-outline-purple">Cancelar</button>
+    <button type="submit" class="btn btn-purple">Guardar</button>
 </form>
 <?php
 Page::footerTemplate();

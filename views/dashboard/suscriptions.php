@@ -46,7 +46,7 @@ Page::headerTemplate('Suscripciones');
     </div>       
 </div>
 <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">
+    <a href="#" class="list-group-item list-group-item-action d-flex flex-wrap flex-row align-items-center justify-content-around">
         <p class="my-auto col-md-2">Medias</p>
         <p class="my-auto col-md-2">Hombres</p>
         <p class="my-auto col-md-1">Talla M</p>
@@ -57,7 +57,7 @@ Page::headerTemplate('Suscripciones');
             <span class="fas fa-ban fa-sm mx-3" data-toggle="modal" data-target="#cancelarSub"></span>
         </div>
     </a>
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">
+    <a href="#" class="list-group-item list-group-item-action d-flex flex-row flex-wrap align-items-center justify-content-between">
         <p class="my-auto col-md-2">Calcetines deportivos</p>
         <p class="my-auto col-md-2">Hombres</p>
         <p class="my-auto col-md-1">Talla L</p>

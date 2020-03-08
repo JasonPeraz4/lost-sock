@@ -11,7 +11,7 @@ Page::headerTemplate('Frecuencias de suscripción');
         <form action="searchAdmin" class="mx-md-2">
             <input type="text" class="form-control" placeholder="Buscar frecuencia" id="searchAdmin">
         </form>
-        <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#nuevaFrecuencia">
+        <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#nuevaFrecuencia">
             Agregar
         </button>
     </div>

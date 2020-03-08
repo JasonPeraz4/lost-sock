@@ -45,7 +45,7 @@ Page::headerTemplate('Clientes');
             </a>
         </div>
     </div>
-    <div class="col-md-8 p-4">
+    <div class="col-md-8 p-4 bg-light">
         <div class="tab-content tab-1" id="nav-tabContent">
             <div class="tab-pane fade show active" id="list-laura" role="tabpanel" aria-labelledby="list-home-list">
                 <div class="about-client px-md-4">
@@ -79,7 +79,6 @@ Page::headerTemplate('Clientes');
                             <p class="my-auto">Mujer</p>
                             <div class="d-flex flex-row align-items-center">
                                 <p class="my-auto">Talla S</p>
-                                <span class="fas fa-ban fa-sm mx-3"></span>
                             </div>
                         </a>
                     </div>
@@ -117,7 +116,6 @@ Page::headerTemplate('Clientes');
                             <p class="my-auto">Hombre</p>
                             <div class="d-flex flex-row align-items-center">
                                 <p class="my-auto">Talla S</p>
-                                <span class="fas fa-ban fa-sm mx-3"></span>
                             </div>
                         </a>
                     </div>

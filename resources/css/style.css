@@ -57,9 +57,28 @@
     border-color: #a044ff;
 }
 
-/* Dashboard styles */
+.list-group-item.active {
+    background-color: #a044ff!important;
+    border-color: #a044ff!important;
+}
+
+.text-purple {
+    color: #a044ff!important;
+}
+
+/* Clientes styles */
+
+.comentario{
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sombra{
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
 
 /*
+
     SIDEBAR STYLE
 */
 
