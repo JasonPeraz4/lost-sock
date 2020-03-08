@@ -9,7 +9,7 @@ class Page {
             <!-- Se indica al navegador que la página web está optimizada para dispositivos móviles -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Título del documento -->
-            <title>Dashboard</title>
+            <title>'.$title.'</title>
             <!-- Importación de archivos CSS -->
             <link rel="stylesheet" href="../../resources/css/material-icons.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
