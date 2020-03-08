@@ -3,6 +3,7 @@ require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Dashboard');
 ?>
 <div class="row p-md-4 m-md-4">
+    <h3>Dashboard</h3>
     <div class="card-deck w-100">
         <div class="card card-dashboard border-primary mb-3 w-md-50">
             <div class="card-header text-primary border-primary">Hoy</div>
@@ -33,11 +34,22 @@ Page::headerTemplate('Dashboard');
             </div>
         </div>
     </div>
-</div><div class="row p-md-4 m-md-4">
-    <div class="col-12">
+</div>
+<div class="row p-md-4 m-md-4">    
+    <div class="col-md-8 h-100">
+        <h5>Ingresos semanales</h5>
         <div class="card">
             <div class="card-body">
-                <canvas id="chLine" height="100"></canvas>
+                <canvas id="chLine"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h6>Producto más vendido</h6>
+                <span class="fas fa-image fa-9x"></span>
+                <h6>Calcetines navideños</h6>
             </div>
         </div>
     </div>

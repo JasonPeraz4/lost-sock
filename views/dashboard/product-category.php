@@ -54,7 +54,7 @@ Page::headerTemplate('Categorias');
                 </button>
             </div>
             <div class="modal-body p-md-4">
-                <p>¿Estas seguro que deseas eliminar la categoria "Niños"?</p>
+                <p>¿Estas seguro que deseas eliminar la categoria "Hombres"?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
@@ -69,18 +69,18 @@ Page::headerTemplate('Categorias');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Hombre
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaCategoria"></span>
                 <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarCategoria"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Mujer
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaCategoria"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarCategoria"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Niños
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaCategoria"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarCategoria"></span>
             </a>
         </div>
     </div>

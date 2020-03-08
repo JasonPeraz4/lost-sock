@@ -65,7 +65,7 @@ Page::headerTemplate('Suscripciones');
         <p class="my-auto col-md-3">Av. Aguilares. Chalatenango Depto. 14</p>
         <div class="d-flex flex-row align-items-center col-md-2">
             <p class="my-auto">Bimensualmente</p>
-            <span class="fas fa-ban fa-sm mx-3"></span>
+            <span class="fas fa-ban fa-sm mx-3" data-toggle="modal" data-target="#cancelarSub"></span>
         </div>
     </a>
 </div>

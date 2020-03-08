@@ -69,23 +69,23 @@ Page::headerTemplate('Frecuencias de suscripción');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Bimensualmente
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaFrecuencia"></span>
                 <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarFrecuencia"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Quincenalmente
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaFrecuencia"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarFrecuencia"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Mensualmente
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaFrecuencia"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarFrecuencia"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Cuaternalmente
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaFrecuencia"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarFrecuencia"></span>
             </a>
         </div>
     </div>

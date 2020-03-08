@@ -74,25 +74,25 @@ Page::headerTemplate('Costos de envio');
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">Ahuachapan</p>
                 <p class="my-auto mr-4">$1.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoDepto"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarDepto"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">Santa Ana</p>
                 <p class="my-auto mr-4">$1.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoDepto"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarDepto"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">Sonsonate</p>
                 <p class="my-auto mr-4">$1.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoDepto"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarDepto"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">San Salvador</p>
                 <p class="my-auto mr-4">$0.25</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoDepto"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarDepto"></span>
             </a>
         </div>

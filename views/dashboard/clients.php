@@ -41,7 +41,7 @@ Page::headerTemplate('Clientes');
             <a class="list-group-item list-group-item-action d-flex align-items-center" id="list-home-list" data-toggle="list" href="#list-rafael" role="tab" aria-controls="home">
                 <span class="fas fa-user fa-sm mr-3"></span>
                 Rafael Anaya
-                <span class="fas fa-trash-alt fa-sm ml-auto"></span>
+                <span class="fas fa-trash-alt fa-sm ml-auto" data-toggle="modal" data-target="#eliminarCliente"></span>
             </a>
         </div>
     </div>

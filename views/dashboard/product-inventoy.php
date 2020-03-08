@@ -95,7 +95,28 @@ Page::headerTemplate('Productos');
                                         </div>
                                     </div>
                                     <strong>Talla </strong>
-                                    <strong><span class="fas fa-plus fa-sm"></span>Agregar existencia</strong>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Talla S
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">S</a>
+                                                    <a class="dropdown-item" href="#">M</a>
+                                                    <a class="dropdown-item" href="#">L</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <form action="">
+                                                <div class="form-group">  
+                                                    <input type="text" class="form-control" placeholder="Cantidad" id="inputUsuario">
+                                                </div>
+                                            </form>                                   
+                                        </div>
+                                    </div>
+                                    <strong><span class="fas fa-plus fa-sm"></span>Agregar talla</strong>
                                 </div>
                             </div>
                             <div class="row">
@@ -149,11 +170,13 @@ Page::headerTemplate('Productos');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center active" id="list-home-list" data-toggle="list" href="#list-detalle1" role="tab" aria-controls="home">
                 Calcetines navideños
-                <span class="fas fa-trash-alt fa-sm mx-3 ml-auto" data-toggle="modal" data-target="#eliminarProducto"></span>
+                <span class="fas fa-edit fa-sm  ml-auto" data-toggle="modal" data-target="#nuevoProducto"></span>
+                <span class="fas fa-trash-alt fa-sm mx-3" data-toggle="modal" data-target="#eliminarProducto"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center" id="list-home-list" data-toggle="list" href="#list-detalle2" role="tab" aria-controls="home">
                 Calcetines de corazones
-                <span class="fas fa-trash-alt fa-sm mx-3 ml-auto"></span>
+                <span class="fas fa-edit fa-sm  ml-auto" data-toggle="modal" data-target="#nuevoProducto"></span>
+                <span class="fas fa-trash-alt fa-sm mx-3" data-toggle="modal" data-target="#eliminarProducto"></span>
             </a>
         </div>
     </div>

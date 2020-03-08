@@ -69,23 +69,23 @@ Page::headerTemplate('Colores');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Rojo
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
                 <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Azul
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Amarillo
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Verde
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
             </a>
         </div>
     </div>

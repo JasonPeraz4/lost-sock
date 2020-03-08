@@ -21,7 +21,7 @@ Page::headerTemplate('Tallas');
             <div class="modal-content">
             <div class="modal-header">
                 <i class="fas fa-plus fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo talla</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nueva talla</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,18 +69,18 @@ Page::headerTemplate('Tallas');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Talla S
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaTalla"></span>
                 <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTalla"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Talla M
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaTalla"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTalla"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Talla L
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevaTalla"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTalla"></span>
             </a>
         </div>
     </div>

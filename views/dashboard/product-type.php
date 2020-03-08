@@ -69,23 +69,23 @@ Page::headerTemplate('Tipo de producto');
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Calcetines deportivos
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
                 <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Calcetas
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Medias
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 Edición ilimitada
-                <span class="fas fa-edit fa-sm ml-auto mr-2"></span>
-                <span class="fas fa-trash-alt fa-sm"></span>
+                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
+                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
             </a>
         </div>
     </div>

@@ -95,12 +95,12 @@ Page::headerTemplate('Pedidos');
                             <label class="custom-control-label" for="defaultChecked1">Enviada</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex flex-column">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Recibida</label>
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                            <label class="custom-control-label" for="defaultChecked2">Recibida</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex flex-column">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Entregada</label>
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked3" checked>
+                            <label class="custom-control-label" for="defaultChecked3">Entregada</label>
                         </div>
                         <span class="fas fa-ban fa-lg mr-3" data-toggle="modal" data-target="#cancelarPedido"></span>
                     </div>
@@ -147,14 +147,14 @@ Page::headerTemplate('Pedidos');
                             <label class="custom-control-label" for="defaultChecked1">Enviada</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex flex-column">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Recibida</label>
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                            <label class="custom-control-label" for="defaultChecked2">Recibida</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex flex-column">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Entregada</label>
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked3" checked>
+                            <label class="custom-control-label" for="defaultChecked3">Entregada</label>
                         </div>
-                        <span class="fas fa-ban fa-lg mr-3"></span>
+                        <span class="fas fa-ban fa-lg mr-3" data-toggle="modal" data-target="#cancelarPedido"></span>
                     </div>
                     <div class="d-flex flow-row flex-wrap align-items-center mb-md-4">
                         <p class="text-md-right col-md-6"><strong>Fecha:</strong></p>

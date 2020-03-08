@@ -74,25 +74,25 @@ Page::headerTemplate('Frecuencias de suscripción');
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">1 pares</p>
                 <p class="my-auto mr-4">$3.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoPlan"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarPlan"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">2 pares</p>
                 <p class="my-auto mr-4">$8.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoPlan"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarPlan"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">3 pares</p>
                 <p class="my-auto mr-4">$12.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoPlan"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarPlan"></span>
             </a>
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">4 pares</p>
                 <p class="my-auto mr-4">$16.50</p>
-                <span class="fas fa-edit fa-sm"></span>
+                <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#nuevoPlan"></span>
                 <span class="fas fa-trash-alt fa-sm ml-3" data-toggle="modal" data-target="#eliminarPlan"></span>
             </a>
         </div>

@@ -113,8 +113,8 @@ Page::headerTemplate('Administradores');
         <p class="my-auto">2525-2525</p>
         <div class="d-flex flex-row align-items-center">
             <p class="my-auto">Superadministrador</p>
-            <span class="fas fa-trash-alt fa-sm mx-3" data-toggle="modal" data-target="#eliminarUsuario"></span>
-            <span class="fas fa-edit fa-sm" data-toggle="modal" data-target="#modalNuevoUsuario"></span>
+            <span class="fas fa-edit fa-sm mx-3" data-toggle="modal" data-target="#modalNuevoUsuario"></span>
+            <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarUsuario"></span>
         </div>
     </a>
     <a href="#" class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between">
@@ -129,8 +129,8 @@ Page::headerTemplate('Administradores');
         <p class="my-auto">2525-2525</p>
         <div class="d-flex flex-row align-items-center">
             <p class="my-auto">Superadministrador</p>
-            <span class="fas fa-trash-alt fa-sm mx-3"></span>
-            <span class="fas fa-edit fa-sm"></span>
+            <span class="fas fa-edit fa-sm mx-3" data-toggle="modal" data-target="#modalNuevoUsuario"></span>
+            <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarUsuario"></span>
         </div>
     </a>
 </div>
