@@ -375,13 +375,13 @@ Page::headerTemplate('Productos');
                 </ul>
                 <div class="tab-content">
                     <div id="detalle2" class="tab-pane fade in active p-md-4">
-                        <h2>Calcetines de corazones</h2>
-                        <div class="container">
+                    <h2>Calcetines de corazones</h2>
+                        <div class="">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <span class="fas fa-image fa-9x"></span>
+                                <div class="col-sm-12 col-md-4">
+                                    <span class="fas fa-image fa-7x m-1"></span>
                                 </div>
-                                <div class="col-md-8 p-md-4">
+                                <div class="col-sm-12 col-md-8 p-md-4">
                                     <div class="row">
                                         <div class="col">
                                             <strong>Precio</strong>
@@ -424,27 +424,27 @@ Page::headerTemplate('Productos');
                                         </div>
                                     </div>
                                     <strong>Talla</strong>
-                                    <p>Talla S 14<span class="fas fa-edit fa-sm mx-1"></span></p>
-                                    <p>Talla M 10<span class="fas fa-edit fa-sm mx-1"></span></p>
-                                    <strong>Agregar existencia</strong>
+                                    <p>Talla S 14<span class="fas fa-edit fa-sm mx-1" data-toggle="modal" data-target="#agregarExistencia"></span></p>
+                                    <p>Talla M 10<span class="fas fa-edit fa-sm mx-1" data-toggle="modal" data-target="#agregarExistencia"></span></p>
+                                    <span data-toggle="modal" data-target="#agregarExistencia">Agregar existencia</span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 d-flex justify-content-between m-md-4">
-                                    <span class="fas fa-image fa-5x"></span>
-                                    <span class="fas fa-image fa-5x"></span>
-                                    <span class="fas fa-image fa-5x"></span>
-                                    <span class="fas fa-image fa-5x"></span>
-                                    <span class="fas fa-image fa-5x"></span>
+                                <div class="col-md-12 d-flex flex-wrap m-md-4">
+                                    <span class="fas fa-image fa-5x mx-2 mx-md-3"></span>
+                                    <span class="fas fa-image fa-5x mx-2 mx-md-3"></span>
+                                    <span class="fas fa-image fa-5x mx-2 mx-md-3"></span>
+                                    <span class="fas fa-image fa-5x mx-2 mx-md-3"></span>
+                                    <span class="fas fa-image fa-5x mx-2 mx-md-3"></span>
                                 </div>
                             </div>  
                         </div>
                     </div>
                     <div id="comentarios2" class="tab-pane fade p-md-4">
-                        <h4>Valoración promedio</h4>
-                        <div class="d-flex flex-row my-auto">
+                    <h4 class="">Valoración promedio</h4>
+                        <div class="d-flex flex-row my-auto ">
                             <h3 class="my-auto">4.0</h3>
-                            <div class="valoracion d-flex flex-row">
+                            <div class="valoracion d-flex flex-row text-warning">
                                 <i class="fas fa-star fa-lg my-auto mx-2"></i>
                                 <i class="fas fa-star fa-lg my-auto mx-2"></i>
                                 <i class="fas fa-star fa-lg my-auto mx-2"></i>
@@ -452,52 +452,61 @@ Page::headerTemplate('Productos');
                                 <i class="far fa-star fa-lg my-auto mx-2"></i>
                             </div>
                         </div>
-                        <div class="comentario d-flex flex-row shadow m-md-4">
-                            <div class="d-flex flex-column my-auto">
-                                <span class="fas fa-user fa-3x mx-auto"></span>
-                                <h5 class="mx-auto">Laura Navas</h53>
-                            </div>
-                            <div class="d-flex flex-column m-md-3 my-auto">
-                                <div class="valoracion d-flex flex-row">
-                                    <i class="fas fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
+                        <div class="comentario d-flex flex-row m-sm-2 m-md-3 p-3">
+                            <div class="d-flex flex-column justify-content-start col-10">
+                                <div class="d-flex flex-row align-items-center">
+                                    <span class="fas fa-user fa-3x"></span>
+                                    <h5 class="mx-2">Rafael Anaya</h5>
                                 </div>
-                                <p class="m-md-3">No hay de mi talla. Pésimo servicio.</p>
+                                <div class="d-flex flex-row text-warning my-2">
+                                    <i class="fas fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                </div>
+                                <p class="my-2">No hay de mi talla. Pésimo servicio.</p>
+                            </div>
+                            <div class="text-danger col-2 mb-auto">
+                                <span class="fas fa-ban fa-lg" data-toggle="modal" data-target="#eliminarComentario"></span>
                             </div>
                         </div>
-                        <div class="comentario d-flex flex-row shadow m-md-4">
-                            <div class="d-flex flex-column my-auto">
-                                <span class="fas fa-user fa-3x mx-auto"></span>
-                                <h5 class="mx-auto">Laura Navas</h53>
-                            </div>
-                            <div class="d-flex flex-column m-md-3 my-auto">
-                                <div class="valoracion d-flex flex-row">
-                                    <i class="fas fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
+                        <div class="comentario d-flex flex-row m-xs-2 m-md-3 p-3">
+                            <div class="d-flex flex-column justify-content-start col-10">
+                                <div class="d-flex flex-row align-items-center">
+                                    <span class="fas fa-user fa-3x"></span>
+                                    <h5 class="mx-2">Rafael Anaya</h5>
                                 </div>
-                                <p class="m-md-3">No hay de mi talla. Pésimo servicio.</p>
+                                <div class="d-flex flex-row text-warning my-2">
+                                    <i class="fas fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                </div>
+                                <p class="my-2">No hay de mi talla. Pésimo servicio.</p>
+                            </div>
+                            <div class="text-danger col-2 mb-auto">
+                                <span class="fas fa-ban fa-lg" data-toggle="modal" data-target="#eliminarComentario"></span>
                             </div>
                         </div>
-                        <div class="comentario d-flex flex-row shadow m-md-4">
-                            <div class="d-flex flex-column my-auto">
-                                <span class="fas fa-user fa-3x mx-auto"></span>
-                                <h5 class="mx-auto">Laura Navas</h53>
-                            </div>
-                            <div class="d-flex flex-column m-md-3 my-auto">
-                                <div class="valoracion d-flex flex-row">
-                                    <i class="fas fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
-                                    <i class="far fa-star my-auto mx-2"></i>
+                        <div class="comentario d-flex flex-row m-xs-2 m-md-3 p-3">
+                            <div class="d-flex flex-column justify-content-start col-10">
+                                <div class="d-flex flex-row align-items-center">
+                                    <span class="fas fa-user fa-3x"></span>
+                                    <h5 class="mx-2">Ana Cañas</h5>
                                 </div>
-                                <p class="m-md-3">No hay de mi talla. Pésimo servicio.</p>
+                                <div class="d-flex flex-row text-warning my-2">
+                                    <i class="fas fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                    <i class="far fa-star my-auto"></i>
+                                </div>
+                                <p class="my-2">No hay de mi talla. Pésimo servicio.</p>
+                            </div>
+                            <div class="text-danger col-2 mb-auto">
+                                <span class="fas fa-ban fa-lg" data-toggle="modal" data-target="#eliminarComentario"></span>
                             </div>
                         </div>
                     </div>
