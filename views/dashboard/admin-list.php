@@ -6,6 +6,7 @@ Page::headerTemplate('Administradores');
     <div class="d-flex flex-wrap flex-row align-items-center mb-2">
         <h2>Administradores</h2>
         <p class="mx-2 my-auto">4 en total</p>
+        <!-- Botón para mostrar administradores según su tipo -->
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Tipo
@@ -21,6 +22,7 @@ Page::headerTemplate('Administradores');
         <form action="searchAdmin" class="mx-2">
             <input type="text" class="form-control" placeholder="Buscar un administrador" id="searchAdmin">
         </form>
+        <!-- Botón de agregar -->
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#modalNuevoUsuario">
             Agregar
         </button>
@@ -29,6 +31,7 @@ Page::headerTemplate('Administradores');
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
+                    <!-- Titulo del modal -->
                     <i class="fas fa-plus fa-lg my-auto mx-2"></i>
                     <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -36,6 +39,7 @@ Page::headerTemplate('Administradores');
                     </button>
                 </div>
                 <div class="modal-body p-md-4">
+                    <!-- Formulario -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputNombres">Nombres</label>
@@ -87,6 +91,7 @@ Page::headerTemplate('Administradores');
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
+                <!-- Titulo del modal -->
                     <i class="fas fa-exclamation fa-lg my-auto mx-2"></i>
                     <h5 class="modal-title" id="exampleModalLabel">Deshabilitar usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -94,6 +99,7 @@ Page::headerTemplate('Administradores');
                     </button>
                 </div>
                 <div class="modal-body p-md-4">
+                    <!-- Mensaje de confirmación -->
                     <p>¿Estas seguro que deseas deshabilitar el  usuario "Jason Peraza"?</p>
                 </div>
                 <div class="modal-footer">
@@ -105,7 +111,9 @@ Page::headerTemplate('Administradores');
         </div>
     </div>       
 </div>
+<!-- Lista de items con la información de los administradores -->
 <div class="list-group">
+    <!-- Item de la lista -->
     <a href="#" class="list-group-item list-group-item-action d-flex flex-column flex-md-row align-items-center justify-content-between">
         <div class="d-flex flex-row my-auto">
             <i class="fas fa-user-circle fa-3x mr-3 text-purple"></i>

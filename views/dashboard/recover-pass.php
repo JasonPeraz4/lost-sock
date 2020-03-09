@@ -2,6 +2,7 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerSignIn('Restablece tu contraseña')
 ?>
+<!-- Formulario para recuperar contraseña -->
 <p>Ingresa una nueva contraseña segura. Tu contraseña debe tener minimo 8 carácteres: Una minuscula, una máyuscula, un número y un signo especial.</p>
 <form>
     <div class="form-group">

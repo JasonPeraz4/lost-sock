@@ -29,9 +29,11 @@ Page::headerTemplate('Clientes');
 </div>
 <div class="row">
     <div class="col-md-4">
+        <!-- Campo para buscar cliente -->
         <form action="searchTypeUser" class="my-4">
             <input type="text" class="form-control" placeholder="Buscar cliente" id="searchUserType">
         </form>
+        <!-- lista de clientes -->
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex align-items-center active" id="list-home-list" data-toggle="list" href="#list-laura" role="tab" aria-controls="home">
                 <span class="fas fa-user fa-sm mr-3"></span>
@@ -46,6 +48,7 @@ Page::headerTemplate('Clientes');
         </div>
     </div>
     <div class="col-md-8 p-4 bg-light">
+        <!-- Paneles con el detalle de información de cada cliente -->
         <div class="tab-content tab-1" id="nav-tabContent">
             <div class="tab-pane fade show active" id="list-laura" role="tabpanel" aria-labelledby="list-home-list">
                 <div class="about-client px-md-4">

@@ -29,10 +29,12 @@ Page::headerTemplate('Pedidos');
 </div>
 <div class="row">
     <div class="col-md-4">
+        <!-- Campo para buscar un pedido -->
         <form action="searchTypeUser" class="my-4">
             <input type="text" class="form-control" placeholder="Buscar pedido" id="searchUserType">
         </form>
         <div class="list-group" id="list-tab" role="tablist">
+            <!-- Lista de ordenes -->
             <a class="list-group-item list-group-item-action d-flex align-items-center active" id="list-home-list" data-toggle="list" href="#list-pedido1" role="tab" aria-controls="home">
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex align-items-center m-md-1">
@@ -81,6 +83,7 @@ Page::headerTemplate('Pedidos');
     </div>
     <div class="col-md-8 p-4">
         <div class="tab-content tab-1" id="nav-tabContent">
+            <!-- Paneles con el detalle de la orden -->
             <div class="tab-pane fade show active" id="list-pedido1" role="tabpanel" aria-labelledby="list-home-list">
                 <div class="about-client px-md-4">
                     <div class="d-flex flow-row justify-content-around align-items-center mx-4">

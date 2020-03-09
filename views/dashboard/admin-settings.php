@@ -10,7 +10,7 @@ Page::headerTemplate('Configuración');
         <h4 class="">Información general</h4>
         <i class="fas fa-user-circle fa-3x ml-auto text-purple"></i>
     </div>
-    
+    <!-- Formulario con la información básica -->
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputNombres">Nombres</label>
@@ -36,6 +36,7 @@ Page::headerTemplate('Configuración');
 </form>
 <form action="cambiarClave" class="m-md-4 p-md-4 sombra">
     <h4>Contraseña</h4>
+    <!-- Formulario para editar contraseña -->
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputClave">Contraseña</label>

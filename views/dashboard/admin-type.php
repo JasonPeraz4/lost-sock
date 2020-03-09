@@ -4,7 +4,8 @@ Page::headerTemplate('Tipos de usuario');
 ?>
 <div class="d-flex flex-row align-items-center mb-4">
     <h2>Tipo de usuario</h2>
-    <p class="mr-auto ml-2 my-auto">4 en total</p>
+    <p class="mr-auto ml-2 my-auto">4 en total</p>}
+    <!-- Botón para mandar a llamar el modal agregar usuario -->
     <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#nuevoTipoU">
         Agregar
     </button>
@@ -59,9 +60,11 @@ Page::headerTemplate('Tipos de usuario');
 </div>
 <div class="row">
     <div class="col-md-4">
+        <!-- Campo para buscar -->
         <form action="searchTypeUser" class="my-4">
             <input type="text" class="form-control" placeholder="Buscar un tipo" id="searchUserType">
         </form>
+        <!-- Lista con los tipos de usuarios -->
         <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" id="list-home-list" data-toggle="list" href="#list-superadministrador" role="tab" aria-controls="home">
                 Superadministrador
@@ -82,6 +85,7 @@ Page::headerTemplate('Tipos de usuario');
         </div>
     </div>
     <div class="col-md-8 p-4">
+        <!-- Paneles con la ifnormación de cada tipo de usuario -->
         <div class="tab-content tab-1" id="nav-tabContent">
             <div class="tab-pane fade show active" id="list-superadministrador" role="tabpanel" aria-labelledby="list-home-list">
                 <div class="d-flex flex-row align-items-center">

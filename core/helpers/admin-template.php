@@ -234,5 +234,17 @@ class Page {
         </body>
         </html>');
     }
+
+    public static function adminTypeListItem($tipoUsuario, $isActive){
+        if ($isActive) {
+            $isActive = ' active';
+        } else {
+            $isActive = '';
+        }
+        print('<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center'.$isActive.'" id="list-home-list" data-toggle="list" href="#list-superadministrador" role="tab" aria-controls="home">
+            '.$tipoUsuario.'
+            <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoU"></span>
+        </a>');
+    }
 }
 ?>

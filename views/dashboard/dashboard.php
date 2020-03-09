@@ -5,6 +5,7 @@ Page::headerTemplate('Dashboard');
 <div class="row p-md-4 m-md-4 m-2 p-1">
     <h3>Dashboard</h3>
     <div class="card-deck w-100">
+        <!-- Grupo de tarjetas con información sobre ventas -->
         <div class="card card-dashboard border-primary mb-3 w-md-50">
             <div class="card-header text-primary border-primary">Hoy</div>
             <div class="card-body text-primary">
@@ -40,6 +41,7 @@ Page::headerTemplate('Dashboard');
         <h5>Ingresos semanales</h5>
         <div class="card">
             <div class="card-body">
+                <!-- Gráfico -->
                 <canvas id="chLine"></canvas>
             </div>
         </div>
@@ -47,6 +49,7 @@ Page::headerTemplate('Dashboard');
     <div class="col-md-4 mt-md-4">
         <div class="card">
             <div class="card-body">
+                <!-- Producto más vendido -->
                 <h6>Producto más vendido</h6>
                 <span class="fas fa-image fa-9x"></span>
                 <h6>Calcetines navideños</h6>
@@ -56,6 +59,7 @@ Page::headerTemplate('Dashboard');
 </div>
 <div class="row p-md-4 m-md-4 m-2 p-1">
     <div class="col-md-8 table-responsive">
+        <!-- Tabla con los últimos pedidos -->
         <h5>Ultimos pedidos</h5>
         <table class="table table-hover">
             <thead>
@@ -97,6 +101,7 @@ Page::headerTemplate('Dashboard');
         </table>
     </div>
     <div class="col-md-4 table-responsive">
+        <!-- Tabla con las últimas suscripciones -->
         <h5>Ultimas suscripciones</h5>
         <table class="table table-hover">
             <thead>

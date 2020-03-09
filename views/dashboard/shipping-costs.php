@@ -60,10 +60,12 @@ Page::headerTemplate('Costos de envio');
         </div>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
+        <!-- Campo para buscar departamento -->
         <form action="searchAdmin" class="mx-md-2">
             <input type="text" class="form-control" placeholder="Buscar departamento" id="searchAdmin">
         </form>
     </div>
+    <!-- Boton para llamar modal nuevo departamento -->
     <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#nuevoDepto">
         Agregar
     </button>       
@@ -71,6 +73,7 @@ Page::headerTemplate('Costos de envio');
 <div class="row">
     <div class="col-md-4"> 
         <div class="list-group" id="list-tab" role="tablist">
+            <!-- lista de costes de envio -->
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">Ahuachapan</p>
                 <p class="my-auto mr-4">$1.50</p>

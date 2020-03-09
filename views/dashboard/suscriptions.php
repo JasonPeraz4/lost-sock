@@ -9,9 +9,11 @@ Page::headerTemplate('Suscripciones');
         
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
+        <!-- Campo de buscar suscripcion -->
         <form action="searchAdmin" class="mx-2">
             <input type="text" class="form-control" placeholder="Buscar" id="searchAdmin">
         </form>
+        <!-- ComboBox para filtrar suscripciones -->
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Frecuencia
@@ -46,6 +48,7 @@ Page::headerTemplate('Suscripciones');
     </div>       
 </div>
 <div class="list-group">
+    <!-- listas de suscripciones -->
     <a href="#" class="list-group-item list-group-item-action d-flex flex-wrap flex-row align-items-center justify-content-around">
         <p class="my-auto col-md-2">Medias</p>
         <p class="my-auto col-md-2">Hombres</p>

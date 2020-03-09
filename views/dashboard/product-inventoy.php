@@ -202,14 +202,17 @@ Page::headerTemplate('Productos');
 <div class="row">
     <div class="col-md-4">
         <div class="d-flex flex-row align-items-center my-4 ">
+            <!-- Campo para buscar un producto -->
             <form action="searchAdmin" class="">
                 <input type="text" class="form-control" placeholder="Buscar producto" id="searchAdmin">
             </form>
+            <!-- Boton para llamar modal agregar producto -->
             <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#nuevoProducto">
                 Agregar
             </button>
         </div>
         <div class="list-group" id="list-tab" role="tablist">
+            <!-- Lista de productos -->
             <a class="list-group-item list-group-item-action d-flex align-items-center active" id="list-home-list" data-toggle="list" href="#list-detalle1" role="tab" aria-controls="home">
                 Calcetines navideños
                 <span class="fas fa-edit fa-sm  ml-auto" data-toggle="modal" data-target="#nuevoProducto"></span>
@@ -224,6 +227,7 @@ Page::headerTemplate('Productos');
     </div>
     <div class="col-md-8 p-4">
         <div class="tab-content tab-1" id="nav-tabContent">
+            <!-- Panel con el detalle del producto -->
             <div class="tab-pane fade show active" id="list-detalle1" role="tabpanel" aria-labelledby="list-home-list">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#detalle1" class="btn btn-purple">Detalle</a></li>
@@ -296,6 +300,7 @@ Page::headerTemplate('Productos');
                             </div>  
                         </div>
                     </div>
+                    <!-- Panel con los comentarios del producto -->
                     <div id="comentarios1" class="tab-pane fade px-sm-auto p-md-4">
                         <h4 class="">Valoración promedio</h4>
                         <div class="d-flex flex-row my-auto ">

@@ -8,9 +8,11 @@ Page::headerTemplate('Frecuencias de suscripción');
         <p class="mx-2 my-auto">4 en total</p>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
+        <!-- Campo para buscar planes -->
         <form action="searchAdmin" class="mx-md-2">
             <input type="text" class="form-control" placeholder="Buscar plan" id="searchAdmin">
         </form>
+        <!-- Boton para llamar modal de agregar un plan -->
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#nuevoPlan">
             Agregar
         </button>
@@ -71,6 +73,7 @@ Page::headerTemplate('Frecuencias de suscripción');
 <div class="row">
     <div class="col-md-4"> 
         <div class="list-group" id="list-tab" role="tablist">
+            <!-- Lista de planes -->
             <a class="list-group-item list-group-item-action d-flex align-items-center">
                 <p class="my-auto mr-auto">1 pares</p>
                 <p class="my-auto mr-4">$3.50</p>
