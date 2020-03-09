@@ -11,7 +11,7 @@ class Page {
             <!-- Título del documento -->
             <title>'.$title.'</title>
             <!-- Importación de archivos CSS -->
-            <link rel="stylesheet" href="../../resources/css/material-icons.css">
+            <link rel="stylesheet" href="../../resources/css/fontawesome-all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
             <!-- Llamada a un archivo tipo icono -->
@@ -156,7 +156,6 @@ class Page {
             <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
             <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/font-awesome.js" type="text/javascript"></script>
             <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
             <script src="../../resources/js/script.js" type="text/javascript"></script>
         </body>

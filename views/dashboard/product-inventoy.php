@@ -111,7 +111,7 @@ Page::headerTemplate('Productos');
                                         <div class="col">
                                             <form action="">
                                                 <div class="form-group">  
-                                                    <input type="text" class="form-control" placeholder="Cantidad" id="inputUsuario">
+                                                    <input type="text" class="form-control" placeholder="Cantidad" id="inputCantidad">
                                                 </div>
                                             </form>                                   
                                         </div>
@@ -185,7 +185,7 @@ Page::headerTemplate('Productos');
                     <div class="col-3">
                         <form action="">
                             <div class="form-group">  
-                                <input type="text" class="form-control" placeholder="Cantidad" id="inputUsuario">
+                                <input type="text" class="form-control" placeholder="Cantidad" id="inputCant">
                             </div>
                         </form>                                   
                     </div>

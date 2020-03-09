@@ -2,7 +2,7 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Dashboard');
 ?>
-<div class="row p-md-4 m-md-4">
+<div class="row p-md-4 m-md-4 m-2 p-1">
     <h3>Dashboard</h3>
     <div class="card-deck w-100">
         <div class="card card-dashboard border-primary mb-3 w-md-50">
@@ -54,8 +54,8 @@ Page::headerTemplate('Dashboard');
         </div>
     </div>
 </div>
-<div class="row p-md-4 m-md-4">
-    <div class="col-md-8">
+<div class="row p-md-4 m-md-4 m-2 p-1">
+    <div class="col-md-8 table-responsive">
         <h5>Ultimos pedidos</h5>
         <table class="table table-hover">
             <thead>
@@ -96,7 +96,7 @@ Page::headerTemplate('Dashboard');
             </tbody>
         </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 table-responsive">
         <h5>Ultimas suscripciones</h5>
         <table class="table table-hover">
             <thead>
