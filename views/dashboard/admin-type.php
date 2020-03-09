@@ -4,7 +4,7 @@ Page::headerTemplate('Tipos de usuario');
 ?>
 <div class="d-flex flex-row align-items-center mb-4">
     <h2>Tipo de usuario</h2>
-    <p class="mr-auto ml-2 my-auto">4 en total</p>}
+    <p class="mr-auto ml-2 my-auto">4 en total</p>
     <!-- Botón para mandar a llamar el modal agregar usuario -->
     <button type="button" class="btn btn-purple" data-toggle="modal" data-target="#nuevoTipoU">
         Agregar
