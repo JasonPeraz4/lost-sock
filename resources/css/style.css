@@ -1,24 +1,14 @@
 /*
-    Sign in Styles
+*    Sign in Styles
 */
 
 .sign-in-bg{
-    height: 92.5vh;
+    height: calc(100vh - 56px);
     background-image: linear-gradient(to right, #a044ff 0%, #333399 51%, #a044ff 100%);
-}
-.sign-in-bg:hover{
-    background-position: right center;
-}
-
-.sign-in-gradient-line{
-    height: 6px;
-    background-image: linear-gradient(to right, #a044ff 0%, #333399 51%, #a044ff 100%);
-    border-radius: 3px 3px 0 0;
-    margin: 0;
 }
 
 /*
-    Dashboard styles
+*    Dashboard styles
 */
 
 .card-dashboard{
@@ -26,7 +16,7 @@
 }
 
 /*
-    Styles
+*    Styles
 */
 .body{
     color: #202124;
@@ -66,6 +56,16 @@
     color: #a044ff!important;
 }
 
+.table th {
+    border-top: none;
+    border-bottom: none;
+}
+
+.table-bordered td {
+    border-left: 0px;
+    border-right: 0px;
+}
+
 /* Clientes styles */
 
 .comentario{
@@ -89,9 +89,9 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
 }
 
 .top-bar {
-    padding: 15px 10px;
-    margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    /*height: 55px;*/
+    background-color: #fff;
 }
 
 .navbar-btn {
@@ -129,9 +129,6 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
     padding: 20px;
 }
 
-#sidebar ul.components {
-    border-bottom: 1px solid #fff;
-}
 
 #sidebar ul li a {
     padding: 10px;
@@ -140,14 +137,14 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #333399;
+    color: #8527e2;
     background: #f8f9fa;
 }
 
 /* , a[aria-expanded="true"]  */
 #sidebar ul li.active > a{
-    color: #333399;
-    background: #f8f9fa;
+    color: #8527e2;
+    background: #fff;
     border-radius: 20px 0px 0px 20px;
 }
 
@@ -184,8 +181,13 @@ ul ul a {
 #sidebarCollapse {
     width: 40px;
     height: 40px;
-    background: #f8f9fa;
+    background: #fff;
     cursor: pointer;
+}
+
+.toggle{
+    display: initial;
+    border: none;
 }
 
 #sidebarCollapse span {

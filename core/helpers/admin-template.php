@@ -103,54 +103,45 @@ class Page {
                             </ul>
                         </li>
                     </ul>
-                    <ul class="list-unstyled components pb-3">
-                        <li class="">
-                            <a href="admin-settings.php">
-                                <i class="fas fa-cog"></i>
-                                <span class="menu-title">Ajustes</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="index.html">
-                                <i class="fas fa-power-off"></i>
-                                <span class="menu-title">Cerrar sesión</span>
-                            </a>
-                        </li>
-                    </ul>
                 </nav>
         
-                <!-- Page Content Holder -->
+                <!-- Contenido principal de la página -->
                 <div id="content">
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
-                        <div class="container-fluid">
-                            <!-- Left Toogle-->
-                            <button type="button" id="sidebarCollapse" class="navbar-btn btn-light">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </button>
-                            <ul class="navbar-nav">
+                    
+                    <nav class="navbar sticky-top navbar-expand-lg navbar-light top-bar">
+                        <!-- Left Toogle-->
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <button class="navbar-toggler toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav ml-auto">         
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                        <i class="fas fa-user-circle fa-2x"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
-                                        <a class="dropdown-item" href="index.html">Cerrar sesión</a>
-                                    </div>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Jason Anthony
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
+                                    <a class="dropdown-item" href="index.php">Cerrar sesión</a>
+                                </div>
                                 </li>
-                            </ul>                    
+                            </ul>
                         </div>
-                    </nav>
+                      </nav>
                     <!-- Contenido principal -->
-                    <div class="container">');
+                    <div class="container-fluid px-md-5 pb-md-5 mt-5">');
     }
 
     public static function footerTemplate(){
-        print('</div>
+        print('     </div>
                 </div>
             </div>
+            <!-- Modals -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
             <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
             <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
@@ -162,8 +153,8 @@ class Page {
         </html>');
     }
 
-    public static function headerSignIn($cardTitle){
-        print('<!DOCTYPE html>
+    public static function headerSignIn($title, $cardTitle){
+        print('<!doctype html>
         <html lang="es">
         <head>
             <!-- Se especifica la codificación de caracteres para el documento -->
@@ -171,9 +162,8 @@ class Page {
             <!-- Se indica al navegador que la página web está optimizada para dispositivos móviles -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Título del documento -->
-            <title>Iniciar sesión | Lost Sock</title>
+            <title>'.$title.' | Lost Sock</title>
             <!-- Importación de archivos CSS -->
-            <link rel="stylesheet" href="../../resources/css/material-icons.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
             <!-- Llamada a un archivo tipo icono -->
@@ -185,46 +175,25 @@ class Page {
                     <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
                     Lost Sock
                 </a>
-                <p class="my-auto ml-auto">Ir al <a href="#">sitio público</a></p>
-            <div class="modal fade" id="modalNewUserType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
+                <p class="my-auto ml-auto">Ir al <a href="../commerce/index.php">sitio público</a></p>
             </nav>
-            <div class="sign-in-bg d-flex align-items-center">
-                
+            <div class="sign-in-bg d-flex align-items-center">       
                 <div class="container">
                     <div class="row justify-content-md-center">
-                        <div class="col-lg-5 col-md-7 co-sm-4">
+                        <div class="col-lg-5 col-md-7 col-sm-4">
                             <div class="card">
-                                <!-- <div class="sign-in-gradient-line"></div> -->
-                                <!-- <img class="card-img-top" src="..." alt="Logo de Lost Sock"> -->
-                                <div class="card-body m-4 m-xs-2">
+                                <div class="card-body m-3 m-md-4 m-xs-2">
                                     <h3 class="card-title">'.$cardTitle.'</h3>');
     }
 
     public static function footerSignIn(){
-                print('</div>
+        print('         </div>
+                    </div>
                 </div>
+            </div>
         </div>
         </div>
-        </div>
-        </div>
+        <!-- Modals -->
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
@@ -233,18 +202,6 @@ class Page {
         <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
         </body>
         </html>');
-    }
-
-    public static function adminTypeListItem($tipoUsuario, $isActive){
-        if ($isActive) {
-            $isActive = ' active';
-        } else {
-            $isActive = '';
-        }
-        print('<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center'.$isActive.'" id="list-home-list" data-toggle="list" href="#list-superadministrador" role="tab" aria-controls="home">
-            '.$tipoUsuario.'
-            <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoU"></span>
-        </a>');
     }
 }
 ?>
