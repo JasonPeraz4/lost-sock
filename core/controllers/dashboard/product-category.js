@@ -14,6 +14,7 @@ function fillTable(dataset) {
     dataset.forEach(function (row) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
+        
             <tr>
                 <td><img src="../../resources/img/categorias/${row.imagen_categoria}" class="materialboxed" height="100"></td>
                 <td>${row.nombre_categoria}</td>
@@ -35,10 +36,6 @@ function fillTable(dataset) {
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $('#tbody-rows').html(content);
-    // Se inicializa el componente Material Box asignado a las imagenes para que funcione el efecto Lightbox.
-    $('.materialboxed').materialbox();
-    // Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
-    $('.tooltipped').tooltip();
 }
 
 // Evento para mostrar los resultados de una búsqueda.

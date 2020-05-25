@@ -81,7 +81,14 @@ Page::headerTemplate('Categorias', null);
             <th>Acción</th>
         </tr>
     </thead>
-    <tbody class="table-bordered" id="tbody-rows" >
+    <tbody class="table-bordered" id="tbody-rows">
+        <tr>
+            <td>Hombres</td>
+            <td>
+                <a class="fas fa-edit mx-1" data-toggle="modal" data-target="#nuevaCategoria"></a>
+                <a class="fas fa-trash-alt" data-toggle="modal" data-target="#eliminarCategoria"></a>
+            </td>
+        </tr>
     </tbody>
 </table> 
 <?php
