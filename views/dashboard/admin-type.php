@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Tipos de usuario');
+Page::headerTemplate('Tipos de usuario', null);
 ?>
 <div class="d-flex flex-row align-items-center mb-4">
     <h2>Tipo de usuario</h2>

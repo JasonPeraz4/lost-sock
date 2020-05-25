@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Pedidos');
+Page::headerTemplate('Pedidos', null);
 ?>
 <div class="d-flex flex-row align-items-center mb-4">
     <h2>Pedidos</h2>

@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerSignIn('Recuperar contraseña','Necesitamos comprobar tu identidad')
+Page::headerTemplate('Recuperar contraseña','Necesitamos comprobar tu identidad')
 ?>
 <p>Ingresa tu correo electrónico asociado a tu cuenta. Te enviaremos un enlace para restablecer tu contraseña.</p>
 <form>
@@ -13,6 +13,6 @@ Page::headerSignIn('Recuperar contraseña','Necesitamos comprobar tu identidad')
     <a class="btn btn-purple btn-block" href="recover-pass.php" role="button">Enviar</a>
 </form>
 <?php
-Page::footerSignIn();
+Page::footerSignIn('recoverpass.js');
 ?>
 

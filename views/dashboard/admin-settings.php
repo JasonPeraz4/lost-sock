@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Configuración');
+Page::headerTemplate('Configuración', null);
 ?>
 <h2>Configuración de la cuenta</h2>
 <p>Cambia tu foto de perfil y ajustes de la cuenta</p>

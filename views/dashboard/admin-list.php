@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Administradores');
+Page::headerTemplate('Administradores', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex align-items-end pb-md-3 pb-2">

@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Frecuencias de suscripción');
+Page::headerTemplate('Frecuencias de suscripción', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">

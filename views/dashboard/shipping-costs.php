@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Costos de envio');
+Page::headerTemplate('Costos de envio', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">

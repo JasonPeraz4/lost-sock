@@ -82,6 +82,8 @@ if ( isset( $_GET['action'] ) ) {
                         if ( $administrador->checkClave( $_POST['clave'] ) ) {
                             $_SESSION['idadministrador'] = $administrador->getId();
                             $_SESSION['email'] = $administrador->getEmail();
+                            $_SESSION['nombres'] = $administrador->getNombres();
+                            $_SESSION['apellidos'] = $administrador->getApellidos();
                             $result['status'] = 1;
                             $result['message'] = 'Autenticación correcta';
                         } else {

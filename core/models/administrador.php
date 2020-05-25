@@ -192,11 +192,13 @@ class Administrador extends Validator{
         }
     }
     public function checkEmail( $email ){
-        $sql = 'SELECT idAdministrador FROM administrador WHERE email = ?';
+        $sql = 'SELECT idAdministrador, nombres, apellidos FROM administrador WHERE email = ?';
         $params = array($email);
         if ($data = Database::getRow($sql, $params)) {
             $this->id = $data['idadministrador'];
             $this->email = $email;
+            $this->nombres = $data['nombres'];
+            $this->apellidos = $data['apellidos'];
             return true;
         } else {
             return false;

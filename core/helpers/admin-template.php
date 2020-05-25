@@ -136,7 +136,7 @@ class Page {
                                 <ul class="navbar-nav ml-auto">         
                                     <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Jason Anthony
+                                        '.$_SESSION['nombres'].' '.$_SESSION['apellidos'].'
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
@@ -155,7 +155,7 @@ class Page {
             }
         } else {
             // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
-            if ($filename != 'index.php' && $filename != 'signin.php') {
+            if ( $filename != 'index.php' && $filename != 'signin.php' && $filename != 'recover-email.php' && $filename != 'recover-pass.php' ) {
                 header('location: index.php');
             } else {
                 // Se imprime el código HTML para el encabezado del documento con un menú vacío cuando sea iniciar sesión o registrar el primer usuario.
