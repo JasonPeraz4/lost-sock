@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Dashboard');
+Page::headerTemplate('Dashboard', null);
 ?>
 <div class="row p-md-4 m-md-4 m-2 p-1">
     <h3>Dashboard</h3>

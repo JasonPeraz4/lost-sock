@@ -1,6 +1,9 @@
 <?php
 class Page {
-    public static function headerTemplate($title){
+    public static function headerTemplate( $title, $cardTitle){
+        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en las páginas web.
+        session_start();
+        // Se imprime el código HTML de la cabecera del documento.
         print('<!DOCTYPE html>
         <html lang="es">
         <head>
@@ -9,7 +12,7 @@ class Page {
             <!-- Se indica al navegador que la página web está optimizada para dispositivos móviles -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Título del documento -->
-            <title>'.$title.'</title>
+            <title>'.$title.' | Lost Sock</title>
             <!-- Importación de archivos CSS -->
             <link rel="stylesheet" href="../../resources/css/fontawesome-all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
@@ -18,7 +21,18 @@ class Page {
             <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
         </head>
         <body>
-            <div class="wrapper">
+        ');
+        // Se obtiene el nombre del archivo de la página web actual.
+        $filename = basename($_SERVER['PHP_SELF']);
+        // Se comprueba si existe una sesión de administrador para mostrar el menú de opciones, de lo contrario se muestra un menú vacío.
+        if (isset($_SESSION['idadministrador'])) {
+            // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para no iniciar sesión otra vez, de lo contrario se direcciona a main.php
+            if ($filename != 'index.php' && $filename != 'signin.php') {
+                // Se llama al método que contiene el código de las cajas de dialogo (modals).
+                
+                // Se imprime el código HTML para el encabezado del documento con el menú de opciones.
+                print('
+                <div class="wrapper">
                 <!-- Sidebar Holder -->
                 <nav id="sidebar">
                     <!-- Sidebar Header -->
@@ -103,42 +117,83 @@ class Page {
                             </ul>
                         </li>
                     </ul>
-                </nav>
-        
+                </nav>        
                 <!-- Contenido principal de la página -->
                 <div id="content">
                     <!-- Topbar -->
-                    
-                    <nav class="navbar sticky-top navbar-expand-lg navbar-light top-bar">
-                        <!-- Left Toogle-->
-                        <button type="button" id="sidebarCollapse" class="navbar-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        <button class="navbar-toggler toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav ml-auto">         
-                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Jason Anthony
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
-                                    <a class="dropdown-item" href="index.php">Cerrar sesión</a>
-                                </div>
-                                </li>
-                            </ul>
-                        </div>
-                      </nav>
+                    <header>
+                        <nav class="navbar sticky-top navbar-expand-lg navbar-light top-bar">
+                            <!-- Left Toogle-->
+                            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <button class="navbar-toggler toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav ml-auto">         
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Jason Anthony
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
+                                        <a class="dropdown-item" href="#" onclick="signOff()">Cerrar sesión</a>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </div>
+                          </nav>
+                    </header>                    
                     <!-- Contenido principal -->
-                    <div class="container-fluid px-md-5 pb-md-5 mt-5">');
+                    <main class="container-fluid px-md-5 pb-md-5 mt-5">
+                ');
+            } else {
+                header('location: dashboard.php');
+            }
+        } else {
+            // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
+            if ($filename != 'index.php' && $filename != 'signin.php') {
+                header('location: index.php');
+            } else {
+                // Se imprime el código HTML para el encabezado del documento con un menú vacío cuando sea iniciar sesión o registrar el primer usuario.
+                print('
+                <header>
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="#">
+                        <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
+                        Lost Sock
+                    </a>
+                    <p class="my-auto ml-auto">Ir al <a href="../commerce/index.php">sitio público</a></p>
+                </nav>
+            </header>
+            <main class="sign-in-bg d-flex align-items-center">       
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                ');
+                if ($filename == 'signin.php') {
+                    print('
+                    <div class="col-lg-7 col-md-9 col-sm-6">
+                    <div class="card">
+                        <div class="card-body m-3 m-md-4 m-xs-2">
+                            <h3 class="card-title">'.$cardTitle.'</h3>
+                    ');
+                } else {
+                    print('
+                    <div class="col-lg-5 col-md-7 col-sm-4">
+                    <div class="card">
+                        <div class="card-body m-3 m-md-4 m-xs-2">
+                            <h3 class="card-title">'.$cardTitle.'</h3>
+                    ');
+                }                
+            }
+        }    
     }
 
     public static function footerTemplate(){
-        print('     </div>
+        print('     </main>
                 </div>
             </div>
             <!-- Modals -->
@@ -148,7 +203,9 @@ class Page {
             <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
             <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
             <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/script.js" type="text/javascript"></script>
+            <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+            <script src="../../resources/js/script.js" type="text/javascript"></script>       
+            <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
         </body>
         </html>');
     }
@@ -170,29 +227,16 @@ class Page {
             <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
         </head>
         <body>
-            <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="#">
-                    <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
-                    Lost Sock
-                </a>
-                <p class="my-auto ml-auto">Ir al <a href="../commerce/index.php">sitio público</a></p>
-            </nav>
-            <div class="sign-in-bg d-flex align-items-center">       
-                <div class="container">
-                    <div class="row justify-content-md-center">
-                        <div class="col-lg-5 col-md-7 col-sm-4">
-                            <div class="card">
-                                <div class="card-body m-3 m-md-4 m-xs-2">
-                                    <h3 class="card-title">'.$cardTitle.'</h3>');
+            ');
     }
 
-    public static function footerSignIn(){
+    public static function footerSignIn($controller){
         print('         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+        </main>
         <!-- Modals -->
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -200,6 +244,10 @@ class Page {
         <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
         <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
         <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+        <script src="../../resources/js/script.js" type="text/javascript"></script>
+        <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+        <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
         </body>
         </html>');
     }

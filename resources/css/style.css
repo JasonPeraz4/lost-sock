@@ -5,6 +5,7 @@
 .sign-in-bg{
     height: calc(100vh - 56px);
     background-image: linear-gradient(to right, #a044ff 0%, #333399 51%, #a044ff 100%);
+    overflow-y: scroll;
 }
 
 /*

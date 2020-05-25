@@ -282,5 +282,22 @@ class Validator
             return false;
         }
     }
+
+    /*
+    *   Método para validar un número de teléfono.
+    *
+    *   Parámetros: $value (dato a validar).
+    *   
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validatePhoneNumber($value)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (preg_match('/^[0-9]{8}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>
