@@ -48,7 +48,7 @@ class Product_Category extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function searchCategory($value)
+    public function searchCategoria($value)
     {
         $sql = 'SELECT idCategoria, categoria
                 FROM categoria 
@@ -57,7 +57,7 @@ class Product_Category extends Validator
         return Database::getRows($sql, $params);
     }
 
-    public function createCategory()
+    public function createCategoria()
     { 
         $sql = 'INSERT INTO categoria(idCategoria, categoria)
                 VALUES(?, ?)';
@@ -65,7 +65,7 @@ class Product_Category extends Validator
         return Database::executeRow($sql, $params);
     }
 
-    public function readAllCategory()
+    public function readAllCategoria()
     {
         $sql = 'SELECT idCategoria, categoria
                 FROM categoria
@@ -74,7 +74,7 @@ class Product_Category extends Validator
         return Database::getRows($sql, $params);
     }
 
-    public function readCategory()
+    public function readOneCategoria()
     {
         $sql = 'SELECT idCategoria, categoria
                 FROM categoria
@@ -83,13 +83,13 @@ class Product_Category extends Validator
         return Database::getRow($sql, $params);
     }
 
-    public function updateCategory(){
+    public function updateCategoria(){
             $sql='UPDATE categoria SET categoria=? WHERE idCategoria=?';
             $params=array($this->idCategoria, $this->categoria);
             return Database::executeRow($sql, $params);
         }
 
-    public function deleteCategory()
+    public function deleteCategoria()
     {
         $sql = 'DELETE FROM categoria
                 WHERE idCategoria = ?';
