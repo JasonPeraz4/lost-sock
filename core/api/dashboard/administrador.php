@@ -48,12 +48,15 @@ if ( isset( $_GET['action'] ) ) {
                         if ( $administrador->setEmail($_POST['email']) ) {
                             if ( $administrador->setUsuario($_POST['usuario']) ) {
                                 if ( $administrador->setTelefono($_POST['telefono']) ) {
-                                    $administrador->setTipo(1);
-                                    if ( $administrador->createAdministrador() ) {
-                                        $result['status'] = 1;
-                                        $result['message'] = 'Administrador registrado exitosamente';
+                                    if ( $administrador->setTipo(1) ) {
+                                        if ( $administrador->createAdministrador() ) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Administrador registrado exitosamente';
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
                                     } else {
-                                        $result['exception'] = Database::getException();
+                                        $result['exception'] = 'Error al establecer el tipo de usuario';
                                     }
                                     
                                 } else {
