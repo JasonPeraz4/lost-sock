@@ -1,6 +1,6 @@
 <?php
 /*
-*	Clase para manejar la tabla productos de la base de datos. Es clase hija de Validator.
+*	Clase para manejar la tabla producto de la base de datos. Es clase hija de Validator.
 */
 class Product_Inventory extends Validator
 {
