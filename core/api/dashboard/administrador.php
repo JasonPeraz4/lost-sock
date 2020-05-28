@@ -23,18 +23,18 @@ if ( isset( $_GET['action'] ) ) {
                 }
             break;
             case 'readAll':
-                if ( $administrador->existAdministradores() ) {
+                if ($result['dataset'] = $administrador->readAllAdministradores()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No existen administradores registrados';
+                    $result['exception'] = 'No hay administradores registrados';
                 }
-            break;
+                break;
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ( $_GET['action'] ){
             case 'readAll':
-                if ( $administrador->existAdministradores() ) {
+                if ( $administrador->readAllAdministradores() ) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un administrador registrado';
                 } else {

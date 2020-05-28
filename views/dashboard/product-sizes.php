@@ -90,6 +90,6 @@ Page::headerTemplate('Tallas', null);
 </div>    
 
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

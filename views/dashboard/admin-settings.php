@@ -57,6 +57,6 @@ Page::headerTemplate('Configuración', null);
     <button type="submit" class="btn btn-purple">Guardar</button>
 </form>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

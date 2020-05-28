@@ -94,6 +94,6 @@ Page::headerTemplate('Frecuencias de suscripción', null);
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

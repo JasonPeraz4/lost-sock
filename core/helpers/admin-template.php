@@ -17,6 +17,7 @@ class Page {
             <link rel="stylesheet" href="../../resources/css/fontawesome-all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
+            <link rel="stylesheet" href="../../resources/css/datatables.min.css" type="text/css"/>
             <!-- Llamada a un archivo tipo icono -->
             <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
         </head>
@@ -192,7 +193,7 @@ class Page {
         }    
     }
 
-    public static function footerTemplate(){
+    public static function footerTemplate($controller){
         print('     </main>
                 </div>
             </div>
@@ -203,31 +204,13 @@ class Page {
             <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
             <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
             <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
+            <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-            <script src="../../resources/js/script.js" type="text/javascript"></script>       
+            <script src="../../core/helpers/components.js" type="text/javascript"></script>
             <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+            <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
         </body>
         </html>');
-    }
-
-    public static function headerSignIn($title, $cardTitle){
-        print('<!doctype html>
-        <html lang="es">
-        <head>
-            <!-- Se especifica la codificación de caracteres para el documento -->
-            <meta charset="utf-8">
-            <!-- Se indica al navegador que la página web está optimizada para dispositivos móviles -->
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <!-- Título del documento -->
-            <title>'.$title.' | Lost Sock</title>
-            <!-- Importación de archivos CSS -->
-            <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
-            <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
-            <!-- Llamada a un archivo tipo icono -->
-            <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
-        </head>
-        <body>
-            ');
     }
 
     public static function footerSignIn($controller){
@@ -245,7 +228,7 @@ class Page {
         <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
         <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-        <script src="../../resources/js/script.js" type="text/javascript"></script>
+        <script src="../../core/helpers/components.js" type="text/javascript"></script>
         <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
         <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
         </body>

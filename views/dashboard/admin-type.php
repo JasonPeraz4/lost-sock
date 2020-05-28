@@ -263,6 +263,6 @@ Page::headerTemplate('Tipos de usuario', null);
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

@@ -85,6 +85,6 @@ Page::headerTemplate('Categorias', null);
     </tbody>
 </table> 
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 
