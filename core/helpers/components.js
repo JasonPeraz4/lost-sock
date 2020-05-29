@@ -104,7 +104,7 @@ function saveRow( api, action, form, modalId)
             readRows( api );
             sweetAlert( 1, response.message, null );
             // Se cierra la caja de dialogo (modal) donde está el formulario.
-            $( '#' + modalId ).modal( 'close' );
+            $( '#' + modalId ).modal( 'hide' );
         } else {
             sweetAlert( 2, response.exception, null );
         }
@@ -130,7 +130,7 @@ function confirmDelete( api, identifier )
 {
     swal({
         title: 'Advertencia',
-        text: '¿Desea eliminar el registro?',
+        text: '¿Estas seguro que deseas eliminar a ""?',
         icon: 'warning',
         buttons: ['Cancelar', 'Aceptar'],
         closeOnClickOutside: false,

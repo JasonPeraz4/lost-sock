@@ -10,6 +10,10 @@ $( document ).ready( function(){
 
 function fillTable( dataset )
 {
+    if ($.fn.dataTable.isDataTable('#admin-table')) {
+        $('#admin-table').DataTable().clear();
+        $('#admin-table').DataTable().destroy();
+    }
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.forEach(function( row ) {
@@ -36,12 +40,7 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#admin-table' ).DataTable({
-        'language': {
-            'url': './../core/helpers/Spanish.json' ,
-            'search': 'Buscar administrador:'
-        }
-    });
+    $( '#admin-table' ).DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -57,4 +56,87 @@ function openCreateModal()
     //$( '#foto_administrador' ).prop( 'required', true );
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
     fillSelect( API_TIPOUSUARIO, 'tipo_administrador', null );
+}
+
+// Función que prepara formulario para modificar un registro.
+function openUpdateModal( id )
+{
+    // Se limpian los campos del formulario.
+    $( '#admin-form' )[0].reset();
+    // Se abre la caja de dialogo (modal) que contiene el formulario.
+    $( '#admin-modal' ).modal( 'show' );
+    // Se asigna el título para la caja de dialogo (modal).
+    $( '#modal-title' ).text( 'Actualizar administrador' );
+    // Se establece el campo de tipo archivo como opcional.
+    // $( '#archivo_producto' ).prop( 'required', false );
+
+    $.ajax({
+        dataType: 'json',
+        url: API_ADMINISTRADOR + 'readOne',
+        data: { id_producto: id },
+        type: 'post'
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+        if ( response.status ) {
+            // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
+            $( '#id' ).val( response.dataset.idadministrador );
+            $( '#nombres' ).val( response.dataset.nombres );
+            $( '#apellidos' ).val( response.dataset.apellidos );
+            $( '#email' ).val( response.dataset.email );
+            $( '#telefono' ).val( response.dataset.telefono );
+            $( '#usuario' ).val( response.dataset.usuario );
+            fillSelect( API_TIPOUSUARIO, 'tipo_administrador', response.dataset.idtipousuario );
+            //( response.dataset.estado ) ? $( '#estado' ).prop( 'checked', true ) : $( '#estado' ).prop( 'checked', false );
+            // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
+            llenarEstado( '#estado', response.dataset.estado )
+            M.updateTextFields();
+        } else {
+            sweetAlert( 2, result.exception, null );
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+function llenarEstado( selectId, estado ){
+    let content;
+    if ( estado ) {
+        content+=  `
+            <option value="1" selected>Activo</option>
+            <option value="0">Inactivo</option>
+        `;
+    } else {
+        content+=  `
+            <option value="1">Activo</option>
+            <option value="0" selected>Inactivo</option>
+        `;
+    }
+    $( '#' + selectId ).html( content );
+}
+
+// Evento para crear o modificar un registro.
+$( '#admin-form' ).submit(function( event ) {
+    event.preventDefault();
+    // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
+    // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
+    if ( $( '#id_administrador' ).val() ) {
+        saveRow( API_ADMINISTRADOR, 'update', this, 'admin-modal' );
+    } else {
+        saveRow( API_ADMINISTRADOR, 'create', this, 'admin-modal' );
+    }
+});
+
+// Función para establecer el registro a eliminar mediante el id recibido.
+function openDeleteDialog( id )
+{
+    // Se declara e inicializa un objeto con el id del registro que será borrado.
+    let identifier = { id_producto: id };
+    confirmDelete( API_PRODUCTOS, identifier );
 }
