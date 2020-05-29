@@ -103,6 +103,6 @@ Page::headerTemplate('Costos de envio', null);
 </div>
 
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

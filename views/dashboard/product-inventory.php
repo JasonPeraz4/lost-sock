@@ -521,6 +521,6 @@ Page::headerTemplate('Productos', null);
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

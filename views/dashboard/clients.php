@@ -128,6 +128,6 @@ Page::headerTemplate('Clientes', null);
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

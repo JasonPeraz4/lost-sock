@@ -37,12 +37,12 @@ Page::headerTemplate('Administradores', null);
             </div>    
         </div>
         <!-- Botón agregar -->
-        <button type="button" class="btn btn-purple ml-md-auto my-auto" data-toggle="modal" data-target="#nuevoUsuario">
+        <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
             Agregar
         </button>
     </div>
 </div>
-<table class="table table-responsive-sm table-hover">
+<table id="admin-table" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
             <th></th>
@@ -50,9 +50,14 @@ Page::headerTemplate('Administradores', null);
             <th>Usuario</th>
             <th>Teléfono</th>
             <th>Tipo</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>
     </thead>
+    <tbody id="tbody-rows" class="table-bordered">
+    </tbody>
+    <!-- 
+
     <tbody class="table-bordered">
         <tr>
             <td><i class="fas fa-user-circle fa-3x mr-3 text-purple"></i></td>
@@ -63,72 +68,69 @@ Page::headerTemplate('Administradores', null);
             <td>jasonperaza</td>
             <td>25252525</td>
             <td>Administrador</td>
+            <td>Activo</td>
             <td>
                 <i class="fas fa-edit mx-1" data-toggle="modal" data-target="#nuevoUsuario"></i>
                 <i class="fas fa-trash-alt" data-toggle="modal" data-target="#eliminarUsuario"></i>
             </td>
         </tr>
     </tbody>
+
+    -->
 </table>
 <!-- Modal agregar usuario -->
-<div class="modal fade" id="nuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="nuevoUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <!-- Titulo del modal -->
-            <i class="fas fa-plus fa-lg my-auto mx-2"></i>
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="admin-modal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="post" id="admin-form">
         <div class="modal-body p-md-4">
-            <!-- Formulario -->
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputNombres">Nombres</label>
-                    <input type="text" class="form-control" placeholder="Nombres" id="inputNombres">
+                    <label for="nombres">Nombres</label>
+                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputApellidos">Apellidos</label>
-                    <input type="text" class="form-control" placeholder="Apellidos" id="inputApellidos">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail">Correo electrónico</label>
-                    <input type="email" class="form-control" placeholder="Correo electrónico" id="inputEmail">
-                </div>
+                <div class="form-group col-md-12">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
+                </div>  
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputUsuario">Usuario</label>
-                    <input type="text" class="form-control" placeholder="Usuario" id="inputUsuario">
+                    <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
+                </div>    
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputTelefono">Teléfono</label>
-                    <input type="text" class="form-control" placeholder="Telefono" id="inputEmail">
-                </div>
-                <div class="col-md-6 col-4 my-auto">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tipo
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Superadministrador</a>
-                            <a class="dropdown-item" href="#">Administrador</a>
-                            <a class="dropdown-item" href="#">Inhabilitado</a>
-                        </div>
-                    </div>
+                    <label for="tipo_administrador">Tipo</label>
+                    <select class="form-control" id="tipo_administrador" name="tipo_administrador">
+                    </select>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-purple">Agregar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-purple">Guardar</button>
         </div>
-        </div>
+    </form>   
     </div>
+</div>
 </div>
 <!-- Modal deshabilitar usuario -->
 <div class="modal fade" id="eliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="eliminarUsuarioLabel" aria-hidden="true">
@@ -154,6 +156,6 @@ Page::headerTemplate('Administradores', null);
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate('administrador.js');
 ?>
 

@@ -73,6 +73,6 @@ Page::headerTemplate('Suscripciones', null);
     </a>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

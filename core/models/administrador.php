@@ -217,8 +217,10 @@ class Administrador extends Validator{
         
     }
 
-    public function existAdministradores(){
-        $sql = 'SELECT * FROM administrador';
+    public function readAllAdministradores(){
+        $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
+                FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
+                ORDER BY nombres';
         $params = null;
         return Database::getRows($sql, $params);
     }

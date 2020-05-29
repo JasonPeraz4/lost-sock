@@ -93,6 +93,6 @@ Page::headerTemplate('Tipo de producto', null);
     </div>
 </div>    
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
 

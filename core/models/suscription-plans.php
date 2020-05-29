@@ -40,6 +40,7 @@ class Suscription_Plans extends Validator
         } else {
             return false;
         }
+    }
 
     /*
     *   Métodos para obtener valores de los atributos.
