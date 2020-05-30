@@ -259,7 +259,7 @@ class Administrador extends Validator{
     {
         $sql = 'INSERT INTO administrador( idadministrador, nombres, apellidos, email, telefono, usuario, clave, foto, estado, idTipoUsuario)
         VALUES ( DEFAULT, ?, ?, ?, ?, ?, DEFAULT, null, DEFAULT, ? )';
-        $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->idtipo );
+        $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->tipo );
         return Database::executeRow($sql, $params);
     }
 
