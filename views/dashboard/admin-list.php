@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Administradores', null);
+Page::headerTemplate('Gestión de administradores', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex align-items-end pb-md-3 pb-2">
@@ -56,27 +56,6 @@ Page::headerTemplate('Administradores', null);
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
     </tbody>
-    <!-- 
-
-    <tbody class="table-bordered">
-        <tr>
-            <td><i class="fas fa-user-circle fa-3x mr-3 text-purple"></i></td>
-            <td>
-                <div>Jason Anthony Peraza Cruz</div>
-                <div>jason@peraza.com</div>
-            </td>
-            <td>jasonperaza</td>
-            <td>25252525</td>
-            <td>Administrador</td>
-            <td>Activo</td>
-            <td>
-                <i class="fas fa-edit mx-1" data-toggle="modal" data-target="#nuevoUsuario"></i>
-                <i class="fas fa-trash-alt" data-toggle="modal" data-target="#eliminarUsuario"></i>
-            </td>
-        </tr>
-    </tbody>
-
-    -->
 </table>
 <!-- Modal agregar usuario -->
 <div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="admin-modal" aria-hidden="true">
@@ -88,10 +67,10 @@ Page::headerTemplate('Administradores', null);
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form method="post" id="admin-form" enctype="multipart/form-data">
+    <form method="post" id="admin-form" enctype="">
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-            <input class="d-none" type="text" id="id" name="id"/>
+            <input class="d-none" type="text" id="idadministrador" name="idadministrador"/>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombres">Nombres</label>
@@ -125,10 +104,8 @@ Page::headerTemplate('Administradores', null);
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="estado">Tipo</label>
+                    <label id="lblE" for="estado">Estado</label>
                     <select class="form-control" id="estado" name="estado">
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
                     </select>
                 </div>               
             </div>

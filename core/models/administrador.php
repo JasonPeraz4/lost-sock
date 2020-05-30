@@ -14,6 +14,8 @@ class Administrador extends Validator{
     private $foto = null;
     private $estado = null;
     private $idtipo = null;
+    private $archivo = null;
+    private $ruta = '../../../resources/img/administrador/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -89,15 +91,16 @@ class Administrador extends Validator{
         }
     }
 
-    /* public function setFoto()
+    public function setFoto($file)
     {
-        if ($this->) {
-            $this->foto = ;
+        if ($this->validateImageFile($file, 500, 500)) {
+            $this->foto = $this->getImageName();
+            $this->archivo = $file;
             return true;
         } else {
             return false;
         }
-    } */
+    }
 
     public function setEstado($value)
     {
@@ -168,6 +171,11 @@ class Administrador extends Validator{
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    public function getRuta()
+    {
+        return $this->ruta;
     }
 
     /*
@@ -262,6 +270,23 @@ class Administrador extends Validator{
             WHERE idadministrador = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
+    }
+
+    public function updateAdministrador()
+    {
+        $sql = 'UPDATE administrador 
+                SET nombres = ?, apellidos = ?, email = ?, telefono = ?, usuario = ?, estado = ?, idtipousuario = ?
+                WHERE idadministrador = ?';
+        $params = array($this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->estado, $this->tipo, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+    
+    public function deleteAdministrador()
+    {
+        $sql = 'DELETE FROM administrador
+                WHERE idadministrador = ?';
+        $params = array($this->id);
+        return Database::executeRow($sql, $params);
     }
 }
 ?>
