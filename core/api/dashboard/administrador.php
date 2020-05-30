@@ -78,28 +78,32 @@ if ( isset( $_GET['action'] ) ) {
                 }
                 break;
             case 'update':
-                $_POST = $administrador->validateForm( $_POST );
-                if ( $administrador->setId( $_POST( 'idadministrador' ) ) ) {
+                $_POST = $administrador->validateForm($_POST);
+                if ( $administrador->setId( $_POST[ 'idadministrador' ] ) ) {
                     if ( $data = $administrador->readOneAdministrador() ) {
-                        if ( $administrador->setNombres( $_POST( 'nombres' ) ) ) {
-                            if ( $administrador->setApellidos( $_POST( 'apellidos' ) ) ) {
-                                if ( $administrador->setEmail( $_POST( 'email' ) ) ) {
-                                    if ( $administrador->setUsuario( $_POST( 'usuario' ) ) ) {
-                                        if ( $administrador->setTelefono( $_POST( 'telefono' ) ) ) {
-                                            if ( $administrador->setTipo( $_POST( 'tipo_administrador' ) ) ) {
-                                                if ( $administrador->setEstado( $_POST( 'estado' ) ) ) {
-                                                    if ( $administrador->updateAdministrador() ) {
-                                                        $result['status'] = 1;
-                                                        $result['message'] = 'Administrador actualizado correctamente';
+                        if ( $administrador->setNombres( $_POST[ 'nombres' ] ) ) {
+                            if ( $administrador->setApellidos( $_POST[ 'apellidos' ] ) ) {
+                                if ( $administrador->setEmail( $_POST[ 'email' ] ) ) {
+                                    if ( $administrador->setUsuario( $_POST[ 'usuario' ]   ) ) {
+                                        if ( $administrador->setTelefono( $_POST[ 'telefono' ] ) ) {
+                                            if ( isset( $_POST[ 'tipo_administrador' ] ) ) {
+                                                if ( $administrador->setTipo( $_POST[ 'tipo_administrador' ]  ) ) {
+                                                    if ( $administrador->setEstado( $_POST[ 'estado' ] ) ) {
+                                                        if ( $administrador->updateAdministrador() ) {
+                                                            $result['status'] = 1;
+                                                            $result['message'] = 'Administrador actualizado correctamente';
+                                                        } else {
+                                                            $result['exception'] = Database::getException();;
+                                                        }
                                                     } else {
-                                                        $result['exception'] = Database::getException();;
+                                                        $result['exception'] = 'Estado no válido';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Estado no válido';
+                                                    $result['exception'] = 'Tipo de usuario no válido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Tipo de usuario no válido';
-                                            }
+                                                $result['exception'] = 'Asegurate de haber seleccionado un tipo';
+                                            }       
                                         } else {
                                             $result['exception'] = 'Teléfono ingresadi no válido';
                                         }
@@ -123,7 +127,7 @@ if ( isset( $_GET['action'] ) ) {
                 }
             break;
             case 'delete':
-                if ( $administrador->setId( $_POST( 'idadministrador' ) ) ) {
+                if ( $administrador->setId( $_POST[ 'idadministrador' ] ) ) {
                     if ( $data = $administrador->readOneAdministrador() ) {
                         if ( $administrador->deleteAdministrador() ) {
                             $result['status'] = 1;
