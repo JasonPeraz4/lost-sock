@@ -77,6 +77,69 @@ if ( isset( $_GET['action'] ) ) {
                     $result['exception'] = 'Administrador no válido';
                 }
                 break;
+            case 'update':
+                $_POST = $administrador->validateForm( $_POST );
+                if ( $administrador->setId( $_POST( 'idadministrador' ) ) ) {
+                    if ( $data = $administrador->readOneAdministrador() ) {
+                        if ( $administrador->setNombres( $_POST( 'nombres' ) ) ) {
+                            if ( $administrador->setApellidos( $_POST( 'apellidos' ) ) ) {
+                                if ( $administrador->setEmail( $_POST( 'email' ) ) ) {
+                                    if ( $administrador->setUsuario( $_POST( 'usuario' ) ) ) {
+                                        if ( $administrador->setTelefono( $_POST( 'telefono' ) ) ) {
+                                            if ( $administrador->setTipo( $_POST( 'tipo_administrador' ) ) ) {
+                                                if ( $administrador->setEstado( $_POST( 'estado' ) ) ) {
+                                                    if ( $administrador->updateAdministrador() ) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Administrador actualizado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();;
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Estado no válido';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Tipo de usuario no válido';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Teléfono ingresadi no válido';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Usuario ingresado no válido';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Correo eletrónico no válido';
+                                }
+                            } else {
+                                $result['exception'] = 'Apellidos ingresados no válidos';
+                            }
+                        } else {
+                            $result['exception'] = 'Nombres ingresados no válidos';
+                        }
+                    } else {
+                        $result['exception'] = 'Admnistrador inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Administrador no válido';
+                }
+            break;
+            case 'delete':
+                if ( $administrador->setId( $_POST( 'idadministrador' ) ) ) {
+                    if ( $data = $administrador->readOneAdministrador() ) {
+                        if ( $administrador->deleteAdministrador() ) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Administrador eliminado correctamente';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                        
+                    } else {
+                        $result['exception'] = 'Administrador inexistente';
+                    }
+                    
+                } else {
+                    $result['exception'] = 'Administrador incorrecto';
+                } 
+            break;
             default:
                 exit('Acción no disponible log');
         }

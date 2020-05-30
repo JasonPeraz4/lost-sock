@@ -32,15 +32,21 @@ function fillTable( dataset )
                 <td>${row.tipo}</td>
                 <td>${txt}</td>
                 <td>
-                    <i class="fas fa-edit mx-1" data-toggle="modal" data-target="#admin-modal"></i>
-                    <i class="fas fa-trash-alt" data-toggle="modal" data-target="#eliminarUsuario"></i>
+                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idadministrador})"></i>
+                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idadministrador})"></i>
                 </td>
             </tr>
         `;
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#admin-table' ).DataTable();
+    $( '#admin-table' ).DataTable({
+        'language': {
+            'url': '../../core/helpers/Spanish.json' ,
+            'search': 'Buscar administrador:' ,
+            
+        }
+    });
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -56,6 +62,8 @@ function openCreateModal()
     //$( '#foto_administrador' ).prop( 'required', true );
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
     fillSelect( API_TIPOUSUARIO, 'tipo_administrador', null );
+    $( '#estado' ).addClass( 'd-none' );
+    $( '#lblE' ).addClass( 'd-none' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -80,16 +88,15 @@ function openUpdateModal( id )
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
         if ( response.status ) {
             // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-            $( '#id' ).val( response.dataset.idadministrador );
+            $( '#idadministrador' ).val( response.dataset.idadministrador );
             $( '#nombres' ).val( response.dataset.nombres );
             $( '#apellidos' ).val( response.dataset.apellidos );
             $( '#email' ).val( response.dataset.email );
             $( '#telefono' ).val( response.dataset.telefono );
             $( '#usuario' ).val( response.dataset.usuario );
             fillSelect( API_TIPOUSUARIO, 'tipo_administrador', response.dataset.idtipousuario );
-            //( response.dataset.estado ) ? $( '#estado' ).prop( 'checked', true ) : $( '#estado' ).prop( 'checked', false );
             // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
-            llenarEstado( '#estado', response.dataset.estado )
+            llenarEstado( 'estado', response.dataset.estado );
             M.updateTextFields();
         } else {
             sweetAlert( 2, result.exception, null );
@@ -126,7 +133,7 @@ $( '#admin-form' ).submit(function( event ) {
     event.preventDefault();
     // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
     // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
-    if ( $( '#id_administrador' ).val() ) {
+    if ( $( '#idadministrador' ).val() ) {
         saveRow( API_ADMINISTRADOR, 'update', this, 'admin-modal' );
     } else {
         saveRow( API_ADMINISTRADOR, 'create', this, 'admin-modal' );
@@ -138,5 +145,5 @@ function openDeleteDialog( id )
 {
     // Se declara e inicializa un objeto con el id del registro que será borrado.
     let identifier = { id_producto: id };
-    confirmDelete( API_PRODUCTOS, identifier );
+    confirmDelete( API_ADMINISTRADOR, identifier );
 }
