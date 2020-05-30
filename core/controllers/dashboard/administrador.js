@@ -81,7 +81,7 @@ function openUpdateModal( id )
     $.ajax({
         dataType: 'json',
         url: API_ADMINISTRADOR + 'readOne',
-        data: { id_producto: id },
+        data: { idadministrador: id },
         type: 'post'
     })
     .done(function( response ) {
@@ -97,7 +97,7 @@ function openUpdateModal( id )
             fillSelect( API_TIPOUSUARIO, 'tipo_administrador', response.dataset.idtipousuario );
             // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
             llenarEstado( 'estado', response.dataset.estado );
-            M.updateTextFields();
+            //M.updateTextFields();
         } else {
             sweetAlert( 2, result.exception, null );
         }
