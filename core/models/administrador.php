@@ -13,7 +13,7 @@ class Administrador extends Validator{
     private $clave = null;
     private $foto = null;
     private $estado = null;
-    private $idtipo = null;
+    private $tipo = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/administrador/';
 
@@ -115,7 +115,7 @@ class Administrador extends Validator{
     public function setTipo($value)
     {
         if ($this->validateNaturalNumber($value)) {
-            $this->idtipo = $value;
+            $this->tipo = $value;
             return true;
         } else {
             return false;

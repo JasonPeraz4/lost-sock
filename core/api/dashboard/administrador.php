@@ -127,21 +127,25 @@ if ( isset( $_GET['action'] ) ) {
                 }
             break;
             case 'delete':
-                if ( $administrador->setId( $_POST[ 'idadministrador' ] ) ) {
-                    if ( $data = $administrador->readOneAdministrador() ) {
-                        if ( $administrador->deleteAdministrador() ) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Administrador eliminado correctamente';
+                if ( isset( $_POST[ 'idadministrador' ] ) ) {
+                    if ( $administrador->setId( $_POST[ 'idadministrador' ] ) ) {
+                        if ( $data = $administrador->readOneAdministrador() ) {
+                            if ( $administrador->deleteAdministrador() ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Administrador eliminado correctamente';
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                            
                         } else {
-                            $result['exception'] = Database::getException();
+                            $result['exception'] = 'Administrador inexistente';
                         }
                         
                     } else {
-                        $result['exception'] = 'Administrador inexistente';
+                        $result['exception'] = 'Administrador incorrecto';
                     }
-                    
                 } else {
-                    $result['exception'] = 'Administrador incorrecto';
+                    $result['exception'] = 'Error en el formulario';
                 } 
             break;
             default:
