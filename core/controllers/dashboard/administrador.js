@@ -144,6 +144,6 @@ $( '#admin-form' ).submit(function( event ) {
 function openDeleteDialog( id )
 {
     // Se declara e inicializa un objeto con el id del registro que será borrado.
-    let identifier = { id_producto: id };
+    let identifier = { idadministrador: id };
     confirmDelete( API_ADMINISTRADOR, identifier );
 }
