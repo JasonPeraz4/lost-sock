@@ -88,8 +88,10 @@ Page::headerTemplate('Administradores', null);
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form method="post" id="admin-form">
+    <form method="post" id="admin-form" enctype="multipart/form-data">
         <div class="modal-body p-md-4">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input class="d-none" type="text" id="id" name="id"/>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombres">Nombres</label>
@@ -108,7 +110,7 @@ Page::headerTemplate('Administradores', null);
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputUsuario">Usuario</label>
+                    <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
                 </div>
                 <div class="form-group col-md-6">
@@ -122,6 +124,13 @@ Page::headerTemplate('Administradores', null);
                     <select class="form-control" id="tipo_administrador" name="tipo_administrador">
                     </select>
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="estado">Tipo</label>
+                    <select class="form-control" id="estado" name="estado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>               
             </div>
         </div>
         <div class="modal-footer">

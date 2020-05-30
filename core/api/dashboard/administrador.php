@@ -29,6 +29,56 @@ if ( isset( $_GET['action'] ) ) {
                     $result['exception'] = 'No hay administradores registrados';
                 }
                 break;
+            case 'create':
+                $_POST = $administrador->validateForm($_POST);
+                if ( $administrador->setNombres( $_POST['nombres'] ) ) {
+                    if ( $administrador->setApellidos( $_POST['apellidos'] ) ) {
+                        if ( $administrador->setEmail( $_POST['email'] ) ) {
+                            if ( $administrador->setUsuario( $_POST['usuario'] ) ) {
+                                if ( $administrador->setTelefono( $_POST['telefono'] ) ) {
+                                    if ( isset( $_POST['tipo_administrador'] ) ) {
+                                        if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
+                                            if ( $administrador->createAdministrador() ) {
+                                                $result['status'] = 1;
+                                                    $result['message'] = 'Administrador agregado correctamente';
+                                            } else {
+                                                $result['exception'] = Database::getException();;
+                                            } 
+                                        } else {
+                                            $result['exception'] = 'Tipo de administrador no válido';
+                                        } 
+                                    } else {
+                                        $result['exception'] = 'Selecciona un tipo de administrador';
+                                    } 
+                                } else {
+                                    $result['exception'] = 'Teléfono ingresado no válido';
+                                } 
+                            } else {
+                                $result['exception'] = 'Usuario ingresado no válido';
+                            } 
+                        } else {
+                            $result['exception'] = 'Correo electtrónico no válido';
+                        } 
+                    } else {
+                        $result['exception'] = 'Apellidos ingresados no válidos';
+                    } 
+                } else {
+                    $result['exception'] = 'Nombres ingresados no válidos';
+                }            
+            break;
+            case 'readOne':
+                if ($administrador->setId( $_POST['idadministrador'] )) {
+                    if ( $result[ 'dataset' ] = $administrador->readOneAdministrador() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Administrador no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Administrador no válido';
+                }
+                break;
+            default:
+                exit('Acción no disponible log');
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.

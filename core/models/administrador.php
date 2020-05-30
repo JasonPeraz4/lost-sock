@@ -218,10 +218,20 @@ class Administrador extends Validator{
     }
 
     public function readAllAdministradores(){
-        $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
+        if ( isset( $_SESSION['idadministrador'] ) ) {
+            $this->setId( $_SESSION['idadministrador'] );
+            $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
+                FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
+                WHERE idadministrador <> ? ORDER BY nombres';
+            $params = array( $this->id );
+        } else {
+            $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
                 FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
                 ORDER BY nombres';
-        $params = null;
+            $params = null;
+        }
+        
+        
         return Database::getRows($sql, $params);
     }
 
@@ -243,6 +253,15 @@ class Administrador extends Validator{
         VALUES ( DEFAULT, ?, ?, ?, ?, ?, DEFAULT, null, DEFAULT, ? )';
         $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->idtipo );
         return Database::executeRow($sql, $params);
+    }
+
+    public function readOneAdministrador()
+    {
+        $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, idtipousuario 
+            FROM administrador
+            WHERE idadministrador = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
     }
 }
 ?>
