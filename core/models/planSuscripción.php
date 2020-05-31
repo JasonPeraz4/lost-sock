@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla planSuscripcion de la base de datos. Es clase hija de Validator.
 */
-class Suscription_Plans extends Validator
+class PlanSuscripcion extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idPlanSuscripcion = null;
@@ -64,15 +64,6 @@ class Suscription_Plans extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function searchPlanSuscripcion($value)
-    {
-        $sql = 'SELECT cantidadPares, precio
-                FROM planSuscripcion
-                WHERE planSuscripcion ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
     public function createPlanSuscripcion()
     {
         $sql = 'INSERT INTO planSuscripcion(cantidadPares, precio)
@@ -83,7 +74,7 @@ class Suscription_Plans extends Validator
  
     public function readAllPlanSuscripcion()
     {
-        $sql = 'SELECT cantidadPares, precio
+        $sql = 'SELECT idplansuscripcion, cantidadPares, precio
                 FROM planSuscripcion
                 ORDER BY idPlanSuscripcion';
         $params = null;
@@ -92,7 +83,7 @@ class Suscription_Plans extends Validator
 
     public function readPlanSuscripcion()
     {
-        $sql = 'SELECT cantidadPares, precio
+        $sql = 'SELECT idplansuscripcion, cantidadPares, precio
                 FROM planSuscripcion
                 WHERE idPlanSuscripcion = ?';
         $params = array($this->idPlanSuscripcion);
@@ -100,7 +91,9 @@ class Suscription_Plans extends Validator
     }
 
     public function updatePlanSuscripcion(){
-            $sql='UPDATE planSuscripcion SET cantidadPares=?, precio=? WHERE idPlanSuscripcion=?';
+            $sql = 'UPDATE planSuscripcion 
+                    SET cantidadPares=?, precio=? 
+                    WHERE idPlanSuscripcion=?';
             $params=array($this->cantidadPares, $this->precio, $this->idPlanSuscripcion);
             return Database::executeRow($sql, $params);
         }

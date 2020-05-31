@@ -40,9 +40,9 @@ if ( isset( $_GET['action'] ) ) {
                                         if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
                                             if ( $administrador->createAdministrador() ) {
                                                 $result['status'] = 1;
-                                                    $result['message'] = 'Administrador agregado correctamente';
+                                                $result['message'] = 'Administrador agregado correctamente';
                                             } else {
-                                                $result['exception'] = Database::getException();;
+                                                $result['exception'] = Database::getException();
                                             } 
                                         } else {
                                             $result['exception'] = 'Tipo de administrador no válido';
@@ -93,7 +93,7 @@ if ( isset( $_GET['action'] ) ) {
                                                             $result['status'] = 1;
                                                             $result['message'] = 'Administrador actualizado correctamente';
                                                         } else {
-                                                            $result['exception'] = Database::getException();;
+                                                            $result['exception'] = Database::getException();
                                                         }
                                                     } else {
                                                         $result['exception'] = 'Estado no válido';

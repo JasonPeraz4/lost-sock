@@ -10,15 +10,15 @@ $( document ).ready( function(){
 
 function fillTable( dataset )
 {
-    if ($.fn.dataTable.isDataTable('#admin-table')) {
-        $('#admin-table').DataTable().clear();
-        $('#admin-table').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#myTable')) {
+        $('#myTable').DataTable().clear();
+        $('#myTable').DataTable().destroy();
     }
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.forEach(function( row ) {
         // Se establece un icono para el estado del producto.
-        ( row.estado ) ? txt = 'Activo' : txt = 'Inactivo';
+        ( row.estado == 1 ) ? txt = 'Activo' : txt = 'Inactivo';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
@@ -40,7 +40,7 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#admin-table' ).DataTable({
+    $( '#myTable' ).DataTable({
         'language': {
             'url': '../../core/helpers/Spanish.json' ,
             'search': 'Buscar administrador:' ,
@@ -53,9 +53,9 @@ function fillTable( dataset )
 function openCreateModal()
 {
     // Se limpian los campos del formulario.
-    $( '#admin-form' )[0].reset();
+    $( '#save-form' )[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $( '#admin-modal' ).modal( 'show' );
+    $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
     $( '#modal-title' ).text( 'Agregar administrador' );
     // Se establece el campo de tipo archivo como obligatorio.
@@ -70,9 +70,9 @@ function openCreateModal()
 function openUpdateModal( id )
 {
     // Se limpian los campos del formulario.
-    $( '#admin-form' )[0].reset();
+    $( '#save-form' )[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $( '#admin-modal' ).modal( 'show' );
+    $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
     $( '#modal-title' ).text( 'Actualizar administrador' );
     // Se establece el campo de tipo archivo como opcional.
@@ -114,7 +114,7 @@ function openUpdateModal( id )
 
 function llenarEstado( selectId, estado ){
     let content;
-    if ( estado ) {
+    if ( estado == 1 ) {
         content+=  `
             <option value="1" selected>Activo</option>
             <option value="0">Inactivo</option>
@@ -129,14 +129,14 @@ function llenarEstado( selectId, estado ){
 }
 
 // Evento para crear o modificar un registro.
-$( '#admin-form' ).submit(function( event ) {
+$( '#save-form' ).submit(function( event ) {
     event.preventDefault();
     // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
     // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
     if ( $( '#idadministrador' ).val() ) {
-        saveRow( API_ADMINISTRADOR, 'update', this, 'admin-modal' );
+        saveRow( API_ADMINISTRADOR, 'update', this, 'save-modal' );
     } else {
-        saveRow( API_ADMINISTRADOR, 'create', this, 'admin-modal' );
+        saveRow( API_ADMINISTRADOR, 'create', this, 'save-modal' );
     }
 });
 

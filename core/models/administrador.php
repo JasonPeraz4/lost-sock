@@ -237,9 +237,7 @@ class Administrador extends Validator{
                 FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
                 ORDER BY nombres';
             $params = null;
-        }
-        
-        
+        }  
         return Database::getRows($sql, $params);
     }
 

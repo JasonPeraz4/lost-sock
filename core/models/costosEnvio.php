@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla departamento de la base de datos. Es clase hija de Validator.
 */
-class Shipping_Costs extends Validator
+class CostoEnvio extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idDepartamento = null;
@@ -64,15 +64,6 @@ class Shipping_Costs extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function searchDepartamento($value)
-    {
-        $sql = 'SELECT departamento
-                FROM departamento
-                WHERE departamento ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
     public function createDepartamento()
     {
         $sql = 'INSERT INTO departamento(departamento, costoEnvio)
@@ -83,7 +74,7 @@ class Shipping_Costs extends Validator
  
     public function readAllDepartamento()
     {
-        $sql = 'SELECT departamento
+        $sql = 'SELECT iddepartamento, departamento, costoEnvio
                 FROM departamento
                 ORDER BY idDepartamento';
         $params = null;
@@ -92,7 +83,7 @@ class Shipping_Costs extends Validator
 
     public function readDepartamento()
     {
-        $sql = 'SELECT departamento
+        $sql = 'SELECT iddepartamento, departamento, costoEnvio
                 FROM departamento
                 WHERE idDepartamento = ?';
         $params = array($this->idDepartamento);
@@ -100,9 +91,11 @@ class Shipping_Costs extends Validator
     }
 
     public function updateDepartamento(){
-            $sql='UPDATE departamento SET departamento=?, costoEnvio=? WHERE idDepartamento=?';
-            $params=array($this->departamento, $this->costoEnvio, $this->idDepartamento);
-            return Database::executeRow($sql, $params);
+        $sql='UPDATE departamento 
+            SET departamento=?, costoEnvio=? 
+            WHERE idDepartamento=?';
+        $params=array($this->departamento, $this->costoEnvio, $this->idDepartamento);
+        return Database::executeRow($sql, $params);
     }
 
     public function deleteDepartamento()

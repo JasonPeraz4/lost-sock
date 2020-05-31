@@ -3,16 +3,9 @@ require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Gestión de administradores', null);
 ?>
 <div class="d-flex flex-column mb-3">
-    <div class="d-flex align-items-end pb-md-3 pb-2">
-        <!-- Encabezado -->
-        <h3>Administradores</h3>
-        <p class="mb-2 mx-2">10 en total</p>
-    </div>
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <form action="#"class="mr-md-3">
-            <input type="search" name="" class="form-control" id="buscarAdministrador" placeholder="Buscar administrador">
-        </form>
+        <h3 class="mr-md-3">Administradores</h3>
         <!-- Grupo de dropdowns -->
         <div class="d-flex flex-row my-2 my-md-0">
             <!-- Dropdown filtrar por estado -->
@@ -42,7 +35,7 @@ Page::headerTemplate('Gestión de administradores', null);
         </button>
     </div>
 </div>
-<table id="admin-table" class="table table-responsive-sm table-hover">
+<table id="myTable" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
             <th></th>
@@ -58,7 +51,7 @@ Page::headerTemplate('Gestión de administradores', null);
     </tbody>
 </table>
 <!-- Modal agregar usuario -->
-<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="admin-modal" aria-hidden="true">
+<div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="save-modal" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
     <div class="modal-header">
@@ -67,7 +60,7 @@ Page::headerTemplate('Gestión de administradores', null);
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form method="post" id="admin-form" enctype="">
+    <form method="post" id="save-form" enctype="">
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idadministrador" name="idadministrador"/>

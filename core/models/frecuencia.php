@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla frecuencia de la base de datos. Es clase hija de Validator.
 */
-class Suscription_Frecuency extends Validator
+class Frecuencia extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idFrecuencia = null;
@@ -48,53 +48,46 @@ class Suscription_Frecuency extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function searchFrecuencia($value)
-    {
-        $sql = 'SELECT frecuencia
-                FROM frecuencia
-                WHERE frecuencia ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
     public function createFrecuencia()
     {
         $sql = 'INSERT INTO frecuencia(frecuencia)
                 VALUES(?)';
-        $params = array($this->frecuencia);
-        return Database::executeRow($sql, $params);
+        $params = array( $this->frecuencia );
+        return Database::executeRow( $sql, $params );
     }
  
     public function readAllFrecuencia()
     {
-        $sql = 'SELECT frecuencia
+        $sql = 'SELECT idfrecuencia, frecuencia
                 FROM frecuencia
                 ORDER BY idFrecuencia';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::getRows( $sql, $params );
     }
 
     public function readFrecuencia()
     {
-        $sql = 'SELECT frecuencia
+        $sql = 'SELECT idfrecuencia, frecuencia
                 FROM frecuencia
                 WHERE idFrecuencia = ?';
-        $params = array($this->idFrecuencia);
-        return Database::getRow($sql, $params);
+        $params = array( $this->idFrecuencia );
+        return Database::getRow( $sql, $params );
     }
 
     public function updateFrecuencia(){
-            $sql='UPDATE frecuencia SET frecuencia=? WHERE idFrecuencia=?';
-            $params=array($this->frecuencia, $this->idFrecuencia);
-            return Database::executeRow($sql, $params);
+        $sql = 'UPDATE frecuencia 
+                SET frecuencia = ? 
+                WHERE idFrecuencia = ?';
+        $params=array( $this->frecuencia, $this->idFrecuencia );
+        return Database::executeRow( $sql, $params );
     }
 
     public function deleteFrecuencia()
     {
         $sql = 'DELETE FROM frecuencia
                 WHERE idFrecuencia = ?';
-        $params = array($this->idFrecuencia);
-        return Database::executeRow($sql, $params);
+        $params = array( $this->idFrecuencia );
+        return Database::executeRow( $sql, $params );
     }
 }
 ?>

@@ -22,6 +22,61 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay tipos de usuarios registrados';
                 }
                 break;
+            case 'create':
+                $_POST = $tipo->validateForm( $_POST );
+                if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
+                    if ( $tipo->createTipoUsuario() ) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Tipo de usuario agregado exitosamente';
+                    } else {
+                        $result['exception'] = Database::getException();
+                    }    
+                } else {
+                    $result['exception'] = 'Tipo de usuario ingresado no válido';
+                }
+                break;
+            case 'readOne':
+                if ( $tipo->setTipo( $_POST[ 'idtipousuario' ] ) ) {
+                    if ( $result[ 'dataset' ] = $tipo->readTipo() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Tipo de usuario no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Tipo de usuario no válido';
+                }
+                break;
+            case 'update':
+                $_POST = $tipo->validateForm( $_POST );
+                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
+                    if ( $tipo->updateTipo() ) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Tipo de usuario actualizado exitosamente';
+                    } else {
+                        $result['exception'] = Database::getException();
+                    }    
+                } else {
+                    $result['exception'] = 'Tipo de usuario ingresado no válido';
+                }
+                break;
+            case 'delete':
+                if ( $tipo->setId( $_POST[ 'idadministrador' ] ) ) {
+                    if ( $data = $tipo->readTipo() ) {
+                        if ( $tipo->deleteTipo() ) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Tipo de usuario eliminado correctamente';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                        
+                    } else {
+                        $result['exception'] = 'Tipo de usuario inexistente';
+                    }
+                    
+                } else {
+                    $result['exception'] = 'Tipo de usuario incorrecto';
+                }
+                break;
             default:
                 exit('Acción no disponible');
         }
