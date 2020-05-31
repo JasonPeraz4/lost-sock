@@ -91,17 +91,18 @@ class CostoEnvio extends Validator
     }
 
     public function updateDepartamento(){
-        $sql='UPDATE departamento 
+        $sql = 'UPDATE departamento 
             SET departamento=?, costoEnvio=? 
             WHERE idDepartamento=?';
         $params=array($this->departamento, $this->costoEnvio, $this->idDepartamento);
         return Database::executeRow($sql, $params);
     }
 
-    public function deleteDepartamento()
+    public function deleteCostoEnvio()
     {
-        $sql = 'DELETE FROM departamento
-                WHERE idDepartamento = ?';
+        $sql = 'UPDATE departamento 
+                SET costoEnvio = 0.00
+                WHERE idDepartamento=?';
         $params = array($this->idDepartamento);
         return Database::executeRow($sql, $params);
     }

@@ -46,11 +46,9 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idtipousuario" name="idtipousuario"/>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="tipo">Ingresa un tipo de usuario</label>
-                    <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo">
-                </div>
+            <div class="form-group">
+                <label for="tipo">Ingresa un tipo de usuario</label>
+                <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo">
             </div>
         </div>
         <div class="modal-footer">

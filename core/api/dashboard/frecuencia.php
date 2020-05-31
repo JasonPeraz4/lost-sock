@@ -1,14 +1,14 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/tipoUsuario.php');
+require_once('../../models/frecuencia.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $tipo = new TipoUsuario;
+    $frecuencia = new Frecuencia;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -16,69 +16,69 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                if ($result['dataset'] = $tipo->readAllTipos()) {
+                if ($result['dataset'] = $frecuencia->readAllFrecuencia()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay tipos de usuarios registrados';
+                    $result['exception'] = 'No hay frecuencias de envio registrados';
                 }
                 break;
             case 'create':
-                $_POST = $tipo->validateForm( $_POST );
-                if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
-                    if ( $tipo->createTipoUsuario() ) {
+                $_POST = $frecuencia->validateForm( $_POST );
+                if ( $frecuencia->setFrecuencia( $_POST[ 'frecuencia' ] ) ) {
+                    if ( $frecuencia->createFrecuencia() ) {
                         $result['status'] = 1;
-                        $result['message'] = 'Tipo de usuario agregado exitosamente';
+                        $result['message'] = 'frecuencia de envio agregado exitosamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }    
                 } else {
-                    $result['exception'] = 'Tipo de usuario ingresado no válido';
+                    $result['exception'] = 'Frecuencia ingresada no válido';
                 }
                 break;
             case 'readOne':
-                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
-                    if ( $result[ 'dataset' ] = $tipo->readTipo() ) {
+                if ( $frecuencia->setIdFrecuencia( $_POST[ 'idfrecuencia' ] ) ) {
+                    if ( $result[ 'dataset' ] = $frecuencia->readFrecuencia() ) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Tipo de usuario no existente';
+                        $result['exception'] = 'Frecuencia de envio no existente';
                     }
                 } else {
-                    $result['exception'] = 'Tipo de usuario no válido';
+                    $result['exception'] = 'Frecuencia de envio no válida';
                 }
                 break;
             case 'update':
-                $_POST = $tipo->validateForm( $_POST );
-                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
-                    if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
-                        if ( $tipo->updateTipo() ) {
+                $_POST = $frecuencia->validateForm( $_POST );
+                if ( $frecuencia->setIdFrecuencia( $_POST[ 'idfrecuencia' ] ) ) {
+                    if ( $frecuencia->setFrecuencia( $_POST[ 'frecuencia' ] ) ) {
+                        if ( $frecuencia->updateFrecuencia() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Tipo de usuario actualizado exitosamente';
+                            $result['message'] = 'Frecuencia de envio actualizada exitosamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'Ingresa un nombre válido';
+                        $result['exception'] = 'Ingresa una frecuencia válida';
                     }    
                 } else {
-                    $result['exception'] = 'Tipo de usuario ingresado no válido';
+                    $result['exception'] = 'Frecuencia ingresada no válido';
                 }
                 break;
             case 'delete':
-                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
-                    if ( $data = $tipo->readTipo() ) {
-                        if ( $tipo->deleteTipo() ) {
+                if ( $frecuencia->setIdFrecuencia( $_POST[ 'idfrecuencia' ] ) ) {
+                    if ( $data = $frecuencia->readFrecuencia() ) {
+                        if ( $frecuencia->deleteFrecuencia() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Tipo de usuario eliminado correctamente';
+                            $result['message'] = 'Frecuencia de envio eliminada correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
                         
                     } else {
-                        $result['exception'] = 'Tipo de usuario inexistente';
+                        $result['exception'] = 'Frecuencia de envio inexistente';
                     }
                     
                 } else {
-                    $result['exception'] = 'Tipo de usuario incorrecto';
+                    $result['exception'] = 'Frecuencia de envio incorrecta';
                 }
                 break;
             default:

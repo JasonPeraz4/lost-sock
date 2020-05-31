@@ -1,14 +1,14 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/costoEnvio.php');
+require_once('../../models/planSuscripcion.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $costoEnvio = new CostoEnvio;
+    $plan = new PlanSuscripcion;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -16,77 +16,77 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                if ($result['dataset'] = $costoEnvio->readAllDepartamento()) {
+                if ($result['dataset'] = $plan->readAllPlanSuscripcion()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay departamentos registrados';
+                    $result['exception'] = 'No hay planes registrados';
                 }
                 break;
             case 'create':
-                $_POST = $costoEnvio->validateForm( $_POST );
-                if ( $costoEnvio->setDepartamento( $_POST[ 'departamento' ] ) ) {
-                    if ( $costoEnvio->setCostoEnvio( $_POST[ 'costoenvio' ] ) ) {
-                        if ( $costoEnvio->createDepartamento() ) {
+                $_POST = $plan->validateForm( $_POST );
+                if ( $plan->setCantidadPares( $_POST[ 'cantidadpares' ] ) ) {
+                    if ( $plan->setPrecio( $_POST[ 'precio' ] ) ) {
+                        if ( $plan->createPlanSuscripcion() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Departamento agregado exitosamente';
+                            $result['message'] = 'Plan agregado exitosamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'Costo ingresado no válido';
+                        $result['exception'] = 'Precio ingresado no válido';
                     } 
                 } else {
-                    $result['exception'] = 'Departamento ingresado no válida';
+                    $result['exception'] = 'Cantidad de pares ingresado no válida';
                 }
                 break;
             case 'readOne':
-                if ( $costoEnvio->setIdDepartamento( $_POST[ 'iddepartamento' ] ) ) {
-                    if ( $result[ 'dataset' ] = $costoEnvio->readDepartamento() ) {
+                if ( $plan->setIdPlanSuscripcion( $_POST[ 'idplansuscripcion' ] ) ) {
+                    if ( $result[ 'dataset' ] = $plan->readPlanSuscripcion() ) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Departamento no existente';
+                        $result['exception'] = 'Plan de suscripción no existente';
                     }
                 } else {
-                    $result['exception'] = 'Costo de envio no válido';
+                    $result['exception'] = 'Plan no válido';
                 }
                 break;
             case 'update':
-                $_POST = $costoEnvio->validateForm( $_POST );
-                if ( $costoEnvio->setIdDepartamento( $_POST[ 'iddepartamento' ] ) ) {
-                    if ( $costoEnvio->setDepartamento( $_POST[ 'departamento' ] ) ) {
-                        if ( $costoEnvio->setCostoEnvio( $_POST[ 'costoenvio' ] ) ) {
-                            if ( $costoEnvio->updateDepartamento() ) {
+                $_POST = $plan->validateForm( $_POST );
+                if ( $plan->setIdPlanSuscripcion( $_POST[ 'idplansuscripcion' ] ) ) {
+                    if ( $plan->setCantidadPares( $_POST[ 'cantidadpares' ] ) ) {
+                        if ( $plan->setPrecio( $_POST[ 'precio' ] ) ) {
+                            if ( $plan->updatePlanSuscripcion() ) {
                                 $result['status'] = 1;
-                                $result['message'] = 'Costo de envio actualizado exitosamente';
+                                $result['message'] = 'Plan actualizado exitosamente';
                             } else {
                                 $result['exception'] = Database::getException();
                             }
                         } else {
-                            $result['exception'] = 'Costo ingresado no válido';
+                            $result['exception'] = 'Precio ingresado no válido';
                         } 
                     } else {
-                        $result['exception'] = 'Departamento ingresado no válida';
+                        $result['exception'] = 'Cantidad de pares ingresado no válida';
                     }    
                 } else {
-                    $result['exception'] = 'Departamento ingresado no válido';
+                    $result['exception'] = 'Plan ingresado no válido';
                 }
                 break;
             case 'delete':
-                if ( $costoEnvio->setIdDepartamento( $_POST[ 'iddepartamento' ] ) ) {
-                    if ( $data = $costoEnvio->readDepartamento() ) {
-                        if ( $costoEnvio->deleteCostoEnvio() ) {
+                if ( $plan->setIdPlanSuscripcion( $_POST[ 'idplansuscripcion' ] ) ) {
+                    if ( $data = $plan->readPlanSuscripcion() ) {
+                        if ( $plan->deletePlanSuscripcion() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Costo de envio eliminado correctamente';
+                            $result['message'] = 'Plan eliminado correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
                         
                     } else {
-                        $result['exception'] = 'Departamento inexistente';
+                        $result['exception'] = 'Plan inexistente';
                     }
                     
                 } else {
-                    $result['exception'] = 'Departamento incorrecto';
+                    $result['exception'] = 'Plan incorrecto';
                 }
                 break;
             default:
