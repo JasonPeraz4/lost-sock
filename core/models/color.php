@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla color de la base de datos. Es clase hija de Validator.
 */
-class Product_Colors extends Validator
+class Color extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idColor = null;
@@ -48,20 +48,20 @@ class Product_Colors extends Validator
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
 
-    public function searchColor($value)
-    {
-        $sql = 'SELECT idColor, color
-                FROM color 
-                WHERE color ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
+    // public function searchColor($value)
+    // {
+    //     $sql = 'SELECT idColor, color
+    //             FROM color 
+    //             WHERE color ILIKE ?';
+    //     $params = array("%$value%");
+    //     return Database::getRows($sql, $params);
+    // }
 
     public function createColor()
     {
         $sql = 'INSERT INTO color(idColor, color)
-                VALUES(?, ?)';
-        $params = array($this->idColor, $this->color);
+                VALUES(DEFAULT, ?)';
+        $params = array($this->color);
         return Database::executeRow($sql, $params);
     }
 
@@ -84,7 +84,7 @@ class Product_Colors extends Validator
     //     return Database::getRows($sql, $params);
     // }
 
-    public function readColor()
+    public function readOneColor()
     {
         $sql = 'SELECT idColor, color
                 FROM color
