@@ -1,25 +1,21 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Colores', null);
+Page::headerTemplate('Gestión de colores', null);
 ?>
-<div class="d-flex flex-row align-items-center flex-wrap mb-4">
-    <div class="d-flex flex-row align-items-center">
+<div class="d-flex flex-column mb-3">
+    <div class="d-flex align-items-end pb-md-3 pb-2">
         <h2>Colores</h2>
-        <p class="mx-2 my-auto">4 en total</p>
+        <p class="mb-2 mx-2">4 en total</p>
     </div>
-    <div class="d-flex flex-row align-items-center ml-md-auto">
-        <!-- Campo para buscar un color -->
-        <form action="searchAdmin" class="mx-md-2">
-            <input type="text" class="form-control" placeholder="Buscar color" id="searchAdmin">
-        </form>
+    <div class="d-flex flex-wrap">
         <!-- Botòn para llamar modal de agregar color -->
-        <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#nuevoColor">
+        <button type="button" class="btn btn-purple ml-md-auto my-auto" data-toggle="modal" onclick="openCreateModal()">
             Agregar
         </button>
     </div>
-    <!-- Modal agregar tipo de producto -->
-    <div class="modal fade" id="nuevoColor" tabindex="-1" role="dialog" aria-labelledby="nuevoTIpoUlLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Modal agregar color -->
+    <div class="modal fade" id="color-modal" tabindex="-1" role="dialog" aria-labelledby="color-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
                 <i class="fas fa-plus fa-lg my-auto mx-2"></i>
@@ -28,72 +24,63 @@ Page::headerTemplate('Colores', null);
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body p-md-4">
-                <p>Ingresa el nombre del nuevo color</p>
-                <form action="addUser">
+            <!-- Formulario -->
+            <form method="post" id="color-form" enctype="">
+                <div class="modal-body p-md-4">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="d-none" type="text" id="idcolor" name="idcolor" />
                     <div class="form-group">
-                        
-                        <input type="text" class="form-control" placeholder="Color" id="inputUsuario">
+                        <label for="color">Ingresa el nombre del nuevo color</label>
+                        <input type="text" class="form-control" placeholder="Color" id="color" name="color">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-purple">Agregar</button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
+                    </div>
+                </div>
+            </form>
+            <!-- Formulario -->
             </div>
         </div>
     </div>
-    <!-- Modal eliminar color de producto -->
-    <div class="modal fade" id="eliminarColor" tabindex="-1" role="dialog" aria-labelledby="eliminarTIpoUlLabel" aria-hidden="true">
+    <!-- Modal eliminar color -->
+    <div class="modal fade" id="eliminarColor" tabindex="-1" role="dialog" aria-labelledby="eliminarColorLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-trash fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar color de producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-md-4">
-                <p>¿Estas seguro que deseas eliminar el color "Rojo"?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-purple">Eliminar</button>
-            </div>
+                <div class="modal-header">
+                    <i class="fas fa-trash fa-lg my-auto mx-2"></i>
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar color de producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-md-4">
+                    <p>¿Estás seguro que deseas eliminar el color "Rojo"?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-purple">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>       
-</div>
-<div class="row">
-    <div class="col-md-5"> 
-        <div class="list-group" id="list-tab" role="tablist">
-            <!-- Lista de colores -->
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Rojo
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Azul
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Amarillo
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Verde
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoColor"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarColor"></span>
-            </a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="color-table" class="table table-responsive-sm table-hover">
+                <thead>
+                    <tr>
+                        <th class="pl-4">Color</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-rows" class="table-bordered">
+                </tbody>
+            </table>
         </div>
     </div>
 </div>    
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('color.js');
 ?>
 

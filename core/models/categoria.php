@@ -44,19 +44,6 @@ class Categoria extends Validator
         return $this->categoria;
     }
 
-    /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
-
-    // public function searchCategoria($value)
-    // {
-    //     $sql = 'SELECT idCategoria, categoria
-    //             FROM categoria 
-    //             WHERE categoria ILIKE ?';
-    //     $params = array("%$value%");
-    //     return Database::getRows($sql, $params);
-    // }
-
     public function createCategoria()
     { 
         $sql = 'INSERT INTO categoria(idCategoria, categoria)

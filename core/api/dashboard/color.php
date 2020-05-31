@@ -1,14 +1,14 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/categoria.php');
+require_once('../../models/color.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $categoria = new Categoria;
+    $color = new Color;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -18,36 +18,36 @@ if (isset($_GET['action'])) {
 
         switch ($_GET['action']) {
             case 'readAll': 
-                if ($result['dataset'] = $categoria->readAllCategoria()) {
+                if ($result['dataset'] = $color->readAllColor()) {
                     $result['status'] = 1;
                 } else {
                     $result['exception'] = 'No hay categorías registradas';
                 }
                 break;
 
-            case 'search':
-                $_POST = $categoria->validateForm($_POST);
-                if ($_POST['search'] != '') {
-                    if ($result['dataset'] = $categoria->searchCategoria($_POST['search'])) {
-                        $result['status'] = 1;
-                        $rows = count($result['dataset']);
-                        if ($rows > 1) {
-                            $result['message'] = 'Se encontraron '.$rows.' coincidencias';
-                        } else {
-                            $result['message'] = 'Solo existe una coincidencia';
-                        }
-                    } else {
-                        $result['exception'] = 'No hay coincidencias';
-                    }
-                } else {
-                    $result['exception'] = 'Ingrese un valor para buscar';
-                }
-                break;
+             case 'search':
+                 $_POST = $color->validateForm($_POST);
+                 if ($_POST['search'] != '') {
+                     if ($result['dataset'] = $color->searchColor($_POST['search'])) {
+                         $result['status'] = 1;
+                         $rows = count($result['dataset']);
+                         if ($rows > 1) {
+                             $result['message'] = 'Se encontraron '.$rows.' coincidencias';
+                         } else {
+                             $result['message'] = 'Solo existe una coincidencia';
+                         }
+                     } else {
+                         $result['exception'] = 'No hay coincidencias';
+                     }
+                 } else {
+                     $result['exception'] = 'Ingrese un valor para buscar';
+                 }
+                 break;
 
             case 'create':
-                $_POST = $categoria->validateForm($_POST);
-                if ($categoria->setCategoria($_POST['categoria'])) { 
-                    if ($categoria->createCategoria()) {
+                $_POST = $color->validateForm($_POST);
+                if ($color->setColor($_POST['color'])) { 
+                    if ($color->createColor()) {
                         $result['status'] = 1;
                         $result['message'] = 'Categoría creada correctamente';
                     } else {
@@ -59,8 +59,8 @@ if (isset($_GET['action'])) {
                 break;
 
             case 'readOne':
-                if ($categoria->setIdCategoria($_POST['idcategoria'])) {
-                    if ($result['dataset'] = $categoria->readOneCategoria()) {
+                if ($color->setIdColor($_POST['idcolor'])) {
+                    if ($result['dataset'] = $color->readOneColor()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Categoría inexistente';
@@ -70,11 +70,11 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-            $_POST = $categoria->validateForm($_POST);
-            if ($categoria->setIdCategoria($_POST['idcategoria'])) {
-                if ($data = $categoria->readOneCategoria()) {
-                    if ($categoria->setCategoria($_POST['categoria'])) {
-                            if ( $categoria->updateCategoria() ) {
+            $_POST = $color->validateForm($_POST);
+            if ($color->setIdColor($_POST['idcolor'])) {
+                if ($data = $color->readOneColor()) {
+                    if ($color->setColor($_POST['color'])) {
+                            if ( $color->updateColor() ) {
                                 $result['status'] = 1;
                                 $result['message'] = 'Categoría actualizada correctamente';
                             } else {
@@ -92,9 +92,9 @@ if (isset($_GET['action'])) {
             }
             break;
             case 'delete':
-                if ($categoria->setIdCategoria($_POST['idcategoria'])) {
-                    if ($data = $categoria->readOneCategoria()) {
-                        if ($categoria->deleteCategoria()) {
+                if ($color->setIdColor($_POST['idcolor'])) {
+                    if ($data = $color->readOneColor()) {
+                        if ($color->deleteColor()) {
                             $result['status'] = 1;
                         } else {
                             $result['exception'] = Database::getException();
