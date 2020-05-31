@@ -111,29 +111,6 @@ Page::headerTemplate('Gestión de administradores', null);
     </div>
 </div>
 </div>
-<!-- Modal deshabilitar usuario -->
-<div class="modal fade" id="eliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="eliminarUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <!-- Titulo del modal -->
-            <i class="fas fa-exclamation fa-lg my-auto mx-2"></i>
-            <h5 class="modal-title" id="exampleModalLabel">Deshabilitar usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body p-md-4">
-            <!-- Mensaje de confirmación -->
-            <p>¿Estas seguro que deseas deshabilitar el  usuario "Jason Peraza"?</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-purple">Deshabilitar</button>
-        </div>
-        </div>
-    </div>
-</div>
 <?php
 Page::footerTemplate('administrador.js');
 ?>

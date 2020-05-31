@@ -55,7 +55,7 @@ class Page {
                             </a>
                             <ul class="collapse list-unstyled" id="productoSubmenu">
                                 <li>
-                                    <a href="product-inventoy.php">Inventario</a>
+                                    <a href="product-inventory.php">Inventario</a>
                                 </li>
                                 <li>
                                     <a href="product-category.php">Categorias</a>
