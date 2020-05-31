@@ -14,20 +14,6 @@ Page::headerTemplate('Gestión de categorías', null);
             Agregar
         </button>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="categoria-table" class="table table-responsive-sm table-hover">
-                <thead>
-                    <tr>
-                        <th class="pl-4">Categoría</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-rows" class="table-bordered">
-                </tbody>
-            </table>
-        </div>
-    </div>
     <!-- Modal agregar cateogria de producto -->
     <div class="modal fade" id="categoria-modal" tabindex="-1" role="dialog" aria-labelledby="categoria-modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -59,6 +45,20 @@ Page::headerTemplate('Gestión de categorías', null);
         </div>
     </div>     
 </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="categoria-table" class="table table-responsive-sm table-hover">
+                <thead>
+                    <tr>
+                        <th class="pl-4">Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-rows" class="table-bordered">
+                </tbody>
+            </table>
+        </div>
+    </div>
 <?php
 Page::footerTemplate('categoria.js');
 ?>

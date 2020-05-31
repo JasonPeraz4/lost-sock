@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Tipo de producto', null);
+Page::headerTemplate('Gestionar tipo de producto', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
@@ -8,91 +8,56 @@ Page::headerTemplate('Tipo de producto', null);
         <p class="mx-2 my-auto">4 en total</p>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
-        <!-- Campo para buscar tipos de productos -->
-        <form action="searchAdmin" class="mx-md-2">
-            <input type="text" class="form-control" placeholder="Buscar tipo" id="searchAdmin">
-        </form>
-        <button type="button" class="btn btn-purple mx-2" data-toggle="modal" data-target="#nuevoTipoP">
+        <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
             Agregar
         </button>
     </div>
     <!-- Modal agregar tipo de producto -->
-    <div class="modal fade" id="nuevoTipoP" tabindex="-1" role="dialog" aria-labelledby="nuevoTIpoUlLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="tipoproducto-modal" tabindex="-1" role="dialog" aria-labelledby="tipoproducto-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-plus fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo tipo de producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-md-4">
-                <p>Ingresa el nombre del nuevo tipo de calcetin</p>
-                <form action="addUser">
-                    <div class="form-group">
-                        
-                        <input type="text" class="form-control" placeholder="Nombre" id="inputUsuario">
+                <div class="modal-header">
+                    <i class="fas fa-plus fa-lg my-auto mx-2"></i>
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Formulario -->
+                <form method="post" id="tipoproducto-form" enctype="">
+                    <div class="modal-body p-md-4">
+                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                        <input class="d-none" type="text" id="idtipoproducto" name="idtipoproducto" />
+                        <div class="form-group">
+                            <label for="tipoproducto">Ingresa el tipo del producto</label>
+                            <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-purple">Guardar</button>
+                        </div>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-purple">Agregar</button>
-            </div>
+                <!-- Formulario -->
             </div>
         </div>
-    </div>
-    <!-- Modal eliminar tipo de producto -->
-    <div class="modal fade" id="eliminarTipoP" tabindex="-1" role="dialog" aria-labelledby="eliminarTIpoUlLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-trash fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar tipo de producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-md-4">
-                <p>¿Estas seguro que deseas eliminar este tipo de calcetin "Deportivo"?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-purple">Eliminar</button>
-            </div>
-            </div>
-        </div>
-    </div>       
+    </div>     
 </div>
 <div class="row">
-    <div class="col-md-5"> 
-        <div class="list-group" id="list-tab" role="tablist">
-            <!-- Lista de tipos de productos -->
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Calcetines deportivos
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Calcetas
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Medias
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
-            </a>
-            <a class="list-group-item list-group-item-action d-flex align-items-center">
-                Edición ilimitada
-                <span class="fas fa-edit fa-sm ml-auto mr-2" data-toggle="modal" data-target="#nuevoTipoP"></span>
-                <span class="fas fa-trash-alt fa-sm" data-toggle="modal" data-target="#eliminarTipoP"></span>
-            </a>
-        </div>
+    <div class="col-md-12">
+        <table id="tipoproducto-table" class="table table-responsive-sm table-hover">
+            <thead>
+                <tr>
+                    <th class="pl-4">Tipo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-rows" class="table-bordered">
+            </tbody>
+        </table>
     </div>
-</div>    
+</div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('tipoProducto.js');
 ?>
 

@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla tipoProducto de la base de datos. Es clase hija de Validator.
 */
-class Product_Type extends Validator
+class Tipo_Producto extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idTipoProducto = null;
@@ -39,33 +39,20 @@ class Product_Type extends Validator
         return $this->idTipoProducto;
     }
 
-    public function getTipo()
+    public function getTipoProducto()
     {
         return $this->tipo;
     }
 
-    /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
-
-    public function searchProductType($value)
-    {
-        $sql = 'SELECT idTipoProducto, tipo
-                FROM tipoProducto
-                WHERE tipo ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
-    public function createProductType()
-    {
+    public function createTipoProducto()
+    { 
         $sql = 'INSERT INTO tipoProducto(idTipoProducto, tipo)
-                VALUES(?, ?)';
-        $params = array($this->idTipoProducto, $this->tipo);
+                VALUES(DEFAULT, ?)';
+        $params = array($this->tipo);
         return Database::executeRow($sql, $params);
     }
- 
-    public function readAllProductType()
+
+    public function readAllTipoProducto()
     {
         $sql = 'SELECT idTipoProducto, tipo
                 FROM tipoProducto
@@ -74,7 +61,7 @@ class Product_Type extends Validator
         return Database::getRows($sql, $params);
     }
 
-    public function readProductType()
+    public function readOneTipoProducto()
     {
         $sql = 'SELECT idTipoProducto, tipo
                 FROM tipoProducto
@@ -83,13 +70,13 @@ class Product_Type extends Validator
         return Database::getRow($sql, $params);
     }
 
-    public function updateProductType(){
+    public function updateTipoProducto(){
             $sql='UPDATE tipoProducto SET tipo=? WHERE idTipoProducto=?';
-            $params=array($this->idTipoProducto, $this->tipo);
+            $params=array($this->tipo, $this->idTipoProducto);
             return Database::executeRow($sql, $params);
         }
 
-    public function deleteProductType()
+    public function deleteTipoProducto()
     {
         $sql = 'DELETE FROM tipoProducto
                 WHERE idTipoProducto = ?';
