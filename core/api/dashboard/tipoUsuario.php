@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if ( $tipo->setTipo( $_POST[ 'idtipousuario' ] ) ) {
+                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
                     if ( $result[ 'dataset' ] = $tipo->readTipo() ) {
                         $result['status'] = 1;
                     } else {
@@ -49,18 +49,22 @@ if (isset($_GET['action'])) {
             case 'update':
                 $_POST = $tipo->validateForm( $_POST );
                 if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
-                    if ( $tipo->updateTipo() ) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Tipo de usuario actualizado exitosamente';
+                    if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
+                        if ( $tipo->updateTipo() ) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Tipo de usuario actualizado exitosamente';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
                     } else {
-                        $result['exception'] = Database::getException();
+                        $result['exception'] = 'Ingresa un nombre válido';
                     }    
                 } else {
                     $result['exception'] = 'Tipo de usuario ingresado no válido';
                 }
                 break;
             case 'delete':
-                if ( $tipo->setId( $_POST[ 'idadministrador' ] ) ) {
+                if ( $tipo->setId( $_POST[ 'idtipousuario' ] ) ) {
                     if ( $data = $tipo->readTipo() ) {
                         if ( $tipo->deleteTipo() ) {
                             $result['status'] = 1;
