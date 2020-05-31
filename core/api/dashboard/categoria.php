@@ -1,18 +1,18 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/product-category.php');
+require_once('../../models/categoria.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $categoria = new Product_Category;
+    $categoria = new Categoria;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idAdministrador'])) {
+    if (isset($_SESSION['idadministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
 
 
@@ -59,7 +59,7 @@ if (isset($_GET['action'])) {
                 break;
 
             case 'readOne':
-                if ($categoria->setId($_POST['idCategoria'])) {
+                if ($categoria->setIdCategoria($_POST['idcategoria'])) {
                     if ($result['dataset'] = $categoria->readOneCategoria()) {
                         $result['status'] = 1;
                     } else {
@@ -69,30 +69,30 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Categoría incorrecta';
                 }
                 break;
-
             case 'update':
-                $_POST = $categoria->validateForm($_POST);
-                if ($categoria->setIdCategoria($_POST['idCategoria'])) {
-                    if ($data = $categoria->readOneCategoria()) { 
-                        // nombres_categoria equals categoria ON POST
-                        if ($categoria->setCategoria($_POST['categoria'])) {     
-                            if ($categoria->updateCategoria()) {
+            $_POST = $categoria->validateForm($_POST);
+            if ($categoria->setIdCategoria($_POST['idcategoria'])) {
+                if ($data = $categoria->readOneCategoria()) {
+                    if ($categoria->setCategoria($_POST['categoria'])) {
+                            if ( $categoria->updateCategoria() ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Categoría actualizada correctamente';
                             } else {
                                 $result['exception'] = Database::getException();
-                            } 
-                        } else {
-                            $result['exception'] = 'Nombre incorrecto';
-                        }
+                            }
+
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['exception'] = 'Nombre de categoría incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Categoría inexistente';
                 }
-                break;
-
+            } else {
+                $result['exception'] = 'Categoría incorrecta';
+            }
+            break;
             case 'delete':
-                if ($categoria->setId($_POST['idCategoria'])) {
+                if ($categoria->setIdCategoria($_POST['idcategoria'])) {
                     if ($data = $categoria->readOneCategoria()) {
                         if ($categoria->deleteCategoria()) {
                             $result['status'] = 1;

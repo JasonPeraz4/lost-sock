@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla categoria de la base de datos. Es clase hija de Validator.
 */
-class Product_Category extends Validator
+class Categoria extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idCategoria = null;
@@ -44,24 +44,11 @@ class Product_Category extends Validator
         return $this->categoria;
     }
 
-    /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
-
-    public function searchCategoria($value)
-    {
-        $sql = 'SELECT idCategoria, categoria
-                FROM categoria 
-                WHERE categoria ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
     public function createCategoria()
     { 
         $sql = 'INSERT INTO categoria(idCategoria, categoria)
-                VALUES(?, ?)';
-        $params = array($this->idCategoria, $this->categoria);
+                VALUES(DEFAULT, ?)';
+        $params = array($this->categoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -85,7 +72,7 @@ class Product_Category extends Validator
 
     public function updateCategoria(){
             $sql='UPDATE categoria SET categoria=? WHERE idCategoria=?';
-            $params=array($this->idCategoria, $this->categoria);
+            $params=array($this->categoria, $this->idCategoria);
             return Database::executeRow($sql, $params);
         }
 
