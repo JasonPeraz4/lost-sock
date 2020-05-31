@@ -5,7 +5,7 @@
 class tipoUsuario extends Validator
 {
     // Declaración de atributos (propiedades).
-    private $id = null;
+    private $idtipousuario = null;
     private $tipo = null;
 
     /*
@@ -14,7 +14,7 @@ class tipoUsuario extends Validator
     public function setId($value)
     {
         if ($this->validateNaturalNumber($value)) {
-            $this->id = $value;
+            $this->idtipousuario = $value;
             return true;
         } else {
             return false;
@@ -36,7 +36,7 @@ class tipoUsuario extends Validator
     */
     public function getId()
     {
-        return $this->id;
+        return $this->idtipousuario;
     }
 
     public function getTipo()
@@ -47,12 +47,50 @@ class tipoUsuario extends Validator
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
+
+
     public function readAllTipos()
     {
-        $sql = 'SELECT idtipousuario, tipo FROM tipoUsuario ORDER BY tipo';
+        $sql = 'SELECT idtipousuario, tipo FROM tipoUsuario 
+                ORDER BY idtipousuario';
         $params = null;
         return Database::getRows($sql, $params);
     }
+    
+    public function fun(){
+        $sql = '';
+        $params = array(  );
+        return Database::getRow( $sql, $params );
+    }
 
+    public function createTipoUsuario(){
+        $sql = 'INSERT INTO tipoUsuario( tipo ) 
+                VALUES ( ? )';
+        $params = array( $this->tipo );
+        return Database::executeRow( $sql, $params );
+    }
+
+    public function readTipo(){
+        $sql = 'SELECT idtipousuario, tipo 
+                FROM tipoUsuario 
+                WHERE idtipousuario = ?';
+        $params = array( $this->idtipousuario );
+        return Database::getRow( $sql, $params );
+    }
+
+    public function updateTipo(){
+        $sql = 'UPDATE tipoUsuario 
+                SET tipo = ? 
+                WHERE idtipousuario = ?';
+        $params = array( $this->tipo, $this->idtipousuario );
+        return Database::executeRow( $sql, $params );
+    }
+
+    public function deleteTipo(){
+        $sql = 'DELETE FROM tipoUsuario 
+                WHERE idtipousuario = ?';
+        $params = array( $this->idtipousuario );
+        return Database::executeRow( $sql, $params );
+    }
 }
 ?>
