@@ -1,10 +1,10 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_TIPOUSUARIO = '../../core/api/dashboard/tipoUsuario.php?action=';
+const API_FRECUENCIA = '../../core/api/dashboard/frecuencia.php?action=';
 
 // Método que se ejecuta una vez la página este lista.
 $( document ).ready( function(){
     //Se llama a la función que verifica la existencia de tipos de usuario. Se ubica en el archivo account.js
-    readRows( API_TIPOUSUARIO );
+    readRows( API_FRECUENCIA );
 });
 
 function fillTable( dataset )
@@ -19,10 +19,10 @@ function fillTable( dataset )
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td class="pl-4">${row.tipo}</td>
+                <td class="pl-4">${row.frecuencia}</td>
                 <td>
-                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idtipousuario})"></i>
-                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idtipousuario})"></i>
+                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idfrecuencia})"></i>
+                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idfrecuencia})"></i>
                 </td>
             </tr>
         `;
@@ -44,7 +44,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Agregar tipo de usuario' );
+    $( '#modal-title' ).text( 'Agregar frecuencia de envio' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -55,20 +55,20 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Actualizar tipo de administrador' );
+    $( '#modal-title' ).text( 'Actualizar frecuencia' );
 
     $.ajax({
         dataType: 'json',
-        url: API_TIPOUSUARIO + 'readOne',
-        data: { idtipousuario: id },
+        url: API_FRECUENCIA + 'readOne',
+        data: { idfrecuencia: id },
         type: 'post'
     })
     .done(function( response ) {
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
         if ( response.status ) {
             // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-            $( '#idtipousuario' ).val( response.dataset.idtipousuario );
-            $( '#tipo' ).val( response.dataset.tipo );
+            $( '#idfrecuencia' ).val( response.dataset.idfrecuencia );
+            $( '#frecuencia' ).val( response.dataset.frecuencia );
         } else {
             sweetAlert( 2, result.exception, null );
         }
@@ -88,10 +88,10 @@ $( '#save-form' ).submit(function( event ) {
     event.preventDefault();
     // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
     // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
-    if ( $( '#idtipousuario' ).val() ) {
-        saveRow( API_TIPOUSUARIO, 'update', this, 'save-modal' );
+    if ( $( '#idfrecuencia' ).val() ) {
+        saveRow( API_FRECUENCIA, 'update', this, 'save-modal' );
     } else {
-        saveRow( API_TIPOUSUARIO, 'create', this, 'save-modal' );
+        saveRow( API_FRECUENCIA, 'create', this, 'save-modal' );
     }
 });
 
@@ -99,6 +99,6 @@ $( '#save-form' ).submit(function( event ) {
 function openDeleteDialog( id )
 {
     // Se declara e inicializa un objeto con el id del registro que será borrado.
-    let identifier = { idtipousuario: id };
-    confirmDelete( API_TIPOUSUARIO, identifier );
+    let identifier = { idfrecuencia: id };
+    confirmDelete( API_FRECUENCIA, identifier );
 }

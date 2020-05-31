@@ -13,8 +13,8 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
     </div>
 </div>
 <div class="row">
-    <div class="col-md-5">
-        <table id="tipo-table" class="table table-responsive-sm table-hover">
+    <div class="col-md-8">
+        <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
                     <th class="pl-4">Tipo</th>
@@ -46,11 +46,9 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idtipousuario" name="idtipousuario"/>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="Tipo">Ingresa un tipo de usuario</label>
-                    <input type="text" class="form-control" placeholder="Nombres" id="tipo" name="tipo">
-                </div>
+            <div class="form-group">
+                <label for="tipo">Ingresa un tipo de usuario</label>
+                <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo">
             </div>
         </div>
         <div class="modal-footer">
@@ -62,6 +60,6 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
 </div>
 </div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate( 'tipoUsuario.js' );
 ?>
 
