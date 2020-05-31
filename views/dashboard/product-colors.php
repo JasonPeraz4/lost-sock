@@ -19,7 +19,7 @@ Page::headerTemplate('Gestión de colores', null);
             <div class="modal-content">
             <div class="modal-header">
                 <i class="fas fa-plus fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo color de producto</h5>
+                <h5 class="modal-title" id="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -42,28 +42,7 @@ Page::headerTemplate('Gestión de colores', null);
             <!-- Formulario -->
             </div>
         </div>
-    </div>
-    <!-- Modal eliminar color -->
-    <div class="modal fade" id="eliminarColor" tabindex="-1" role="dialog" aria-labelledby="eliminarColorLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fas fa-trash fa-lg my-auto mx-2"></i>
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar color de producto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body p-md-4">
-                    <p>¿Estás seguro que deseas eliminar el color "Rojo"?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-purple">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    </div>       
+    </div>     
     </div>
     <div class="row">
         <div class="col-md-12">

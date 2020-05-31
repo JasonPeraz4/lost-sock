@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla talla de la base de datos. Es clase hija de Validator.
 */
-class Product_Sizes extends Validator
+class Talla extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idTalla = null;
@@ -44,28 +44,15 @@ class Product_Sizes extends Validator
         return $this->talla;
     }
 
-    /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
-
-    public function searchSize($value)
-    {
-        $sql = 'SELECT idTalla, talla
-                FROM talla 
-                WHERE talla ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
-    public function createSize()
-    {
+    public function createTalla()
+    { 
         $sql = 'INSERT INTO talla(idTalla, talla)
-                VALUES(?, ?)';
-        $params = array($this->idTalla, $this->talla);
+                VALUES(DEFAULT, ?)';
+        $params = array($this->talla);
         return Database::executeRow($sql, $params);
     }
 
-    public function readAllSize()
+    public function readAllTalla()
     {
         $sql = 'SELECT idTalla, talla
                 FROM talla
@@ -73,23 +60,23 @@ class Product_Sizes extends Validator
         $params = null;
         return Database::getRows($sql, $params);
     }
- 
-    public function readSize()
+
+    public function readOneTalla()
     {
-        $sql = 'SELECT idTalla, tall
+        $sql = 'SELECT idTalla, talla
                 FROM talla
                 WHERE idTalla = ?';
         $params = array($this->idTalla);
         return Database::getRow($sql, $params);
     }
 
-    public function updateSize(){
+    public function updateTalla(){
             $sql='UPDATE talla SET talla=? WHERE idTalla=?';
-            $params=array($this->idTalla, $this->talla);
+            $params=array($this->talla, $this->idTalla);
             return Database::executeRow($sql, $params);
         }
 
-    public function deleteSize()
+    public function deleteTalla()
     {
         $sql = 'DELETE FROM talla
                 WHERE idTalla = ?';

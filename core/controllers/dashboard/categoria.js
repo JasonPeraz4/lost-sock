@@ -56,7 +56,7 @@ function openUpdateModal(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#categoria-title').text('Actualizar categoría');
+    $('#modal-title').text('Actualizar categoría');
 
     $.ajax({
         dataType: 'json',

@@ -28,6 +28,7 @@ Page::headerTemplate('Gestión de categorías', null);
             </table>
         </div>
     </div>
+    <!-- Modal agregar cateogria de producto -->
     <div class="modal fade" id="categoria-modal" tabindex="-1" role="dialog" aria-labelledby="categoria-modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -56,29 +57,7 @@ Page::headerTemplate('Gestión de categorías', null);
             <!-- Formulario -->
             </div>
         </div>
-    </div>
-    <!-- Modal eliminar cateogria de producto -->
-    <div class="modal fade" id="eliminarCategoria" tabindex="-1" role="dialog" aria-labelledby="eliminarCategoria" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-trash fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar categoria de producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-md-4">
-                <!-- Mensaje de confirmación -->
-                <p>¿Estás seguro que deseas eliminar la categoría "Hombres"?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-purple">Eliminar</button>
-            </div>
-            </div>
-        </div>
-    </div>       
+    </div>     
 </div>
 <?php
 Page::footerTemplate('categoria.js');
