@@ -78,6 +78,7 @@ if (isset($_GET['action'])) {
                     if ($data = $talla->readOneTalla()) {
                         if ($talla->deleteTalla()) {
                             $result['status'] = 1;
+                            $result['message'] = 'Talla eliminada correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }

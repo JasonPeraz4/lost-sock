@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla tipoProducto de la base de datos. Es clase hija de Validator.
 */
-class Tipo_Producto extends Validator
+class TipoProducto extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idTipoProducto = null;

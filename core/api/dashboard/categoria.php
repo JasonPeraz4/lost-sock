@@ -96,6 +96,7 @@ if (isset($_GET['action'])) {
                     if ($data = $categoria->readOneCategoria()) {
                         if ($categoria->deleteCategoria()) {
                             $result['status'] = 1;
+                            $result['message'] = 'Categoría eliminada correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }

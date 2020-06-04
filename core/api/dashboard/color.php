@@ -96,6 +96,7 @@ if (isset($_GET['action'])) {
                     if ($data = $color->readOneColor()) {
                         if ($color->deleteColor()) {
                             $result['status'] = 1;
+                            $result['message'] = 'Color eliminado correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }

@@ -2,77 +2,132 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Suscripciones', null);
 ?>
-<div class="d-flex flex-row align-items-center flex-wrap mb-4">
-    <div class="d-flex flex-row align-items-center">
-        <h2>Suscripciones</h2>
-        <p class="mx-2 my-auto">3 en total</p>
-        
+<div class="d-flex flex-column mb-3">
+    <div class="d-flex flex-wrap">
+        <!-- Textbox de búsqueda -->
+        <h3 class="mr-md-3">Suscripciones</h3>
+        <!-- Grupo de dropdowns -->
+        <div class="d-flex flex-row my-2 my-md-0">
     </div>
-    <div class="d-flex flex-row align-items-center ml-md-auto">
-        <!-- Campo de buscar suscripcion -->
-        <form action="searchAdmin" class="mx-2">
-            <input type="text" class="form-control" placeholder="Buscar" id="searchAdmin">
-        </form>
-        <!-- ComboBox para filtrar suscripciones -->
-        <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Frecuencia
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Quincenalmente</a>
-                <a class="dropdown-item" href="#">Mensualmente</a>
-                <a class="dropdown-item" href="#">Bimensualmente</a>
+</div>
+<table id="suscripcion-table" class="table table-responsive-sm table-hover">
+    <thead>
+        <tr>
+            <th>Categoría</th>
+            <th>Tipo de producto</th>
+            <th>Talla</th>
+            <th>Frecuencia</th>
+            <th>Cliente</th>
+            <th>Información de envío</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tbody-rows" class="table-bordered">
+        <tr>
+            <td>${row.categoria}</td>
+            <td>${row.tipo}</td>
+            <td>${row.talla}</td>
+            <td>${row.frecuencia}</td>
+            <td>
+                <div>${row.nombres} ${row.apellidos}</div>
+            </td>
+            <td> ${drow.detalledireccion}</td>
+            <td>${txt}</td>
+            <td>
+                <i class="fas fa-info mx-1" data-toggle="modal" data-target="#suscripcion-modal"></i>
+                <i class="fas fa-eye-slash mx-1" data-toggle="modal"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal fade" id="suscripcion-modal" tabindex="-1" role="dialog" aria-labelledby="suscripcion-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-        <!-- Modal cancelar suscripciòn -->
-        <div class="modal fade" id="cancelarSub" tabindex="-1" role="dialog" aria-labelledby="eliminarClienteLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <i class="fas fa-exclamation fa-lg my-auto mx-2"></i>
-                        <h5 class="modal-title" id="exampleModalLabel">Cancelar suscripción</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+            <form method="post" id="suscripcion-form" enctype="">
+                <div class="modal-body p-md-4">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="d-none" type="text" id="idsuscripcion" name="idsuscripcion" />
+                    <!-- <p class="text-secondary">INFORMACIÓN PERSONAL</p> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombres">Nombres</label>
+                            <input readonly type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="apellidos">Apellidos</label>
+                            <input readonly type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos">
+                        </div>
                     </div>
-                    <div class="modal-body p-md-4">
-                        <p>¿Estas seguro que deseas cancelar esta suscripción?</p>
+                    <!-- <p class="text-secondary">INFORMACIÓN DE ENVÍO</p> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="direccion">Dirección de envío</label>
+                            <input readonly type="direccion" class="form-control" placeholder="Dirección de envío" id="detalledireccion" name="detalledireccion">
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-purple">Aceptar</button>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="departamento">Departamento</label>
+                            <input readonly type="text" class="form-control" placeholder="Departamento" id="detalledepartamentoo" name="detalledepartamento">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="frecuencia">Frecuencia</label>
+                            <input readonly type="text" class="form-control" placeholder="Frecuencia" id="frecuencia" name="frecuencia">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="costoenvio">Costo de envío</label>
+                            <input readonly type="text" class="form-control" placeholder="Costo de envío" id="costoenvio" name="costoenvio">
+                        </div>
+                    </div>
+                    <!-- <p class="text-secondary">INFORMACIÓN DEL PLAN DE SUSCRIPCIÓN</p> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tipoproducto">Tipo de producto</label>
+                            <input readonly type="text" class="form-control" placeholder="Tipo de producto" id="tipoproducto" name="tipoproducto">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="categoria">Categoría</label>
+                            <input readonly type="text" class="form-control" placeholder="Categoría" id="categoria" name="categoria">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="estado">Estado</label>
+                            <select readonly class="form-control" id="estado" name="estado"></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="talla">Talla</label>
+                            <input readonly type="text" class="form-control" placeholder="Talla" id="talla" name="talla">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cantidad">Cantidad</label>
+                            <input readonly type="text" class="form-control" placeholder="Cantidad" id="cantidad" name="cantidad">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="precio">Precio del producto</label>
+                            <input readonly type="text" class="form-control" placeholder="Precio ($)" id="precio" name="precio">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="total">Total a pagar</label>
+                            <input readonly type="text" class="form-control" placeholder="Total ($)" id="total" name="total">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-purple">Guardar</button>
+                </div>
+            </form>
         </div>
-    </div>       
-</div>
-<div class="list-group">
-    <!-- listas de suscripciones -->
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-wrap flex-row align-items-center justify-content-around">
-        <p class="my-auto col-md-2">Medias</p>
-        <p class="my-auto col-md-2">Hombres</p>
-        <p class="my-auto col-md-1">Talla M</p>
-        <p class="my-auto col-md-2">Pedro Ricaldone</p>
-        <p class="my-auto col-md-3">Av. Aguilares. Chalatenango Depto. 14</p>
-        <div class="d-flex flex-row align-items-center col-md-2">
-            <p class="my-auto">Mensualmente</p>
-            <span class="fas fa-ban fa-sm mx-3" data-toggle="modal" data-target="#cancelarSub"></span>
-        </div>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-row flex-wrap align-items-center justify-content-between">
-        <p class="my-auto col-md-2">Calcetines deportivos</p>
-        <p class="my-auto col-md-2">Hombres</p>
-        <p class="my-auto col-md-1">Talla L</p>
-        <p class="my-auto col-md-2">Juan Melchor</p>
-        <p class="my-auto col-md-3">Av. Aguilares. Chalatenango Depto. 14</p>
-        <div class="d-flex flex-row align-items-center col-md-2">
-            <p class="my-auto">Bimensualmente</p>
-            <span class="fas fa-ban fa-sm mx-3" data-toggle="modal" data-target="#cancelarSub"></span>
-        </div>
-    </a>
+    </div>
 </div>
 <?php
 Page::footerTemplate(null);
 ?>
-

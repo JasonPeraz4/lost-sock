@@ -1,38 +1,47 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_TIPOPRODUCTO = '../../core/api/dashboard/tipoproducto.php?action=';
+const API_SUSCRIPCION = '../../core/api/dashboard/suscripcion.php?action=';
 
 // Método que se ejecuta cuando el documento está listo.
 $(document).ready(function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js
-    readRows(API_TIPOPRODUCTO);
+    readRows(API_SUSCRIPCION);
 });
 
 // Función para llenar la tabla con los datos enviados por readRows().
 function fillTable(dataset) {
-    if ($.fn.dataTable.isDataTable('#tipoproducto-table')) {
-        $('#tipoproducto-table').DataTable().clear();
-        $('#tipoproducto-table').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('suscripcion-table')) {
+        $('#suscripcion-table').DataTable().clear();
+        $('#suscripcion-table').DataTable().destroy();
     }
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.forEach(function (row) {
+        // Se establece un icono para el estado del producto.
+        (row.estado == 1) ? txt = 'Activo' : txt = 'Inactivo';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
-             <tr>
-                <td>${row.tipo}</td>
+            <tr>
                 <td>
-                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idtipoproducto})"></i>
-                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idtipoproducto})"></i>
+                    <div>${row.nombres} ${row.apellidos}</div>
+                </td>
+                <td>${row.categoria}</td>
+                <td>${row.talla}</td>
+                <td>${row.precio}</td>
+                <td>${row.cantidadpares}</td>
+                <td>${row.frecuencia}</td>
+                <td>${txt}</td>
+                <td>
+                    <i class="fas fa-edit mx-1" onclick="openDisableModal(${row.idsuscripcion})"></i>
                 </td>
             </tr>
         `;
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $('#tbody-rows').html(content);
-    $('#tipoproducto-table').DataTable({
+    $('#suscripcion-table').DataTable({
         'language': {
             'url': '../../core/helpers/Spanish.json',
-            'search': 'Buscar tipo de producto:',
+            'search': 'Buscar suscripción:',
 
         }
     });
@@ -41,35 +50,33 @@ function fillTable(dataset) {
 // Función que prepara formulario para insertar un registro.
 function openCreateModal() {
     // Se limpian los campos del formulario.
-    $('#tipoproducto-form')[0].reset();
+    $('#categoria-form')[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#tipoproducto-modal').modal('show');
+    $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar tipo de producto');
+    $('#modal-title').text('Agregar categoría');
 
 }
 
 // Función que prepara formulario para modificar un registro.
 function openUpdateModal(id) {
-    // Se limpian los campos del formulario.
-    $('#tipoproducto-form')[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#tipoproducto-modal').modal('show');
+    $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Actualizar tipo de producto');
+    $('#modal-title').text('Actualizar categoría');
 
     $.ajax({
         dataType: 'json',
-        url: API_TIPOPRODUCTO + 'readOne',
-        data: { idtipoproducto: id },
+        url: API_SUSCRIPCION + 'readOne',
+        data: { idcategoria: id },
         type: 'post'
     })
         .done(function (response) {
             // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
             if (response.status) {
                 // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-                $('#idtipoproducto').val(response.dataset.idtipoproducto);
-                $('#tipoproducto').val(response.dataset.tipo);
+                $('#idcategoria').val(response.dataset.idcategoria);
+                $('#categoria').val(response.dataset.categoria);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -86,20 +93,20 @@ function openUpdateModal(id) {
 
 
 // Evento para crear o modificar un registro.
-$('#tipoproducto-form').submit(function (event) {
+$('#categoria-form').submit(function (event) {
     event.preventDefault();
     // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
     // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
-    if ($('#idtipoproducto').val()) {
-        saveRow(API_TIPOPRODUCTO, 'update', this, 'tipoproducto-modal');
+    if ($('#idcategoria').val()) {
+        saveRow(API_SUSCRIPCION, 'update', this, 'categoria-modal');
     } else {
-        saveRow(API_TIPOPRODUCTO, 'create', this, 'tipoproducto-modal');
+        saveRow(API_SUSCRIPCION, 'create', this, 'categoria-modal');
     }
 });
 
 // Función para establecer el registro a eliminar mediante el id recibido.
 function openDeleteDialog(id) {
     // Se declara e inicializa un objeto con el id del registro que será borrado.
-    let identifier = { idtipoproducto: id };
-    confirmDelete(API_TIPOPRODUCTO, identifier);
+    let identifier = { idcategoria: id };
+    confirmDelete(API_SUSCRIPCION, identifier);
 }

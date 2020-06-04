@@ -138,7 +138,9 @@ CREATE TABLE suscripcion(
 	idFrecuencia INTEGER REFERENCES frecuencia(idFrecuencia),
 	idCategoria INTEGER REFERENCES categoria(idCategoria),
 	idCliente INTEGER REFERENCES cliente(idCliente),
-	idPlanSuscripcion INTEGER REFERENCES planSuscripcion(idPlanSuscripcion)
+	idPlanSuscripcion INTEGER REFERENCES planSuscripcion(idPlanSuscripcion),
+	idTipoProducto INTEGER REFERENCES tipoProducto(idTipoProducto),
+	idDireccion INTEGER REFERENCES direccion(idDireccion)
 );
 
 
@@ -172,11 +174,11 @@ VALUES	(DEFAULT, 'San Salvador', 0.00),
 INSERT INTO direccion
 VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
 		(DEFAULT, 'Calle Siempreviva, casa 203', 2, 2),
-		(DEFAULT, 'Urbanización Maquillishuat, casa 201', 3, 2),
-		(DEFAULT, 'PLAZA CONSTITUCION NO. 1, Depto 4', 5, 3),
-		(DEFAULT, 'AV. LIC. VICENTE AGUIRRE, Depto 3', 4, 4),
-		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 5),
-		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 6);
+		(DEFAULT, 'Urbanización Maquillishuat, casa 201', 3, 3),
+		(DEFAULT, 'PLAZA CONSTITUCION NO. 1, Depto 4', 5, 4),
+		(DEFAULT, 'AV. LIC. VICENTE AGUIRRE, Depto 3', 4, 5),
+		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
+		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 
 
 INSERT INTO estadoCompra 
@@ -197,14 +199,14 @@ VALUES	(DEFAULT, 'Mensual'),
 		(DEFAULT, 'Cuatrimestral'),
 		(DEFAULT, 'Bimensual'),
 		(DEFAULT, 'Quincenal');
-/*
+
 INSERT INTO administrador
-VALUES	(DEFAULT, 'Eduardo David', 'Estrada Rivera', 'e2rd0@gmail.com', '72964120', 'e2rd0', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '3'),
-		(DEFAULT, 'Bryan Isaac', 'Ramírez Alfaro', 'bryram0@gmail.com', '72961120', 'Bryram', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '4'),
-		(DEFAULT, 'Alejandro Daniel', 'Vásquez Campos', 'alevas@gmail.com', '61875110', 'Ale', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '5'),
+VALUES	(DEFAULT, 'Eduardo David', 'Estrada Rivera', 'e2rd0@gmail.com', '72964120', 'e2rd0', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2'),
+		(DEFAULT, 'Bryan Isaac', 'Ramírez Alfaro', 'bryram0@gmail.com', '72961120', 'Bryram', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '1'),
+		(DEFAULT, 'Alejandro Daniel', 'Vásquez Campos', 'alevas@gmail.com', '61875110', 'Ale', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2'),
 		(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx0@gmail.com', '72961120', 'jasonpc', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '1'),
 		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', '72589658', 'luunavas', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2');
-*/
+
 INSERT INTO tipoProducto
 VALUES	(DEFAULT, 'Calcetas'),
 		(DEFAULT, 'Calcetines'),
@@ -518,14 +520,14 @@ VALUES	(DEFAULT, 1, 5.00),
 		(DEFAULT, 3, 15.00);
 
 INSERT INTO suscripcion
-VALUES	(DEFAULT, DEFAULT, 1, 1, 5, 1, 2),
-		(DEFAULT, DEFAULT, 2, 1, 2, 4, 1),
-		(DEFAULT, DEFAULT, 3, 5, 1, 15, 1),
-		(DEFAULT, DEFAULT, 1, 2, 4, 10, 3),
-		(DEFAULT, DEFAULT, 2, 1, 1, 5, 1),
-		(DEFAULT, DEFAULT, 3, 3, 3, 12, 1),
-		(DEFAULT, DEFAULT, 2, 4, 2, 4, 2),
-		(DEFAULT, DEFAULT, 2, 1, 3, 6, 1);
+VALUES	(DEFAULT, DEFAULT, 1, 1, 5, 1, 2, 1, 1),
+		(DEFAULT, DEFAULT, 2, 1, 2, 4, 1, 1, 4),
+		(DEFAULT, DEFAULT, 3, 5, 1, 2, 1, 1, 2),
+		(DEFAULT, DEFAULT, 1, 2, 4, 3, 3, 1, 3),
+		(DEFAULT, DEFAULT, 2, 1, 1, 5, 1, 1, 5),
+		(DEFAULT, DEFAULT, 3, 3, 3, 3, 1, 1, 3),
+		(DEFAULT, DEFAULT, 2, 4, 2, 4, 2, 1, 4),
+		(DEFAULT, DEFAULT, 2, 1, 3, 6, 1, 1, 6);
 		
 -- SELECTS
 
