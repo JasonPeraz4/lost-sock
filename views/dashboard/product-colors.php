@@ -17,33 +17,32 @@ Page::headerTemplate('Gestión de colores', null);
     <div class="modal fade" id="color-modal" tabindex="-1" role="dialog" aria-labelledby="color-modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-plus fa-lg my-auto mx-2"></i>
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- Formulario -->
-            <form method="post" id="color-form" enctype="">
-                <div class="modal-body p-md-4">
-                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="d-none" type="text" id="idcolor" name="idcolor" />
-                    <div class="form-group">
-                        <label for="color">Ingresa el nombre del nuevo color</label>
-                        <input type="text" class="form-control" placeholder="Color" id="color" name="color">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="color-form" enctype="">
+                    <div class="modal-body p-md-6">
+                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                        <input class="d-none" type="text" id="idcolor" name="idcolor" />
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="color">Ingresa el nombre del color</label>
+                                <input type="text" class="form-control" placeholder="Color" id="color" name="color">
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-purple">Guardar</button>
                     </div>
-                </div>
-            </form>
-            <!-- Formulario -->
+                </form>
             </div>
         </div>
-    </div>     
-    </div>
+    </div>    
+</div>
     <div class="row">
         <div class="col-md-12">
             <table id="color-table" class="table table-responsive-sm table-hover">

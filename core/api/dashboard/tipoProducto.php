@@ -21,7 +21,7 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $tipoProducto->readAllTipoProducto()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay tipo de productos registradas';
+                    $result['exception'] = 'No hay tipo de productos registrados';
                 }
                 break;
 
@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                 if ($tipoProducto->setTipoProducto($_POST['tipoproducto'])) { 
                     if ($tipoProducto->createTipoProducto()) {
                         $result['status'] = 1;
-                        $result['message'] = 'tipo de producto creada correctamente';
+                        $result['message'] = 'Tipo de producto creado correctamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }
@@ -44,10 +44,10 @@ if (isset($_GET['action'])) {
                     if ($result['dataset'] = $tipoProducto->readOneTipoProducto()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'tipo de producto inexistente';
+                        $result['exception'] = 'Tipo de producto inexistente';
                     }
                 } else {
-                    $result['exception'] = 'tipo de producto incorrecta';
+                    $result['exception'] = 'Tipo de producto incorrecto';
                 }
                 break;
             case 'update':
@@ -57,7 +57,7 @@ if (isset($_GET['action'])) {
                     if ($tipoProducto->setTipoProducto($_POST['tipoproducto'])) {
                             if ( $tipoProducto->updateTipoProducto() ) {
                                 $result['status'] = 1;
-                                $result['message'] = 'tipo de producto actualizada correctamente';
+                                $result['message'] = 'Tipo de producto actualizado correctamente';
                             } else {
                                 $result['exception'] = Database::getException();
                             }
@@ -66,10 +66,10 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Nombre de tipo de producto incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'tipo de producto inexistente';
+                    $result['exception'] = 'Tipo de producto inexistente';
                 }
             } else {
-                $result['exception'] = 'tipo de producto incorrecta';
+                $result['exception'] = 'Tipo de producto incorrecto';
             }
             break;
             case 'delete':
@@ -81,10 +81,10 @@ if (isset($_GET['action'])) {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'tipo de producto inexistente';
+                        $result['exception'] = 'Tipo de producto inexistente';
                     }
                 } else {
-                    $result['exception'] = 'tipo de producto incorrecta';
+                    $result['exception'] = 'Tipo de producto incorrecto';
                 }
                 break;
             default:

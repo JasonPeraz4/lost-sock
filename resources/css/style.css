@@ -286,3 +286,8 @@ ul ul a {
       column-count: 5;
     }
   }
+
+  button:focus{
+    outline: none!important;
+    box-shadow: none!important;
+}

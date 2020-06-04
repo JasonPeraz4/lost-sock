@@ -130,7 +130,7 @@ function confirmDelete( api, identifier )
 {
     swal({
         title: 'Advertencia',
-        text: '¿Estas seguro que deseas eliminar a ""?',
+        text: '¿Estas seguro que deseas eliminarlo?',
         icon: 'warning',
         buttons: ['Cancelar', 'Aceptar'],
         closeOnClickOutside: false,

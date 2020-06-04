@@ -17,28 +17,27 @@ Page::headerTemplate('Gestionar tipo de producto', null);
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <i class="fas fa-plus fa-lg my-auto mx-2"></i>
                     <h5 class="modal-title" id="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!-- Formulario -->
                 <form method="post" id="tipoproducto-form" enctype="">
-                    <div class="modal-body p-md-4">
+                    <div class="modal-body p-md-6">
                         <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                         <input class="d-none" type="text" id="idtipoproducto" name="idtipoproducto" />
-                        <div class="form-group">
-                            <label for="tipoproducto">Ingresa el tipo del producto</label>
-                            <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-purple">Guardar</button>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="tipoproducto">Ingresa el tipo del producto</label>
+                                <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto">
+                            </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
+                    </div>
                 </form>
-                <!-- Formulario -->
             </div>
         </div>
     </div>     

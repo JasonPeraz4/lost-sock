@@ -13,7 +13,7 @@ Page::headerTemplate('Gestión de frecuencias de envio', null);
     </div>
 </div>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
