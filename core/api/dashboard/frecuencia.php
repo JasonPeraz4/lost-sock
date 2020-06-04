@@ -68,7 +68,7 @@ if (isset($_GET['action'])) {
                     if ( $data = $frecuencia->readFrecuencia() ) {
                         if ( $frecuencia->deleteFrecuencia() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Frecuencia de envio eliminada correctamente';
+                            $result['message'] = 'Frecuencia de envío eliminada correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
