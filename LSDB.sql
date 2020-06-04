@@ -143,6 +143,53 @@ CREATE TABLE suscripcion(
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
 );
 
+/*
+* Función que crea el detalle de un producto por cada talla registrada
+*/
+CREATE OR REPLACE FUNCTION crearDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, $1, (SELECT idproducto FROM producto ORDER BY idproducto DESC LIMIT 1))';
+    FOR rec IN SELECT idtalla FROM talla ORDER BY idtalla 
+    LOOP 
+	RAISE NOTICE '%', rec.idtalla;
+	EXECUTE query USING rec.idtalla;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
+
+/*
+* Disparador que ejecuta la función crearDetalleProducto
+*/
+CREATE TRIGGER crearDetalleProducto AFTER INSERT ON producto
+FOR EACH ROW EXECUTE PROCEDURE crearDetalleProducto();
+/*
+* Función que crea el detalle con la nueva talla por cada producto existente
+*/
+CREATE OR REPLACE FUNCTION actualizarDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, (SELECT idtalla FROM talla ORDER BY idtalla DESC LIMIT 1), $1)';
+    FOR rec IN SELECT DISTINCT idproducto FROM detalleProducto ORDER BY idproducto
+    LOOP 
+	RAISE NOTICE '%', rec.idproducto;
+	EXECUTE query USING rec.idproducto;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
+/*
+* Disparador que se activa luego de agregar una talla y agrega un detalle para cada prdoducto existente
+*/
+CREATE TRIGGER actualizarDetalleProducto AFTER INSERT ON talla
+FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();
 
 -- INSERT
 
