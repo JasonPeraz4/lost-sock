@@ -2,7 +2,7 @@
 /*
 *	Clase para manejar la tabla producto de la base de datos. Es clase hija de Validator.
 */
-class Product_Inventory extends Validator
+class Producto extends Validator
 {
     // Declaración de atributos (propiedades).
     private $idProducto = null;
@@ -12,6 +12,8 @@ class Product_Inventory extends Validator
     private $precio = null;
     private $idCategoria = null;
     private $idTipoProducto = null;
+    private $archivo = null;
+    private $ruta = '../../../resources/img/producto/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -58,7 +60,7 @@ class Product_Inventory extends Validator
 
     public function setDescuento($value)
     {
-        if ($this->validateMoney($value)) {
+        if ($this->validateNaturalNumber($value)) {
             $this->descuento = $value;
             return true;
         } else {
@@ -127,59 +129,50 @@ class Product_Inventory extends Validator
     }
 
     /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
+    *   Métodos para realizar las operaciones CRUD (search, create, read, update, delete).
     */
-    public function searchProduct($value)
+    
+    public function createProducto()
     {
-        $sql = 'SELECT nombre
-                FROM producto 
-                WHERE nombre ILIKE ? 
-                ORDER BY nombre';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
-    public function createProduct()
-    {
-       
         $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, idCategoria, idTipoProducto)
                 VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto);
-        return Database::executeRow($sql, $params);
+        $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto );
+        return Database::executeRow( $sql, $params );
        
     }
 
-    public function readAllProduct()
+    public function readAllProductos()
     {
         $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, categoria, tipo
-                FROM productos INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
+                FROM producto INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
                 ORDER BY idProducto';
         $params = null;
-        return Database::getRows($sql, $params);
+        return Database::getRows( $sql, $params );
     }
 
-    public function readProduct()
+    public function readProducto()
     {
-        $sql = 'SELECT nombre
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, idCategoria, idTipoProducto
                 FROM producto
                 WHERE idProducto = ?';
-        $params = array($this->nombre);
-        return Database::getRow($sql, $params);
+        $params = array( $this->idProducto );
+        return Database::getRow( $sql, $params );
     }
 
-
-   public function updateProduct(){
-            $sql='UPDATE producto SET nombre=?, descripcion=?, precio=?, descuento=?, idCategoria=?, idTipoProducto=? WHERE idProducto=?';
-            $params=array($this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto);
-            return Database::executeRow($sql, $params);
+    public function updateProducto(){
+        $sql = 'UPDATE producto 
+                SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                WHERE idProducto = ?';
+        $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        return Database::executeRow( $sql, $params );
     }
 
-    public function deleteProduct()
+    public function deleteProducto()
     {
         $sql = 'DELETE FROM producto
                 WHERE idProducto = ?';
-        $params = array($this->idProducto);
-        return Database::executeRow($sql, $params);
+        $params = array( $this->idProducto );
+        return Database::executeRow( $sql, $params );
     }
 
 }

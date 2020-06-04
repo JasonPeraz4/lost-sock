@@ -60,7 +60,7 @@ Page::headerTemplate('Gestión de productos', null);
             </td>
             <td>Hombre</td>
             <td>Calcetin deportivo</td>
-            <td><a class="text-success" href="#">Ver existencias</a></td>
+            <td><a class="text-success" href="#" onclick="openExistModal()">Ver existencias</a></td>
             <td>
                 <i class="fas fa-comments" onclick="openCommentsModal()" data-toggle="tooltip" title="Comentarios"></i>
                 <i class="fas fa-edit mx-1" onclick="openUpdateModal()" data-toggle="tooltip" title="Editar"></i>
@@ -103,19 +103,19 @@ Page::headerTemplate('Gestión de productos', null);
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="categoria-producto">Categoria</label>
-                    <select class="form-control" id="categoria-producto" name="categoria-producto">
+                    <label for="categoria_producto">Categoria</label>
+                    <select class="form-control" id="categoria_producto" name="categoria_producto">
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="tipo-producto">Tipo</label>
-                    <select class="form-control" id="tipo-producto" name="tipo-producto">
+                    <label for="tipo_producto">Tipo</label>
+                    <select class="form-control" id="tipo_producto" name="tipo_producto">
                     </select>
                 </div>             
             </div>
             <div class="form-group">
-                <label for="nombre">Nombre del producto</label>
-                <input type="image" class="form-control" placeholder="Nombre del producto" id="nombre" name="nombre">
+                <label for="test">Nombre del producto</label>
+                <input type="file" class="form-control" placeholder="Nombre del producto" id="test" name="test">
             </div>
         </div>
         <div class="modal-footer">
@@ -126,7 +126,38 @@ Page::headerTemplate('Gestión de productos', null);
     </div>
 </div>
 </div>
+<!-- Modal agregar producto -->
+<div class="modal fade" id="existencias-modal" tabindex="-1" role="dialog" aria-labelledby="existencias-modal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">Actualizar existencias del producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="post" id="existencias-form">
+        <div class="modal-body p-md-4">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input class="d-none" type="text" id="idproductoe" name="idproductoe"/>
+            <div id="existencias-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" class="form-control" name="1" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-purple">Actualizar existencias</button>
+        </div>
+    </form>   
+    </div>
+</div>
+</div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate( 'producto.js' );
 ?>
 
