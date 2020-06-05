@@ -26,7 +26,7 @@ if ( isset( $_GET['action'] ) ) {
                 if ($result['dataset'] = $administrador->readAllAdministradores()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay administradores registrados';
+                    $result['exception'] = 'No hay más administradores registrados';
                 }
                 break;
             case 'create':
@@ -36,19 +36,23 @@ if ( isset( $_GET['action'] ) ) {
                         if ( $administrador->setEmail( $_POST['email'] ) ) {
                             if ( $administrador->setUsuario( $_POST['usuario'] ) ) {
                                 if ( $administrador->setTelefono( $_POST['telefono'] ) ) {
-                                    if ( isset( $_POST['tipo_administrador'] ) ) {
-                                        if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
-                                            if ( $administrador->createAdministrador() ) {
-                                                $result['status'] = 1;
-                                                $result['message'] = 'Administrador agregado correctamente';
+                                    if ( $administrador->setClave( 'LostSock20$20' ) ) {
+                                        if ( isset( $_POST['tipo_administrador'] ) ) {
+                                            if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
+                                                if ( $administrador->createAdministrador() ) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Administrador agregado correctamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                } 
                                             } else {
-                                                $result['exception'] = Database::getException();
+                                                $result['exception'] = 'Tipo de administrador no válido';
                                             } 
                                         } else {
-                                            $result['exception'] = 'Tipo de administrador no válido';
-                                        } 
+                                            $result['exception'] = 'Selecciona un tipo de administrador';
+                                        }
                                     } else {
-                                        $result['exception'] = 'Selecciona un tipo de administrador';
+                                        $result['exception'] = 'Error al establecer la contraseña por defecto';
                                     } 
                                 } else {
                                     $result['exception'] = 'Teléfono ingresado no válido';
@@ -169,17 +173,24 @@ if ( isset( $_GET['action'] ) ) {
                         if ( $administrador->setEmail($_POST['email']) ) {
                             if ( $administrador->setUsuario($_POST['usuario']) ) {
                                 if ( $administrador->setTelefono($_POST['telefono']) ) {
-                                    if ( $administrador->setTipo(1) ) {
-                                        if ( $administrador->createAdministrador() ) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Administrador registrado exitosamente';
+                                    if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                        if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
+                                            if ( $administrador->setTipo(1) ) {
+                                                if ( $administrador->createAdministrador() ) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Administrador registrado exitosamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Error al establecer el tipo de usuario';
+                                            }
                                         } else {
-                                            $result['exception'] = Database::getException();
+                                            $result['exception'] = 'La clave no cumple con los requerimientos minimos';
                                         }
                                     } else {
-                                        $result['exception'] = 'Error al establecer el tipo de usuario';
+                                        $result['exception'] = 'Las contraseñas no coinciden';
                                     }
-                                    
                                 } else {
                                     $result['exception'] = 'Teléfono ingresado no válido';
                                 }
@@ -208,9 +219,8 @@ if ( isset( $_GET['action'] ) ) {
                             $result['status'] = 1;
                             $result['message'] = 'Autenticación correcta';
                         } else {
-                            $result['exception'] = 'Clave incorrecta';
+                            $result['exception'] = 'Contraseña incorrecta';
                         }
-                        
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
                     }

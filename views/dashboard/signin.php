@@ -30,6 +30,16 @@ Page::headerTemplate('Registrarse', 'Registrarse')
             <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
         </div>
     </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="clave1">Nueva contraseña</label>
+            <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Nueva contraseña">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="clave2">Repetir contraseña</label>
+            <input type="password" class="form-control" id="clave2" name="clave2" placeholder="Repetir contraseña">
+        </div>
+    </div>
     <button type="submit" class="btn btn-purple btn-block mt-2">Registrarse</button>
 </form>
 <?php

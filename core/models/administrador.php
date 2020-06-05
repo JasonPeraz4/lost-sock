@@ -14,8 +14,6 @@ class Administrador extends Validator{
     private $foto = null;
     private $estado = null;
     private $tipo = null;
-    private $archivo = null;
-    private $ruta = '../../../resources/img/administrador/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -73,7 +71,7 @@ class Administrador extends Validator{
 
     public function setUsuario($value)
     {
-        if ($this->validateAlphanumeric($value, 6, 50)) {
+        if ($this->validateUsername($value)) {
             $this->usuario = $value;
             return true;
         } else {
@@ -213,16 +211,16 @@ class Administrador extends Validator{
         }
     }
 
-    public function checkClave( $clave ){
+    public function checkClave( $clave )
+    {
         $sql = 'SELECT clave FROM administrador WHERE idAdministrador = ?';
-        $params = array( $this->id );
-        $data = Database::getRow( $sql, $params );
-        if ( /*password_verify(*/ $clave == $data['clave'] /*)*/ ) {
+        $params = array($this->id);
+        $data = Database::getRow($sql, $params);
+        if (password_verify( $clave, $data[ 'clave' ] )) {
             return true;
         } else {
             return false;
         }
-        
     }
 
     public function readAllAdministradores(){
@@ -255,9 +253,11 @@ class Administrador extends Validator{
 
     public function createAdministrador()
     {
+        // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'INSERT INTO administrador( idadministrador, nombres, apellidos, email, telefono, usuario, clave, foto, estado, idTipoUsuario)
-        VALUES ( DEFAULT, ?, ?, ?, ?, ?, DEFAULT, null, DEFAULT, ? )';
-        $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->tipo );
+        VALUES ( DEFAULT, ?, ?, ?, ?, ?, ?, null, DEFAULT, ? )';
+        $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $hash, $this->tipo );
         return Database::executeRow($sql, $params);
     }
 
