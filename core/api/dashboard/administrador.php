@@ -35,27 +35,23 @@ if ( isset( $_GET['action'] ) ) {
                     if ( $administrador->setApellidos( $_POST['apellidos'] ) ) {
                         if ( $administrador->setEmail( $_POST['email'] ) ) {
                             if ( $administrador->setUsuario( $_POST['usuario'] ) ) {
-                                if ( $administrador->setTelefono( $_POST['telefono'] ) ) {
-                                    if ( $administrador->setClave( 'LostSock20$20' ) ) {
-                                        if ( isset( $_POST['tipo_administrador'] ) ) {
-                                            if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
-                                                if ( $administrador->createAdministrador() ) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Administrador agregado correctamente';
-                                                } else {
-                                                    $result['exception'] = Database::getException();
-                                                } 
+                                if ( $administrador->setClave( 'LostSock20$20' ) ) {
+                                    if ( isset( $_POST['tipo_administrador'] ) ) {
+                                        if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
+                                            if ( $administrador->createAdministrador() ) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Administrador agregado correctamente';
                                             } else {
-                                                $result['exception'] = 'Tipo de administrador no válido';
+                                                $result['exception'] = Database::getException();
                                             } 
                                         } else {
-                                            $result['exception'] = 'Selecciona un tipo de administrador';
-                                        }
+                                            $result['exception'] = 'Tipo de administrador no válido';
+                                        } 
                                     } else {
-                                        $result['exception'] = 'Error al establecer la contraseña por defecto';
-                                    } 
+                                        $result['exception'] = 'Selecciona un tipo de administrador';
+                                    }
                                 } else {
-                                    $result['exception'] = 'Teléfono ingresado no válido';
+                                    $result['exception'] = 'Error al establecer la contraseña por defecto';
                                 } 
                             } else {
                                 $result['exception'] = 'Usuario ingresado no válido';
@@ -89,27 +85,23 @@ if ( isset( $_GET['action'] ) ) {
                             if ( $administrador->setApellidos( $_POST[ 'apellidos' ] ) ) {
                                 if ( $administrador->setEmail( $_POST[ 'email' ] ) ) {
                                     if ( $administrador->setUsuario( $_POST[ 'usuario' ]   ) ) {
-                                        if ( $administrador->setTelefono( $_POST[ 'telefono' ] ) ) {
-                                            if ( isset( $_POST[ 'tipo_administrador' ] ) ) {
-                                                if ( $administrador->setTipo( $_POST[ 'tipo_administrador' ]  ) ) {
-                                                    if ( $administrador->setEstado( $_POST[ 'estado' ] ) ) {
-                                                        if ( $administrador->updateAdministrador() ) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'Administrador actualizado correctamente';
-                                                        } else {
-                                                            $result['exception'] = Database::getException();
-                                                        }
+                                        if ( isset( $_POST[ 'tipo_administrador' ] ) ) {
+                                            if ( $administrador->setTipo( $_POST[ 'tipo_administrador' ]  ) ) {
+                                                if ( $administrador->setEstado( $_POST[ 'estado' ] ) ) {
+                                                    if ( $administrador->updateAdministrador() ) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Administrador actualizado correctamente';
                                                     } else {
-                                                        $result['exception'] = 'Estado no válido';
+                                                        $result['exception'] = Database::getException();
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Tipo de usuario no válido';
+                                                    $result['exception'] = 'Estado no válido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Asegurate de haber seleccionado un tipo';
-                                            }       
+                                                $result['exception'] = 'Tipo de usuario no válido';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Teléfono ingresadi no válido';
+                                            $result['exception'] = 'Asegurate de haber seleccionado un tipo';
                                         }
                                     } else {
                                         $result['exception'] = 'Usuario ingresado no válido';
@@ -172,27 +164,23 @@ if ( isset( $_GET['action'] ) ) {
                     if ( $administrador->setApellidos($_POST['apellidos']) ) {
                         if ( $administrador->setEmail($_POST['email']) ) {
                             if ( $administrador->setUsuario($_POST['usuario']) ) {
-                                if ( $administrador->setTelefono($_POST['telefono']) ) {
-                                    if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
-                                        if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
-                                            if ( $administrador->setTipo(1) ) {
-                                                if ( $administrador->createAdministrador() ) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Administrador registrado exitosamente';
-                                                } else {
-                                                    $result['exception'] = Database::getException();
-                                                }
+                                if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                    if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
+                                        if ( $administrador->setTipo(1) ) {
+                                            if ( $administrador->createAdministrador() ) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Administrador registrado exitosamente';
                                             } else {
-                                                $result['exception'] = 'Error al establecer el tipo de usuario';
+                                                $result['exception'] = Database::getException();
                                             }
                                         } else {
-                                            $result['exception'] = 'La clave no cumple con los requerimientos minimos';
+                                            $result['exception'] = 'Error al establecer el tipo de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Las contraseñas no coinciden';
+                                        $result['exception'] = 'La clave no cumple con los requerimientos minimos';
                                     }
                                 } else {
-                                    $result['exception'] = 'Teléfono ingresado no válido';
+                                    $result['exception'] = 'Las contraseñas no coinciden';
                                 }
                             } else {
                                 $result['exception'] = 'Usuario no valido';

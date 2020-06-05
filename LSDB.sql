@@ -61,10 +61,8 @@ CREATE TABLE administrador(
 	nombres VARCHAR(25) NOT NULL,
 	apellidos VARCHAR(25) NOT NULL,
 	email VARCHAR(100) NOT NULL,
-	telefono CHAR(8) NOT NULL,
 	usuario VARCHAR(25) NOT NULL,
-	clave VARCHAR(100) DEFAULT 'LostSock2020' NOT NULL ,
-	foto VARCHAR(200) DEFAULT NULL,
+	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL ,
 	estado BIT DEFAULT '1',
 	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario)
 );
@@ -193,6 +191,11 @@ FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();
 
 -- INSERT
 
+
+INSERT INTO tipoUsuario
+VALUES	(DEFAULT, 'Superadministrador'),
+		(DEFAULT, 'Administrador');
+
 INSERT INTO cliente 
 VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', 78789562, 'jasonpcx', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
 		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', 79570450, 'luunavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
@@ -235,11 +238,6 @@ VALUES	(DEFAULT, 'En proceso'),
 		(DEFAULT, 'Finalizada'),
 		(DEFAULT, 'Iniciada');
 
-
-INSERT INTO tipoUsuario
-VALUES	(DEFAULT, 'Superadministrador'),
-		(DEFAULT, 'Administrador');
-
 INSERT INTO frecuencia
 VALUES	(DEFAULT, 'Mensual'),
 		(DEFAULT, 'Trimestral'),
@@ -248,11 +246,8 @@ VALUES	(DEFAULT, 'Mensual'),
 		(DEFAULT, 'Quincenal');
 
 INSERT INTO administrador
-VALUES	(DEFAULT, 'Eduardo David', 'Estrada Rivera', 'e2rd0@gmail.com', '72964120', 'e2rd0', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2'),
-		(DEFAULT, 'Bryan Isaac', 'Ramírez Alfaro', 'bryram0@gmail.com', '72961120', 'Bryram', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '1'),
-		(DEFAULT, 'Alejandro Daniel', 'Vásquez Campos', 'alevas@gmail.com', '61875110', 'Ale', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2'),
-		(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx0@gmail.com', '72961120', 'jasonpc', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '1'),
-		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', '72589658', 'luunavas', '1234', 'https://pixabay.com/es/vectors/hombre-avator-persona-admin-161282/',DEFAULT, '2');
+VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1'),
+		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1');
 
 INSERT INTO tipoProducto
 VALUES	(DEFAULT, 'Calcetas'),

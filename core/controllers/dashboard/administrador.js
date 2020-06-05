@@ -22,13 +22,11 @@ function fillTable( dataset )
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td><i class="fas fa-user-circle fa-3x mr-3 text-purple"></i></td>
                 <td>
                     <div>${row.nombres} ${row.apellidos}</div>
                     <div>${row.email}</div>
                 </td>
                 <td>${row.usuario}</td>
-                <td>${row.telefono}</td>
                 <td>${row.tipo}</td>
                 <td>${txt}</td>
                 <td>
@@ -92,7 +90,6 @@ function openUpdateModal( id )
             $( '#nombres' ).val( response.dataset.nombres );
             $( '#apellidos' ).val( response.dataset.apellidos );
             $( '#email' ).val( response.dataset.email );
-            $( '#telefono' ).val( response.dataset.telefono );
             $( '#usuario' ).val( response.dataset.usuario );
             fillSelect( API_TIPOUSUARIO, 'tipo_administrador', response.dataset.idtipousuario );
             // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.

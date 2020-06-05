@@ -38,10 +38,8 @@ Page::headerTemplate('Gestión de administradores', null);
 <table id="myTable" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
-            <th></th>
             <th>Información general</th>
             <th>Usuario</th>
-            <th>Teléfono</th>
             <th>Tipo</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -75,20 +73,14 @@ Page::headerTemplate('Gestión de administradores', null);
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
-                </div>  
-            </div>
-            <div class="form-row">
+                </div>
                 <div class="form-group col-md-6">
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
-                </div>    
+                </div>   
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
