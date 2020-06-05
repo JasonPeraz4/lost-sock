@@ -2,60 +2,76 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Configuración', null);
 ?>
-<h2>Configuración de la cuenta</h2>
-<p>Cambia tu foto de perfil y ajustes de la cuenta</p>
-
-<form class="m-md-4 p-md-4 sombra">
-    <div class="d-flex flex-row align-items-center">
-        <h4 class="">Información general</h4>
-        <i class="fas fa-user-circle fa-3x ml-auto text-purple"></i>
+<div class="d-flex flex-column mb-3">
+    <div class="d-flex flex-wrap">
+        <!-- Textbox de búsqueda -->
+        <h3 class="mr-md-3">Ajustes de la cuenta</h3>
     </div>
-    <!-- Formulario con la información básica -->
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputNombres">Nombres</label>
-            <input type="text" class="form-control" placeholder="Nombres" id="inputNombres">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputApellidos">Apellidos</label>
-            <input type="text" class="form-control" placeholder="Apellidos" id="inputApellidos">
+</div>
+<div class="row">
+    <!-- Lista de opciones -->
+    <div class="col-md-4">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="home">Editar perfil</a>
+            <a class="list-group-item list-group-item-action" id="list-password-list" data-toggle="list" href="#list-password" role="tab" aria-controls="profile">Cambiar contraseña</a>
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputEmail">Correo electrónico</label>
-            <input type="email" class="form-control" placeholder="Correo electrónico" id="inputEmail">
+    <!-- Pestañas a las que acceden las opciones -->
+    <div class="col-md-8 bg-light py-5 px-4 list-group-item">
+        <div class="tab-content" id="nav-tabContent">
+        <!-- Pestaña de cambiar perfil -->
+        <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+            <h4 class="mb-4">Información general</h4>
+            <form method="post" id="profile-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputUsuario">Usuario</label>
+                        <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
+                    </div>  
+                </div>
+                <button type="submit" class="btn btn-purple mt-2">Actualizar</button>
+            </form>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputUsuario">Usuario</label>
-            <input type="text" class="form-control" placeholder="Usuario" id="inputUsuario">
+        <!-- Pestaña de cambiar contraseña -->
+        <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
+            <h4 class="mb-4">Cambiar contraseña</h4>
+            <form method="post" id="password-form">           
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="clave">Contraseña actual</label>
+                        <input type="password" class="form-control" id="clave" name="claveactual" placeholder="Contraseña actual">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="clave1">Nueva contraseña</label>
+                        <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Nueva contraseña">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="clave2">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="clave2" name="clave2" placeholder="Repetir contraseña">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-purple mt-2">Actualizar</button>
+            </form>
+        </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-outline-purple">Cancelar</button>
-    <button type="submit" class="btn btn-purple">Guardar</button>
-</form>
-<form action="cambiarClave" class="m-md-4 p-md-4 sombra">
-    <h4>Contraseña</h4>
-    <!-- Formulario para editar contraseña -->
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputClave">Contraseña</label>
-            <input type="password" class="form-control" placeholder="Contraseña" id="inputClave">
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-        <label for="inputClave2">Nueva contraseña</label>
-            <input type="password" class="form-control" placeholder="Nueva contraseña" id="inputClave2">
-        </div>
-        <div class="form-group col-md-6">
-        <label for="inputClave3">Confirmar contraseña</label>
-            <input type="password" class="form-control" placeholder="Repetir contraseña" id="inputClave3">
-        </div>
-    </div>
-    <button type="submit" class="btn btn-outline-purple">Cancelar</button>
-    <button type="submit" class="btn btn-purple">Guardar</button>
-</form>
+</div>
 <?php
 Page::footerTemplate(null);
 ?>
