@@ -188,6 +188,24 @@ class Administrador extends Validator{
         }
     }
 
+    public function editProfile()
+    {
+        $sql = 'UPDATE administrador 
+                SET nombres = ?, apellidos = ?, email = ?, usuario = ?
+                WHERE idadministrador = ?';
+        $params = array($this->nombres, $this->apellidos, $this->email, $this->usuario, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changePassword()
+    {
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        $sql = 'UPDATE administrador 
+                SET clave = ? WHERE idadministrador = ?';
+        $params = array($hash, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function readAllAdministradores(){
         if ( isset( $_SESSION['idadministrador'] ) ) {
             $this->setId( $_SESSION['idadministrador'] );

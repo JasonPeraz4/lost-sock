@@ -22,13 +22,7 @@ Page::headerTemplate('Gestión de frecuencias de envio', null);
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
-                <tr>
-                    <td class="pl-4">Semanalmente</td>
-                    <td>
-                        <i class="fas fa-edit mx-1" onclick="openUpdateModal()"></i>
-                        <i class="fas fa-trash-alt" onclick="openDeleteDialog()"></i>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>

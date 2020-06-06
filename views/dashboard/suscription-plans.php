@@ -23,14 +23,7 @@ Page::headerTemplate('Gestión de planes de suscripción', null);
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
-                <tr>
-                    <td class="pl-4">1 pares</td>
-                    <td>$7.10</td>
-                    <td>
-                        <i class="fas fa-edit mx-1" onclick="openUpdateModal()"></i>
-                        <i class="fas fa-trash-alt" onclick="openDeleteDialog()"></i>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>

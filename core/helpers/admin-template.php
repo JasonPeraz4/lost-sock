@@ -194,23 +194,46 @@ class Page {
     }
 
     public static function footerTemplate($controller){
-        print('     </main>
+        if ( $controller != null ) {
+            print('     </main>
+                    </div>
                 </div>
-            </div>
-            <!-- Modals -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
-            <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-            <script src="../../core/helpers/components.js" type="text/javascript"></script>
-            <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
-            <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
-        </body>
-        </html>');
+                <!-- Modals -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
+                <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+                <script src="../../core/helpers/components.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
+            </body>
+            </html>'
+            );
+        } else {
+            print('     </main>
+                    </div>
+                </div>
+                <!-- Modals -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
+                <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+                <script src="../../core/helpers/components.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+            </body>
+            </html>'
+            );
+        }
+        
+        
     }
 
     public static function footerSignIn($controller){

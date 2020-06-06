@@ -39,7 +39,7 @@ Page::headerTemplate('Configuración', null);
                         <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputUsuario">Usuario</label>
+                        <label for="usuario">Usuario</label>
                         <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
                     </div>  
                 </div>
