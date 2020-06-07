@@ -19,7 +19,7 @@ class Page {
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/datatables.min.css" type="text/css"/>
             <!-- Llamada a un archivo tipo icono -->
-            <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+            <link rel="icon" href="../../resources/img/favicon.svg">
         </head>
         <body>
         ');
