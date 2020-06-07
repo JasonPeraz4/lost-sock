@@ -114,11 +114,11 @@ function openUpdateModal(id) {
                 $('#costoenvio').val(response.dataset.costoenvio);
                 $('#tipoproducto').val(response.dataset.tipo);
                 $('#categoria').val(response.dataset.categoria);
-                $('#estado').val(response.dataset.estado ? 'Activo' : 'Inactivo');
+                $('#estado').val(+response.dataset.estado ? 'Activo' : 'Inactivo');
                 $('#talla').val(response.dataset.talla);
                 $('#cantidad').val(response.dataset.cantidadpares);
                 $('#precio').val(response.dataset.precio);
-                $('#total').val((response.dataset.precio * response.dataset.cantidadpares) + (response.dataset.costoenvio));
+                $('#total').val((+response.dataset.precio * +response.dataset.cantidadpares) + (+response.dataset.costoenvio));
 
             } else {
                 sweetAlert(2, response.exception, null);

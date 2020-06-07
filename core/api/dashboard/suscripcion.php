@@ -22,32 +22,15 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay planes registrados';
                 }
                 break;
-            case 'create':
-                $_POST = $plan->validateForm( $_POST );
-                if ( $plan->setCantidadPares( $_POST[ 'cantidadpares' ] ) ) {
-                    if ( $plan->setPrecio( $_POST[ 'precio' ] ) ) {
-                        if ( $plan->createPlanSuscripcion() ) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Plan agregado exitosamente';
-                        } else {
-                            $result['exception'] = Database::getException();
-                        }
-                    } else {
-                        $result['exception'] = 'Precio ingresado no válido';
-                    } 
-                } else {
-                    $result['exception'] = 'Cantidad de pares ingresado no válida';
-                }
-                break;
             case 'readOne':
                 if ( $plan->setIdSuscripcion( $_POST[ 'idsuscripcion' ] ) ) {
                     if ( $result[ 'dataset' ] = $plan->readOneSuscripcion() ) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Plan de suscripción no existente';
+                        $result['exception'] = 'Suscripción no existente';
                     }
                 } else {
-                    $result['exception'] = 'Plan no válido';
+                    $result['exception'] = 'Suscripción no válido';
                 }
                 break;
             case 'status':
@@ -62,47 +45,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Estado no válido';
                 }
                 break;
-            case 'update':
-                $_POST = $plan->validateForm( $_POST );
-                if ( $plan->setIdPlanSuscripcion( $_POST[ 'idplansuscripcion' ] ) ) {
-                    if ( $plan->setCantidadPares( $_POST[ 'cantidadpares' ] ) ) {
-                        if ( $plan->setPrecio( $_POST[ 'precio' ] ) ) {
-                            if ( $plan->updatePlanSuscripcion() ) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Plan actualizado exitosamente';
-                            } else {
-                                $result['exception'] = Database::getException();
-                            }
-                        } else {
-                            $result['exception'] = 'Precio ingresado no válido';
-                        } 
-                    } else {
-                        $result['exception'] = 'Cantidad de pares ingresado no válida';
-                    }    
-                } else {
-                    $result['exception'] = 'Plan ingresado no válido';
-                }
-                break;
-            case 'delete':
-                if ( $plan->setIdPlanSuscripcion( $_POST[ 'idplansuscripcion' ] ) ) {
-                    if ( $data = $plan->readPlanSuscripcion() ) {
-                        if ( $plan->deletePlanSuscripcion() ) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Plan eliminado correctamente';
-                        } else {
-                            $result['exception'] = Database::getException();
-                        }
-                        
-                    } else {
-                        $result['exception'] = 'Plan inexistente';
-                    }
-                    
-                } else {
-                    $result['exception'] = 'Plan incorrecto';
-                }
-                break;
-            default:
-                exit('Acción no disponible');
+            
         }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');

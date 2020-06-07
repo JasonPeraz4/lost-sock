@@ -25,19 +25,6 @@ Page::headerTemplate('Suscripciones', null);
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
         <tr>
-            <td>${row.categoria}</td>
-            <td>${row.tipo}</td>
-            <td>${row.talla}</td>
-            <td>${row.frecuencia}</td>
-            <td>
-                <div>${row.nombres} ${row.apellidos}</div>
-            </td>
-            <td> ${drow.detalledireccion}</td>
-            <td>${txt}</td>
-            <td>
-                <i class="fas fa-info mx-1" data-toggle="modal" data-target="#suscripcion-modal"></i>
-                <i class="fas fa-eye-slash mx-1" data-toggle="modal"></i>
-            </td>
         </tr>
     </tbody>
 </table>
