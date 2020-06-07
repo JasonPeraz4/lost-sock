@@ -42,20 +42,20 @@ class Page {
                     </div>
                     <!-- Sidebar elements -->
                     <ul class="list-unstyled components pb-3">
-                        <li class="active">
+                        <li id="dashboard">
                             <a href="dashboard.php">
                                 <i class="fas fa-chart-line"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="producto">
                             <a href="#productoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-socks"></i>
                                 <span class="menu-title">Productos</span>
                             </a>
                             <ul class="collapse list-unstyled" id="productoSubmenu">
                                 <li>
-                                    <a href="product-inventoy.php">Inventario</a>
+                                    <a href="product-inventory.php">Inventario</a>
                                 </li>
                                 <li>
                                     <a href="product-category.php">Categorias</a>
@@ -71,13 +71,13 @@ class Page {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="pedido">
                             <a href="orders.php">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span class="menu-title">Pedidos</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="suscripcion">
                             <a href="#suscripcionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-shipping-fast"></i>
                                 <span class="menu-title">Suscripciones</span>
@@ -97,13 +97,13 @@ class Page {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="clientes">
                             <a href="clients.php">
                                 <i class="fas fa-user"></i>
                                 <span class="menu-title">Clientes</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="administrador">
                             <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-user-shield"></i>
                                 <span class="menu-title">Administradores</span>
@@ -194,23 +194,46 @@ class Page {
     }
 
     public static function footerTemplate($controller){
-        print('     </main>
+        if ( $controller != null ) {
+            print('     </main>
+                    </div>
                 </div>
-            </div>
-            <!-- Modals -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
-            <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
-            <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-            <script src="../../core/helpers/components.js" type="text/javascript"></script>
-            <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
-            <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
-        </body>
-        </html>');
+                <!-- Modals -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
+                <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+                <script src="../../core/helpers/components.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/'.$controller.'" type="text/javascript"></script>
+            </body>
+            </html>'
+            );
+        } else {
+            print('     </main>
+                    </div>
+                </div>
+                <!-- Modals -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <!-- Importación de archivos JavaScript al final del documento para una carga optimizada -->
+                <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+                <script src="../../core/helpers/components.js" type="text/javascript"></script>
+                <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>
+            </body>
+            </html>'
+            );
+        }
+        
+        
     }
 
     public static function footerSignIn($controller){

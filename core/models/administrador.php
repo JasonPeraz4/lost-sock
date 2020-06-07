@@ -8,14 +8,10 @@ class Administrador extends Validator{
     private $nombres = null;
     private $apellidos = null;
     private $email = null;
-    private $telefono = null;
     private $usuario = null;
     private $clave = null;
-    private $foto = null;
     private $estado = null;
     private $tipo = null;
-    private $archivo = null;
-    private $ruta = '../../../resources/img/administrador/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -61,19 +57,9 @@ class Administrador extends Validator{
         }
     }
 
-    public function setTelefono($value)
-    {
-        if ($this->validatePhoneNumber($value)) {
-            $this->telefono = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function setUsuario($value)
     {
-        if ($this->validateAlphanumeric($value, 6, 50)) {
+        if ($this->validateUsername($value)) {
             $this->usuario = $value;
             return true;
         } else {
@@ -85,17 +71,6 @@ class Administrador extends Validator{
     {
         if ($this->validatePassword($value)) {
             $this->clave = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function setFoto($file)
-    {
-        if ($this->validateImageFile($file, 500, 500)) {
-            $this->foto = $this->getImageName();
-            $this->archivo = $file;
             return true;
         } else {
             return false;
@@ -145,10 +120,6 @@ class Administrador extends Validator{
         return $this->email;
     }
 
-    public function getTelefono(){
-        return $this->telefono;
-    }
-
     public function getUsuario()
     {
         return $this->usuario;
@@ -157,10 +128,6 @@ class Administrador extends Validator{
     public function getClave()
     {
         return $this->clave;
-    }
-
-    public function getFoto(){
-        return $this->foto;
     }
 
     public function getEstado()
@@ -173,10 +140,6 @@ class Administrador extends Validator{
         return $this->tipo;
     }
 
-    public function getRuta()
-    {
-        return $this->ruta;
-    }
 
     /*
     *   Métodos para gestionar la cuenta del usuario.
@@ -213,27 +176,45 @@ class Administrador extends Validator{
         }
     }
 
-    public function checkClave( $clave ){
+    public function checkClave( $clave )
+    {
         $sql = 'SELECT clave FROM administrador WHERE idAdministrador = ?';
-        $params = array( $this->id );
-        $data = Database::getRow( $sql, $params );
-        if ( /*password_verify(*/ $clave == $data['clave'] /*)*/ ) {
+        $params = array($this->id);
+        $data = Database::getRow($sql, $params);
+        if (password_verify( $clave, $data[ 'clave' ] )) {
             return true;
         } else {
             return false;
         }
-        
+    }
+
+    public function editProfile()
+    {
+        $sql = 'UPDATE administrador 
+                SET nombres = ?, apellidos = ?, email = ?, usuario = ?
+                WHERE idadministrador = ?';
+        $params = array($this->nombres, $this->apellidos, $this->email, $this->usuario, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changePassword()
+    {
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        $sql = 'UPDATE administrador 
+                SET clave = ? WHERE idadministrador = ?';
+        $params = array($hash, $this->id);
+        return Database::executeRow($sql, $params);
     }
 
     public function readAllAdministradores(){
         if ( isset( $_SESSION['idadministrador'] ) ) {
             $this->setId( $_SESSION['idadministrador'] );
-            $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
+            $sql = 'SELECT idadministrador, nombres, apellidos, email, usuario, estado, tipo 
                 FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
                 WHERE idadministrador <> ? ORDER BY nombres';
             $params = array( $this->id );
         } else {
-            $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, tipo 
+            $sql = 'SELECT idadministrador, nombres, apellidos, email, usuario, estado, tipo 
                 FROM administrador INNER JOIN tipoUsuario USING(idTipoUsuario) 
                 ORDER BY nombres';
             $params = null;
@@ -255,15 +236,17 @@ class Administrador extends Validator{
 
     public function createAdministrador()
     {
-        $sql = 'INSERT INTO administrador( idadministrador, nombres, apellidos, email, telefono, usuario, clave, foto, estado, idTipoUsuario)
-        VALUES ( DEFAULT, ?, ?, ?, ?, ?, DEFAULT, null, DEFAULT, ? )';
-        $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->tipo );
+        // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        $sql = 'INSERT INTO administrador( nombres, apellidos, email, usuario, clave, estado, idTipoUsuario)
+        VALUES ( ?, ?, ?, ?, ?, DEFAULT, ? )';
+        $params = array( $this->nombres, $this->apellidos, $this->email, $this->usuario, $hash, $this->tipo );
         return Database::executeRow($sql, $params);
     }
 
     public function readOneAdministrador()
     {
-        $sql = 'SELECT idadministrador, nombres, apellidos, email, telefono, usuario, estado, idtipousuario 
+        $sql = 'SELECT idadministrador, nombres, apellidos, email, usuario, estado, idtipousuario 
             FROM administrador
             WHERE idadministrador = ?';
         $params = array($this->id);
@@ -273,9 +256,9 @@ class Administrador extends Validator{
     public function updateAdministrador()
     {
         $sql = 'UPDATE administrador 
-                SET nombres = ?, apellidos = ?, email = ?, telefono = ?, usuario = ?, estado = ?, idtipousuario = ?
+                SET nombres = ?, apellidos = ?, email = ?, usuario = ?, estado = ?, idtipousuario = ?
                 WHERE idadministrador = ?';
-        $params = array($this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $this->estado, $this->tipo, $this->id);
+        $params = array($this->nombres, $this->apellidos, $this->email, $this->usuario, $this->estado, $this->tipo, $this->id);
         return Database::executeRow($sql, $params);
     }
     

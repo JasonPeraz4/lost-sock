@@ -15,19 +15,23 @@ Page::headerTemplate('Registrarse', 'Registrarse')
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
             <label for="email">Correo electrónico</label>
             <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="usuario">Usuario</label>
+            <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
         </div>  
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputUsuario">Usuario</label>
-            <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
+            <label for="clave1">Nueva contraseña</label>
+            <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Nueva contraseña">
         </div>
         <div class="form-group col-md-6">
-            <label for="telefono">Teléfono</label>
-            <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
+            <label for="clave2">Repetir contraseña</label>
+            <input type="password" class="form-control" id="clave2" name="clave2" placeholder="Repetir contraseña">
         </div>
     </div>
     <button type="submit" class="btn btn-purple btn-block mt-2">Registrarse</button>

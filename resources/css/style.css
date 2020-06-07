@@ -67,17 +67,6 @@
     border-right: 0px;
 }
 
-/* Clientes styles */
-
-.comentario{
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.sombra{
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
 /*
 
     SIDEBAR STYLE
@@ -117,7 +106,7 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
     max-width: 250px;
     background-image: linear-gradient(to bottom, #a044ff 0%, #333399 100%); 
     color: #fff;
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transition: all .5s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
 }
 
@@ -140,6 +129,7 @@ ul.components li a, ul.components li a:hover, ul.components li a:focus {
 #sidebar ul li a:hover {
     color: #8527e2;
     background: #f8f9fa;
+    border-radius: 20px 0px 0px 20px;
 }
 
 /* , a[aria-expanded="true"]  */

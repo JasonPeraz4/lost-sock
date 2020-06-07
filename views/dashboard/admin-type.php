@@ -13,7 +13,7 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
@@ -22,13 +22,7 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
-                <tr>
-                    <td class="pl-4">Superadministrador</td>
-                    <td>
-                        <i class="fas fa-edit mx-1" onclick="openUpdateModal()"></i>
-                        <i class="fas fa-trash-alt" onclick="openDeleteDialog()"></i>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>

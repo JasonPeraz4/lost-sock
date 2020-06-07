@@ -201,6 +201,23 @@ class Validator
     }
 
     /*
+    *   Método para validar una Cadena alfanumérica que puede incluir _ y - con una longitud de 3 a 16 caracteres.
+    *
+    *   Parámetros: $value (dato a validar), $minimum (longitud mínima) y $maximum (longitud máxima).
+    *   
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validateUsername($value)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (preg_match('/^[a-z0-9_-]{3,15}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
     *   Método para validar un dato monetario.
     *
     *   Parámetros: $value (dato a validar).
@@ -226,8 +243,8 @@ class Validator
     */
     public function validatePassword($value)
     {
-        // Se verifica que la longitud de la contraseña sea de al menos 6 caracteres.
-        if (strlen($value) >= 6) {
+        // Se verifica que la contraseña tenga Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.
+        if (preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/', $value)) {
             return true;
         } else {
             return false;

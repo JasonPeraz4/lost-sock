@@ -38,10 +38,8 @@ Page::headerTemplate('Gestión de administradores', null);
 <table id="myTable" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
-            <th></th>
             <th>Información general</th>
             <th>Usuario</th>
-            <th>Teléfono</th>
             <th>Tipo</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -75,20 +73,14 @@ Page::headerTemplate('Gestión de administradores', null);
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
-                </div>  
-            </div>
-            <div class="form-row">
+                </div>
                 <div class="form-group col-md-6">
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
-                </div>    
+                </div>   
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -110,29 +102,6 @@ Page::headerTemplate('Gestión de administradores', null);
     </form>   
     </div>
 </div>
-</div>
-<!-- Modal deshabilitar usuario -->
-<div class="modal fade" id="eliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="eliminarUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <!-- Titulo del modal -->
-            <i class="fas fa-exclamation fa-lg my-auto mx-2"></i>
-            <h5 class="modal-title" id="exampleModalLabel">Deshabilitar usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body p-md-4">
-            <!-- Mensaje de confirmación -->
-            <p>¿Estas seguro que deseas deshabilitar el  usuario "Jason Peraza"?</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-purple" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-purple">Deshabilitar</button>
-        </div>
-        </div>
-    </div>
 </div>
 <?php
 Page::footerTemplate('administrador.js');

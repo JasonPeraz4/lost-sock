@@ -326,7 +326,7 @@ $(document).ready(function () {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
     });
-    
+    sidebarActive();
 });
 
 /* chart.js chart examples */
@@ -371,4 +371,38 @@ options: {
     }
 }
 });
+}
+
+function sidebarActive() {
+    let current = window.location.pathname;
+    switch ( current ) {
+        case '/lost-sock/views/dashboard/dashboard.php':
+            $( '#dashboard' ).addClass( 'active' );
+            break;
+        case '/lost-sock/views/dashboard/product-inventory.php':
+        case '/lost-sock/views/dashboard/product-category.php':
+        case '/lost-sock/views/dashboard/product-colors.php':
+        case '/lost-sock/views/dashboard/product-sizes.php':
+        case '/lost-sock/views/dashboard/product-type.php':
+            $( '#producto' ).addClass( 'active' );
+            break;
+        case '/lost-sock/views/dashboard/orders.php':
+            $( '#pedido' ).addClass( 'active' );
+            break;
+        case '/lost-sock/views/dashboard/suscriptions.php':
+        case '/lost-sock/views/dashboard/suscription-frecuency.php':
+        case '/lost-sock/views/dashboard/suscription-plans.php':
+        case '/lost-sock/views/dashboard/shipping-costs.php':
+            $( '#suscripcion' ).addClass( 'active' );
+            break;
+        case '/lost-sock/views/dashboard/clients.php':
+            $( '#clientes' ).addClass( 'active' );
+            break;
+        case '/lost-sock/views/dashboard/admin-list.php':
+        case '/lost-sock/views/dashboard/admin-type.php':
+            $( '#administrador' ).addClass( 'active' );
+            break;
+        default:
+            break;
+    }
 }

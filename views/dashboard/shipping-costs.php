@@ -23,14 +23,7 @@ Page::headerTemplate('Gestión de costos de envio', null);
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
-                <tr>
-                    <td class="pl-4">Ahuachapan</td>
-                    <td>$1.10</td>
-                    <td>
-                        <i class="fas fa-edit mx-1" onclick="openUpdateModal()"></i>
-                        <i class="fas fa-trash-alt" onclick="openDeleteDialog()"></i>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>

@@ -22,11 +22,84 @@ if ( isset( $_GET['action'] ) ) {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
             break;
+            case 'readProfile':
+                if ( $administrador->setId( $_SESSION['idadministrador'] ) ) {
+                    if ( $result[ 'dataset' ] = $administrador->readOneAdministrador() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Administrador no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador no válido';
+                }
+            break;
+            case 'editProfile':
+                if ( $administrador->setId( $_SESSION[ 'idadministrador' ] ) ) {
+                    if ( $administrador->readOneAdministrador() ) {
+                        $_POST = $administrador->validateForm( $_POST );
+                        if ( $administrador->setNombres( $_POST[ 'nombres' ] ) ) {
+                            if ( $administrador->setApellidos( $_POST[ 'apellidos' ] ) ) {
+                                if ( $administrador->setEmail( $_POST[ 'email' ] ) ) {
+                                    if ( $administrador->setUsuario( $_POST[ 'usuario' ] ) ) {
+                                        if ( $administrador->editProfile() ) {
+                                            $_SESSION['email'] = $administrador->getEmail();
+                                            $_SESSION['usuario'] = $administrador->getUsuario();
+                                            $_SESSION['nombres'] = $administrador->getNombres();
+                                            $_SESSION['apellidos'] = $administrador->getApellidos();
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Perfil actualizado con éxito';
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Usuario ingresado no válido';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Correo electrónico ingresado no válido';
+                                }
+                            } else {
+                                $result['exception'] = 'Apellidos ingresados no válidos';
+                            }
+                        } else {
+                            $result['exception'] = 'Nombres ingresados no válidos';
+                        }
+                    } else {
+                        $result['exception'] = 'Administrador inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+            break;
+            case 'changePassword':
+                if ( $administrador->setId( $_SESSION[ 'idadministrador' ] ) ) {
+                    $_POST = $administrador->validateForm( $_POST );
+                    if ( $administrador->checkClave( $_POST[ 'claveactual' ] ) ) {
+                        if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                            if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
+                                if ( $administrador->changePassword() ) {
+                                    $result['status'] = 1;
+                                    $result['message'] = 'Contraseña actualizada con éxito';
+                                } else {
+                                    $result['exception'] = Database::getException();
+                                }
+                            } else {
+                                $result['exception'] = 'La contraseña no cumple con los requerimientos minimos';
+                            }
+                        } else {
+                            $result['exception'] = 'Las contraseñas no coinciden';
+                        }
+                    } else {
+                        $result['exception'] = 'Contraseña actual incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+            break;
             case 'readAll':
                 if ($result['dataset'] = $administrador->readAllAdministradores()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay administradores registrados';
+                    $result['exception'] = 'No hay más administradores registrados';
                 }
                 break;
             case 'create':
@@ -35,7 +108,7 @@ if ( isset( $_GET['action'] ) ) {
                     if ( $administrador->setApellidos( $_POST['apellidos'] ) ) {
                         if ( $administrador->setEmail( $_POST['email'] ) ) {
                             if ( $administrador->setUsuario( $_POST['usuario'] ) ) {
-                                if ( $administrador->setTelefono( $_POST['telefono'] ) ) {
+                                if ( $administrador->setClave( 'LostSock20$20' ) ) {
                                     if ( isset( $_POST['tipo_administrador'] ) ) {
                                         if ( $administrador->setTipo( $_POST['tipo_administrador'] ) ) {
                                             if ( $administrador->createAdministrador() ) {
@@ -49,9 +122,9 @@ if ( isset( $_GET['action'] ) ) {
                                         } 
                                     } else {
                                         $result['exception'] = 'Selecciona un tipo de administrador';
-                                    } 
+                                    }
                                 } else {
-                                    $result['exception'] = 'Teléfono ingresado no válido';
+                                    $result['exception'] = 'Error al establecer la contraseña por defecto';
                                 } 
                             } else {
                                 $result['exception'] = 'Usuario ingresado no válido';
@@ -85,27 +158,23 @@ if ( isset( $_GET['action'] ) ) {
                             if ( $administrador->setApellidos( $_POST[ 'apellidos' ] ) ) {
                                 if ( $administrador->setEmail( $_POST[ 'email' ] ) ) {
                                     if ( $administrador->setUsuario( $_POST[ 'usuario' ]   ) ) {
-                                        if ( $administrador->setTelefono( $_POST[ 'telefono' ] ) ) {
-                                            if ( isset( $_POST[ 'tipo_administrador' ] ) ) {
-                                                if ( $administrador->setTipo( $_POST[ 'tipo_administrador' ]  ) ) {
-                                                    if ( $administrador->setEstado( $_POST[ 'estado' ] ) ) {
-                                                        if ( $administrador->updateAdministrador() ) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'Administrador actualizado correctamente';
-                                                        } else {
-                                                            $result['exception'] = Database::getException();
-                                                        }
+                                        if ( isset( $_POST[ 'tipo_administrador' ] ) ) {
+                                            if ( $administrador->setTipo( $_POST[ 'tipo_administrador' ]  ) ) {
+                                                if ( $administrador->setEstado( $_POST[ 'estado' ] ) ) {
+                                                    if ( $administrador->updateAdministrador() ) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Administrador actualizado correctamente';
                                                     } else {
-                                                        $result['exception'] = 'Estado no válido';
+                                                        $result['exception'] = Database::getException();
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Tipo de usuario no válido';
+                                                    $result['exception'] = 'Estado no válido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Asegurate de haber seleccionado un tipo';
-                                            }       
+                                                $result['exception'] = 'Tipo de usuario no válido';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Teléfono ingresadi no válido';
+                                            $result['exception'] = 'Asegurate de haber seleccionado un tipo';
                                         }
                                     } else {
                                         $result['exception'] = 'Usuario ingresado no válido';
@@ -168,26 +237,29 @@ if ( isset( $_GET['action'] ) ) {
                     if ( $administrador->setApellidos($_POST['apellidos']) ) {
                         if ( $administrador->setEmail($_POST['email']) ) {
                             if ( $administrador->setUsuario($_POST['usuario']) ) {
-                                if ( $administrador->setTelefono($_POST['telefono']) ) {
-                                    if ( $administrador->setTipo(1) ) {
-                                        if ( $administrador->createAdministrador() ) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Administrador registrado exitosamente';
+                                if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                    if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
+                                        if ( $administrador->setTipo(1) ) {
+                                            if ( $administrador->createAdministrador() ) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Administrador registrado exitosamente';
+                                            } else {
+                                                $result['exception'] = Database::getException();
+                                            }
                                         } else {
-                                            $result['exception'] = Database::getException();
+                                            $result['exception'] = 'Error al establecer el tipo de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Error al establecer el tipo de usuario';
+                                        $result['exception'] = 'La contraseña no cumple con los requerimientos minimos';
                                     }
-                                    
                                 } else {
-                                    $result['exception'] = 'Teléfono ingresado no válido';
+                                    $result['exception'] = 'Las contraseñas no coinciden';
                                 }
                             } else {
-                                $result['exception'] = 'Usuario no valido';
+                                $result['exception'] = 'Usuario no válido';
                             }
                         } else {
-                            $result['exception'] = 'Dirección de correo no valida';
+                            $result['exception'] = 'Dirección de correo no válida';
                         }
                     } else {
                         $result['exception'] = 'Los apellidos solo deben contener letras';
@@ -203,14 +275,14 @@ if ( isset( $_GET['action'] ) ) {
                         if ( $administrador->checkClave( $_POST['clave'] ) ) {
                             $_SESSION['idadministrador'] = $administrador->getId();
                             $_SESSION['email'] = $administrador->getEmail();
+                            $_SESSION['usuario'] = $administrador->getUsuario();
                             $_SESSION['nombres'] = $administrador->getNombres();
                             $_SESSION['apellidos'] = $administrador->getApellidos();
                             $result['status'] = 1;
                             $result['message'] = 'Autenticación correcta';
                         } else {
-                            $result['exception'] = 'Clave incorrecta';
+                            $result['exception'] = 'Contraseña incorrecta';
                         }
-                        
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
                     }

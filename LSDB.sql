@@ -61,10 +61,8 @@ CREATE TABLE administrador(
 	nombres VARCHAR(25) NOT NULL,
 	apellidos VARCHAR(25) NOT NULL,
 	email VARCHAR(100) NOT NULL,
-	telefono CHAR(8) NOT NULL,
 	usuario VARCHAR(25) NOT NULL,
-	clave VARCHAR(100) DEFAULT 'LostSock2020' NOT NULL ,
-	foto VARCHAR(200) DEFAULT NULL,
+	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL ,
 	estado BIT DEFAULT '1',
 	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario)
 );
@@ -143,6 +141,24 @@ CREATE TABLE suscripcion(
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
 );
 
+/*
+* Función que crea el detalle de un producto por cada talla registrada
+*/
+CREATE OR REPLACE FUNCTION crearDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, $1, (SELECT idproducto FROM producto ORDER BY idproducto DESC LIMIT 1))';
+    FOR rec IN SELECT idtalla FROM talla ORDER BY idtalla 
+    LOOP 
+	RAISE NOTICE '%', rec.idtalla;
+	EXECUTE query USING rec.idtalla;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
 
 -- INSERT
 
@@ -180,13 +196,36 @@ VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
 		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
 		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 
+/*
+* Disparador que ejecuta la función crearDetalleProducto
+*/
+CREATE TRIGGER crearDetalleProducto AFTER INSERT ON producto
+FOR EACH ROW EXECUTE PROCEDURE crearDetalleProducto();
+/*
+* Función que crea el detalle con la nueva talla por cada producto existente
+*/
+CREATE OR REPLACE FUNCTION actualizarDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, (SELECT idtalla FROM talla ORDER BY idtalla DESC LIMIT 1), $1)';
+    FOR rec IN SELECT DISTINCT idproducto FROM detalleProducto ORDER BY idproducto
+    LOOP 
+	RAISE NOTICE '%', rec.idproducto;
+	EXECUTE query USING rec.idproducto;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
+/*
+* Disparador que se activa luego de agregar una talla y agrega un detalle para cada prdoducto existente
+*/
+CREATE TRIGGER actualizarDetalleProducto AFTER INSERT ON talla
+FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();
 
-INSERT INTO estadoCompra 
-VALUES	(DEFAULT, 'En proceso'),
-		(DEFAULT, 'Cancelada'),
-		(DEFAULT, 'Enviada'),
-		(DEFAULT, 'Finalizada'),
-		(DEFAULT, 'Iniciada');
+-- INSERT
 
 
 INSERT INTO tipoUsuario
@@ -225,6 +264,63 @@ VALUES	(DEFAULT, 'Mujer'),
 		(DEFAULT, 'Niños'),
 		(DEFAULT, 'Mixtos'),
 		(DEFAULT, 'Edición limitada');
+
+INSERT INTO estadoCompra 
+VALUES	(DEFAULT, 'En proceso'),
+		(DEFAULT, 'Cancelada'),
+		(DEFAULT, 'Enviada'),
+		(DEFAULT, 'Finalizada'),
+		(DEFAULT, 'Iniciada');
+
+INSERT INTO planSuscripcion
+VALUES	(DEFAULT, 1, 5.00),
+		(DEFAULT, 2, 10.00),
+		(DEFAULT, 3, 15.00);
+
+INSERT INTO departamento 
+VALUES	(DEFAULT, 'San Salvador', 0.00),
+		(DEFAULT, 'Chalatenango', 0.50),
+		(DEFAULT, 'La Libertad', 2.50),
+		(DEFAULT, 'Santa Ana', 3.50),
+		(DEFAULT, 'San Miguel', 1.50);
+
+INSERT INTO frecuencia
+VALUES	(DEFAULT, 'Mensual'),
+		(DEFAULT, 'Trimestral'),
+		(DEFAULT, 'Cuatrimestral'),
+		(DEFAULT, 'Bimensual'),
+		(DEFAULT, 'Quincenal');
+
+INSERT INTO administrador
+VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1'),
+		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1');
+
+INSERT INTO cliente 
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', 78789562, 'jasonpcx', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', 79570450, 'luunavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', 79674338, 'yanavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', 74523010, 'djnavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', 70336064, 'albacanas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', 61532318, 'davidnavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', 70206064, 'sofianavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', 70337064, 'alitanavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Ana Laura', 'Navas Estrada', 'lauradeestrada@gmail.com', 60336064, 'lauraestrada', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Ana Laura', 'Navas Rivera', 'laura@rivera.com', 78889955, 'laurarivera', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com',78451304,'rufux','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', 78156714, 'juananaya', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', 77541264, 'marcosdvm', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', 66784983, 'victorventura', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Mauricio Javier', 'Cestoni Quesada', 'mau@cestoni.com', 75489617, 'maucestoni', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
+		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com',79345127,'marcosgranillo','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg');
+
+INSERT INTO direccion
+VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
+		(DEFAULT, 'Calle Siempreviva, casa 203', 2, 2),
+		(DEFAULT, 'Urbanización Maquillishuat, casa 201', 3, 3),
+		(DEFAULT, 'PLAZA CONSTITUCION NO. 1, Depto 4', 5, 4),
+		(DEFAULT, 'AV. LIC. VICENTE AGUIRRE, Depto 3', 4, 5),
+		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
+		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 		
 INSERT INTO producto	
 VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, NULL, 1, 1),
@@ -290,36 +386,6 @@ VALUES	(DEFAULT, 100, 1, 1),
 		(DEFAULT, 30, 1, 19),
 		(DEFAULT, 47, 1, 20),
 		(DEFAULT, 81, 3, 20);
-
-INSERT INTO color 
-VALUES	(DEFAULT, 'Rojo'),
-		(DEFAULT, 'Amarillo'),
-		(DEFAULT, 'Azul'),
-		(DEFAULT, 'Negro'),
-		(DEFAULT, 'Blanco');
-
-INSERT INTO imagenProducto
-VALUES	(DEFAULT, 'https://pixabay.com/es/photos/navidad-calcetines-presente-medias-3011495/', 1, 1),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 4, 2),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 3, 3),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 2, 4),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 3, 5),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 5, 6),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 1, 7),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 2, 8),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 5, 9),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 1, 10),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 4, 11),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 1, 12),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 3, 13),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 2, 14),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 1, 15),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 4, 16),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 3, 17),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 2, 18),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 5, 19),
-		(DEFAULT, 'https://pixabay.com/es/photos/calcetines-negro-raya-mujer-1495920/', 4, 20),
-		(DEFAULT, 'https://pixabay.com/es/photos/los-pies-tobillo-la-pierna-calcet%C3%ADn-3620570/', 3, 20);
 		
 INSERT INTO compra
 VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
@@ -512,12 +578,6 @@ VALUES	(DEFAULT, 'Están preciosos, como lo esperaba.', '2020-01-12', 5, DEFAULT
 		(DEFAULT, 'No me gustaron en absoluto, pésima calidad.', '2020-03-03', 1, DEFAULT, 87),
 		(DEFAULT, 'No hay de mi talla.', '2020-01-15', 2, DEFAULT, 64),
 		(DEFAULT, 'No me gustaron en absoluto, pésima servicio.', '2020-02-26', 1, DEFAULT, 115);
-		
-
-INSERT INTO planSuscripcion
-VALUES	(DEFAULT, 1, 5.00),
-		(DEFAULT, 2, 10.00),
-		(DEFAULT, 3, 15.00);
 
 INSERT INTO suscripcion
 VALUES	(DEFAULT, DEFAULT, 1, 1, 5, 1, 2, 1, 1),
