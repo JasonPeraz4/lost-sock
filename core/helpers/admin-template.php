@@ -42,13 +42,13 @@ class Page {
                     </div>
                     <!-- Sidebar elements -->
                     <ul class="list-unstyled components pb-3">
-                        <li class="active">
+                        <li id="dashboard">
                             <a href="dashboard.php">
                                 <i class="fas fa-chart-line"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="producto">
                             <a href="#productoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-socks"></i>
                                 <span class="menu-title">Productos</span>
@@ -71,13 +71,13 @@ class Page {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="pedido">
                             <a href="orders.php">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span class="menu-title">Pedidos</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="suscripcion">
                             <a href="#suscripcionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-shipping-fast"></i>
                                 <span class="menu-title">Suscripciones</span>
@@ -97,13 +97,13 @@ class Page {
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="clientes">
                             <a href="clients.php">
                                 <i class="fas fa-user"></i>
                                 <span class="menu-title">Clientes</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="administrador">
                             <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-user-shield"></i>
                                 <span class="menu-title">Administradores</span>

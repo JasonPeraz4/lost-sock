@@ -51,22 +51,7 @@ Page::headerTemplate('Gestión de productos', null);
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
-        <tr>
-            <td>Calcetines rojos</td>
-            <td>Calcetines con estampado rojo</td>
-            <td>
-                <div>$7.96</div>
-                <div>20%</div>
-            </td>
-            <td>Hombre</td>
-            <td>Calcetin deportivo</td>
-            <td><a class="text-success" href="#" onclick="openExistModal()">Ver existencias</a></td>
-            <td>
-                <i class="fas fa-comments" onclick="openCommentsModal()" data-toggle="tooltip" title="Comentarios"></i>
-                <i class="fas fa-edit mx-1" onclick="openUpdateModal()" data-toggle="tooltip" title="Editar"></i>
-                <i class="fas fa-trash-alt" onclick="openDeleteDialog()" data-toggle="tooltip" title="Eliminar"></i>
-            </td>
-        </tr>
+        
     </tbody>
 </table>
 <!-- Modal agregar producto -->
