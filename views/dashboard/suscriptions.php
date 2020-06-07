@@ -98,7 +98,7 @@ Page::headerTemplate('Suscripciones', null);
                         </div>
                         <div class="form-group col-md-4">
                             <label for="estado">Estado</label>
-                            <select readonly class="form-control" id="estado" name="estado"></select>
+                            <input readonly type="text"class="form-control" id="estado" name="estado"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -129,5 +129,5 @@ Page::headerTemplate('Suscripciones', null);
     </div>
 </div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('suscripcion.js');
 ?>

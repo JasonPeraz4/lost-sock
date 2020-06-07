@@ -107,45 +107,53 @@ class Suscripcion extends Validator{
 
     public function getIdFrecuencia()
     {
-        return $this->idFrecuencia
+        return $this->idFrecuencia;
     }
 
     public function getIdCategoria()
     {
-        return $this->idCategoria
+        return $this->idCategoria;
     }
     
     public function getIdCliente()
     {
-        return $this->idCliente
+        return $this->idCliente;
     }
 
     public function getIdPlanSuscripcion()
     {
-        return $this->idPlanSuscripcion
+        return $this->idPlanSuscripcion;
     }
 
     public function readAllSuscripcion()
     {
-        $sql = 'SELECT cl.nombres, cl.apellidos, s.estado, tl.talla, f.frecuencia, ct.categoria, ps.cantidadpares, ps.precio 
-            FROM suscripcion s JOIN talla tl ON s.idtalla = tl.idtalla 
-            JOIN frecuencia f ON s.idfrecuencia = f.idfrecuencia 
-            JOIN categoria ct ON s.idcategoria = ct.idcategoria 
-            JOIN cliente cl ON s.idcliente = cl.idcliente 
-            JOIN plansuscripcion ps ON s.idplansuscripcion = ps.idplansuscripcion';
+        $sql = 'SELECT s.idsuscripcion, cl.nombres, cl.apellidos, s.estado, tl.talla, f.frecuencia, ct.categoria, 
+                tp.tipo, ps.cantidadpares, ps.precio, dr.detalledireccion, dp.departamento, dp.costoenvio
+                FROM suscripcion s JOIN talla tl ON s.idtalla = tl.idtalla 
+                JOIN frecuencia f ON s.idfrecuencia = f.idfrecuencia 
+                JOIN categoria ct ON s.idcategoria = ct.idcategoria 
+                JOIN cliente cl ON s.idcliente = cl.idcliente 
+                JOIN plansuscripcion ps ON s.idplansuscripcion = ps.idplansuscripcion
+                JOIN tipoproducto tp ON s.idtipoproducto = tp.idtipoproducto
+                JOIN direccion dr ON s.iddireccion = dr.iddireccion 
+                JOIN departamento dp ON dr.iddepartamento = dp.iddepartamento';
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function readOneSuscripcion()
     {
-        $sql = 'SELECT cl.nombres, cl.apellidos, s.estado, tl.talla, f.frecuencia, ct.categoria, ps.cantidadpares, ps.precio 
-            FROM suscripcion s JOIN talla tl ON s.idtalla = tl.idtalla 
-            JOIN frecuencia f ON s.idfrecuencia = f.idfrecuencia 
-            JOIN categoria ct ON s.idcategoria = ct.idcategoria 
-            JOIN cliente cl ON s.idcliente = cl.idcliente 
-            JOIN plansuscripcion ps ON s.idplansuscripcion = ps.idplansuscripcion
-            WHERE idSuscripcion = ?';
+        $sql = 'SELECT s.idsuscripcion, cl.nombres, cl.apellidos, s.estado, tl.talla, f.frecuencia, ct.categoria, 
+                tp.tipo, ps.cantidadpares, ps.precio, dr.detalledireccion, dp.departamento, dp.costoenvio, tp.tipo
+                FROM suscripcion s JOIN talla tl ON s.idtalla = tl.idtalla 
+                JOIN frecuencia f ON s.idfrecuencia = f.idfrecuencia 
+                JOIN categoria ct ON s.idcategoria = ct.idcategoria 
+                JOIN cliente cl ON s.idcliente = cl.idcliente 
+                JOIN plansuscripcion ps ON s.idplansuscripcion = ps.idplansuscripcion
+                JOIN tipoproducto tp ON s.idtipoproducto = tp.idtipoproducto
+                JOIN direccion dr ON s.iddireccion = dr.iddireccion 
+                JOIN departamento dp ON dr.iddepartamento = dp.iddepartamento
+                WHERE idsuscripcion=?';
         $params = array($this->idSuscripcion);
         return Database::getRow($sql, $params);
     }

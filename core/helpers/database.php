@@ -19,7 +19,7 @@ class Database
         $server = 'localhost';
         $database = 'lostsock';
         $username = 'postgres';
-        $password = 'laura';
+        $password = '123';
         // Se controlan las excepciones al momento de establecer conexión con el servidor de base de datos.
         try {
             // Se crea la conexión mediante la extensión PDO y el controlador para PostgreSQL.
