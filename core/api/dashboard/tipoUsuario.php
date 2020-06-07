@@ -27,7 +27,7 @@ if (isset($_GET['action'])) {
                 if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
                     if ( $tipo->createTipoUsuario() ) {
                         $result['status'] = 1;
-                        $result['message'] = 'Tipo de usuario agregado exitosamente';
+                        $result['message'] = 'Tipo de usuario agregado correctamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }    
@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
                     if ( $tipo->setTipo( $_POST[ 'tipo' ] ) ) {
                         if ( $tipo->updateTipo() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Tipo de usuario actualizado exitosamente';
+                            $result['message'] = 'Tipo de usuario actualizado correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }

@@ -15,7 +15,7 @@ Page::headerTemplate('Gestión de administradores', null);
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Habilitado</a>
-                    <a class="dropdown-item" href="#">Deshabilitado</a>
+                    <a class="dropdown-item" href="#">Inhabilitado</a>
                 </div>
             </div>
             <!-- Dropdown filtrar por tipo -->

@@ -78,12 +78,12 @@ if ( isset( $_GET['action'] ) ) {
                             if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
                                 if ( $administrador->changePassword() ) {
                                     $result['status'] = 1;
-                                    $result['message'] = 'Contraseña actualizada con éxito';
+                                    $result['message'] = 'Contraseña actualizada con correctamente';
                                 } else {
                                     $result['exception'] = Database::getException();
                                 }
                             } else {
-                                $result['exception'] = 'La contraseña no cumple con los requerimientos minimos';
+                                $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
                             }
                         } else {
                             $result['exception'] = 'Las contraseñas no coinciden';
@@ -242,7 +242,7 @@ if ( isset( $_GET['action'] ) ) {
                                         if ( $administrador->setTipo(1) ) {
                                             if ( $administrador->createAdministrador() ) {
                                                 $result['status'] = 1;
-                                                $result['message'] = 'Administrador registrado exitosamente';
+                                                $result['message'] = 'Administrador registrado correctamente';
                                             } else {
                                                 $result['exception'] = Database::getException();
                                             }
@@ -250,7 +250,7 @@ if ( isset( $_GET['action'] ) ) {
                                             $result['exception'] = 'Error al establecer el tipo de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'La contraseña no cumple con los requerimientos minimos';
+                                        $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
                                     }
                                 } else {
                                     $result['exception'] = 'Las contraseñas no coinciden';
@@ -265,7 +265,7 @@ if ( isset( $_GET['action'] ) ) {
                         $result['exception'] = 'Los apellidos solo deben contener letras';
                     }
                 } else {
-                    $result['exception'] = 'Los nombre solo deben contener letras';
+                    $result['exception'] = 'Los nombres solo deben contener letras';
                 }
             break;
             case 'login':

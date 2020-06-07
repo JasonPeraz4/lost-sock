@@ -2,7 +2,7 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Recuperar contraseña','Necesitamos comprobar tu identidad')
 ?>
-<p>Ingresa tu correo electrónico asociado a tu cuenta. Te enviaremos un enlace para restablecer tu contraseña.</p>
+<p>Ingresa el correo electrónico asociado a tu cuenta. Te enviaremos un enlace para restablecer tu contraseña.</p>
 <form>
     <!-- Formulario de recuperar contraseña -->
     <div class="form-group">

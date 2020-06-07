@@ -21,35 +21,16 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $color->readAllColor()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay categorías registradas';
+                    $result['exception'] = 'No hay colores registrados';
                 }
                 break;
-
-             case 'search':
-                 $_POST = $color->validateForm($_POST);
-                 if ($_POST['search'] != '') {
-                     if ($result['dataset'] = $color->searchColor($_POST['search'])) {
-                         $result['status'] = 1;
-                         $rows = count($result['dataset']);
-                         if ($rows > 1) {
-                             $result['message'] = 'Se encontraron '.$rows.' coincidencias';
-                         } else {
-                             $result['message'] = 'Solo existe una coincidencia';
-                         }
-                     } else {
-                         $result['exception'] = 'No hay coincidencias';
-                     }
-                 } else {
-                     $result['exception'] = 'Ingrese un valor para buscar';
-                 }
-                 break;
 
             case 'create':
                 $_POST = $color->validateForm($_POST);
                 if ($color->setColor($_POST['color'])) { 
                     if ($color->createColor()) {
                         $result['status'] = 1;
-                        $result['message'] = 'Categoría creada correctamente';
+                        $result['message'] = 'Color creado correctamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }
@@ -63,10 +44,10 @@ if (isset($_GET['action'])) {
                     if ($result['dataset'] = $color->readOneColor()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['exception'] = 'Color inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Nombre incorrecto';
                 }
                 break;
             case 'update':
@@ -76,19 +57,19 @@ if (isset($_GET['action'])) {
                     if ($color->setColor($_POST['color'])) {
                             if ( $color->updateColor() ) {
                                 $result['status'] = 1;
-                                $result['message'] = 'Categoría actualizada correctamente';
+                                $result['message'] = 'Color actualizado correctamente';
                             } else {
                                 $result['exception'] = Database::getException();
                             }
 
                     } else {
-                        $result['exception'] = 'Nombre de categoría incorrecto';
+                        $result['exception'] = 'Nombre de color incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Categoría inexistente';
+                    $result['exception'] = 'Color inexistente';
                 }
             } else {
-                $result['exception'] = 'Categoría incorrecta';
+                $result['exception'] = 'Color incorrecto';
             }
             break;
             case 'delete':
@@ -101,10 +82,10 @@ if (isset($_GET['action'])) {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['exception'] = 'Color inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Color incorrecto';
                 }
                 break;
             default:

@@ -1,11 +1,11 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de frecuencias de envio', null);
+Page::headerTemplate('Gestión de frecuencias de envío', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Frecuencias de envio</h3>
+        <h3 class="mr-md-3">Frecuencias de envío</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
             Agregar
@@ -42,7 +42,7 @@ Page::headerTemplate('Gestión de frecuencias de envio', null);
             <input class="d-none" type="text" id="idfrecuencia" name="idfrecuencia"/>
             <p>Ingresa la frecuencia de envio</p>
             <div class="form-group">
-                <label for="frecuencia">Frecuencia de envio</label>
+                <label for="frecuencia">Frecuencia de envío</label>
                 <input type="text" class="form-control" placeholder="Ej: Semanalmente" id="frecuencia" name="frecuencia">
             </div>
         </div>

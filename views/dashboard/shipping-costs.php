@@ -5,7 +5,7 @@ Page::headerTemplate('Gestión de costos de envio', null);
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Costos de envio</h3>
+        <h3 class="mr-md-3">Costos de envío</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
             Agregar
@@ -13,12 +13,12 @@ Page::headerTemplate('Gestión de costos de envio', null);
     </div>
 </div>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
                     <th class="pl-4">Departamento</th>
-                    <th>Costo de envio</th>
+                    <th>Costo de envío</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

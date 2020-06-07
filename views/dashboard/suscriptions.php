@@ -9,6 +9,7 @@ Page::headerTemplate('Suscripciones', null);
         <!-- Grupo de dropdowns -->
         <div class="d-flex flex-row my-2 my-md-0">
     </div>
+    </div>
 </div>
 <table id="suscripcion-table" class="table table-responsive-sm table-hover">
     <thead>
