@@ -53,15 +53,14 @@ function fillTable(dataset) {
 }
 
 // Función que prepara formulario para insertar un registro.
-function openCreateModal() {
+// function openCreateModal() {
     // Se limpian los campos del formulario.
-    $('#categoria-form')[0].reset();
+    // $('#categoria-form')[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#categoria-modal').modal('show');
+    // $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar categoría');
-
-}
+    // $('#modal-title').text('Suscripción');
+// }
 
 // Función que prepara formulario para modificar un registro.
 function updateEstado(estado, id) {

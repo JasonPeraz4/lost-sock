@@ -22,18 +22,16 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td>${row.categoria}</td>
-                <td>${row.tipo}</td>
-                <td>${row.talla}</td>
-                <td>${row.frecuencia}</td>
                 <td>
                     <div>${row.nombres} ${row.apellidos}</div>
                 </td>
-                <td> ${row.detalledireccion}</td>
+                <td>${row.email}</td>
+                <td>${row.telefono}</td>
+                <td>${row.usuario}</td>
                 <td>${txt}</td>
                 <td>
-                    <i class="fas fa-info mx-1" onclick="openUpdateModal(${row.idsuscripcion})"></i>
-                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idsuscripcion})"></i>
+                    <i class="fas fa-info mx-1" onclick="openUpdateModal(${row.idcliente})"></i>
+                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"></i>
                 </td>
             </tr>
         `;
@@ -41,11 +39,11 @@ function fillTable(dataset) {
     $('#tbody-rows').html(content);
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
 
-    $('#suscripcion-table').DataTable({
+    $('#cliente-table').DataTable({
         responsive: true,
         language: {
             'url': '../../core/helpers/Spanish.json',
-            'search': 'Buscar suscripción:',
+            'search': 'Buscar cliente:',
 
         }
     });
@@ -53,15 +51,14 @@ function fillTable(dataset) {
 }
 
 // Función que prepara formulario para insertar un registro.
-function openCreateModal() {
+// function openCreateModal() {
     // Se limpian los campos del formulario.
-    $('#categoria-form')[0].reset();
+    // $('#categoria-form')[0].reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#categoria-modal').modal('show');
+    // $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar categoría');
-
-}
+    // $('#modal-title').text('clientees del cliente');
+// }
 
 // Función que prepara formulario para modificar un registro.
 function updateEstado(estado, id) {
@@ -91,15 +88,15 @@ function updateEstado(estado, id) {
 }
 function openUpdateModal(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#suscripcion-form')[0].reset();
-    $('#suscripcion-modal').modal('show');
+    $('#cliente-form')[0].reset();
+    $('#cliente-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Suscripción');
+    $('#modal-title').text('Suscripciones');
 
     $.ajax({
         dataType: 'json',
         url: API_CLIENTE + 'readOne',
-        data: { idsuscripcion: id },
+        data: { idcliente: id },
         type: 'post'
     })
         .done(function (response) {

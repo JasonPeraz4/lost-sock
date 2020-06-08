@@ -18,7 +18,7 @@ Page::headerTemplate('Clientes', null);
             <th>Correo electrónico</th>
             <th>Teléfono</th>
             <th>Usuario</th>
-            <th>Usuario</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -66,6 +66,6 @@ Page::headerTemplate('Clientes', null);
 </div>
 
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('cliente.js');
 ?>
 
