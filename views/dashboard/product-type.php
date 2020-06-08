@@ -28,7 +28,7 @@ Page::headerTemplate('Gestionar tipo de producto', null);
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="tipoproducto">Ingresa el tipo del producto</label>
-                                <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto">
+                                <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,30}" required>
                             </div>
                         </div>
                     </div>

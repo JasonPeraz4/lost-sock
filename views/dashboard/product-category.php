@@ -29,7 +29,7 @@ Page::headerTemplate('Gestión de categorías', null);
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="categoria">Ingresa el nombre de la categoría</label>
-                                <input type="text" class="form-control" placeholder="Categoría" id="categoria" name="categoria">
+                                <input type="text" class="form-control" placeholder="Categoría" id="categoria" name="categoria" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}" required>
                             </div>
                         </div>
                     </div>

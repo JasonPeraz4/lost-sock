@@ -21,8 +21,8 @@ function fillTable( dataset )
             <tr>
                 <td class="pl-4">${row.frecuencia}</td>
                 <td>
-                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idfrecuencia})"></i>
-                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idfrecuencia})"></i>
+                    <i class="fas fa-edit mx-1 text-warning" onclick="openUpdateModal(${row.idfrecuencia})" data-toggle="tooltip" title="Editar"></i>
+                    <i class="fas fa-trash-alt text-danger" onclick="openDeleteDialog(${row.idfrecuencia})" data-toggle="tooltip" title="Eliminar"></i>
                 </td>
             </tr>
         `;

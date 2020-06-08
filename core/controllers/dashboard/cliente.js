@@ -30,8 +30,8 @@ function fillTable(dataset) {
                 <td>${row.usuario}</td>
                 <td>${txt}</td>
                 <td>
-                    <i class="fas fa-info mx-1" onclick="openSuscripciones(${row.idcliente})"></i>
-                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"></i>
+                    <i class="fas fa-info mx-1 text-info" onclick="openSuscripciones(${row.idcliente})" data-toggle="tooltip" title="Más información"></i>
+                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"  data-toggle="tooltip" title="Estado"></i>
                 </td>
             </tr>
         `;
