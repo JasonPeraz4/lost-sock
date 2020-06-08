@@ -159,7 +159,7 @@ class Orden extends Validator{
 
     public function readOneOrden()
     {
-        $sql = 'SELECT idcompra, nombre, fechacompra, fechaenvio, total, ec.estado, nombres, apellidos
+        $sql = 'SELECT idcompra, nombre, fechacompra, fechaenvio, total, ec.estado, ec.idEstadoCompra, nombres, apellidos
                 FROM detallecompra
                 JOIN compra USING(idcompra)
                 JOIN estadocompra ec USING(idestadocompra)
@@ -170,14 +170,14 @@ class Orden extends Validator{
         return Database::getRow($sql, $params);
     }
 
-    // public function disableOrden()
-    // {
-    //     $sql = 'UPDATE detalleOrden 
-    //             SET estado = ?
-    //             WHERE idCompra = ?';
-    //     $params = array($this->estado, $this->idDetalleCompra);
-    //     return Database::executeRow($sql, $params);
-    // }
+    public function disableOrden()
+    {
+        $sql = 'UPDATE compra
+                SET idEstadoCompra = ?
+                WHERE idCompra = ?';
+        $params = array($this->estado, $this->idCompra);
+        return Database::executeRow($sql, $params);
+    }
     
 }
 ?>
