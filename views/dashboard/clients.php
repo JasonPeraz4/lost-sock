@@ -23,24 +23,9 @@ Page::headerTemplate('Clientes', null);
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
-        <tr>
-           <td>
-                <div>${row.nombres} ${row.apellidos}</div>
-            </td>
-            <td>${row.categoria}</td>
-            <td>${row.tipo}</td>
-            <td>${row.talla}</td>           
-            <td>
-                <div>${row.direccion1} ${row.direccion2} ${row.direccion3} ${row.direccion4}</div>
-            </td>           
-            <td>
-                <i class="fas fa-ellipsis-v mx-1" data-toggle="modal" data-target="#suscripcion-modal"></i>
-                <i class="fas fa-eye mx-1" data-toggle="modal" data-target="#suscripcion-modal"></i>
-            </td>
-        </tr>
     </tbody>
 </table>
-<div class="modal fade" id="suscripcion-modal" tabindex="-1" role="dialog" aria-labelledby="suscripcion-modal" aria-hidden="true">
+<div class="modal fade" id="cliente-modal" tabindex="-1" role="dialog" aria-labelledby="cliente-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +35,7 @@ Page::headerTemplate('Clientes', null);
                 </button>
             </div>
             <div class="modal-body p-md-4">
-                <table id="suscripcion-table" class="table table-responsive-sm table-hover">
+                <table id="cliente-table" class="table table-responsive-sm table-hover">
                     <thead>
                         <tr>
                             <th>Categoría</th>
