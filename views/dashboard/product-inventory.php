@@ -47,20 +47,20 @@ Page::headerTemplate('Gestión de productos', null);
             <input class="d-none" type="text" id="idproducto" name="idproducto"/>
             <div class="form-group">
                 <label for="nombre">Nombre del producto</label>
-                <input type="text" class="form-control" placeholder="Nombre del producto" id="nombre" name="nombre">
+                <input type="text" class="form-control" placeholder="Nombre del producto" id="nombre" name="nombre" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea class="form-control" rows="2" id="descripcion" name="descripcion"></textarea>
+                <textarea class="form-control" rows="2" id="descripcion" name="descripcion" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{'1','120'}$" title="Solo se permiten letras y números"></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="precio">Precio</label>
-                    <input type="text" class="form-control" placeholder="Precio($)" id="precio" name="precio">
+                    <input type="text" class="form-control" placeholder="Precio($)" id="precio" name="precio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="descuento">Descuento</label>
-                    <input type="text" class="form-control" placeholder="Descuento Ej: %20" id="descuento" name="descuento">
+                    <input type="text" class="form-control" placeholder="Descuento Ej: %20" id="descuento" name="descuento" title="Solo se permiten números entre 0 y 99">
                 </div>
             </div>
             <div class="form-row">
@@ -75,10 +75,10 @@ Page::headerTemplate('Gestión de productos', null);
                     </select>
                 </div>             
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="test">Nombre del producto</label>
                 <input type="file" class="form-control" placeholder="Nombre del producto" id="test" name="test">
-            </div>
+            </div> -->
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
