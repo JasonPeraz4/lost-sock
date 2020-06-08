@@ -42,13 +42,6 @@ Page::headerTemplate('Clientes', null);
                         </tr>
                     </thead>
                     <tbody id="tbody-suscripcion-rows" class="table-bordered">
-                        <tr>
-                            <td>${row.categoria}</td>
-                            <td>${row.tipo}</td>
-                            <td>${row.talla}</td>
-                            <td>${row.frecuencia}</td>
-                            <td>${$$$$$$$$}</td>
-                        </tr>
                     </tbody>
                 </table>
 

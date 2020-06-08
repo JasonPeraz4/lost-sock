@@ -30,8 +30,7 @@ Page::headerTemplate('Gestión de tallas', null);
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="talla">Ingresa la talla</label>
-                                <input type="text" class="form-control" placeholder="Talla" id="talla"
-                                    name="talla">
+                                <input type="text" class="form-control" placeholder="Talla" id="talla" name="talla" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,5}" required>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ Page::headerTemplate('Gestión de colores', null);
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="color">Ingresa el nombre del color</label>
-                                <input type="text" class="form-control" placeholder="Color" id="color" name="color">
+                                <input type="text" class="form-control" placeholder="Color" id="color" name="color" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,20}" required>
                             </div>
                         </div>
                     </div>
