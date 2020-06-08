@@ -37,8 +37,8 @@ function fillTable(dataset) {
                     <div>${row.apellidos}</div>
                 </td>
                 <td>
-                    // <i class="fas fa-info mx-1 text-info" onclick="openOrden(${row.idcompra})" data-toggle="tooltip" title="Más información"></i>
-                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcompra})"  data-toggle="tooltip" title="Estado"></i>
+                    <!--<i class="fas fa-info mx-1 text-info" onclick="openOrden(${row.idcompra})" data-toggle="tooltip" title="Más información"></i>-->
+                    <i class="fas ${row.estado == 'En proceso' ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${!(row.estado == 'En proceso')}, ${row.idcompra})"  data-toggle="tooltip" title="Estado"></i>
                 </td>
             </tr>
         `;
@@ -62,7 +62,7 @@ function updateEstado(estado, id) {
     $.ajax({
         dataType: 'json',
         url: API_ORDEN + 'status',
-        data: { estado: estado, id: id },
+        data: { estado: estado ? 1 : 2 , id: id },
         type: 'post'
     })
         .done(function (response) {
