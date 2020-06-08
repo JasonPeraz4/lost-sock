@@ -94,7 +94,7 @@ function openUpdateModal(id) {
     $('#suscripcion-form')[0].reset();
     $('#suscripcion-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Actualizar categoría');
+    $('#modal-title').text('Suscripción');
 
     $.ajax({
         dataType: 'json',
@@ -118,7 +118,7 @@ function openUpdateModal(id) {
                 $('#talla').val(response.dataset.talla);
                 $('#cantidad').val(response.dataset.cantidadpares);
                 $('#precio').val(response.dataset.precio);
-                $('#total').val((+response.dataset.precio * +response.dataset.cantidadpares) + (+response.dataset.costoenvio));
+                $('#total').val((+response.dataset.precio + +response.dataset.costoenvio));
 
             } else {
                 sweetAlert(2, response.exception, null);

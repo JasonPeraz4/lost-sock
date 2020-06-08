@@ -25,8 +25,6 @@ Page::headerTemplate('Suscripciones', null);
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
-        <tr>
-        </tr>
     </tbody>
 </table>
 <div class="modal fade" id="suscripcion-modal" tabindex="-1" role="dialog" aria-labelledby="suscripcion-modal" aria-hidden="true">
