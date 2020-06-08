@@ -206,6 +206,7 @@ class Page {
                 <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/jquery.twbsPagination.min.js" type="text/javascript"></script>
                 <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
                 <script src="../../core/helpers/components.js" type="text/javascript"></script>
                 <script src="../../core/controllers/dashboard/sesion-actual.js" type="text/javascript"></script>

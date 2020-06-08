@@ -57,6 +57,10 @@
     color: #a044ff!important;
 }
 
+.border-purple {
+    border-color: #a044ff!important;
+}
+
 .table th {
     border-top: none;
     border-bottom: none;
@@ -280,4 +284,8 @@ ul ul a {
   button:focus{
     outline: none!important;
     box-shadow: none!important;
+}
+
+.img-avatar{
+    width: 60px;
 }

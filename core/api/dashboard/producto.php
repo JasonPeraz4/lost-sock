@@ -124,6 +124,29 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Identificador incorrecto';
                 }
                 break;
+            case 'readComentarios':
+                if ( $producto->setIdProducto( $_POST[ 'idproducto' ] ) ) {
+                    if ($result['dataset'] = $producto->readComentarios()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay comentarios sobre este producto';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador del producto incorrecto';
+                }
+                break;
+            case 'deleteComentario':
+                if ( $producto->setIdComentario( $_POST[ 'idcomentario' ] ) ) {
+                    if ( $producto->deleteComentario() ) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Comentario deshabilitado correctamente';
+                    } else {
+                        $result['exception'] = Database::getException();
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+                break;
             default:
                 exit('Acción no disponible');
         }
