@@ -6,29 +6,6 @@ Page::headerTemplate('Gestión de administradores', null);
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
         <h3 class="mr-md-3">Administradores</h3>
-        <!-- Grupo de dropdowns -->
-        <div class="d-flex flex-row my-2 my-md-0">
-            <!-- Dropdown filtrar por estado -->
-            <div class="dropdown mx-md-2">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Estado
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Habilitado</a>
-                    <a class="dropdown-item" href="#">Inhabilitado</a>
-                </div>
-            </div>
-            <!-- Dropdown filtrar por tipo -->
-            <div class="dropdown mx-2">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tipo
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Superadministrador</a>
-                    <a class="dropdown-item" href="#">Administrador</a>
-                </div>
-            </div>    
-        </div>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
             Agregar

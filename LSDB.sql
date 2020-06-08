@@ -9,7 +9,8 @@ CREATE TABLE cliente(
 	telefono CHAR(8) NOT NULL,
 	usuario VARCHAR(25) NOT NULL,
 	clave VARCHAR(100) NOT NULL,
-	foto VARCHAR(200)
+	foto VARCHAR(200),
+	estado BIT DEFAULT '1'
 );
 
 CREATE TABLE talla(
@@ -113,7 +114,7 @@ CREATE TABLE detalleCompra(
 	precio NUMERIC(6,2) NOT NULL,
 	idProducto INTEGER REFERENCES producto(idProducto)NOT NULL,
 	idCompra INTEGER REFERENCES compra(idCompra)NOT NULL,
-	idTalla INTEGER REFERENCES talla(idTalla)NOT NULL,
+	idTalla INTEGER REFERENCES talla(idTalla)NOT NULL
 );
 
 CREATE TABLE comentario(
@@ -248,22 +249,22 @@ VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonp
 		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1');
 
 INSERT INTO cliente 
-VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', 78789562, 'jasonpcx', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', 79570450, 'luunavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', 79674338, 'yanavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', 74523010, 'djnavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', 70336064, 'albacanas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', 61532318, 'davidnavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', 70206064, 'sofianavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', 70337064, 'alitanavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Ana Laura', 'Navas Estrada', 'lauradeestrada@gmail.com', 60336064, 'lauraestrada', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Ana Laura', 'Navas Rivera', 'laura@rivera.com', 78889955, 'laurarivera', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com',78451304,'rufux','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', 78156714, 'juananaya', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', 77541264, 'marcosdvm', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', 66784983, 'victorventura', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Mauricio Javier', 'Cestoni Quesada', 'mau@cestoni.com', 75489617, 'maucestoni', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg'),
-		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com',79345127,'marcosgranillo','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg');
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', 78789562, 'jasonpcx', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', 79570450, 'luunavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', 79674338, 'yanavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', 74523010, 'djnavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', 70336064, 'albacanas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', 61532318, 'davidnavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', 70206064, 'sofianavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', 70337064, 'alitanavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Ana Laura', 'Navas Estrada', 'lauradeestrada@gmail.com', 60336064, 'lauraestrada', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Ana Laura', 'Navas Rivera', 'laura@rivera.com', 78889955, 'laurarivera', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com',78451304,'rufux','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', 78156714, 'juananaya', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', 77541264, 'marcosdvm', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', 66784983, 'victorventura', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Mauricio Javier', 'Cestoni Quesada', 'mau@cestoni.com', 75489617, 'maucestoni', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
+		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com',79345127,'marcosgranillo','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT);
 
 INSERT INTO direccion
 VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
@@ -683,3 +684,61 @@ FROM compra GROUP BY date_part('month', fechaCompra);
 SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS "Plan", concat('$',SUM(precio)) AS "Ganancia" FROM suscripcion s 
 JOIN planSuscripcion pS ON s.idPlanSuscripcion = pS.idPlanSuscripcion GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT idcompra, nombre, fechacompra, fechaenvio, total, estado, nombres, apellidos
+FROM detallecompra
+JOIN compra USING(idcompra)
+JOIN estadocompra USING(idestadocompra)
+JOIN cliente USING(idcliente)
+JOIN producto USING(idproducto)
+
+SELECT * FROM producto
+SELECT * FROM compra cp
+SELECT * FROM estadocompra
+SELECT * FROM detallecompra
+SELECT * FROM cliente
+SELECT * FROM direccion
+SELECT * FROM departamento
+SELECT * from cliente
+
+SELECT cp.idcompra, cl.nombres, cl.apellidos, dr.detalledireccion, dp.departamento, dp.costoenvio, cp.fechacompra, 
+cp.fechaenvio, ec.estado, ct.categoria, tl.talla, tp.tipo, cp.total, dc.cantidad, dc.precio 
+FROM detallecompra dc
+JOIN compra cp USING(idcompra)
+JOIN cliente cl USING(idcliente)
+JOIN direccion dr USING(iddireccion)
+JOIN departamento dp USING(iddepartamento)
+JOIN producto pr USING(idproducto)
+JOIN tipoproducto tp USING(idtipoproducto)
+JOIN talla tl USING(idtalla)
+JOIN categoria ct USING(idcategoria)
+JOIN estadocompra ec USING(idestadocompra) WHERE idcompra = 2
+select * from frecuencia
+
+SELECT s.idsuscripcion, tl.talla, f.frecuencia, ct.categoria, tp.tipo, (ps.precio + dp.costoenvio)
+                FROM suscripcion s 
+				JOIN talla tl USING(idtalla)
+                JOIN categoria ct USING(idcategoria)
+                JOIN plansuscripcion ps USING(idplansuscripcion)
+                JOIN tipoproducto tp USING(idtipoproducto)
+				JOIN frecuencia f USING(idfrecuencia)
+				JOIN direccion dr USING(iddireccion)
+				JOIN departamento dp USING(iddepartamento)
+               
+SELECT nombres, apellidos, email, telefono, usuario FROM cliente
+
+select * from cliente

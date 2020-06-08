@@ -6,29 +6,6 @@ Page::headerTemplate('Gestión de productos', null);
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
         <h3 class="mr-md-3">Productos</h3>
-        <!-- Grupo de dropdowns -->
-        <div class="d-flex flex-row my-2 my-md-0">
-            <!-- Dropdown filtrar por estado -->
-            <div class="dropdown mx-md-2">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Categoría
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Hombre</a>
-                    <a class="dropdown-item" href="#">Mujer</a>
-                </div>
-            </div>
-            <!-- Dropdown filtrar por tipo -->
-            <div class="dropdown mx-2">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tipo
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Calceta</a>
-                    <a class="dropdown-item" href="#">Calcetin deportivo</a>
-                </div>
-            </div>    
-        </div>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
             Agregar
