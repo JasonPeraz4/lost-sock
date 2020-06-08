@@ -19,7 +19,7 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $frecuencia->readAllFrecuencia()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay frecuencias de envio registrados';
+                    $result['exception'] = 'No hay frecuencias de envío registrados';
                 }
                 break;
             case 'create':
@@ -27,12 +27,12 @@ if (isset($_GET['action'])) {
                 if ( $frecuencia->setFrecuencia( $_POST[ 'frecuencia' ] ) ) {
                     if ( $frecuencia->createFrecuencia() ) {
                         $result['status'] = 1;
-                        $result['message'] = 'frecuencia de envio agregado exitosamente';
+                        $result['message'] = 'frecuencia de envío agregado correctamente';
                     } else {
                         $result['exception'] = Database::getException();
                     }    
                 } else {
-                    $result['exception'] = 'Frecuencia ingresada no válido';
+                    $result['exception'] = 'Frecuencia ingresada no válida';
                 }
                 break;
             case 'readOne':
@@ -40,10 +40,10 @@ if (isset($_GET['action'])) {
                     if ( $result[ 'dataset' ] = $frecuencia->readFrecuencia() ) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Frecuencia de envio no existente';
+                        $result['exception'] = 'Frecuencia de envío no existente';
                     }
                 } else {
-                    $result['exception'] = 'Frecuencia de envio no válida';
+                    $result['exception'] = 'Frecuencia de envío no válida';
                 }
                 break;
             case 'update':
@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
                     if ( $frecuencia->setFrecuencia( $_POST[ 'frecuencia' ] ) ) {
                         if ( $frecuencia->updateFrecuencia() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Frecuencia de envio actualizada exitosamente';
+                            $result['message'] = 'Frecuencia de envío actualizada correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Ingresa una frecuencia válida';
                     }    
                 } else {
-                    $result['exception'] = 'Frecuencia ingresada no válido';
+                    $result['exception'] = 'Frecuencia ingresada no válida';
                 }
                 break;
             case 'delete':
@@ -74,11 +74,11 @@ if (isset($_GET['action'])) {
                         }
                         
                     } else {
-                        $result['exception'] = 'Frecuencia de envio inexistente';
+                        $result['exception'] = 'Frecuencia de envío inexistente';
                     }
                     
                 } else {
-                    $result['exception'] = 'Frecuencia de envio incorrecta';
+                    $result['exception'] = 'Frecuencia de envío incorrecta';
                 }
                 break;
             default:

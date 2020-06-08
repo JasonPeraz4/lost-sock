@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
                     if ( $plan->setPrecio( $_POST[ 'precio' ] ) ) {
                         if ( $plan->createPlanSuscripcion() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Plan agregado exitosamente';
+                            $result['message'] = 'Plan agregado correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }
@@ -47,7 +47,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Plan de suscripción no existente';
                     }
                 } else {
-                    $result['exception'] = 'Plan no válido';
+                    $result['exception'] = 'Plan de suscripción no válido';
                 }
                 break;
             case 'update':

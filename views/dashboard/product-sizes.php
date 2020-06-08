@@ -4,8 +4,7 @@ Page::headerTemplate('Gestión de tallas', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h2>Tallas</h2>
-        <p class="mx-2 my-auto">3 en total</p>
+        <h3 class="mr-md-3">Tallas</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <!-- Boton para llamar modal de agregar talla -->

@@ -24,7 +24,7 @@ if (isset($_GET['action'])) {
                     if ($result['dataset'] = $dP->readDetalleProducto()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'No hay detalles de este producto registrados';
+                        $result['exception'] = 'No hay detalles registrados para este producto';
                     }
                 } else {
                     $result['exception'] = 'Detalle de producto no válido';
@@ -40,7 +40,7 @@ if (isset($_GET['action'])) {
                                     if ( $dP->setExistencia( $_POST[ $v2 ] ) ) {
                                         if ( $dP->updateDetalleProducto() ) {
                                             $result['status'] = 1;
-                                            $result['message'] = 'Existencia actualizada con exito';
+                                            $result['message'] = 'Existencia actualizada correctamente';
                                         } else {
                                             $result['exception'] = Database::getException();
                                         }

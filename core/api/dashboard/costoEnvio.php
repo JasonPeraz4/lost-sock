@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Costo ingresado no válido';
                     } 
                 } else {
-                    $result['exception'] = 'Departamento ingresado no válida';
+                    $result['exception'] = 'Departamento ingresado no válido';
                 }
                 break;
             case 'readOne':
@@ -47,7 +47,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Departamento no existente';
                     }
                 } else {
-                    $result['exception'] = 'Costo de envio no válido';
+                    $result['exception'] = 'Costo de envío no válido';
                 }
                 break;
             case 'update':
@@ -57,7 +57,7 @@ if (isset($_GET['action'])) {
                         if ( $costoEnvio->setCostoEnvio( $_POST[ 'costoenvio' ] ) ) {
                             if ( $costoEnvio->updateDepartamento() ) {
                                 $result['status'] = 1;
-                                $result['message'] = 'Costo de envio actualizado exitosamente';
+                                $result['message'] = 'Costo de envío actualizado correctamente';
                             } else {
                                 $result['exception'] = Database::getException();
                             }
@@ -65,7 +65,7 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Costo ingresado no válido';
                         } 
                     } else {
-                        $result['exception'] = 'Departamento ingresado no válida';
+                        $result['exception'] = 'Departamento ingresado no válido';
                     }    
                 } else {
                     $result['exception'] = 'Departamento ingresado no válido';
@@ -76,7 +76,7 @@ if (isset($_GET['action'])) {
                     if ( $data = $costoEnvio->readDepartamento() ) {
                         if ( $costoEnvio->deleteCostoEnvio() ) {
                             $result['status'] = 1;
-                            $result['message'] = 'Costo de envio eliminado correctamente';
+                            $result['message'] = 'Costo de envío eliminado correctamente';
                         } else {
                             $result['exception'] = Database::getException();
                         }

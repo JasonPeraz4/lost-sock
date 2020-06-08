@@ -2,14 +2,13 @@
 require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Gestión de colores', null);
 ?>
-<div class="d-flex flex-column mb-3">
-    <div class="d-flex align-items-end pb-md-3 pb-2">
-        <h2>Colores</h2>
-        <p class="mb-2 mx-2">4 en total</p>
+<div class="d-flex flex-row align-items-center flex-wrap mb-4">
+    <div class="d-flex flex-row align-items-center">
+        <h3 class="mr-md-3">Colores</h3>
     </div>
-    <div class="d-flex flex-wrap">
-        <!-- Botòn para llamar modal de agregar color -->
-        <button type="button" class="btn btn-purple ml-md-auto my-auto" data-toggle="modal" onclick="openCreateModal()">
+    <div class="d-flex flex-row align-items-center ml-md-auto">
+        <!-- Boton para llamar modal de agregar color -->
+        <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
             Agregar
         </button>
     </div>

@@ -19,7 +19,7 @@ class Page {
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/datatables.min.css" type="text/css"/>
             <!-- Llamada a un archivo tipo icono -->
-            <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+            <link rel="icon" href="../../resources/img/favicon.svg">
         </head>
         <body>
         ');
@@ -58,7 +58,7 @@ class Page {
                                     <a href="product-inventory.php">Inventario</a>
                                 </li>
                                 <li>
-                                    <a href="product-category.php">Categorias</a>
+                                    <a href="product-category.php">Categorías</a>
                                 </li>
                                 <li>
                                     <a href="product-colors.php">Colores</a>
@@ -93,7 +93,7 @@ class Page {
                                     <a href="suscription-plans.php">Planes</a>
                                 </li>
                                 <li>
-                                    <a href="shipping-costs.php">Costo de envio</a>
+                                    <a href="shipping-costs.php">Costos de envío</a>
                                 </li>
                             </ul>
                         </li>
@@ -113,7 +113,7 @@ class Page {
                                     <a href="admin-list.php">Listado</a>
                                 </li>
                                 <li>
-                                    <a href="admin-type.php">Tipo de usuario</a>
+                                    <a href="admin-type.php">Tipos de usuario</a>
                                 </li>
                             </ul>
                         </li>

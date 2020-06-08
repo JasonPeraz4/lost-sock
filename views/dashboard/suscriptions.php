@@ -9,6 +9,7 @@ Page::headerTemplate('Suscripciones', null);
         <!-- Grupo de dropdowns -->
         <div class="d-flex flex-row my-2 my-md-0">
     </div>
+    </div>
 </div>
 <table id="suscripcion-table" class="table table-responsive-sm table-hover">
     <thead>
@@ -24,21 +25,6 @@ Page::headerTemplate('Suscripciones', null);
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
-        <tr>
-            <td>${row.categoria}</td>
-            <td>${row.tipo}</td>
-            <td>${row.talla}</td>
-            <td>${row.frecuencia}</td>
-            <td>
-                <div>${row.nombres} ${row.apellidos}</div>
-            </td>
-            <td> ${drow.detalledireccion}</td>
-            <td>${txt}</td>
-            <td>
-                <i class="fas fa-info mx-1" data-toggle="modal" data-target="#suscripcion-modal"></i>
-                <i class="fas fa-eye-slash mx-1" data-toggle="modal"></i>
-            </td>
-        </tr>
     </tbody>
 </table>
 <div class="modal fade" id="suscripcion-modal" tabindex="-1" role="dialog" aria-labelledby="suscripcion-modal" aria-hidden="true">
@@ -98,7 +84,7 @@ Page::headerTemplate('Suscripciones', null);
                         </div>
                         <div class="form-group col-md-4">
                             <label for="estado">Estado</label>
-                            <select readonly class="form-control" id="estado" name="estado"></select>
+                            <input readonly type="text"class="form-control" id="estado" name="estado"></select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -129,5 +115,5 @@ Page::headerTemplate('Suscripciones', null);
     </div>
 </div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('suscripcion.js');
 ?>

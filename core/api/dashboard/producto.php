@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Descripción ingresada no válida';
                     }
                 } else {
-                    $result['exception'] = 'Nombre ingresados no válidos';
+                    $result['exception'] = 'Nombres ingresados no válidos';
                 }
                 break;
             case 'readOne':
@@ -78,7 +78,7 @@ if (isset($_GET['action'])) {
                                             if ( $producto->setIdTipoProducto( $_POST[ 'tipo_producto' ] ) ) {
                                                 if ( $producto->updateProducto() ) {
                                                     $result['status'] = 1;
-                                                    $result['message'] = 'Producto actualizado con exito';
+                                                    $result['message'] = 'Producto actualizado correctamente';
                                                 } else {
                                                     $result['exception'] = Database::getException();
                                                 }
@@ -98,7 +98,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Descripción ingresada no válida';
                             }
                         } else {
-                            $result['exception'] = 'Nombre ingresados no válidos';
+                            $result['exception'] = 'Nombres ingresados no válidos';
                         }
                     } else {
                         $result['exception'] = 'Producto inexistente';

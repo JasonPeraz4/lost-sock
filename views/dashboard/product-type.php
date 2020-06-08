@@ -4,8 +4,7 @@ Page::headerTemplate('Gestionar tipo de producto', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h2>Tipo</h2>
-        <p class="mx-2 my-auto">4 en total</p>
+        <h3 class="mr-md-3">Tipos de producto</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">

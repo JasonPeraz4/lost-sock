@@ -44,7 +44,7 @@ Page::headerTemplate('Gestión de productos', null);
                 <div>Precio /</div>
                 <div>Descuento</div>
             </th>
-            <th>Categoria</th>
+            <th>Categoría</th>
             <th>Tipo</th>
             <th>Tallas</th>
             <th>Acciones</th>
