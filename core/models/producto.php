@@ -206,5 +206,33 @@ class Producto extends Validator
         $params = array( 0, $this->idComentario );
         return Database::executeRow( $sql, $params );
     }
+
+    public function cantidadVentas()
+    {
+        $sql = `SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
+                FROM compra GROUP BY date_part('month', fechaCompra)
+                `;
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function cantidadPedidos()
+    {
+        $sql = `SELECT COUNT(idcompra) AS mes, SUM(total) AS ganancias
+                FROM compra WHERE fechacompra BETWEEN (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE) 
+                AND (SELECT date_trunc('MONTH',now())::DATE)`;
+        $params = null;
+        return Database::getRow( $sql, $params );
+    }
+
+    public function cantidadSuscripciones()
+    {
+        $sql = `SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS FROM suscripcion 
+                INNER JOIN planSuscripcion USING(idplansuscripcion) WHERE fecha
+                BETWEEN (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE) 
+                AND (SELECT date_trunc('MONTH',now())::DATE)`;
+        $params = null;
+        return Database::getRow( $sql, $params );
+    }
 }
 ?>
