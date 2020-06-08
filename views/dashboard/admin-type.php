@@ -42,7 +42,7 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
             <input class="d-none" type="text" id="idtipousuario" name="idtipousuario"/>
             <div class="form-group">
                 <label for="tipo">Ingresa un tipo de usuario</label>
-                <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo">
+                <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
             </div>
         </div>
         <div class="modal-footer">

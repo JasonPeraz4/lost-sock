@@ -218,21 +218,30 @@ class Producto extends Validator
 
     public function cantidadPedidos()
     {
-        $sql = `SELECT COUNT(idcompra) AS mes, SUM(total) AS ganancias
-                FROM compra WHERE fechacompra BETWEEN (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE) 
-                AND (SELECT date_trunc('MONTH',now())::DATE)`;
+        $sql = `SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
+                FROM compra WHERE fechacompra BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
         $params = null;
         return Database::getRow( $sql, $params );
     }
 
     public function cantidadSuscripciones()
     {
-        $sql = `SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS FROM suscripcion 
+        $sql = `SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
                 INNER JOIN planSuscripcion USING(idplansuscripcion) WHERE fecha
-                BETWEEN (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE) 
-                AND (SELECT date_trunc('MONTH',now())::DATE)`;
+                BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
         $params = null;
         return Database::getRow( $sql, $params );
+    }
+
+    public function readTopProductos()
+    {
+        $sql = 'SELECT SUM(cantidad) AS cantidad, nombre, SUM(producto.precio*cantidad) AS ganancia 
+                FROM detalleCompra INNER JOIN producto USING(idproducto) 
+                GROUP BY nombre ORDER BY SUM(cantidad) DESC LIMIT 5';
+        $params = null;
+        return Database::getRows( $sql, $params );
     }
 }
 ?>

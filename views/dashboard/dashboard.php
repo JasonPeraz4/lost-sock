@@ -34,18 +34,19 @@ Page::headerTemplate('Dashboard', null);
         </div>
     </div>
     <div class="col-md-7 border">
-        <h5>Ventas mensuales</h5>
-        <canvas id="chLine"></canvas>
+        <h5 class="mb-2">Ventas mensuales</h5>
+        <canvas id="chVentas"></canvas>
     </div>
 </div>
 <div class="row mt-3">
-    <div class="col-md-6 border p-3 mr-md-3">
+    <div class="col-md-12 border p-3 mr-md-3">
         <h6>Productos más vendidos</h6>
         <table id="tableProductos" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Tipo</th>
-                    <th>Acciones</th>
+                    <th class="pl-4">Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Ganancia</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
@@ -53,7 +54,7 @@ Page::headerTemplate('Dashboard', null);
             </tbody>
         </table>
     </div>
-    <div class="col-md-5 border p-3">
+    <!-- <div class="col-md-5 border p-3">
         <h6>Últimos pedidos</h6>
         <table id="tablePedidos" class="table table-responsive-sm table-hover">
             <thead>
@@ -66,7 +67,7 @@ Page::headerTemplate('Dashboard', null);
                 
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 <?php
 Page::footerTemplate( 'dashboard.js' );

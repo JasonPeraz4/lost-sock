@@ -20,7 +20,6 @@ $( document ).ready( function(){
     readComentarios( ID );
 });
 
-// Función para obtener y mostrar los datos del producto seleccionado.
 function readComentarios( id )
 {
     $.ajax({
@@ -50,9 +49,8 @@ function readComentarios( id )
             });
             // Se agregan los comentarios al contenido de la página
             $( '#page-content' ).html( content );
-    
         } else {
-            sweetAlert( 2, result.exception, null );
+            sweetAlert( 4, response.exception, null );
         }
     })
     .fail(function( jqXHR ) {

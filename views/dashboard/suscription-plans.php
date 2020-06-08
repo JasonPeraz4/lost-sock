@@ -45,11 +45,11 @@ Page::headerTemplate('Gestión de planes de suscripción', null);
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cantidadpares">Cantidad de pares</label>
-                        <input type="text" class="form-control" placeholder="x pares" id="cantidadpares" name="cantidadpares">
+                        <input type="text" class="form-control" placeholder="x pares" id="cantidadpares" name="cantidadpares" title="Solo se permiten números">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="precio">Precio de envio</label>
-                        <input type="text" class="form-control" placeholder="Precio($)" id="precio" name="precio">
+                        <input type="text" class="form-control" placeholder="Precio($)" id="precio" name="precio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
                     </div>
                 </div>            
             </div>

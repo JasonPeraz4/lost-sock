@@ -135,6 +135,7 @@ CREATE TABLE planSuscripcion(
 CREATE TABLE suscripcion(
 	idSuscripcion SERIAL PRIMARY KEY,
 	estado BIT DEFAULT '1',
+	fecha DATE NOT NULL,
 	idTalla INTEGER REFERENCES talla(idTalla),
 	idFrecuencia INTEGER REFERENCES frecuencia(idFrecuencia),
 	idCategoria INTEGER REFERENCES categoria(idCategoria),
@@ -192,6 +193,14 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER actualizarDetalleProducto AFTER INSERT ON talla
 FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();
 
+-- Función requerida para que se muestre el mes a partir de la fecha
+
+CREATE OR REPLACE FUNCTION to_month(double precision) RETURNS varchar AS
+$$
+    SELECT to_char(to_timestamp(to_char($1, '999'), 'MM'), 'Month');
+$$ LANGUAGE SQL;
+
+
 -- INSERT
 
 
@@ -206,10 +215,9 @@ VALUES	(DEFAULT, 'Calcetas'),
 		(DEFAULT, 'Calcetines gruesos'),
 		(DEFAULT, 'Medias altas');
 
-INSERT INTO talla 
-VALUES	(DEFAULT, 'S'),
-		(DEFAULT, 'M'),
-		(DEFAULT, 'L');
+INSERT INTO talla VALUES (DEFAULT, 'S');
+INSERT INTO talla VALUES (DEFAULT, 'M');
+INSERT INTO talla VALUES (DEFAULT, 'L');
 		
 INSERT INTO categoria 
 VALUES	(DEFAULT, 'Mujer'),
@@ -275,70 +283,27 @@ VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
 		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
 		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 		
-INSERT INTO producto	
-VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, NULL, 1, 1),
-		(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, NULL, 2, 2),
-		(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, NULL, 3, 3),
-		(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, NULL, 5, 3),
-		(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, NULL, 1, 2),
-		(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, NULL, 3, 2),
-		(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, NULL, 3, 4),
-		(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, NULL, 2, 3),
-		(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, NULL, 2, 5),
-		(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, NULL, 5, 1),
-		(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, NULL, 2, 1),
-		(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, NULL, 4, 2),
-		(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, NULL, 2, 5),
-		(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, NULL, 4, 3),
-		(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, NULL, 2, 4),
-		(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, NULL, 5, 5),
-		(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, NULL, 2, 2),
-		(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, NULL, 3, 1),
-		(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, NULL, 3, 4),
-		(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, NULL, 5, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, DEFAULT, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, DEFAULT, 2, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, DEFAULT, 3, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, DEFAULT, 5, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, DEFAULT, 1, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, DEFAULT, 3, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, DEFAULT, 3, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, DEFAULT, 2, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, DEFAULT, 2, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, DEFAULT, 5, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, DEFAULT, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, DEFAULT, 4, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, DEFAULT, 2, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, DEFAULT, 4, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, DEFAULT, 2, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, DEFAULT, 5, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, DEFAULT, 2, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, DEFAULT, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, DEFAULT, 3, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, DEFAULT, 5, 4);
 		
-INSERT INTO detalleProducto
-VALUES	(DEFAULT, 100, 1, 1),
-		(DEFAULT, 50, 2, 1),
-		(DEFAULT, 80, 3, 1),
-		(DEFAULT, 30, 1, 2),
-		(DEFAULT, 25, 2, 2),
-		(DEFAULT, 40, 3, 2),
-		(DEFAULT, 80, 2, 3),
-		(DEFAULT, 50, 3, 3),
-		(DEFAULT, 70, 1, 4),
-		(DEFAULT, 50, 2, 4),
-		(DEFAULT, 65, 3, 4),
-		(DEFAULT, 72, 1, 5),
-		(DEFAULT, 25, 1, 6),
-		(DEFAULT, 54, 3, 6),
-		(DEFAULT, 65, 1, 7),
-		(DEFAULT, 59, 2, 7),
-		(DEFAULT, 51, 3, 7),
-		(DEFAULT, 17, 1, 8),
-		(DEFAULT, 28, 2, 8),
-		(DEFAULT, 45, 3, 8),
-		(DEFAULT, 42, 1, 9),
-		(DEFAULT, 53, 2, 9),
-		(DEFAULT, 75, 3, 9),
-		(DEFAULT, 30, 1, 10),
-		(DEFAULT, 25, 2, 10),
-		(DEFAULT, 40, 3, 11),
-		(DEFAULT, 65, 1, 12),
-		(DEFAULT, 72, 1, 13),
-		(DEFAULT, 19, 2, 13),
-		(DEFAULT, 43, 1, 14),
-		(DEFAULT, 68, 2, 14),
-		(DEFAULT, 24, 3, 14),
-		(DEFAULT, 30, 1, 15),
-		(DEFAULT, 44, 2, 15),
-		(DEFAULT, 37, 3, 16),
-		(DEFAULT, 45, 1, 17),
-		(DEFAULT, 71, 2, 17),
-		(DEFAULT, 39, 1, 18),
-		(DEFAULT, 30, 1, 19),
-		(DEFAULT, 47, 1, 20),
-		(DEFAULT, 81, 3, 20);
 		
 INSERT INTO compra
 VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
@@ -377,11 +342,10 @@ VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-02-16', NOW(), 25.00, 1, 4, 5),
 		(DEFAULT, '2020-02-11', NOW(), 25.00, 1, 5, 4),
 		(DEFAULT, '2020-02-12', NOW(), 22.50, 4, 6, 5),
-		(DEFAULT, '2020-02-13', NOW(), 24.95, 2, 7, 2),
-		(DEFAULT, '2020-02-17', NOW(), 30.00, 3, 8, 4),
-		(DEFAULT, '2020-02-15', NOW(), 22.50, 4, 9, 2),
-		(DEFAULT, '2020-02-15', NOW(), 25.00, 5, 10, 3);
-		
+		(DEFAULT, '2020-06-1', NOW(), 24.95, 2, 7, 2),
+		(DEFAULT, '2020-06-7', NOW(), 30.00, 3, 8, 4),
+		(DEFAULT, '2020-06-5', NOW(), 22.50, 4, 9, 2),
+		(DEFAULT, '2020-06-2', NOW(), 25.00, 5, 10, 3);
 
 INSERT INTO detalleCompra
 VALUES	(DEFAULT, 1, 5.00, 14, 1, 1),
@@ -526,21 +490,22 @@ VALUES	(DEFAULT, 1, 5.00, 14, 1, 1),
 		(DEFAULT, 1, 5.00, 2, 40, 1);
 	
 INSERT INTO comentario
-VALUES	(DEFAULT, 'Están preciosos, como lo esperaba.', '2020-01-12', 5, DEFAULT, 1),
-		(DEFAULT, 'Están bien pero no son de calidad.', '2019-12-11', 3, DEFAULT, 54),
-		(DEFAULT, 'No me gustaron en absoluto, pésima calidad.', '2020-03-03', 1, DEFAULT, 87),
-		(DEFAULT, 'No hay de mi talla.', '2020-01-15', 2, DEFAULT, 64),
-		(DEFAULT, 'No me gustaron en absoluto, pésima servicio.', '2020-02-26', 1, DEFAULT, 115);
+VALUES	(DEFAULT, 'Están preciosos, como lo esperaba.', '2020-01-12', 5, DEFAULT, 5),
+		(DEFAULT, 'Están bien pero no son de calidad.', '2019-12-11', 3, DEFAULT, 23),
+		(DEFAULT, 'No me gustaron en absoluto, pésima calidad.', '2020-03-03', 1, DEFAULT, 4),
+		(DEFAULT, 'Se me rompio al primer uso.', '2020-06-15', 2, DEFAULT, 18),
+		(DEFAULT, 'No hay de mi talla.', '2020-01-15', 2, DEFAULT, 6),
+		(DEFAULT, 'No me gustaron en absoluto, pésima servicio.', '2020-02-26', 1, DEFAULT, 11);
 
 INSERT INTO suscripcion
-VALUES	(DEFAULT, DEFAULT, 1, 1, 5, 1, 2, 1, 1),
-		(DEFAULT, DEFAULT, 2, 1, 2, 4, 1, 1, 4),
-		(DEFAULT, DEFAULT, 3, 5, 1, 2, 1, 1, 2),
-		(DEFAULT, DEFAULT, 1, 2, 4, 3, 3, 1, 3),
-		(DEFAULT, DEFAULT, 2, 1, 1, 5, 1, 1, 5),
-		(DEFAULT, DEFAULT, 3, 3, 3, 3, 1, 1, 3),
-		(DEFAULT, DEFAULT, 2, 4, 2, 4, 2, 1, 4),
-		(DEFAULT, DEFAULT, 2, 1, 3, 6, 1, 1, 6);
+VALUES	(DEFAULT, DEFAULT, NOW(), 1, 1, 5, 1, 2, 1, 1),
+		(DEFAULT, DEFAULT, NOW(), 2, 1, 2, 4, 1, 1, 4),
+		(DEFAULT, DEFAULT, NOW(), 3, 5, 1, 2, 1, 1, 2),
+		(DEFAULT, DEFAULT, NOW(), 1, 2, 4, 3, 3, 1, 3),
+		(DEFAULT, DEFAULT, NOW(), 2, 1, 1, 5, 1, 1, 5),
+		(DEFAULT, DEFAULT, NOW(), 3, 3, 3, 3, 1, 1, 3),
+		(DEFAULT, DEFAULT, NOW(), 2, 4, 2, 4, 2, 1, 4),
+		(DEFAULT, DEFAULT, NOW(), 2, 1, 3, 6, 1, 1, 6);
 		
 -- SELECTS
 
@@ -683,62 +648,3 @@ FROM compra GROUP BY date_part('month', fechaCompra);
 
 SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS "Plan", concat('$',SUM(precio)) AS "Ganancia" FROM suscripcion s 
 JOIN planSuscripcion pS ON s.idPlanSuscripcion = pS.idPlanSuscripcion GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-SELECT idcompra, nombre, fechacompra, fechaenvio, total, estado, nombres, apellidos
-FROM detallecompra
-JOIN compra USING(idcompra)
-JOIN estadocompra USING(idestadocompra)
-JOIN cliente USING(idcliente)
-JOIN producto USING(idproducto)
-
-SELECT * FROM producto
-SELECT * FROM compra cp
-SELECT * FROM estadocompra
-SELECT * FROM detallecompra
-SELECT * FROM cliente
-SELECT * FROM direccion
-SELECT * FROM departamento
-SELECT * from cliente
-
-SELECT cp.idcompra, cl.nombres, cl.apellidos, dr.detalledireccion, dp.departamento, dp.costoenvio, cp.fechacompra, 
-cp.fechaenvio, ec.estado, ct.categoria, tl.talla, tp.tipo, cp.total, dc.cantidad, dc.precio 
-FROM detallecompra dc
-JOIN compra cp USING(idcompra)
-JOIN cliente cl USING(idcliente)
-JOIN direccion dr USING(iddireccion)
-JOIN departamento dp USING(iddepartamento)
-JOIN producto pr USING(idproducto)
-JOIN tipoproducto tp USING(idtipoproducto)
-JOIN talla tl USING(idtalla)
-JOIN categoria ct USING(idcategoria)
-JOIN estadocompra ec USING(idestadocompra) WHERE idcompra = 2
-select * from frecuencia
-
-SELECT s.idsuscripcion, tl.talla, f.frecuencia, ct.categoria, tp.tipo, (ps.precio + dp.costoenvio)
-                FROM suscripcion s 
-				JOIN talla tl USING(idtalla)
-                JOIN categoria ct USING(idcategoria)
-                JOIN plansuscripcion ps USING(idplansuscripcion)
-                JOIN tipoproducto tp USING(idtipoproducto)
-				JOIN frecuencia f USING(idfrecuencia)
-				JOIN direccion dr USING(iddireccion)
-				JOIN departamento dp USING(iddepartamento)
-               
-SELECT nombres, apellidos, email, telefono, usuario FROM cliente
-
-select * from cliente

@@ -130,7 +130,7 @@ if (isset($_GET['action'])) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'No hay comentarios sobre este producto';
-                    }
+                    } 
                 } else {
                     $result['exception'] = 'Identificador del producto incorrecto';
                 }
@@ -145,6 +145,34 @@ if (isset($_GET['action'])) {
                     }
                 } else {
                     $result['exception'] = 'Identificador incorrecto';
+                }
+                break;
+            case 'cantidadVentas':
+                if ($result['dataset'] = $producto->cantidadVentas()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay datos disponibles';
+                }
+                break;
+            case 'cantidadPedidos':
+                if ($result['dataset'] = $producto->cantidadPedidos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay pedidos disponibles';
+                }
+                break;
+            case 'cantidadSuscripciones':
+                if ($result['dataset'] = $producto->cantidadSuscripciones()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay suscripciones disponibles';
+                }
+                break;
+            case 'readTopProductos':
+                if ($result['dataset'] = $producto->readTopProductos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay productos registrados';
                 }
                 break;
             default:

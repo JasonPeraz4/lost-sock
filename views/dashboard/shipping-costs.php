@@ -44,12 +44,12 @@ Page::headerTemplate('Gestión de costos de envio', null);
             <p>Ingresa el nombre del departamento y el costo de envio</p>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="departamento">Cantidad de pares</label>
-                    <input type="text" class="form-control" placeholder="Departamaento" id="departamento" name="departamento">
+                    <label for="departamento">Departamento</label>
+                    <input type="text" class="form-control" placeholder="Departamaento" id="departamento" name="departamento" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="costoenvio">Costo de envio</label>
-                    <input type="text" class="form-control" placeholder="Costo de envio($)" id="costoenvio" name="costoenvio">
+                    <input type="text" class="form-control" placeholder="Costo de envio($)" id="costoenvio" name="costoenvio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
                 </div>
             </div>            
         </div>

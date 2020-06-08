@@ -43,7 +43,7 @@ Page::headerTemplate('Gestión de frecuencias de envío', null);
             <p>Ingresa la frecuencia de envio</p>
             <div class="form-group">
                 <label for="frecuencia">Frecuencia de envío</label>
-                <input type="text" class="form-control" placeholder="Ej: Semanalmente" id="frecuencia" name="frecuencia">
+                <input type="text" class="form-control" placeholder="Ej: Semanalmente" id="frecuencia" name="frecuencia" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
             </div>
         </div>
         <div class="modal-footer">

@@ -42,21 +42,21 @@ Page::headerTemplate('Gestión de administradores', null);
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombres">Nombres</label>
-                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos">
+                    <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email" title="Solo se permiten direcciones de correo válidas">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario">
+                    <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" pattern="^[a-z0-9_-]{3,15}$" title="Solo se permiten letras, y los caracteres - y _">
                 </div>   
             </div>
             <div class="form-row">
