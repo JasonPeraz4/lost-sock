@@ -8,9 +8,9 @@ Page::headerTemplate('Gestión de comentarios', null);
         <!-- Textbox de búsqueda -->
         <h3 class="mr-md-3">Comentarios</h3>
         <!-- Grupo de dropdowns -->
-        <div class="d-flex flex-row my-2 my-md-0">
+        <!-- <div class="d-flex flex-row my-2 my-md-0"> -->
             <!-- Dropdown filtrar por estado -->
-            <div class="dropdown mx-md-2">
+            <!-- <div class="dropdown mx-md-2">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ordenar por
                 </button>
@@ -19,7 +19,7 @@ Page::headerTemplate('Gestión de comentarios', null);
                     <a class="dropdown-item" href="#">Antiguos</a>
                 </div>
             </div>   
-        </div>
+        </div> -->
     </div>
 </div>
 <div id="page-content">
