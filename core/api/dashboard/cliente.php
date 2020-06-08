@@ -33,6 +33,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cliente no válido';
                 }
                 break;
+            case 'readSuscripciones':
+                if ( $plan->setIdCliente( $_POST[ 'idcliente' ] ) ) {
+                    if ( $result[ 'dataset' ] = $plan->readSuscripcionesCliente() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Cliente no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Cliente no válido';
+                }
+                break;
             case 'status':
                 if ( $plan->setEstado( $_POST[ 'estado' ] ) && $plan->setIdCliente( $_POST[ 'id' ] ) ) {
                     if ( $result[ 'dataset' ] = $plan->disableCliente() ) {
