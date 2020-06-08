@@ -6,19 +6,6 @@ Page::headerTemplate('Pedidos', null);
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
         <h3 class="mr-md-3">Pedidos</h3>
-        <!-- Grupo de dropdowns -->
-        <div class="d-flex flex-row my-2 my-md-0">
-            <!-- Dropdown filtrar por estado -->
-            <div class="dropdown mx-md-2">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Estado
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Habilitado</a>
-                    <a class="dropdown-item" href="#">Deshabilitado</a>
-                </div>
-            </div>  
-        </div>
     </div>
 </div>
 <table id="myTable" class="table table-responsive-sm table-hover">

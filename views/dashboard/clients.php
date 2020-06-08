@@ -4,13 +4,9 @@ Page::headerTemplate('Clientes', null);
 ?>
 
 <div class="d-flex flex-column mb-3">
-    <div class="d-flex flex-wrap">
-        <!-- Textbox de búsqueda -->
+    <div class="d-flex flex-row align-items-center">
         <h3 class="mr-md-3">Clientes</h3>
-        <!-- Grupo de dropdowns -->
-        <div class="d-flex flex-row my-2 my-md-0">
     </div>
-</div>
 <table id="cliente-table" class="table table-responsive-sm table-hover">
     <thead>
         <tr>

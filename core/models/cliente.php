@@ -134,7 +134,7 @@ class Cliente extends Validator{
         return Database::getRows($sql, $params);
     }
 
-    public function readOneSuscripcion()
+    public function readOneCliente()
     {
         $sql = 'SELECT nombres, apellidos, email, telefono, usuario FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
@@ -145,8 +145,8 @@ class Cliente extends Validator{
     {
         $sql = 'UPDATE cliente 
                 SET estado = ?
-                WHERE idSuscripcion = ?';
-        $params = array($this->estado, $this->idSuscripcion);
+                WHERE idCliente = ?';
+        $params = array($this->estado, $this->idCliente);
         return Database::executeRow($sql, $params);
     }
     
