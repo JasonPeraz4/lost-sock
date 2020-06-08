@@ -6,6 +6,7 @@ class Cliente extends Validator{
     // 
     private $idCliente = null; 
     private $nombres = null;
+    private $estado = null;
     private $apellidos = null; 
     private $email = null;
     private $telefono = null; 
@@ -129,24 +130,39 @@ class Cliente extends Validator{
 /*Función para realizar un select de todos los clientes*/
     public function readAllCliente()
     {
-        $sql = 'SELECT nombres, apellidos, email, telefono, usuario FROM cliente';
+        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario, estado FROM cliente';
         $params = null;
         return Database::getRows($sql, $params);
     }
 
-    public function readOneSuscripcion()
+    public function readOneCliente()
     {
-        $sql = 'SELECT nombres, apellidos, email, telefono, usuario FROM cliente WHERE idcliente = ?';
+        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         return Database::getRow($sql, $params);
+    }
+    public function readSuscripcionesCliente()
+    {
+        $sql = 'SELECT s.idsuscripcion, tl.talla, f.frecuencia, ct.categoria, tp.tipo, ps.precio, 
+                dp.costoenvio
+                FROM suscripcion s 
+                JOIN talla tl USING(idtalla)
+                JOIN categoria ct USING(idcategoria)
+                JOIN plansuscripcion ps USING(idplansuscripcion)
+                JOIN tipoproducto tp USING(idtipoproducto)
+                JOIN frecuencia f USING(idfrecuencia)
+                JOIN direccion dr USING(iddireccion)
+                JOIN departamento dp USING(iddepartamento) WHERE s.idcliente = ?';
+        $params = array($this->idCliente);
+        return Database::getRows($sql, $params);
     }
 
     public function disableCliente()
     {
         $sql = 'UPDATE cliente 
                 SET estado = ?
-                WHERE idSuscripcion = ?';
-        $params = array($this->estado, $this->idSuscripcion);
+                WHERE idcliente = ?';
+        $params = array($this->estado, $this->idCliente);
         return Database::executeRow($sql, $params);
     }
     

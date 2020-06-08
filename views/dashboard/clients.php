@@ -35,7 +35,7 @@ Page::headerTemplate('Clientes', null);
                 </button>
             </div>
             <div class="modal-body p-md-4">
-                <table id="cliente-table" class="table table-responsive-sm table-hover">
+                <table id="suscripciones-table" class="table table-responsive-sm table-hover">
                     <thead>
                         <tr>
                             <th>Categoría</th>
@@ -45,7 +45,7 @@ Page::headerTemplate('Clientes', null);
                             <th>Plan</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody-rows" class="table-bordered">
+                    <tbody id="tbody-suscripcion-rows" class="table-bordered">
                         <tr>
                             <td>${row.categoria}</td>
                             <td>${row.tipo}</td>

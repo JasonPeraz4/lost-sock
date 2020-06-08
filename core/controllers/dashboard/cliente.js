@@ -30,7 +30,7 @@ function fillTable(dataset) {
                 <td>${row.usuario}</td>
                 <td>${txt}</td>
                 <td>
-                    <i class="fas fa-info mx-1" onclick="openUpdateModal(${row.idcliente})"></i>
+                    <i class="fas fa-info mx-1" onclick="openSuscripciones(${row.idcliente})"></i>
                     <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"></i>
                 </td>
             </tr>
@@ -86,39 +86,40 @@ function updateEstado(estado, id) {
             }
         });
 }
-function openUpdateModal(id) {
+function openSuscripciones(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#cliente-form')[0].reset();
+    $('#tbody-suscripcion-rows').html('');
     $('#cliente-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
     $('#modal-title').text('Suscripciones');
 
     $.ajax({
         dataType: 'json',
-        url: API_CLIENTE + 'readOne',
+        url: API_CLIENTE + 'readSuscripciones',
         data: { idcliente: id },
         type: 'post'
     })
         .done(function (response) {
             // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
             if (response.status) {
-                // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-                $('#nombres').val(response.dataset.nombres);
-                $('#apellidos').val(response.dataset.apellidos);
-                $('#detalledireccion').val(response.dataset.detalledireccion);
-                $('#detalledepartamentoo').val(response.dataset.departamento);
-                $('#frecuencia').val(response.dataset.frecuencia);
-                $('#costoenvio').val(response.dataset.costoenvio);
-                $('#tipoproducto').val(response.dataset.tipo);
-                $('#categoria').val(response.dataset.categoria);
-                $('#estado').val(+response.dataset.estado ? 'Activo' : 'Inactivo');
-                $('#talla').val(response.dataset.talla);
-                $('#cantidad').val(response.dataset.cantidadpares);
-                $('#precio').val(response.dataset.precio);
-                $('#total').val((+response.dataset.precio + +response.dataset.costoenvio));
+                let content = '';
+                // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+                response.dataset.forEach(function (row) {
+                    content += `
+                        <tr>
+                            <td>${row.categoria}</td>
+                            <td>${row.tipo}</td>
+                            <td>${row.talla}</td>
+                            <td>${row.frecuencia}</td>
+                            <td>${(row.precio * 1) + (row.costoenvio * 1)} </td>
+                        </tr>
+                    `;
+                });
+                $('#tbody-suscripcion-rows').html(content);
+                // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
 
             } else {
-                sweetAlert(2, response.exception, null);
+                $('#tbody-suscripcion-rows').html('No hay registros');
             }
         })
         .fail(function (jqXHR) {
