@@ -217,6 +217,24 @@ class Validator
         }
     }
 
+     /*
+    *   Método para validar una cadena de tipo date que puede incluir - y / 
+    *
+    *   Parámetros: $value (dato a validar)
+    *   
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+
+    public function validateDate($value)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (preg_match('/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Método para validar un dato monetario.
     *

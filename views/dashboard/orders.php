@@ -8,7 +8,7 @@ Page::headerTemplate('Pedidos', null);
         <h3 class="mr-md-3">Pedidos</h3>
     </div>
 </div>
-<table id="myTable" class="table table-responsive-sm table-hover">
+<table id="orden-table" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
             <th>No.°</th>
@@ -24,26 +24,6 @@ Page::headerTemplate('Pedidos', null);
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
-        <tr>
-            <td>50</td>
-            <td>
-                <div>Calcetines navideños</div>
-            </td>
-            <td>
-                <div>02-02-2020</div>
-                <div>Sin entregar</div>
-            </td>
-            <td>$15.20</td>
-            <td>Enviada</td>
-            <td>
-                <div>Ana Laura</div>
-                <div>Navas Cañas</div>
-            </td>
-            <td>
-                <i class="fas fa-info mx-1" data-toggle="modal" data-target="#myModal"></i>
-                <i class="fas fa-eye-slash" onclick="openCancelModal()"></i>
-            </td>
-        </tr>
     </tbody>
 </table>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="suscripcion-modal"
@@ -147,6 +127,6 @@ Page::headerTemplate('Pedidos', null);
     </div>
 </div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('orden.js');
 ?>
 
