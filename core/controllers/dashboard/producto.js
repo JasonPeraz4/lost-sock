@@ -32,9 +32,9 @@ function fillTable( dataset )
                 <td>${row.tipo}</td>
                 <td><a class="text-success" href="#" onclick="openExistModal(${row.idproducto})">Ver existencias</a></td>
                 <td>
-                    <i class="fas fa-comments" onclick="openCommentsModal(${row.idproducto})" data-toggle="tooltip" title="Comentarios"></i>
-                    <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idproducto})" data-toggle="tooltip" title="Editar"></i>
-                    <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idproducto})" data-toggle="tooltip" title="Eliminar"></i>
+                    <a href="comentarios.php?id=${row.idproducto}"><i class="fas fa-comments" data-toggle="tooltip" title="Comentarios"></i></a>
+                    <i class="fas fa-edit mx-1 text-warning" onclick="openUpdateModal(${row.idproducto})" data-toggle="tooltip" title="Editar"></i>
+                    <i class="fas fa-trash-alt text-danger" onclick="openDeleteDialog(${row.idproducto})" data-toggle="tooltip" title="Eliminar"></i>
                 </td>
             </tr>
         `;

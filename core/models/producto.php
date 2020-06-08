@@ -14,6 +14,8 @@ class Producto extends Validator
     private $idTipoProducto = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/producto/';
+    private $idComentario = null;
+    private $estado = null;
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -60,7 +62,7 @@ class Producto extends Validator
 
     public function setDescuento($value)
     {
-        if ($this->validateNaturalNumber($value)) {
+        if (($value%1) == 0 && ($value%100) == 0 && $value>=0 && $value < 100 ) {
             $this->descuento = $value;
             return true;
         } else {
@@ -88,7 +90,21 @@ class Producto extends Validator
         }
     }
 
-   
+    public function setIdComentario($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idComentario = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setEstadoComentario($value)
+    {
+        $this->estado = $value;
+            return true;
+    }
 
     /*
     *   Métodos para obtener valores de los atributos.
@@ -175,5 +191,20 @@ class Producto extends Validator
         return Database::executeRow( $sql, $params );
     }
 
+    public function readComentarios()
+    {
+        $sql = 'SELECT idcomentario, nombres, apellidos, comentario, fecha, calificacion, estado 
+                FROM comentario INNER JOIN detalleCompra dC USING(iddetallecompra) INNER JOIN compra USING(idcompra) INNER JOIN cliente USING(idcliente) 
+                WHERE dC.idproducto = ? ORDER BY fecha DESC;';
+        $params = array( $this->idProducto );
+        return Database::getRows( $sql, $params );
+    }
+
+    public function deleteComentario()
+    {
+        $sql = 'UPDATE comentario SET estado = ? WHERE idcomentario = ?';
+        $params = array( 0, $this->idComentario );
+        return Database::executeRow( $sql, $params );
+    }
 }
 ?>

@@ -281,3 +281,7 @@ ul ul a {
     outline: none!important;
     box-shadow: none!important;
 }
+
+.img-avatar{
+    width: 60px;
+}
