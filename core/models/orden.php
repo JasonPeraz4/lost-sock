@@ -170,14 +170,14 @@ class Orden extends Validator{
         return Database::getRow($sql, $params);
     }
 
-    // public function disableOrden()
-    // {
-    //     $sql = 'UPDATE detalleOrden 
-    //             SET estado = ?
-    //             WHERE idCompra = ?';
-    //     $params = array($this->estado, $this->idDetalleCompra);
-    //     return Database::executeRow($sql, $params);
-    // }
+    public function disableOrden()
+    {
+         $sql = 'UPDATE detalleOrden 
+                 SET estado = ?
+                 WHERE idCompra = ?';
+         $params = array($this->estado, $this->idDetalleCompra);
+         return Database::executeRow($sql, $params);
+     }
     
 }
 ?>
