@@ -193,9 +193,9 @@ class Producto extends Validator
 
     public function readComentarios()
     {
-        $sql = 'SELECT idcomentario, nombres, apellidos, comentario, fecha, calificacion, estado 
+        $sql = 'SELECT idcomentario, nombres, apellidos, comentario, fecha, calificacion, comentario.estado 
                 FROM comentario INNER JOIN detalleCompra dC USING(iddetallecompra) INNER JOIN compra USING(idcompra) INNER JOIN cliente USING(idcliente) 
-                WHERE dC.idproducto = ? ORDER BY fecha DESC;';
+                WHERE dC.idproducto = ? ORDER BY fecha DESC';
         $params = array( $this->idProducto );
         return Database::getRows( $sql, $params );
     }
@@ -209,37 +209,37 @@ class Producto extends Validator
 
     public function cantidadVentas()
     {
-        $sql = `SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
+        $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
                 FROM compra GROUP BY date_part('month', fechaCompra)
-                `;
+                ";
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function cantidadPedidos()
     {
-        $sql = `SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
+        $sql = "SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
                 FROM compra WHERE fechacompra BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
-                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)";
         $params = null;
         return Database::getRow( $sql, $params );
     }
 
     public function cantidadSuscripciones()
     {
-        $sql = `SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
+        $sql = "SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
                 INNER JOIN planSuscripcion USING(idplansuscripcion) WHERE fecha
                 BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
-                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)";
         $params = null;
         return Database::getRow( $sql, $params );
     }
 
     public function readTopProductos()
     {
-        $sql = 'SELECT SUM(cantidad) AS cantidad, nombre, SUM(producto.precio*cantidad) AS ganancia 
+        $sql = "SELECT SUM(cantidad) AS cantidad, nombre, SUM(producto.precio*cantidad) AS ganancia 
                 FROM detalleCompra INNER JOIN producto USING(idproducto) 
-                GROUP BY nombre ORDER BY SUM(cantidad) DESC LIMIT 5';
+                GROUP BY nombre ORDER BY SUM(cantidad) DESC LIMIT 5";
         $params = null;
         return Database::getRows( $sql, $params );
     }
