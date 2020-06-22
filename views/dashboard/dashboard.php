@@ -33,9 +33,9 @@ Page::headerTemplate('Dashboard', null);
             </div>
         </div>
     </div>
-    <div class="col-md-7 border">
+    <div class="col-md-7">
         <h5 class="mb-2">Ventas mensuales</h5>
-        <canvas id="chVentas"></canvas>
+        <canvas id="chVentas" class="border p-2"></canvas>
     </div>
 </div>
 <div class="row mt-3">
