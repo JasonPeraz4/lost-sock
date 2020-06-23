@@ -12,6 +12,7 @@ class Producto extends Validator
     private $precio = null;
     private $idCategoria = null;
     private $idTipoProducto = null;
+    private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/producto/';
     private $idComentario = null;
@@ -62,7 +63,7 @@ class Producto extends Validator
 
     public function setDescuento($value)
     {
-        if (($value%1) == 0 && ($value%100) == 0 && $value>=0 && $value < 100 ) {
+        if (($value%1) == 0 && $value >= 0 && $value < 100 ) {
             $this->descuento = $value;
             return true;
         } else {
@@ -106,6 +107,17 @@ class Producto extends Validator
             return true;
     }
 
+    public function setImagen($file)
+    {
+        if ($this->validateImageFile($file, 500, 500)) {
+            $this->imagen = $this->getImageName();
+            $this->archivo = $file;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -144,22 +156,34 @@ class Producto extends Validator
         return $this->idTipoProducto;
     }
 
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function getRuta()
+    {
+        return $this->ruta;
+    }
     /*
     *   Métodos para realizar las operaciones CRUD (search, create, read, update, delete).
     */
     
     public function createProducto()
-    {
-        $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, idCategoria, idTipoProducto)
-                VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto );
-        return Database::executeRow( $sql, $params );
-       
+    {   
+        if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
+            $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto)
+                VALUES(?, ?, ?, ?, ?, ?, ?)';
+            $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->imagen, $this->idCategoria, $this->idTipoProducto );
+            return Database::executeRow( $sql, $params );
+        } else {
+            return false;
+        }
     }
 
     public function readAllProductos()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, categoria, tipo
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, categoria, tipo
                 FROM producto INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
                 ORDER BY idProducto';
         $params = null;
@@ -168,7 +192,7 @@ class Producto extends Validator
 
     public function readProducto()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, idCategoria, idTipoProducto
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto
                 FROM producto
                 WHERE idProducto = ?';
         $params = array( $this->idProducto );
@@ -176,10 +200,17 @@ class Producto extends Validator
     }
 
     public function updateProducto(){
-        $sql = 'UPDATE producto 
-                SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
-                WHERE idProducto = ?';
-        $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
+            $sql = 'UPDATE producto 
+                    SET imagen = ?, nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    WHERE idProducto = ?';
+            $params=array( $this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        } else {
+            $sql = 'UPDATE producto 
+                    SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    WHERE idProducto = ?';
+            $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        }
         return Database::executeRow( $sql, $params );
     }
 
@@ -200,10 +231,10 @@ class Producto extends Validator
         return Database::getRows( $sql, $params );
     }
 
-    public function deleteComentario()
+    public function disableComentario()
     {
         $sql = 'UPDATE comentario SET estado = ? WHERE idcomentario = ?';
-        $params = array( 0, $this->idComentario );
+        $params = array( $this->estado, $this->idComentario );
         return Database::executeRow( $sql, $params );
     }
 

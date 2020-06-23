@@ -22,6 +22,7 @@ function fillTable( dataset )
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
+                <td><img src="../../resources/img/producto/${row.imagen}" alt="${row.imagen}" class="mr-3 rounded-circle img-avatar"></td>
                 <td>${row.nombre}</td>
                 <td>${row.descripcion}</td>
                 <td>
@@ -61,7 +62,7 @@ function openCreateModal()
     // Se asigna el título para la caja de dialogo (modal).
     $( '#modal-title' ).text( 'Agregar producto' );
     // Se establece el campo de tipo archivo como obligatorio.
-    //$( '#foto_administrador' ).prop( 'required', true );
+    $( '#imagen' ).prop( 'required', true );
     // Se llama a la función que llenar los select del formulario. Se encuentra en el archivo components.js
     fillSelect( API_CATEGORIA, 'categoria_producto', null );
     fillSelect( API_TIPOPRODUCTO, 'tipo_producto', null );
@@ -77,7 +78,7 @@ function openUpdateModal( id )
     // Se asigna el título para la caja de dialogo (modal).
     $( '#modal-title' ).text( 'Actualizar producto' );
     // Se establece el campo de tipo archivo como opcional.
-    // $( '#archivo_producto' ).prop( 'required', false );
+    $( '#imagen' ).prop( 'required', false );
 
     $.ajax({
         dataType: 'json',

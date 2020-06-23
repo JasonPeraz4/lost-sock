@@ -75,6 +75,7 @@ CREATE TABLE producto(
 	descripcion VARCHAR(200) NOT NULL,
 	precio NUMERIC (5,2) NOT NULL,
 	descuento NUMERIC(2) DEFAULT '0',
+	imagen VARCHAR(50) DEFAULT 'default.png',
 	idCategoria INTEGER REFERENCES categoria(idCategoria),
 	idTipoProducto INTEGER REFERENCES tipoProducto(idTipoProducto)
 );
@@ -99,13 +100,6 @@ CREATE TABLE compra(
 CREATE TABLE color(
 	idColor SERIAL PRIMARY KEY,
 	color VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE imagenProducto(
-	idImagenProducto SERIAL PRIMARY KEY,
-	imagen VARCHAR(200) NOT NULL,
-	idColor INTEGER REFERENCES color(idColor),
-	idProducto INTEGER REFERENCES producto(idProducto)
 );
 
 CREATE TABLE detalleCompra(
@@ -144,54 +138,6 @@ CREATE TABLE suscripcion(
 	idTipoProducto INTEGER REFERENCES tipoProducto(idTipoProducto),
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
 );
-
-/*
-* Función que crea el detalle de un producto por cada talla registrada
-*/
-CREATE OR REPLACE FUNCTION crearDetalleProducto() 
-RETURNS TRIGGER AS $$
-DECLARE
-	rec RECORD;
-	query text;
-BEGIN
-	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, $1, (SELECT idproducto FROM producto ORDER BY idproducto DESC LIMIT 1))';
-    FOR rec IN SELECT idtalla FROM talla ORDER BY idtalla 
-    LOOP 
-	RAISE NOTICE '%', rec.idtalla;
-	EXECUTE query USING rec.idtalla;
-    END LOOP;
-	RETURN null;
-END;
-$$ LANGUAGE plpgsql;
-
-/*
-* Disparador que ejecuta la función crearDetalleProducto
-*/
-CREATE TRIGGER crearDetalleProducto AFTER INSERT ON producto
-FOR EACH ROW EXECUTE PROCEDURE crearDetalleProducto();
-/*
-* Función que crea el detalle con la nueva talla por cada producto existente
-*/
-CREATE OR REPLACE FUNCTION actualizarDetalleProducto() 
-RETURNS TRIGGER AS $$
-DECLARE
-	rec RECORD;
-	query text;
-BEGIN
-	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, (SELECT idtalla FROM talla ORDER BY idtalla DESC LIMIT 1), $1)';
-    FOR rec IN SELECT DISTINCT idproducto FROM detalleProducto ORDER BY idproducto
-    LOOP 
-	RAISE NOTICE '%', rec.idproducto;
-	EXECUTE query USING rec.idproducto;
-    END LOOP;
-	RETURN null;
-END;
-$$ LANGUAGE plpgsql;
-/*
-* Disparador que se activa luego de agregar una talla y agrega un detalle para cada prdoducto existente
-*/
-CREATE TRIGGER actualizarDetalleProducto AFTER INSERT ON talla
-FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();
 
 -- Función requerida para que se muestre el mes a partir de la fecha
 
@@ -283,26 +229,26 @@ VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
 		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
 		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 		
-INSERT INTO producto VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, DEFAULT, 1, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, DEFAULT, 2, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, DEFAULT, 3, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, DEFAULT, 5, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, DEFAULT, 1, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, DEFAULT, 3, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, DEFAULT, 3, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, DEFAULT, 2, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, DEFAULT, 2, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, DEFAULT, 5, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, DEFAULT, 2, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, DEFAULT, 4, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, DEFAULT, 2, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, DEFAULT, 4, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, DEFAULT, 2, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, DEFAULT, 5, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, DEFAULT, 2, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, DEFAULT, 3, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, DEFAULT, 3, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, DEFAULT, 5, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, DEFAULT, DEFAULT, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, DEFAULT, DEFAULT, 2, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, DEFAULT, DEFAULT, 3, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, DEFAULT, DEFAULT, 5, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, DEFAULT, DEFAULT, 1, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, DEFAULT, DEFAULT, 3, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, DEFAULT, DEFAULT, 3, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, DEFAULT, DEFAULT, 2, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, DEFAULT, DEFAULT, 2, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, DEFAULT, DEFAULT, 5, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, DEFAULT, DEFAULT, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, DEFAULT, DEFAULT, 4, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, DEFAULT, DEFAULT, 2, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, DEFAULT, DEFAULT, 4, 3);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, DEFAULT, DEFAULT, 2, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, DEFAULT, DEFAULT, 5, 5);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, DEFAULT, DEFAULT, 2, 2);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, DEFAULT, DEFAULT, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, DEFAULT, DEFAULT, 3, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, DEFAULT, DEFAULT, 5, 4);
 		
 		
 INSERT INTO compra
@@ -523,7 +469,6 @@ SELECT * FROM producto;
 SELECT * FROM detalleProducto;
 SELECT * FROM compra;
 SELECT * FROM color;
-SELECT * FROM imagenProducto;
 SELECT * FROM detalleCompra;
 SELECT * FROM comentario;
 SELECT * FROM suscripcion;
@@ -648,3 +593,52 @@ FROM compra GROUP BY date_part('month', fechaCompra);
 
 SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS "Plan", concat('$',SUM(precio)) AS "Ganancia" FROM suscripcion s 
 JOIN planSuscripcion pS ON s.idPlanSuscripcion = pS.idPlanSuscripcion GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')
+
+
+/*
+* Función que crea el detalle de un producto por cada talla registrada
+*/
+CREATE OR REPLACE FUNCTION crearDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, $1, (SELECT idproducto FROM producto ORDER BY idproducto DESC LIMIT 1))';
+    FOR rec IN SELECT idtalla FROM talla ORDER BY idtalla 
+    LOOP 
+	RAISE NOTICE '%', rec.idtalla;
+	EXECUTE query USING rec.idtalla;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
+
+/*
+* Disparador que ejecuta la función crearDetalleProducto
+*/
+CREATE TRIGGER crearDetalleProducto AFTER INSERT ON producto
+FOR EACH ROW EXECUTE PROCEDURE crearDetalleProducto();
+/*
+* Función que crea el detalle con la nueva talla por cada producto existente
+*/
+CREATE OR REPLACE FUNCTION actualizarDetalleProducto() 
+RETURNS TRIGGER AS $$
+DECLARE
+	rec RECORD;
+	query text;
+BEGIN
+	query := 'INSERT INTO detalleProducto (existencia, idTalla, idProducto) VALUES ( 0, (SELECT idtalla FROM talla ORDER BY idtalla DESC LIMIT 1), $1)';
+    FOR rec IN SELECT DISTINCT idproducto FROM detalleProducto ORDER BY idproducto
+    LOOP 
+	RAISE NOTICE '%', rec.idproducto;
+	EXECUTE query USING rec.idproducto;
+    END LOOP;
+	RETURN null;
+END;
+$$ LANGUAGE plpgsql;
+/*
+* Disparador que se activa luego de agregar una talla y agrega un detalle para cada prdoducto existente
+*/
+CREATE TRIGGER actualizarDetalleProducto AFTER INSERT ON talla
+FOR EACH ROW EXECUTE PROCEDURE actualizarDetalleProducto();

@@ -34,15 +34,13 @@ function readComentarios( id )
             let content = '';
             // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
             response.dataset.forEach(function( row ) {
-                ( row.estado == 1 ) ? txt = row.comentario : txt = 'Este comentario ha sido eliminado.';
-                ( row.estado == 1 ) ? dnone = '' : dnone = ' d-none';
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 content += `
                     <div class="media border p-3 mb-3">
                         <img src="../../resources/img/clientes/default.png" alt="John Doe" class="mr-3 rounded-circle img-avatar">
                         <div class="media-body">
-                            <h4>${row.nombres} ${row.apellidos} <small><i>Publicado el ${row.fecha}</i></small> <i class="fas fa-ban ml-5 text-danger${dnone}" onclick="openDeleteDialog(${row.idcomentario})" data-toggle="tooltip" title="Eliminar"></i></h4>
-                            <p>${txt}</p>
+                            <h4>${row.nombres} ${row.apellidos} <small><i>Publicado el ${row.fecha}</i></small> <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcomentario})"  data-toggle="tooltip" title="Estado"></i></h4>
+                            <p>${row.comentario}</p>
                         </div>
                     </div>
                 `;
@@ -64,47 +62,29 @@ function readComentarios( id )
 }
 
 // Función para establecer el registro a eliminar mediante el id recibido.
-function openDeleteDialog( id )
-{
-    swal({
-        title: 'Advertencia',
-        text: '¿Estas seguro que deseas deshabilitar este comentario?',
-        icon: 'warning',
-        buttons: ['Cancelar', 'Aceptar'],
-        closeOnClickOutside: false,
-        closeOnEsc: false
+function updateEstado(estado, id) {
+    $.ajax({
+        dataType: 'json',
+        url: API_PRODUCTO + 'estadoComentario',
+        data: { estado: estado, id: id },
+        type: 'post'
     })
-    .then(function( value ) {
-        // Se verifica si fue cliqueado el botón Aceptar para hacer la petición de borrado, de lo contrario no se hace nada.
-        if ( value ) {
-            $.ajax({
-                type: 'post',
-                url: API_PRODUCTO + 'deleteComentario',
-                data: { idcomentario: id },
-                dataType: 'json'
-            })
-            .done(function( response ) {
-                // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
-                if ( response.status ) {
-                    // Se busca en la URL las variables (parámetros) disponibles.
-                    let params = new URLSearchParams( location.search );
-                    // Se obtienen los datos localizados por medio de las variables.
-                    const ID = params.get( 'id' );
-                    // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro.
-                    readComentarios( ID );
-                    sweetAlert( 1, response.message, null );
-                } else {
-                    sweetAlert( 2, response.exception, null );
-                }
-            })
-            .fail(function( jqXHR ) {
-                // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
-                if ( jqXHR.status == 200 ) {
-                    console.log( jqXHR.responseText );
-                } else {
-                    console.log( jqXHR.status + ' ' + jqXHR.statusText );
-                }
-            });
-        }
-    });
+        .done(function (response) {
+            // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+            if (response.status) {
+                sweetAlert(1, response.message, null);
+                const ID = params.get( 'id' );
+                readComentarios( ID );
+            } else {
+                sweetAlert(2, response.exception, null);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+            if (jqXHR.status == 200) {
+                console.log(jqXHR.responseText);
+            } else {
+                console.log(jqXHR.status + ' ' + jqXHR.statusText);
+            }
+        });
 }
