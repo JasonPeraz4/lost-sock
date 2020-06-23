@@ -11,7 +11,7 @@ Page::headerTemplate('Hombres');
         <!-- Grupo de cards para productos -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -76,7 +76,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -141,7 +141,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -206,7 +206,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -273,7 +273,7 @@ Page::headerTemplate('Hombres');
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -338,7 +338,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -403,7 +403,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -468,7 +468,7 @@ Page::headerTemplate('Hombres');
                             </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product--detail custom--card">
                         <img class="card-img-top" src="../../resources/img/socks.jpg" alt="Card image cap">
                         <div class="card-body">
@@ -527,14 +527,14 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" data-toggle="modal" data-target="#myModal">Agregar al carrito</button>
                                     </div>
                                 </div>
                             </div>
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>      
 <?php
 Page::footerTemplate();
 ?>
