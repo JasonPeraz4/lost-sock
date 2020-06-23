@@ -1,0 +1,490 @@
+
+/*Se aplica a todas las etiqueta a, para que no tengan decoración en ninguno de estos estados*/
+a, a:hover, a:active, a:link, a:visited{
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+/*Se aplica a la clase menu-toggle*/
+.menu-toggle{
+	background-color: white;
+	position: relative;
+	z-index: 10;
+    width: 100%;
+    padding: 1.5rem;
+	cursor: pointer;
+	outline: none;
+	display: none;
+}
+
+.fa-times{
+	display: none;
+	cursor: pointer;
+}
+
+/*Se aplica a la etiqueta nav*/
+nav{
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom:none;
+	z-index: 1080;
+	background-color: white;
+	height: 80px;
+}
+
+/*Ajustes del logo*/
+.logo{
+	width: 5.3rem;
+	box-sizing: content-box;
+	padding-left: 2rem;
+}
+
+/*Ajustes de la imagen en el logo*/
+.logo img{
+	display: block;
+	width: 100%;
+	min-width: 100px;
+}
+
+/*Se aplica a las listas no-ordenadas del nav*/
+nav ul{
+	height: 80px;
+	list-style: none;
+	display: flex;
+}
+
+/*Se aplica a las listas no ordenadas que contentan la etiqueta li*/
+nav ul li{
+	padding: 0 1.3rem;
+	line-height: 5.3rem;
+	transition: background-color .5s;
+	color: gray;
+}
+
+/*Hover del menú*/
+nav ul li:hover{
+	background-color: rgba(0, 0, 0, .075);
+	color: black;
+}
+
+/*Hover para los íconos del menú*/
+nav ul li i:hover{
+	color: #000000;
+}
+
+/*Configurando bordes y márgenes para cada ítem dentro del nav*/
+.nav-right {
+	height: 80px;
+} 
+
+.nav-middle{
+	height: 80px;
+} 
+
+.nav-right i{
+	margin-right: 0.6rem;
+}
+
+.nav-right i:first-child{
+	margin-right: 0;
+}
+
+.product-info{
+	display: flex;
+	float: left;
+	width: 50%;
+	margin: 0 auto;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+	transform: translateY(70%);
+}
+
+.product-info p{
+	margin-bottom: 2.67rem;
+	font-weight: 600;
+}
+
+.product-slider{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	overflow-x: scroll;
+	z-index: 100;
+}
+
+.product-slider-container{
+	display: flex;
+}
+
+.product-slider-card{
+	min-width: 265px;
+	height: 100px;
+	margin-right: 1.99rem;
+    border-radius: 20px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 6px 6px 15px 0px rgba(0,0,0,0.075);
+}
+.product-slider-card .card-img{
+	min-height: 100%;
+    object-fit: cover;
+}
+.product-slider-card .card-title{
+    text-transform: uppercase;
+}
+
+footer .logo{
+	width: 6.67rem;
+    float: right;
+    padding: 0;
+}
+
+.bg-image {
+  background-image: url('../../resources/img/background.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.login--image {
+  background-image: url('../../resources/img/back.jfif');
+  background-size: cover;
+  background-position: center center;
+}
+
+.cover-image {
+  background-image: url('../../resources/img/cover.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.cover--about {
+  background-image: url('../../resources/img/about.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+
+@-webkit-keyframes opacity {
+	0%{
+	opacity: 0;
+	-webkit-transform: scale(3);
+	transform: scale(3); 
+}
+
+	100%{
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		} 
+}
+
+@keyframes opacity {
+	0%{
+	opacity: 0;
+	-webkit-transform: scale(3);
+	transform: scale(3); 
+	}
+
+	100% {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1); 
+	} 
+}
+
+.cover-general{
+	margin-top: 80px;
+}
+
+.cover-sizing{
+	height: 100vh;
+}
+
+.cover--sizing{
+	height: calc(100vh + 70px);
+}
+
+.cover-sizing h1{
+	color: gray;
+}
+
+.jumbotron-cover{
+	min-height: 200px;
+}
+
+.jumbotron-suscripcion{
+	height: 570px;
+}
+
+.jumbotron-suscripcion h1{
+	color: white;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-family: 'Popins', sans-serif;
+}
+
+@media screen and (max-width: 1200px){
+	
+	.product-info h1{
+		font-size: 2.33rem;
+		margin-bottom: 1.33rem;
+				letter-spacing: 5px;
+
+	}
+
+	.product-info p{
+		font-size: 1rem;
+		margin-bottom: 1.33rem;
+	}
+
+	.product-info h2{
+		font-size: 1.33rem;
+
+	}
+
+	.btn.btn-product-info{
+		padding: 1rem;
+		font-size: 0.67rem;
+	}
+
+}
+
+@media screen and (max-width: 900px){
+	.logo{
+		padding-left: 1rem;
+	}
+
+	.nav ul{
+		height: 3.33rem;
+		font-size: 0.93rem;
+	}
+
+	.nav ul li{
+		padding: 0 1rem;
+		line-height: 3.33rem;
+	}
+    
+}
+
+
+@media screen and (max-width: 840px){
+	nav{
+        display: flex;
+        position: absolute;
+		border-bottom: none;
+		flex-direction: column;
+		top: 0; /*Nuevo*/
+		width: 0px;
+		height: 100vh;
+		background-color: #f7f7f6;
+		justify-content: space-evenly;
+		transition: transform .5s, width .5s linear;
+		
+	}
+
+	nav > *{
+		display: none;
+	}
+	nav.menu-opened{
+		width: 16.67rem;
+	}
+	nav.menu-opened > *{
+		display: block;
+	}
+
+	nav ul{
+		height: auto;
+		display: block;
+		font-size: 1.33rem;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	.nav-middle,	.nav-right{
+		height: auto;
+	}
+	.close-icon{
+		display: block;
+	}
+
+	nav ul li{
+		padding: 0;
+		line-height: initial;
+		margin-bottom: 1.33rem;
+	}
+
+	.logo{
+		padding: 0;
+	}
+
+	.nav-right ul li,
+	.nav-right ul li:nth-last-child(1){
+		border: none;
+	}
+
+	.menu-toggle{
+		display: flex;
+	}
+
+	.fa.times{
+		display: block;
+		position: absolute;
+		top: 4.67rem;
+		right: 1.33rem;
+	}
+
+	.active{
+		transform: translateX(0);
+	}
+
+	.overlay{
+		position: absolute;
+		width: 0;
+		top: 0; /*Nuevo*/
+		position: fixed;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, .8);
+		z-index: 998;
+		opacity: 0;
+		transition: opacity .5s, width .4s linear;
+	}
+
+	.overlay.menu-opened{
+		width: 100%;
+		opacity: 1;
+	}
+	
+	.cover-general{
+		margin-top: 0;
+	}
+
+	.cover-sizing{
+		height: calc(100vh - 80px);
+	}
+
+	.product-slider-container{
+		display: none;
+	}
+
+}
+@media screen and (max-width: 767px){
+
+	footer .logo{
+		float: none;
+		margin: auto;
+	}
+
+	.product-info{
+	display: flex;
+	float: center;
+	width: 100%;
+	transform: translateY(60%);	
+	}
+
+	.product-info h1{
+		color: white!important;
+	}
+
+	.product-info p{
+		color: white!important;
+	}
+
+	.product-info h2{
+		color: white!important;
+	}
+
+	.bg-image {
+	background-image: url('../../resources/img/duotone.png');
+	}
+
+	.cover-image {
+  	background-image: url('../../resources/img/cover767.jpg');
+	}
+
+	.titulo--cover{
+		display: none;
+	}
+
+	.login--container{
+		margin-top: -110px;
+	}
+	
+}
+
+
+@media screen and (max-width: 576px){
+
+	.cover-image {
+	  background-image: url('../../resources/img/cover576.jpg');
+	}
+
+}
+
+.slider--card{
+	font-size: 12px;
+}
+
+.custom--button{
+	background-image: linear-gradient(to right, rgba(175,122,255,1) 0%, rgba(146,80,247,1) 40%, rgba(96,15,218,1) 100%);
+	border: none;
+	height: 2.5rem;
+	width: 12rem;
+	border-radius: 45px;
+	transition: 0.5s;
+	background-size: 200% auto;
+}
+
+.custom--card{
+	box-shadow: 0 0 15px rgba(10, 10, 10, 0.05);
+	border: none;
+}
+
+.custom--button:hover { 
+ 	background-position: right center; 
+ }
+
+ .text-purple{
+	color: rgb(146, 80, 247);
+ }
+
+ .text-yellow{
+	color: rgb(235, 195, 20);
+ }
+
+.dot {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bg--purple{
+	background-color: rgba(146,80,247,1)!important;
+}
+
+.bg--inactive{
+	background-color: #eee!important;
+}
+
+.btn-add{
+	opacity: 0;
+	visibility: hidden;
+}
+
+.product--detail:hover .btn-add{
+	opacity: 1;
+	visibility: visible;
+}
+
+  button:focus{
+    outline: none!important;
+	box-shadow: none!important;
+}
+
