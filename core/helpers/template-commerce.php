@@ -11,9 +11,10 @@ class Page {
             <!-- Título del documento -->
             <title>'.$title.'</title>
             <!-- Importación de archivos CSS -->
-            <link rel="stylesheet" href="../../resources/css/normalize.css">
             <link rel="stylesheet" href="../../resources/css/all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
+            <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="../../resources/css/owl.theme.default.min.css">
             <link rel="stylesheet" href="../../resources/css/publicstyle.css" type="text/css">
             <link rel="shortcut icon" href="../../resources/img/favicon.svg" type="image/x-icon"> 
         </head>
@@ -41,6 +42,9 @@ class Page {
                     <!-- Parte central del nav -->
                     <div class="nav-middle">
                         <ul>
+                            <li>
+                                <a href="index.php">Inicio</a>
+                            </li>
                             <li>
                                 <a href="women.php">Mujeres</a>
                             </li>
@@ -264,8 +268,9 @@ class Page {
                 <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-                <script src="../../resources/js/publicmain.js" type="text/javascript"></script>
                 <script src="../../resources/js/all.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/owl.carousel.min.js"></script>
+                <script src="../../resources/js/publicmain.js" type="text/javascript"></script>
                 <!-- Latest compiled and minified CSS -->
         </body>
     </html>');

@@ -2,14 +2,14 @@
 require_once('../../core/helpers/template-commerce.php');
 Page::headerTemplate('Hombres');
 ?>
-<!-- Jumbotron -->
+        <!-- Jumbotron -->
         <div class="jumbotron jumbotron-fluid jumbotron-cover cover-general cover-image">
             <div class="container">
                 <h2 class="font-weight-normal titulo--cover">Colección para hombres</h2>
             </div>
         </div>
         <!-- Grupo de cards para productos -->
-        <div class="container-fluid">
+        <div class="container">
             <!-- row -->
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
