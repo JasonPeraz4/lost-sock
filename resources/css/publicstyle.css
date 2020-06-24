@@ -238,7 +238,7 @@ footer .logo{
 	.product-info h1{
 		font-size: 2.33rem;
 		margin-bottom: 1.33rem;
-				letter-spacing: 5px;
+		letter-spacing: 5px;
 
 	}
 
@@ -388,22 +388,19 @@ footer .logo{
 	}
 
 	.product-info{
-	display: flex;
-	float: center;
-	width: 100%;
-	transform: translateY(60%);	
+		display: flex;
+		float: center;
+		width: 100%;
+		transform: translateY(60%);	
+		background-color: white;
+		padding: 20px;
+		width: 50%;
+		float: none;
+		box-shadow: 0 0 15px rgba(10, 10, 10, 0.05);
 	}
 
 	.product-info h1{
-		color: white!important;
-	}
-
-	.product-info p{
-		color: white!important;
-	}
-
-	.product-info h2{
-		color: white!important;
+		color: rgb(146, 80, 247);
 	}
 
 	.bg-image {
@@ -433,6 +430,10 @@ footer .logo{
 
 	#discover{
 		display: none;
+	}
+
+	.custom--button{
+		width: 10rem!important;
 	}
 
 }
