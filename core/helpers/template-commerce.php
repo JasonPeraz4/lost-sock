@@ -28,7 +28,7 @@ class Page {
                 <!-- Toggle button -->
                 <div class="overlay"></div>
                 <!-- Menú/nav -->
-                <nav class="navegation fixed-top">
+                <nav class="navegation fixed-top box-shadow">
                     <div class="close">
                     <i class="fas fa-times close-icon"></i>
                     </div>
@@ -67,10 +67,10 @@ class Page {
                     <div class="nav-right">
                         <ul>
                             <li>
-                                <a href="account.php"><i class="fas fa-user"></i></a>
+                                <a href="account.php"><i class="fad fa-user"></i></a>
                             </li>
                             <li>
-                                <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+                                <a href="cart.php"><i class="fad fa-shopping-cart"></i></a>
                             </li>
                         </ul>
                     </div>

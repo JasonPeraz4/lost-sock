@@ -7,7 +7,7 @@ Page::headerTemplate('Lost Sock');
         </div>
         <div class="container cover--account">
             <div class="row">
-                <div class="col-12 col-md-4 border mr-5 bg-white py-4  mb-sm-4 mb-md-0">
+                <div class="col-12 col-md-5 border mr-5 bg-white py-4 mb-sm-4 mb-md-0">
                     <div class="row d-flex justify-content-center">
                         <div class="sm-12 md-2 lg-2 columns">
                             <div class="circle position-relative mb-3 mx-auto">
@@ -49,7 +49,7 @@ Page::headerTemplate('Lost Sock');
                         <button type="submit" class="btn custom--button text-white d-flex justify-content-center mx-auto">Actualizar</button>
                     </form>
                 </div>
-                <div class="col-12 col-md-7 border bg-white py-4">
+                <div class="col-12 col-md-6 border bg-white py-4">
                     <form class="p-3">
                         <h6 class="my-3 text-muted">INFORMACIÓN DE ENVÍO</h6>
                         <!-- Input de direccion-->
