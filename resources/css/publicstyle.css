@@ -439,6 +439,7 @@ footer .logo{
 	border-radius: 45px;
 	transition: 0.5s;
 	background-size: 200% auto;
+	color: #fff;
 }
 
 .custom--card{
@@ -447,7 +448,8 @@ footer .logo{
 }
 
 .custom--button:hover { 
- 	background-position: right center; 
+	 background-position: right center;
+	 color: #fff; 
  }
 
  .text-purple{
