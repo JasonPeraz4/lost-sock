@@ -28,7 +28,7 @@ class Page {
                 <!-- Toggle button -->
                 <div class="overlay"></div>
                 <!-- Menú/nav -->
-                <nav class="navegation fixed-top box-shadow">
+                <nav class="navegation fixed-top custom--card">
                     <div class="close">
                     <i class="fas fa-times close-icon"></i>
                     </div>
@@ -67,10 +67,10 @@ class Page {
                     <div class="nav-right">
                         <ul>
                             <li>
-                                <a href="account.php"><i class="fad fa-user"></i></a>
+                                <a href="account.php"><i class="fad fa-user text-purple"></i></a>
                             </li>
                             <li>
-                                <a href="cart.php"><i class="fad fa-shopping-cart"></i></a>
+                                <a href="cart.php"><i class="fad fa-shopping-cart text-purple"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -133,7 +133,7 @@ class Page {
                                     <div class="col-12 col-md-4">
                                         <div class="card text-center custom--card">
                                             <div class="card-body">
-                                                <div class="fad fa-box mb-5 fa-3x text-purple"></div>
+                                                <div class="fad fa-box mb-5 fa-5x text-purple"></div>
                                                 <h4 class="card-title mb-4 text-secondary font-weight-light">Devoluciones</h2>
                                                     <p class="card-text mx-auto text-secondary">Si después de recibir tu pedido te
                                                         encuentras
@@ -147,7 +147,7 @@ class Page {
                                     <div class="col-12 col-md-4">
                                         <div class="card text-center custom--card">
                                             <div class="card-body">
-                                                <div class="fad fa-money-bill-wave mb-5 fa-3x text-purple"></div>
+                                                <div class="fad fa-money-bill-wave mb-5 fa-5x text-purple"></div>
                                                 <h4 class="card-title mb-4 text-secondary font-weight-light">Precios</h2>
                                                     <p class="card-text mx-auto text-secondary">Los precios dependen del lugar donde te
                                                         encuentres. Para el área metropolitana de San Salvador los envíos son gratuitos,
@@ -161,7 +161,7 @@ class Page {
                                     <div class="col-12 col-md-4">
                                         <div class="card text-center custom--card">
                                             <div class="card-body">
-                                                <div class="fad fa-box-fragile mb-5 fa-3x text-purple"></div>
+                                                <div class="fad fa-box-fragile mb-5 fa-5x text-purple"></div>
                                                 <h4 class="card-title mb-4 text-secondary font-weight-light">Daños</h2>
                                                     <p class="card-text mx-auto text-secondary">Si el producto se encuentra dañado
                                                         debido

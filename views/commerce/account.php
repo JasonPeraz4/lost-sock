@@ -12,7 +12,7 @@ Page::headerTemplate('Lost Sock');
                         <div class="sm-12 md-2 lg-2 columns">
                             <div class="circle position-relative mb-3 mx-auto">
                                 <!-- Imagen de perfil del usuario -->
-                                <img class="profile--pic d-flex justify-content rounded-circle mx-auto" src="../../resources/img/user.jpg">
+                                <img class="profile--pic d-flex justify-content rounded-circle mx-auto" src="../../resources/img/user.png">
                                 <div class="image-upload p-image">
                                     <label for="file-input">
                                         <i class="fad fa-camera-alt camera--button"></i>

@@ -50,7 +50,7 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                <!-- Tallas -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">

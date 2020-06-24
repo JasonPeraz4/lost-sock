@@ -140,7 +140,7 @@ Page::headerTemplate('Lost Sock');
                             <div class="col-12 col-sm-6 col-md-3 mb-5 mb-md-0">
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
-                                        <div class="fad fa-heart mb-5 fa-3x text-purple"></div>
+                                        <div class="fad fa-heart mb-5 fa-3x text-light-blue"></div>
                                         <h4 class="card-title mb-4 text-secondary font-weight-light">Diseños únicos</h2>
                                         <p class="card-text mx-auto text-secondary">Diseños creados especialmente para representar
                                             a cada personalidad, y a aquella personalidad alocada que todos llevamos
@@ -152,7 +152,7 @@ Page::headerTemplate('Lost Sock');
                             <div class="col-12 col-sm-6 col-md-3 mb-5 mb-md-0">
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
-                                        <div class="fad fa-piggy-bank mb-5 fa-3x text-purple"></div>
+                                        <div class="fad fa-piggy-bank mb-5 fa-3x text-light-blue"></div>
                                         <h4 class="card-title mb-4 text-secondary font-weight-light">Precios asequibles</h2>
                                         <p class="card-text mx-auto text-secondary">Porque pensamos en la economía y
                                             las posibilidades de nuestros clientes especiales, contamos con
@@ -163,7 +163,7 @@ Page::headerTemplate('Lost Sock');
                             <div class="col-12 col-sm-6 col-md-3 mb-5 mb-md-0">
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
-                                        <div class="fad fa-truck mb-5 fa-3x text-purple"></div>
+                                        <div class="fad fa-truck mb-5 fa-3x text-light-blue"></div>
                                         <h4 class="card-title mb-4 text-secondary font-weight-light">Envíos a todo el país</h2>
                                         <p class="card-text mx-auto text-secondary">Envíos rápidos y económicos a cada rincón de país.
                                         Entregas hasta la puerta de tu casa, tu oficina o centros comerciales.</p>
@@ -173,7 +173,7 @@ Page::headerTemplate('Lost Sock');
                             <div class="col-12 col-sm-6 col-md-3 mb-5 mb-md-0">
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
-                                        <div class="fad fa-heart mb-5 fa-3x text-purple"></div>
+                                        <div class="fad fa-heart mb-5 fa-3x text-light-blue"></div>
                                         <h4 class="card-title mb-4 text-secondary font-weight-light">Diseños únicos</h2>
                                         <p class="card-text mx-auto text-secondary">Diseños creados especialmente para representar
                                             a cada personalidad, y a aquella personalidad alocada que todos llevamos
@@ -202,7 +202,7 @@ Page::headerTemplate('Lost Sock');
                 </section>
                 <hr>
                 <div class="container mb-5">
-                    <h3 class="text-center my-5 text-secondary text-uppercase">Exclusivos</h3>
+                    <h3 class="text-center my-5 text-secondary">Exclusivos</h3>
                     <div class="row">
                         <div class="owl-carousel owl-theme">
                             <div class="item">

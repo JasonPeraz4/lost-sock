@@ -2,7 +2,7 @@
 require_once('../../core/helpers/template-commerce.php');
 Page::headerTemplate('Hombres');
 ?>
-        <!-- Jumbotron -->
+<!-- Jumbotron -->
         <div class="jumbotron jumbotron-fluid jumbotron-cover cover-general cover-image">
             <div class="container">
                 <h2 class="font-weight-normal titulo--cover">Colección para hombres</h2>
@@ -39,11 +39,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -104,11 +104,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -169,11 +169,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -234,11 +234,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -299,11 +299,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -364,11 +364,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -429,11 +429,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
@@ -494,11 +494,11 @@ Page::headerTemplate('Hombres');
                                     <!-- Colores -->
                                     <div class=" mb-3">
                                         <div class="star--card float-right">
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
-                                            <span class="fa fa-star text-yellow"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
+                                            <span class="fa fa-star text-yellow" id="product--star"></span>
                                         </div>
                                     </div>
                                </div>
