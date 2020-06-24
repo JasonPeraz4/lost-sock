@@ -163,12 +163,6 @@ footer .logo{
   background-position: center center;
 }
 
-.cover--color {
-  background-color: coral;
-  background-size: cover;
-  background-position: center center;
-}
-
 .cover--about {
   background-image: url('../../resources/img/about.jpg');
   background-size: cover;
@@ -206,6 +200,10 @@ footer .logo{
 
 .cover-general{
 	margin-top: 80px;
+}
+
+.cover--account{
+	margin-top: -140px;
 }
 
 .cover-sizing{
@@ -485,6 +483,10 @@ footer .logo{
 	background-color: rgba(146,80,247,1)!important;
 }
 
+.bg--light-blue{
+	background-color: rgb(197, 241, 243);
+}
+
 .bg--inactive{
 	background-color: #eee!important;
 }
@@ -523,4 +525,39 @@ footer .logo{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(126, 125, 125); 
+}
+
+.profile--pic{
+	height: 150px;
+	width: 150px;
+}
+
+.camera--button {
+  color: white;
+}
+
+.camera--button:hover {
+  transition: all .6s cubic-bezier(.175, .885, .32, 1.275);
+  color: rgba(96,15,218,1);
+}
+
+.p-image {
+	position: absolute;
+	right: 16px;
+	bottom: 0;
+    background: rgba(175,122,255,1);
+    border-radius: 50%;
+    width: 2.2rem;
+	height: 2.2rem;
+	padding-top: 5px;
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    text-align: center;
+}
+
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.image-upload>input {
+  display: none;
 }
