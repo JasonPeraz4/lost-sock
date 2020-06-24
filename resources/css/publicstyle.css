@@ -473,10 +473,16 @@ footer .logo{
  }
 
 .dot {
-  height: 18px;
-  width: 18px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   display: inline-block;
+}
+
+.dot.product--color {
+  height: 18px;
+  width: 18px;
+
 }
 
 #product--star{

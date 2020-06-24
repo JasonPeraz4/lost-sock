@@ -29,10 +29,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -94,10 +94,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -159,10 +159,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -224,10 +224,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -289,10 +289,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -354,10 +354,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -419,10 +419,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
@@ -484,10 +484,10 @@ Page::headerTemplate('Hombres');
                                <div class="col-6 text-center">
                                     <!-- Colores -->
                                     <div class="mb-3 float-left">
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--purple"></span>
-                                        <span class="dot bg--inactive data-toggle="tooltip" title="Sin existencias"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--purple"></span>
+                                        <span class="dot product--color bg--inactive data-toggle=" tooltip" title="Sin existencias"></span>
                                     </div>
                                </div>
                                <div class="col-6 text-center">
