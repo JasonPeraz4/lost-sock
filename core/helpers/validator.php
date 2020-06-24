@@ -318,8 +318,25 @@ class Validator
         }
     }
 
+/*
+    *   Método para validar el formato del DUI (Documento Único de Identidad).
+    *
+    *   Parámetros: $value (dato a validar).
+    *   
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validateDUI($value)
+    {
+        // Se verifica que el número tenga el formato 00000000-0.
+        if (preg_match('/^[0-9]{8}[-][0-9]{1}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
-    *   Método para validar un número de teléfono.
+    *   Método para validar un número telefónico.
     *
     *   Parámetros: $value (dato a validar).
     *   
@@ -327,8 +344,8 @@ class Validator
     */
     public function validatePhoneNumber($value)
     {
-        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[0-9]{8}$/', $value)) {
+        // Se verifica que el número tenga el formato 0000-0000 y que inicie con 2, 6 o 7.
+        if (preg_match('/^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/', $value)) {
             return true;
         } else {
             return false;

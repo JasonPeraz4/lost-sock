@@ -5,11 +5,11 @@ CREATE TABLE cliente(
 	idCliente SERIAL PRIMARY KEY, 
 	nombres VARCHAR(25) NOT NULL,
 	apellidos VARCHAR(25) NOT NULL,
-	email VARCHAR(100) NOT NULL,
-	telefono CHAR(8) NOT NULL,
-	usuario VARCHAR(25) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	telefono CHAR(9) UNIQUE NOT NULL,
+	usuario VARCHAR(25) UNIQUE NOT NULL,
 	clave VARCHAR(100) NOT NULL,
-	foto VARCHAR(200),
+	imagen VARCHAR(100) DEFAULT 'default.png',
 	estado BIT DEFAULT '1'
 );
 
@@ -203,22 +203,19 @@ VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonp
 		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1');
 
 INSERT INTO cliente 
-VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', 78789562, 'jasonpcx', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', 79570450, 'luunavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', 79674338, 'yanavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', 74523010, 'djnavasv', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', 70336064, 'albacanas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', 61532318, 'davidnavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', 70206064, 'sofianavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', 70337064, 'alitanavas', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Ana Laura', 'Navas Estrada', 'lauradeestrada@gmail.com', 60336064, 'lauraestrada', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Ana Laura', 'Navas Rivera', 'laura@rivera.com', 78889955, 'laurarivera', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com',78451304,'rufux','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', 78156714, 'juananaya', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', 77541264, 'marcosdvm', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', 66784983, 'victorventura', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Mauricio Javier', 'Cestoni Quesada', 'mau@cestoni.com', 75489617, 'maucestoni', '1234', 'https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT),
-		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com',79345127,'marcosgranillo','1234','https://pusheen.com/wp-content/uploads/2019/12/Catfe-Drink_v2-34.jpg', DEFAULT);
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', '7957-0450', 'luunavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', '7967-4338', 'yanavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', '7452-3010', 'djnavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', '7033-6064', 'albacanas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', '6153-2318', 'davidnavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', '7020-6064', 'sofianavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', '7033-7064', 'alitanavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com','7845-1304','rufux','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT),
+		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', '7815-6714', 'juananaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', '7754-1264', 'marcosdvm', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', '6678-4983', 'victorventura', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com','7934-5127','marcosgranillo','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT);
 
 INSERT INTO direccion
 VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),

@@ -222,8 +222,8 @@ class Administrador extends Validator{
         return Database::getRows($sql, $params);
     }
 
-    public function checkExist(){
-        switch ($variable) {
+    public function checkExist($value){
+        switch ($value) {
             case 'value':
                 # code...
                 break;
