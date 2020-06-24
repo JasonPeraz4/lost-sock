@@ -244,19 +244,19 @@ class Cliente extends Validator{
 
     public function editProfile()
     {
-        $sql = 'UPDATE administrador 
-                SET nombres = ?, apellidos = ?, email = ?, usuario = ?
-                WHERE idadministrador = ?';
-        $params = array($this->nombres, $this->apellidos, $this->email, $this->usuario, $this->id);
+        $sql = 'UPDATE cliente 
+                SET nombres = ?, apellidos = ?, telefono = ?, email = ?, usuario = ?
+                WHERE cliente = ?';
+        $params = array($this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
         return Database::executeRow($sql, $params);
     }
 
     public function changePassword()
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'UPDATE administrador 
-                SET clave = ? WHERE idadministrador = ?';
-        $params = array($hash, $this->id);
+        $sql = 'UPDATE cliente 
+                SET clave = ? WHERE idcliente = ?';
+        $params = array($hash, $this->idCliente);
         return Database::executeRow($sql, $params);
     }
 

@@ -23,6 +23,84 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
+            case 'editProfile':
+                if ( $cliente->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
+                    if ( $cliente->readOneCliente() ) {
+                        $_POST = $cliente->validateForm( $_POST );
+                        if ( $cliente->setNombres($_POST['nombres']) ) {
+                            if ( $cliente->setApellidos($_POST['apellidos']) ) {
+                                if ( $cliente->setTelefono( $_POST[ 'telefono' ] ) ) {
+                                    if ( !$cliente->checkExist( 'telefono', $_POST[ 'telefono' ] ) ) {
+                                        if ( $cliente->setEmail($_POST['email']) ) {
+                                            if ( !$cliente->checkExist( 'email', $_POST[ 'email' ] ) ) {
+                                                if ( $cliente->setUsuario($_POST['usuario']) ) {
+                                                    if ( !$cliente->checkExist( 'usuario', $_POST[ 'usuario' ] ) ) {
+                                                        if ( $administrador->editProfile() ) {
+                                                            $_SESSION['email'] = $administrador->getEmail();
+                                                            $_SESSION['usuario'] = $administrador->getUsuario();
+                                                            $_SESSION['nombres'] = $administrador->getNombres();
+                                                            $_SESSION['apellidos'] = $administrador->getApellidos();
+                                                            $result['status'] = 1;
+                                                            $result['message'] = 'Perfil actualizado con éxito';
+                                                        } else {
+                                                            $result['exception'] = Database::getException();
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Este usuario ya se encuentra registrado';
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Usuario no válido';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Este correo electrónico ya se encuentra registrado';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Dirección de correo no válida';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Este teléfono ya se encuentra registrado';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Teléfono no válido';
+                                }
+                            } else {
+                                $result['exception'] = 'Los apellidos solo deben contener letras';
+                            }
+                        } else {
+                            $result['exception'] = 'Los nombres solo deben contener letras';
+                        }
+                    } else {
+                        $result['exception'] = 'Administrador inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+                break;
+            case 'changePassword':
+                if ( $cliente->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
+                    $_POST = $cliente->validateForm( $_POST );
+                    if ( $cliente->checkClave( $_POST[ 'claveactual' ] ) ) {
+                        if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                            if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
+                                if ( $cliente->changePassword() ) {
+                                    $result['status'] = 1;
+                                    $result['message'] = 'Contraseña actualizada con correctamente';
+                                } else {
+                                    $result['exception'] = Database::getException();
+                                }
+                            } else {
+                                $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                            }
+                        } else {
+                            $result['exception'] = 'Las contraseñas no coinciden';
+                        }
+                    } else {
+                        $result['exception'] = 'Contraseña actual incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+                break;
             default:
                 exit('Acción no disponible dentro de la sesión');
         }

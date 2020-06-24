@@ -20,8 +20,10 @@ function checkAdministradores(){
     .done( function( response ){
         // Se obtiene la ruta del documento en el servidor web.
         let current = window.location.pathname;
+        // Se obtiene el nombre del documento actual.
+        let page = current.split("/").pop();
         // Se comprueba si la página web actual es register.php, de lo contrario seria index.php
-        if ( current == '/lost-sock/views/dashboard/signin.php' ) {
+        if ( page == 'signin.php' ) {
             // Si ya existe un usuario registrado se envía a iniciar sesión, de lo contrario se pide crear el primero.
             if ( response.status ) {
                 sweetAlert( 3, response.message, 'index.php' );
@@ -88,8 +90,11 @@ function signOff()
 }
 
 function loadProfile(){
+    // Se obtiene la ruta del documento en el servidor web.
     let current = window.location.pathname;
-    if ( current == '/lost-sock/views/dashboard/admin-settings.php' ) {
+    // Se obtiene el nombre del documento actual.
+    let page = current.split("/").pop();
+    if ( page == 'admin-settings.php' ) {
         $( '#profile-form' )[0].reset();
         $( '#password-form' )[0].reset();
         $.ajax({

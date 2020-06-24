@@ -100,8 +100,8 @@ class Page {
                 header('location: index.php');
             }
         } else {
-            // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
-            if ($filename != 'cart.php') {
+            // Se verifica si la página web actual es diferente a cart.php (Carrito) y a account.php (Ajustes del cliente) para direccionar a index.php, de lo contrario se muestra un menú vacío.
+            if ($filename != 'cart.php' && $filename != 'account.php') {
                 print('
                     <!-- Parte derecha del nav -->
                     <div class="nav-right">
