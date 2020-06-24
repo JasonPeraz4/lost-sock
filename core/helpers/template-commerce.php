@@ -1,6 +1,9 @@
 <?php
 class Page {
     public static function headerTemplate($title){
+        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en las páginas web.
+        session_start();
+        // Se imprime el código HTML de la cabecera del documento.
         print('<!DOCTYPE html>
     <html lang="es">
         <head>
@@ -62,12 +65,49 @@ class Page {
                             </li>
                         </ul>
                     </div>
-                    <!-- Parte central del nav -->
+                    <!-- /Parte central del nav -->
+                    
+            ');
+            // Se obtiene el nombre del archivo de la página web actual.
+        $filename = basename($_SERVER['PHP_SELF']);
+        // Se comprueba si existe una sesión de cliente para mostrar el menú de opciones, de lo contrario se muestra otro menú.
+        if (isset($_SESSION['idcliente'])) {
+            // Se verifica si la página web actual es diferente a login.php y register.php, de lo contrario se direcciona a index.php
+            if ($filename != 'login.php' && $filename != 'register.php') {
+                print('
                     <!-- Parte derecha del nav -->
                     <div class="nav-right">
                         <ul>
                             <li>
                                 <a href="account.php"><i class="fad fa-user text-purple"></i></a>
+                            </li>
+                            <li>
+                                <a href="cart.php"><i class="fad fa-shopping-cart text-purple"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="logOut()"><i class="fad fa-sign-out-alt text-purple"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Parte derecha del nav -->
+                </nav>
+                <!-- Menú/nav -->
+            </header>
+            <main>
+            <!-- Contenido principal -->
+                ');
+            } else {
+                header('location: index.php');
+            }
+        } else {
+            // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
+            if ($filename != 'cart.php') {
+                print('
+                    <!-- Parte derecha del nav -->
+                    <div class="nav-right">
+                        <ul>
+                            <li>
+                                <a href="login.php"><i class="fad fa-sign-in-alt text-purple"></i></a>
                             </li>
                             <li>
                                 <a href="cart.php"><i class="fad fa-shopping-cart text-purple"></i></a>
@@ -79,110 +119,16 @@ class Page {
                 <!-- Menú/nav -->
             </header>
             <main>
-                <!-- Modal -->
-                <div class="modal fade" id="modalAbout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="jumbotron jumbotron-fluid cover--about">
-                                            <div class="container">
-                                                <h2 class="display-4 text-muted">Nuestra historia</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="container">
-                                            <p class="lead">
-                                                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                                non commodo luctus.
-                                                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                                non commodo luctus.
-                                                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                                non commodo luctus.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End modal -->
-                <!-- Modal -->
-                <div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-12 col-md-4">
-                                        <div class="card text-center custom--card">
-                                            <div class="card-body">
-                                                <div class="fad fa-box mb-5 fa-5x text-purple"></div>
-                                                <h4 class="card-title mb-4 text-secondary font-weight-light">Devoluciones</h2>
-                                                    <p class="card-text mx-auto text-secondary">Si después de recibir tu pedido te
-                                                        encuentras
-                                                        insatisfecho con nuestros productos, tienes 5 días para solicitar un reembolso
-                                                        de tu dinero, siempre
-                                                        y cuando el producto se encuentre en el empaque orginal y en buen estado.
-                                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="card text-center custom--card">
-                                            <div class="card-body">
-                                                <div class="fad fa-money-bill-wave mb-5 fa-5x text-purple"></div>
-                                                <h4 class="card-title mb-4 text-secondary font-weight-light">Precios</h2>
-                                                    <p class="card-text mx-auto text-secondary">Los precios dependen del lugar donde te
-                                                        encuentres. Para el área metropolitana de San Salvador los envíos son gratuitos,
-                                                        entregados
-                                                        por el personal de Lost Sock, en caso contrario, los envíos son realizados por
-                                                        Correos de El Salvador.
-                                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="card text-center custom--card">
-                                            <div class="card-body">
-                                                <div class="fad fa-box-fragile mb-5 fa-5x text-purple"></div>
-                                                <h4 class="card-title mb-4 text-secondary font-weight-light">Daños</h2>
-                                                    <p class="card-text mx-auto text-secondary">Si el producto se encuentra dañado
-                                                        debido
-                                                        a mal manejo del servicio de correos, tienes un plazo de 15 días a partir de la
-                                                        fecha
-                                                        en la que recibiste el paquete para realizar tu reclamos y solicitar un cambio o
-                                                        una
-                                                        devolución.
-                                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End modal -->
-            <!-- Contenido principal -->');
+            <!-- Contenido principal -->
+                ');
+            } else {
+                header('location: login.php');
+            }
         }
-        public static function footerTemplate(){
+            // Se llama al método que contiene el código de las cajas de dialogo (modals).
+            self::modals();
+        }
+        public static function footerTemplate($controller){
             print('            </main>
             <hr>
             <!-- Pie del documento -->
@@ -271,9 +217,135 @@ class Page {
                 <script src="../../resources/js/all.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/owl.carousel.min.js"></script>
                 <script src="../../resources/js/publicmain.js" type="text/javascript"></script>
+                <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+                <script src="../../core/helpers/components.js" type="text/javascript"></script>
+                <script src="../../core/controllers/commerce/account.js" type="text/javascript"></script>
+                ');
+        if ( $controller != null ) {
+            print('
+                <script src="../../core/controllers/commerce/'.$controller.'" type="text/javascript"></script>
                 <!-- Latest compiled and minified CSS -->
-        </body>
-    </html>');
+            </body>
+        </html>
+            ');
+        } else {
+            print('
+                <!-- Latest compiled and minified CSS -->
+            </body>
+        </html>
+        ');
+        }
+    }
+
+    /*
+    *   Método para imprimir las cajas de dialogo (modals).
+    */
+    private static function modals()
+    {
+        // Se imprime el código HTML de las cajas de dialogo (modals).
+        print('
+        <!-- Modal -->
+        <div class="modal fade" id="modalAbout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="jumbotron jumbotron-fluid cover--about">
+                                    <div class="container">
+                                        <h2 class="display-4 text-muted">Nuestra historia</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="container">
+                                    <p class="lead">
+                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
+                                        non commodo luctus.
+                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
+                                        non commodo luctus.
+                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
+                                        non commodo luctus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="card text-center custom--card">
+                                    <div class="card-body">
+                                        <div class="fad fa-box mb-5 fa-5x text-purple"></div>
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Devoluciones</h2>
+                                            <p class="card-text mx-auto text-secondary">Si después de recibir tu pedido te
+                                                encuentras
+                                                insatisfecho con nuestros productos, tienes 5 días para solicitar un reembolso
+                                                de tu dinero, siempre
+                                                y cuando el producto se encuentre en el empaque orginal y en buen estado.
+                                            </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="card text-center custom--card">
+                                    <div class="card-body">
+                                        <div class="fad fa-money-bill-wave mb-5 fa-5x text-purple"></div>
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Precios</h2>
+                                            <p class="card-text mx-auto text-secondary">Los precios dependen del lugar donde te
+                                                encuentres. Para el área metropolitana de San Salvador los envíos son gratuitos,
+                                                entregados
+                                                por el personal de Lost Sock, en caso contrario, los envíos son realizados por
+                                                Correos de El Salvador.
+                                            </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="card text-center custom--card">
+                                    <div class="card-body">
+                                        <div class="fad fa-box-fragile mb-5 fa-5x text-purple"></div>
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Daños</h2>
+                                            <p class="card-text mx-auto text-secondary">Si el producto se encuentra dañado
+                                                debido
+                                                a mal manejo del servicio de correos, tienes un plazo de 15 días a partir de la
+                                                fecha
+                                                en la que recibiste el paquete para realizar tu reclamos y solicitar un cambio o
+                                                una
+                                                devolución.
+                                            </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End modal -->
+        ');
     }
 }
 ?>

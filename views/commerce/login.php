@@ -24,7 +24,7 @@ Page::headerTemplate('Iniciar sesión | Lost Sock');
                                         <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña"  pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
                                     </div>
                                     <a class="mx-auto" href=""><small><span class="text-purple">¿Olvidaste tu contraseña?</span></small></a>
-                                    <button type="submit" class="btn custom--button float-none w-100 mt-3">Iniciar sesión</button>
+                                    <button type="submit" class="btn custom--button float-none w-100 mt-3 text-white">Iniciar sesión</button>
                                 </form>
                                 <a class="mx-auto mt-4" href="register.php"><small>¡<span class="text-purple">Crea una cuenta</span> para comprar en Lost Sock!</small></a>
                             </div>
@@ -36,6 +36,6 @@ Page::headerTemplate('Iniciar sesión | Lost Sock');
     </div>
 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate('login.js');
 ?>
 

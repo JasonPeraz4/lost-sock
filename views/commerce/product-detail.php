@@ -97,5 +97,5 @@ Page::headerTemplate('Hombres');
             <!-- end row -->
         </div>  
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
