@@ -12,6 +12,7 @@ class Producto extends Validator
     private $precio = null;
     private $idCategoria = null;
     private $idTipoProducto = null;
+    private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/producto/';
     private $idComentario = null;
@@ -62,7 +63,7 @@ class Producto extends Validator
 
     public function setDescuento($value)
     {
-        if (($value%1) == 0 && ($value%100) == 0 && $value>=0 && $value < 100 ) {
+        if (($value%1) == 0 && $value >= 0 && $value < 100 ) {
             $this->descuento = $value;
             return true;
         } else {
@@ -106,6 +107,17 @@ class Producto extends Validator
             return true;
     }
 
+    public function setImagen($file)
+    {
+        if ($this->validateImageFile($file, 500, 500)) {
+            $this->imagen = $this->getImageName();
+            $this->archivo = $file;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -144,22 +156,34 @@ class Producto extends Validator
         return $this->idTipoProducto;
     }
 
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function getRuta()
+    {
+        return $this->ruta;
+    }
     /*
     *   Métodos para realizar las operaciones CRUD (search, create, read, update, delete).
     */
     
     public function createProducto()
-    {
-        $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, idCategoria, idTipoProducto)
-                VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto );
-        return Database::executeRow( $sql, $params );
-       
+    {   
+        if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
+            $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto)
+                VALUES(?, ?, ?, ?, ?, ?, ?)';
+            $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->imagen, $this->idCategoria, $this->idTipoProducto );
+            return Database::executeRow( $sql, $params );
+        } else {
+            return false;
+        }
     }
 
     public function readAllProductos()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, categoria, tipo
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, categoria, tipo
                 FROM producto INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
                 ORDER BY idProducto';
         $params = null;
@@ -168,7 +192,7 @@ class Producto extends Validator
 
     public function readProducto()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, idCategoria, idTipoProducto
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto
                 FROM producto
                 WHERE idProducto = ?';
         $params = array( $this->idProducto );
@@ -176,10 +200,17 @@ class Producto extends Validator
     }
 
     public function updateProducto(){
-        $sql = 'UPDATE producto 
-                SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
-                WHERE idProducto = ?';
-        $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
+            $sql = 'UPDATE producto 
+                    SET imagen = ?, nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    WHERE idProducto = ?';
+            $params=array( $this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        } else {
+            $sql = 'UPDATE producto 
+                    SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    WHERE idProducto = ?';
+            $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+        }
         return Database::executeRow( $sql, $params );
     }
 
@@ -193,53 +224,53 @@ class Producto extends Validator
 
     public function readComentarios()
     {
-        $sql = 'SELECT idcomentario, nombres, apellidos, comentario, fecha, calificacion, estado 
+        $sql = 'SELECT idcomentario, nombres, apellidos, comentario, fecha, calificacion, comentario.estado 
                 FROM comentario INNER JOIN detalleCompra dC USING(iddetallecompra) INNER JOIN compra USING(idcompra) INNER JOIN cliente USING(idcliente) 
-                WHERE dC.idproducto = ? ORDER BY fecha DESC;';
+                WHERE dC.idproducto = ? ORDER BY fecha DESC';
         $params = array( $this->idProducto );
         return Database::getRows( $sql, $params );
     }
 
-    public function deleteComentario()
+    public function disableComentario()
     {
         $sql = 'UPDATE comentario SET estado = ? WHERE idcomentario = ?';
-        $params = array( 0, $this->idComentario );
+        $params = array( $this->estado, $this->idComentario );
         return Database::executeRow( $sql, $params );
     }
 
     public function cantidadVentas()
     {
-        $sql = `SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
+        $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
                 FROM compra GROUP BY date_part('month', fechaCompra)
-                `;
+                ";
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function cantidadPedidos()
     {
-        $sql = `SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
+        $sql = "SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
                 FROM compra WHERE fechacompra BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
-                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)";
         $params = null;
         return Database::getRow( $sql, $params );
     }
 
     public function cantidadSuscripciones()
     {
-        $sql = `SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
+        $sql = "SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
                 INNER JOIN planSuscripcion USING(idplansuscripcion) WHERE fecha
                 BETWEEN (SELECT date_trunc('MONTH',now())::DATE) 
-                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)`;
+                AND (SELECT (date_trunc('month', now()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE)";
         $params = null;
         return Database::getRow( $sql, $params );
     }
 
     public function readTopProductos()
     {
-        $sql = 'SELECT SUM(cantidad) AS cantidad, nombre, SUM(producto.precio*cantidad) AS ganancia 
+        $sql = "SELECT SUM(cantidad) AS cantidad, nombre, SUM(producto.precio*cantidad) AS ganancia 
                 FROM detalleCompra INNER JOIN producto USING(idproducto) 
-                GROUP BY nombre ORDER BY SUM(cantidad) DESC LIMIT 5';
+                GROUP BY nombre ORDER BY SUM(cantidad) DESC LIMIT 5";
         $params = null;
         return Database::getRows( $sql, $params );
     }

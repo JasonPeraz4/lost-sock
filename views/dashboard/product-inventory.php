@@ -15,6 +15,7 @@ Page::headerTemplate('Gestión de productos', null);
 <table id="myTable" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
+            <th></th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>
@@ -41,17 +42,19 @@ Page::headerTemplate('Gestión de productos', null);
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form method="post" id="save-form" enctype="">
+    <form method="post" novalidate="" id="save-form" enctype="multipart/form-data">
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idproducto" name="idproducto"/>
             <div class="form-group">
                 <label for="nombre">Nombre del producto</label>
-                <input type="text" class="form-control" placeholder="Nombre del producto" id="nombre" name="nombre" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                <input type="text" class="form-control" placeholder="Nombre del producto" id="nombre" name="nombre" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{5,25}$" title="Solo se permiten letras" autocomplete="no" required>
+                <div class="valid-feedback">Nice! You got this one!</div>
+                <div class="invalid-feedback">Solo se permiten letras</div>
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea class="form-control" rows="2" id="descripcion" name="descripcion" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{'1','120'}$" title="Solo se permiten letras y números"></textarea>
+                <textarea class="form-control" rows="2" id="descripcion" name="descripcion" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{1,120}$" title="Solo se permiten letras y números"></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -75,10 +78,10 @@ Page::headerTemplate('Gestión de productos', null);
                     </select>
                 </div>             
             </div>
-            <!-- <div class="form-group">
-                <label for="test">Nombre del producto</label>
-                <input type="file" class="form-control" placeholder="Nombre del producto" id="test" name="test">
-            </div> -->
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imagen" name="imagen" accept=".gif, .jpg, .png"/>
+                <label class="custom-file-label" for="imagen">Selecccionar imagen</label>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
