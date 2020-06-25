@@ -146,7 +146,7 @@ footer .logo{
 }
 
 .bg-image {
-  background-image: url('../../resources/img/background.jpg');
+  background-image: url('../../resources/img/bg.jpg');
   background-size: cover;
   background-position: center center;
 }
@@ -368,7 +368,7 @@ footer .logo{
 	}
 
 	.cover-sizing{
-		height: calc(100vh - 80px);
+		height: calc(100vh - 160px);
 	}
 
 	.product-slider-container{
@@ -389,13 +389,10 @@ footer .logo{
 
 	.product-info{
 		display: flex;
-		float: center;
-		width: 100%;
-		transform: translateY(60%);	
-		background-color: white;
+		background-color: 	rgba(255, 255, 255, 0.7);
 		padding: 20px;
 		width: 50%;
-		float: none;
+		float: none!important;
 		box-shadow: 0 0 15px rgba(10, 10, 10, 0.05);
 	}
 
@@ -415,8 +412,16 @@ footer .logo{
 		display: none;
 	}
 
+	.cover-sizing{
+		height: 100vh;
+	}
+
 	.login--container{
 		margin-top: -110px;
+	}
+	
+	.product-info{
+		transform: translateY(50%)!important;
 	}
 	
 }
@@ -433,7 +438,11 @@ footer .logo{
 	}
 
 	.custom--button{
-		width: 10rem!important;
+		width: 9.5rem!important;
+	}
+
+	.product-info{
+		width: 80%;
 	}
 
 }
