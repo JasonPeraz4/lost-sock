@@ -242,6 +242,24 @@ class Cliente extends Validator{
         return Database::executeRow($sql, $params);
     }
 
+    public function editProfile()
+    {
+        $sql = 'UPDATE cliente 
+                SET nombres = ?, apellidos = ?, telefono = ?, email = ?, usuario = ?
+                WHERE cliente = ?';
+        $params = array($this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changePassword()
+    {
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        $sql = 'UPDATE cliente 
+                SET clave = ? WHERE idcliente = ?';
+        $params = array($hash, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */

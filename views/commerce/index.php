@@ -254,5 +254,5 @@ Page::headerTemplate('Lost Sock');
                     </div>
                 </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>

@@ -22,32 +22,56 @@ Page::headerTemplate('Lost Sock');
                             </div>
                         </div>
                     </div>
-                    <form class="p-3">
+                    <form method="post" id="profile-form" class="p-3">
                         <h6 class="my-3 text-muted">INFORMACIÓN PERSONAL</h6>
-                        <div class="form-group mt-4">
-                            <input type="text" class="form-control" id="exampleInputName" placeholder="Nombres">
+                        <div class="form-group">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}$" title="Solo se permiten letras">
+                            <div class="invalid-feedback">Solo se permiten letras</div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputSurame" placeholder="Apellidos">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}$" title="Solo se permiten letras">
+                            <div class="invalid-feedback">Solo se permiten letras</div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputNumber" placeholder="Teléfono">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" pattern="^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$" title="Solo se permite número tenga el formato 0000-0000 y que inicie con 2, 6 o 7">
+                            <div class="valid-feedback">Número de teléfono válido</div>
+                            <div class="invalid-feedback">Número con formato 0000-0000 e inicie con 2, 6 o 7</div>
                         </div>
                         <h6 class="my-3 text-muted">INFORMACIÓN DE LA CUENTA</h6>
-                        <div class="form-group mt-4">
-                            <input type="text" class="form-control" id="exampleInputUser" placeholder="Usuario">
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email" title="Solo se permiten direcciones de correo válidas">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail" placeholder="Correo">
+                            <label for="usuario">Usuario</label>
+                            <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" pattern="^[a-z0-9_-]{3,15}$" title="Solo se permiten letras, y los caracteres - y _">
+                            <div class="valid-feedback">Nombre de usuario válido</div>
+                            <div class="invalid-feedback">Solo se permiten letras, y los caracteres - y _</div>
+                        </div> 
+                        <button type="submit" class="btn custom--button text-white d-flex justify-content-center mx-auto">Actualizar</button>
+                    </form>
+                    <form method="post" id="password-form" class="p-3">
+                        <h6 class="my-3 text-muted">ACCESO A LA CUENTA</h6>   
+                        <div class="form-group">
+                            <label for="clave">Contraseña actual</label>
+                            <input type="password" class="form-control" id="clave" name="claveactual" placeholder="Contraseña actual" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="exampleInputPassword" placeholder="Contraseña">
+                            <label for="clave1">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Nueva contraseña" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
+                            <div class="valid-feedback">Contraseña segura</div>
+                            <div class="invalid-feedback">Mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial</div>
                         </div>
-                        <div class="form-group mb-5">
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmar contraseña">
+                        <div class="form-group">
+                            <label for="clave2">Repetir contraseña</label>
+                            <input type="password" class="form-control" id="clave2" name="clave2" placeholder="Repetir contraseña" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
                         </div>
                         <button type="submit" class="btn custom--button text-white d-flex justify-content-center mx-auto">Actualizar</button>
                     </form>
+                    
                 </div>
                 <div class="col-12 col-md-6 border bg-white py-4">
                     <form class="p-3">
@@ -98,5 +122,5 @@ Page::headerTemplate('Lost Sock');
             </div>
         </div>
 <?php
-Page::footerTemplate();
+Page::footerTemplate(null);
 ?>
