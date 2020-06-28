@@ -78,23 +78,23 @@ Page::headerTemplate('Ajustes | Lost Sock');
                 <h6 class="mb-3 text-muted">INFORMACIÓN DE ENVÍO <small id="lblAgregar" onclick="openCreateModal()" class="ml-auto text-purple"><a href="#">Agregar dirección</a></small> </h6>
                 <div id="direcciones-body">
                     <!-- <div class="form-group">
-                        <label for="direccion1">Dirección 1</label>
-                        <textarea class="form-control" rows="2" id="direccion1" name="direccion1" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{1,120}$" title="Solo se permiten letras y números"></textarea>
+                        <label for="direccion1">Dirección 1</label><i class="fad fa-pen mx-1 text-purple" onclick="openUpdateModal()"></i>
+                        <textarea class="form-control" rows="2" id="direccion1" disabled></textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="departamento1">Departamento</label>
-                            <select class="form-control" id="departamento1" name="departamento1">
+                            <select class="form-control" id="departamento1" disabled>
                             </select>
                         </div>
                     </div> -->
+                    <h6>No hay direcciones agregadas</h6>
                 </div>
-                <button type="submit" id="btnUpdate" class="btn custom--button text-white d-flex justify-content-center mx-auto">Actualizar</button>
             </form>
         </div>
     </div>
 </div>
-<!-- Modal agregar producto -->
+<!-- Modal agregar dirección -->
 <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="save-modal" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -106,14 +106,16 @@ Page::headerTemplate('Ajustes | Lost Sock');
     </div>
     <form method="post" novalidate="" id="save-form">
         <div class="modal-body p-md-4">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input class="d-none" type="text" id="iddireccion" name="iddireccion"/>
             <div class="form-group">
                 <label for="direccion">Dirección</label>
                 <textarea class="form-control" rows="2" id="direccion" name="direccion" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{1,120}$" title="Solo se permiten letras y números"></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="departamento">Departamento</label>
-                    <select class="form-control" id="departamento" name="departamento">
+                    <label for="departamento_direccion">Departamento</label>
+                    <select class="form-control" id="departamento_direccion" name="departamento_direccion">
                     </select>
                 </div>
             </div>
