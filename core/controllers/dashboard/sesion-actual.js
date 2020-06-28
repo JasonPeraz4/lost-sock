@@ -8,7 +8,7 @@ const API = '../../core/api/dashboard/administrador.php?action=';
 
 // Método que se ejecuta una vez la página este lista.
 $( document ).ready( function(){
-    //Se llama a la función que verifica la existencia de administradores. Se ubica en el archivo account.js
+    //Se llama a la función que llena los campos de los ajustes. Se ubica en el archivo sesion-actual.js
     loadProfile();
 });
 

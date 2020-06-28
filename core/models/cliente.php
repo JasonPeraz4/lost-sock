@@ -193,6 +193,29 @@ class Cliente extends Validator{
         }
     }
 
+    public function checkProfile($column, $value){
+        switch ($column) {
+            case 'email':
+                $sql = 'SELECT * FROM cliente WHERE email = ? AND idcliente <> ?';
+                break;
+            case 'telefono':
+                $sql = 'SELECT * FROM cliente WHERE telefono = ? AND idcliente <> ?';
+                break;
+            case 'usuario':
+                $sql = 'SELECT * FROM cliente WHERE usuario = ? AND idcliente <> ?';
+                break;
+            default:
+                # code...
+                break;
+        }
+        $params = array($value, $this->idCliente);
+        if ($data = Database::getRow($sql, $params)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function checkEstado( $email ){
         $sql = 'SELECT estado FROM cliente WHERE email = ?';
         $params = array($email);
@@ -246,7 +269,7 @@ class Cliente extends Validator{
     {
         $sql = 'UPDATE cliente 
                 SET nombres = ?, apellidos = ?, telefono = ?, email = ?, usuario = ?
-                WHERE cliente = ?';
+                WHERE idcliente = ?';
         $params = array($this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
         return Database::executeRow($sql, $params);
     }

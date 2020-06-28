@@ -23,6 +23,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
+            case 'readProfile':
+                if ( $cliente->setIdCliente( $_SESSION['idcliente'] ) ) {
+                    if ( $result[ 'dataset' ] = $cliente->readOneCliente() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Cliente no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador no válido';
+                }
+                break;
             case 'editProfile':
                 if ( $cliente->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
                     if ( $cliente->readOneCliente() ) {
@@ -30,16 +41,17 @@ if (isset($_GET['action'])) {
                         if ( $cliente->setNombres($_POST['nombres']) ) {
                             if ( $cliente->setApellidos($_POST['apellidos']) ) {
                                 if ( $cliente->setTelefono( $_POST[ 'telefono' ] ) ) {
-                                    if ( !$cliente->checkExist( 'telefono', $_POST[ 'telefono' ] ) ) {
+                                    if ( !$cliente->checkProfile( 'telefono', $_POST[ 'telefono' ] ) ) {
                                         if ( $cliente->setEmail($_POST['email']) ) {
-                                            if ( !$cliente->checkExist( 'email', $_POST[ 'email' ] ) ) {
+                                            if ( !$cliente->checkProfile( 'email', $_POST[ 'email' ] ) ) {
                                                 if ( $cliente->setUsuario($_POST['usuario']) ) {
-                                                    if ( !$cliente->checkExist( 'usuario', $_POST[ 'usuario' ] ) ) {
-                                                        if ( $administrador->editProfile() ) {
-                                                            $_SESSION['email'] = $administrador->getEmail();
-                                                            $_SESSION['usuario'] = $administrador->getUsuario();
-                                                            $_SESSION['nombres'] = $administrador->getNombres();
-                                                            $_SESSION['apellidos'] = $administrador->getApellidos();
+                                                    if ( !$cliente->checkProfile( 'usuario', $_POST[ 'usuario' ] ) ) {
+                                                        if ( $cliente->editProfile() ) {
+                                                            $_SESSION['email'] = $cliente->getEmail();
+                                                            $_SESSION['usuario'] = $cliente->getUsuario();
+                                                            $_SESSION['nombres'] = $cliente->getNombres();
+                                                            $_SESSION['apellidos'] = $cliente->getApellidos();
+                                                            $_SESSION['telefono'] = $cliente->getTelefono();
                                                             $result['status'] = 1;
                                                             $result['message'] = 'Perfil actualizado con éxito';
                                                         } else {
