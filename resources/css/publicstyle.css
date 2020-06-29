@@ -146,7 +146,7 @@ footer .logo{
 }
 
 .bg-image {
-  background-image: url('../../resources/img/background.jpg');
+  background-image: url('../../resources/img/bg.jpg');
   background-size: cover;
   background-position: center center;
 }
@@ -238,7 +238,7 @@ footer .logo{
 	.product-info h1{
 		font-size: 2.33rem;
 		margin-bottom: 1.33rem;
-				letter-spacing: 5px;
+		letter-spacing: 5px;
 
 	}
 
@@ -272,6 +272,10 @@ footer .logo{
 	.nav ul li{
 		padding: 0 1rem;
 		line-height: 3.33rem;
+	}
+
+	.bg-image {
+	  	background-image: url('../../resources/img/bg2.jpg');
 	}
 }
 
@@ -368,7 +372,7 @@ footer .logo{
 	}
 
 	.cover-sizing{
-		height: calc(100vh - 80px);
+		height: calc(100vh - 160px);
 	}
 
 	.product-slider-container{
@@ -388,26 +392,16 @@ footer .logo{
 	}
 
 	.product-info{
-	display: flex;
-	float: center;
-	width: 100%;
-	transform: translateY(60%);	
-	}
-
-	.product-info h1{
-		color: white!important;
-	}
-
-	.product-info p{
-		color: white!important;
-	}
-
-	.product-info h2{
-		color: white!important;
+		display: flex;
+		background-color: 	rgba(255, 255, 255, 0.7);
+		padding: 20px;
+		width: 50%;
+		float: none!important;
+		box-shadow: 0 0 15px rgba(10, 10, 10, 0.05);
 	}
 
 	.bg-image {
-	background-image: url('../../resources/img/duotone.png');
+	background-image: url('../../resources/img/duotone.jpg');
 	}
 
 	.cover-image {
@@ -418,8 +412,16 @@ footer .logo{
 		display: none;
 	}
 
+	.cover-sizing{
+		height: 100vh;
+	}
+
 	.login--container{
 		margin-top: -110px;
+	}
+	
+	.product-info{
+		transform: translateY(50%)!important;
 	}
 	
 }
@@ -433,6 +435,14 @@ footer .logo{
 
 	#discover{
 		display: none;
+	}
+
+	.custom--button{
+		width: 9.5rem!important;
+	}
+
+	.product-info{
+		width: 80%;
 	}
 
 }
@@ -469,19 +479,25 @@ footer .logo{
  }
 
  .text-light-blue{
-	color: rgb(0, 191, 191);;
+	color: rgb(0, 191, 191);
  }
 
 .dot {
-  height: 18px;
-  width: 18px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   display: inline-block;
 }
 
-#product--star{
-	font-size: 12px;
+.dot.product--color {
+  height: 18px;
+  width: 18px;
+
 }
+
+/* #product--star{
+	font-size: 12px;
+} */
 
 .bg--purple{
 	background-color: rgba(146,80,247,1)!important;

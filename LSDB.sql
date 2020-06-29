@@ -1,4 +1,5 @@
   
+  
 -- CREATE
 
 CREATE TABLE cliente(
@@ -64,9 +65,15 @@ CREATE TABLE administrador(
 	apellidos VARCHAR(25) NOT NULL,
 	email VARCHAR(100) NOT NULL,
 	usuario VARCHAR(25) NOT NULL,
-	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL ,
+	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL,
 	estado BIT DEFAULT '1',
 	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario)
+);
+
+CREATE TABLE color(
+	idColor SERIAL PRIMARY KEY,
+	color VARCHAR(20) NOT NULL,
+	codigo VARCHAR(20)
 );
 
 CREATE TABLE producto(
@@ -77,7 +84,8 @@ CREATE TABLE producto(
 	descuento NUMERIC(2) DEFAULT '0',
 	imagen VARCHAR(50) DEFAULT 'default.png',
 	idCategoria INTEGER REFERENCES categoria(idCategoria),
-	idTipoProducto INTEGER REFERENCES tipoProducto(idTipoProducto)
+	idTipoProducto INTEGER REFERENCES tipoProducto(idTipoProducto),
+	idColor INTEGER REFERENCES color(idColor)
 );
 
 CREATE TABLE detalleProducto(
@@ -95,11 +103,6 @@ CREATE TABLE compra(
 	idEstadoCompra INTEGER REFERENCES estadoCompra(idEstadoCompra),
 	idCliente INTEGER REFERENCES cliente(idCliente),
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
-);
-
-CREATE TABLE color(
-	idColor SERIAL PRIMARY KEY,
-	color VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE detalleCompra(
@@ -164,7 +167,11 @@ VALUES	(DEFAULT, 'Calcetas'),
 INSERT INTO talla VALUES (DEFAULT, 'S');
 INSERT INTO talla VALUES (DEFAULT, 'M');
 INSERT INTO talla VALUES (DEFAULT, 'L');
-		
+
+INSERT INTO color
+VALUES 	(DEFAULT, 'Rojo', '#e32d61'),
+		(DEFAULT, 'Azul', '#6c5ed1');
+
 INSERT INTO categoria 
 VALUES	(DEFAULT, 'Mujer'),
 		(DEFAULT, 'Hombre'),
@@ -226,26 +233,26 @@ VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
 		(DEFAULT, 'PLAZA JUAREZ NO.1, Depto 15', 2, 6),
 		(DEFAULT, 'AVENIDA NIÑOS HEROES NO. 3, Depto 21', 3, 7);
 		
-INSERT INTO producto VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, DEFAULT, DEFAULT, 1, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, DEFAULT, DEFAULT, 2, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, DEFAULT, DEFAULT, 3, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, DEFAULT, DEFAULT, 5, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, DEFAULT, DEFAULT, 1, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, DEFAULT, DEFAULT, 3, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, DEFAULT, DEFAULT, 3, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, DEFAULT, DEFAULT, 2, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, DEFAULT, DEFAULT, 2, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, DEFAULT, DEFAULT, 5, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, DEFAULT, DEFAULT, 2, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, DEFAULT, DEFAULT, 4, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, DEFAULT, DEFAULT, 2, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, DEFAULT, DEFAULT, 4, 3);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, DEFAULT, DEFAULT, 2, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, DEFAULT, DEFAULT, 5, 5);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, DEFAULT, DEFAULT, 2, 2);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, DEFAULT, DEFAULT, 3, 1);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, DEFAULT, DEFAULT, 3, 4);
-INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, DEFAULT, DEFAULT, 5, 4);
+INSERT INTO producto VALUES	(DEFAULT, 'Cat Sock', 'Divertidos calcetines con un llamativo patron de gatos', 5.00, DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Banana Sock', 'Divertidos calcetines con un llamativo patron de bananas', 5.00, DEFAULT, DEFAULT, 2, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Happy Face Sock', 'Divertidos calcetines con un llamativo patron de caritas felices', 4.00, DEFAULT, DEFAULT, 3, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos', 'Divertidos calcetines con un llamativo patron de perritos animados', 6.00, DEFAULT, DEFAULT, 5, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos', 'Divertidos calcetines con un llamativo patron de gatos animados', 5.00, DEFAULT, DEFAULT, 1, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de perritos divertidos', 'Divertidos calcetines con un llamativo patron de perritos', 5.00, DEFAULT, DEFAULT, 3, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de gatos divertidos', 'Divertidos calcetines con un llamativo patron de gatos', 5.50, DEFAULT, DEFAULT, 3, 4, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados rojo y negro', 'Divertidos calcetines con un llamativo patron de lineas rojas y negras', 5.00, DEFAULT, DEFAULT, 2, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines rayados azul y anaranjado', 'Divertidos calcetines con un llamativo patron de lineas azules y anaranjadas', 5.50, DEFAULT, DEFAULT, 2, 5, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Caja de dos pares de medias', 'Calcetines divertidos para niños de diseño exclusivo', 9.00, DEFAULT, DEFAULT, 5, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tigre', 'Divertidos calcetines con un llamativo patron de piel de tigre', 5.00, DEFAULT, DEFAULT, 2, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rojos', 'Divertidos calcetines con un llamativo patron de corazones rojos', 4.99, DEFAULT, DEFAULT, 4, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de hamburguesas', 'Divertidos calcetines con un llamativo patron de hamburguesas', 6.40, DEFAULT, DEFAULT, 2, 5, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones blancos', 'Divertidos calcetines con un llamativo patrón de corazones blancos', 4.99, DEFAULT, DEFAULT, 4, 3, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de tacos', 'Divertidos calcetines con un llamativo patrón de tacos', 6.00, DEFAULT, DEFAULT, 2, 4, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de corazones rotos', 'Divertidos calcetines con un llamativo patrón de corazones rotos', 4.99, DEFAULT, DEFAULT, 5, 5, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de arcoiris', 'Divertidos calcetines con un llamativo patrón de arcoíris', 6.00, DEFAULT, DEFAULT, 2, 2, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de dinosaurio', 'Divertidos calcetines con un llamativo patrón de dinosaurios', 5.00, DEFAULT, DEFAULT, 3, 1, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de payasos', 'Divertidos calcetines con un llamativo patrón de payasos', 6.00, DEFAULT, DEFAULT, 3, 4, 1);
+INSERT INTO producto VALUES	(DEFAULT, 'Calcetines de navidad', 'Divertidos calcetines con un llamativo patrón de lineas rojas verdes y rojas', 5.00, DEFAULT, DEFAULT, 5, 4, 1);
 		
 		
 INSERT INTO compra

@@ -12,6 +12,7 @@ class Producto extends Validator
     private $precio = null;
     private $idCategoria = null;
     private $idTipoProducto = null;
+    private $idColor = null;
     private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/producto/';
@@ -107,6 +108,16 @@ class Producto extends Validator
             return true;
     }
 
+    public function setIdColor($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idColor = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setImagen($file)
     {
         if ($this->validateImageFile($file, 500, 500)) {
@@ -156,6 +167,11 @@ class Producto extends Validator
         return $this->idTipoProducto;
     }
 
+    public function getIdColor()
+    {
+        return $this->idColor;
+    }
+
     public function getImagen()
     {
         return $this->imagen;
@@ -197,6 +213,18 @@ class Producto extends Validator
                 WHERE idProducto = ?';
         $params = array( $this->idProducto );
         return Database::getRow( $sql, $params );
+    }
+
+    public function readProductoCategoria()
+    {
+        $sql = 'SELECT nombre, p.precio, cantidad, talla, codigo, calificacion 
+                FROM producto p INNER JOIN detalleCompra USING(idproducto) 
+                INNER JOIN comentario USING(iddetallecompra) 
+                INNER JOIN color USING(idcolor) 
+                INNER JOIN talla USING(idtalla)
+                WHERE idCategoria = ?';
+        $params = array( $this->idCategoria);
+        return Database::getRow( $sql, $params);
     }
 
     public function updateProducto(){
