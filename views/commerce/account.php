@@ -8,21 +8,22 @@ Page::headerTemplate('Ajustes | Lost Sock');
 <div class="container cover--account">
     <div class="row">
         <div class="col-12 col-md-5 border mr-5 bg-white py-4 mb-sm-4 mb-md-0">
-            <div class="row d-flex justify-content-center">
-                <div class="sm-12 md-2 lg-2 columns">
-                    <div class="circle position-relative mb-3 mx-auto">
-                        <!-- Imagen de perfil del usuario -->
-                        <img class="profile--pic d-flex justify-content rounded-circle mx-auto" src="../../resources/img/user.png">
-                        <div class="image-upload p-image">
-                            <label for="file-input">
-                                <i class="fad fa-camera-alt camera--button"></i>
-                            </label>
-                            <input id="file-input" class="file-upload" type="file" accept="image/*" />
+            
+            <form method="post" id="profile-form" class="p-3" enctype="multipart/form-data">
+                <div class="row d-flex justify-content-center">
+                    <div class="sm-12 md-2 lg-2 columns">
+                        <div class="circle position-relative mb-3 mx-auto">
+                            <!-- Imagen de perfil del usuario -->
+                            <img id="profile-picture" alt="Foto de perfil" class="profile--pic d-flex justify-content rounded-circle mx-auto">
+                            <div class="image-upload p-image">
+                                <label for="file-input">
+                                    <i class="fad fa-camera-alt camera--button"></i>
+                                </label>
+                                <input class="file-upload" type="file" accept="image/*" id="file-input" name="imagen">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <form method="post" id="profile-form" class="p-3">
                 <h6 class="mt-3 mb-2 text-muted">INFORMACIÓN PERSONAL</h6>
                 <div class="form-group">
                     <label for="nombres">Nombres</label>

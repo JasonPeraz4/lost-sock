@@ -266,11 +266,18 @@ class Cliente extends Validator{
     }
 
     public function editProfile()
-    {
-        $sql = 'UPDATE cliente 
+    {   
+        if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
+            $sql = 'UPDATE cliente 
+                SET imagen = ?, nombres = ?, apellidos = ?, telefono = ?, email = ?, usuario = ?
+                WHERE idcliente = ?';
+            $params = array( $this->imagen, $this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
+        } else {
+            $sql = 'UPDATE cliente 
                 SET nombres = ?, apellidos = ?, telefono = ?, email = ?, usuario = ?
                 WHERE idcliente = ?';
-        $params = array($this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
+            $params = array($this->nombres, $this->apellidos, $this->telefono, $this->email, $this->usuario, $this->idCliente);
+        }
         return Database::executeRow($sql, $params);
     }
 
@@ -289,14 +296,14 @@ class Cliente extends Validator{
     /*Función para realizar un select de todos los clientes*/
     public function readAllCliente()
     {
-        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario, estado FROM cliente';
+        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario, estado, imagen FROM cliente';
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function readOneCliente()
     {
-        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario FROM cliente WHERE idcliente = ?';
+        $sql = 'SELECT idcliente, nombres, apellidos, email, telefono, usuario, imagen FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         return Database::getRow($sql, $params);
     }

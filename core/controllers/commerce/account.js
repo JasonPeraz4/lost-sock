@@ -70,7 +70,10 @@ function loadProfile(){
         .done(function( response ){
             // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
             if ( response.status ) {
+                let src = '../../resources/img/clientes/';
+                src+=response.dataset.imagen;
                 // Se inicializan los campos del formulario con los datos del usuario que ha iniciado sesión.
+                $("#profile-picture").attr('src', src);
                 $( '#nombres' ).val( response.dataset.nombres );
                 $( '#apellidos' ).val( response.dataset.apellidos );
                 $( '#telefono' ).val( response.dataset.telefono );
@@ -98,8 +101,11 @@ $( '#profile-form' ).submit(function( event ) {
     $.ajax({
         type: 'post',
         url: API + 'editProfile',
-        data: $( '#profile-form' ).serialize(),
-        dataType: 'json'
+        data: new FormData( $( '#profile-form' )[0] ),
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
     })
     .done(function( response ) {
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
