@@ -2,10 +2,6 @@
 require_once('../../core/helpers/template-commerce.php');
 Page::headerTemplate('Lost Sock');
 ?>
-    <?php
-require_once('../../core/helpers/template-commerce.php');
-Page::headerTemplate('Hombres');
-?>
         <!-- Grupo de cards para productos -->
         <div class="container cover-general">
             <!-- row -->
