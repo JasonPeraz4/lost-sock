@@ -4,7 +4,8 @@
 */
 class Orden extends Validator{
     // 
-    private $idCompra = null; 
+    private $idCompra = null;
+    private $idDetalleCompra = null;
     private $nombre = null;
     private $fechaCompra = null;
     private $fechaEnvio = null; 
@@ -22,6 +23,16 @@ class Orden extends Validator{
     {
         if ($this->validateNaturalNumber($value)) {
             $this->idCompra = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setIdDetalleCompra($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idDetalleCompra = $value;
             return true;
         } else {
             return false;
@@ -106,6 +117,11 @@ class Orden extends Validator{
     public function getIdCompra()
     {
         return $this->idCompra;
+    }
+
+    public function getIdDetalleCompra()
+    {
+        return $this->idDetallecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccCompra;
     }
 
     public function getNombre()
