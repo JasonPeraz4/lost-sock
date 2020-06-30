@@ -215,6 +215,69 @@ Page::headerTemplate('Lost Sock');
                                     </div>
                                 </div>
                             </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="card custom--card">
+                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">Penguin Sock</h5>
+                                        <p class="card-text text-center">$5</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
