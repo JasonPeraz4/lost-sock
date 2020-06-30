@@ -202,6 +202,10 @@ footer .logo{
 	margin-top: 80px;
 }
 
+.cover--general{
+	margin-top: 100px;
+}
+
 .cover--account{
 	margin-top: -140px;
 }
@@ -464,6 +468,10 @@ footer .logo{
 .custom--card{
 	box-shadow: 0 0 15px rgba(10, 10, 10, 0.05);
 	border: none;
+}
+
+.shadow{
+	box-shadow: 0 0 15px rgba(10, 10, 10, 0.03);
 }
 
 .custom--button:hover { 
