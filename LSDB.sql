@@ -1,5 +1,3 @@
-  
-  
 -- CREATE
 
 CREATE TABLE cliente(
@@ -181,10 +179,9 @@ VALUES	(DEFAULT, 'Mujer'),
 
 INSERT INTO estadoCompra 
 VALUES	(DEFAULT, 'En proceso'),
-		(DEFAULT, 'Cancelada'),
-		(DEFAULT, 'Enviada'),
 		(DEFAULT, 'Finalizada'),
-		(DEFAULT, 'Iniciada');
+		(DEFAULT, 'Entregada'),
+		(DEFAULT, 'Cancelada');
 
 INSERT INTO planSuscripcion
 VALUES	(DEFAULT, 1, 5.00),
@@ -259,7 +256,7 @@ INSERT INTO compra
 VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-02-17', NOW(), 9.00, 4, 2, 2),
 		(DEFAULT, '2020-02-11', NOW(), 9.00, 3, 3, 3),
-		(DEFAULT, '2020-02-7', NOW(), 10.00, 5, 4, 2),
+		(DEFAULT, '2020-02-7', NOW(), 10.00, 1, 4, 2),
 		(DEFAULT, '2020-02-12', NOW(), 9.98, 2, 5, 3),
 		(DEFAULT, '2020-02-12', NOW(), 12.00, 3, 6, 4),
 		(DEFAULT, '2020-02-16', NOW(), 9.00, 4, 7, 5),
@@ -268,7 +265,7 @@ VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 10, 3),
 		(DEFAULT, '2020-02-17', NOW(), 16.00, 3, 11, 5),
 		(DEFAULT, '2020-02-17', NOW(), 15.00, 4, 12, 2),
-		(DEFAULT, '2020-02-17', NOW(), 15.00, 5, 13, 4),
+		(DEFAULT, '2020-02-17', NOW(), 15.00, 2, 13, 4),
 		(DEFAULT, '2020-02-8', NOW(), 14.00, 3, 1, 3),
 		(DEFAULT, '2020-02-17', NOW(), 15.00, 1, 2, 4),
 		(DEFAULT, '2020-02-17', NOW(), 15.00, 2, 2, 3),
@@ -277,7 +274,7 @@ VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-02-17', NOW(), 16.00, 3, 12, 2),
 		(DEFAULT, '2020-02-17', NOW(), 15.00, 3, 11, 2),
 		(DEFAULT, '2020-02-17', NOW(), 18.00, 3, 10, 5),
-		(DEFAULT, '2020-02-17', NOW(), 20.00, 5, 9, 4),
+		(DEFAULT, '2020-02-17', NOW(), 20.00, 4, 9, 4),
 		(DEFAULT, '2020-02-17', NOW(), 19.00, 4, 8, 4),
 		(DEFAULT, '2020-02-17', NOW(), 20.00, 1, 7, 2),
 		(DEFAULT, '2020-02-17', NOW(), 19.96, 2, 6, 3),
@@ -286,7 +283,7 @@ VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-02-17', NOW(), 16.00, 3, 3, 4),
 		(DEFAULT, '2020-02-17', NOW(), 24.00, 2, 2, 1),
 		(DEFAULT, '2020-02-17', NOW(), 20.00, 1, 1, 4),
-		(DEFAULT, '2020-02-17', NOW(), 24.95, 5, 1, 4),
+		(DEFAULT, '2020-02-17', NOW(), 24.95, 4, 1, 4),
 		(DEFAULT, '2020-02-17', NOW(), 22.50, 2, 2, 2),
 		(DEFAULT, '2020-02-17', NOW(), 30.00, 1, 3, 3),
 		(DEFAULT, '2020-02-16', NOW(), 25.00, 1, 4, 5),
@@ -295,7 +292,7 @@ VALUES	(DEFAULT, '2020-02-17', NOW(), 9.98, 1, 1, 1),
 		(DEFAULT, '2020-06-1', NOW(), 24.95, 2, 7, 2),
 		(DEFAULT, '2020-06-7', NOW(), 30.00, 3, 8, 4),
 		(DEFAULT, '2020-06-5', NOW(), 22.50, 4, 9, 2),
-		(DEFAULT, '2020-06-2', NOW(), 25.00, 5, 10, 3);
+		(DEFAULT, '2020-06-2', NOW(), 25.00, 1, 10, 3);
 
 INSERT INTO detalleCompra
 VALUES	(DEFAULT, 1, 5.00, 14, 1, 1),

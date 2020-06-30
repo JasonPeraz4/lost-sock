@@ -2,6 +2,7 @@
 const API_PRODUCTO = '../../core/api/dashboard/producto.php?action=';
 const API_CATEGORIA = '../../core/api/dashboard/categoria.php?action=readAll';
 const API_TIPOPRODUCTO = '../../core/api/dashboard/tipoProducto.php?action=readAll';
+const API_COLOR = '../../core/api/dashboard/color.php?action=readAll';
 const API_DETALLEPRODUCTO = '../../core/api/dashboard/detalleProducto.php?action=';
 
 // Método que se ejecuta una vez la página este lista.
@@ -66,6 +67,7 @@ function openCreateModal()
     // Se llama a la función que llenar los select del formulario. Se encuentra en el archivo components.js
     fillSelect( API_CATEGORIA, 'categoria_producto', null );
     fillSelect( API_TIPOPRODUCTO, 'tipo_producto', null );
+    fillSelect( API_COLOR, 'color_producto', null );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -97,6 +99,7 @@ function openUpdateModal( id )
             $( '#descuento' ).val( response.dataset.descuento );
             fillSelect( API_CATEGORIA, 'categoria_producto', response.dataset.idcategoria );
             fillSelect( API_TIPOPRODUCTO, 'tipo_producto', response.dataset.idtipoproducto );
+            fillSelect( API_COLOR, 'color_producto', response.dataset.idcolor );
         } else {
             sweetAlert( 2, result.exception, null );
         }

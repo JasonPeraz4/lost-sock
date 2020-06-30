@@ -188,9 +188,9 @@ class Producto extends Validator
     public function createProducto()
     {   
         if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
-            $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto)
-                VALUES(?, ?, ?, ?, ?, ?, ?)';
-            $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->imagen, $this->idCategoria, $this->idTipoProducto );
+            $sql = 'INSERT INTO producto(nombre, descripcion, precio, descuento, imagen, idColor, idCategoria, idTipoProducto)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+            $params = array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->imagen, $this->idColor, $this->idCategoria, $this->idTipoProducto );
             return Database::executeRow( $sql, $params );
         } else {
             return false;
@@ -199,8 +199,8 @@ class Producto extends Validator
 
     public function readAllProductos()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, categoria, tipo
-                FROM producto INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, color, categoria, tipo
+                FROM producto INNER JOIN color USING(idColor) INNER JOIN categoria USING(idCategoria) INNER JOIN tipoProducto USING(idTipoProducto)
                 ORDER BY idProducto';
         $params = null;
         return Database::getRows( $sql, $params );
@@ -208,7 +208,7 @@ class Producto extends Validator
 
     public function readProducto()
     {
-        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, idCategoria, idTipoProducto
+        $sql = 'SELECT idProducto, nombre, descripcion, precio, descuento, imagen, idColor, idCategoria, idTipoProducto
                 FROM producto
                 WHERE idProducto = ?';
         $params = array( $this->idProducto );
@@ -230,14 +230,14 @@ class Producto extends Validator
     public function updateProducto(){
         if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
             $sql = 'UPDATE producto 
-                    SET imagen = ?, nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    SET imagen = ?, nombre = ?, descripcion = ?, precio = ?, descuento = ?, idColor = ?, idCategoria = ?, idTipoProducto = ? 
                     WHERE idProducto = ?';
-            $params=array( $this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+            $params=array( $this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idColor, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
         } else {
             $sql = 'UPDATE producto 
-                    SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idCategoria = ?, idTipoProducto = ? 
+                    SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, idColor = ?, idCategoria = ?, idTipoProducto = ? 
                     WHERE idProducto = ?';
-            $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
+            $params=array( $this->nombre, $this->descripcion, $this->precio, $this->descuento, $this->idColor, $this->idCategoria, $this->idTipoProducto, $this->idProducto );
         }
         return Database::executeRow( $sql, $params );
     }
