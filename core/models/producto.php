@@ -215,13 +215,21 @@ class Producto extends Validator
         return Database::getRow( $sql, $params );
     }
 
-    public function readProductoCategoria()
+    public function readProductosCategoria()
     {
-        $sql = 'SELECT nombre, p.precio, cantidad, talla, codigo, calificacion 
+        $sql = 'SELECT nombre, p.precio, imagen, cantidad, talla, codigo, calificacion 
                 FROM producto p INNER JOIN detalleCompra USING(idproducto) 
                 INNER JOIN comentario USING(iddetallecompra) 
                 INNER JOIN color USING(idcolor) 
                 INNER JOIN talla USING(idtalla)
+                WHERE idCategoria = ?';
+        $params = array( $this->idCategoria);
+        return Database::getRow( $sql, $params);
+    }
+
+    public function readProductosCarousel()
+    {
+        $sql = 'SELECT nombre, precio, imagen FROM producto
                 WHERE idCategoria = ?';
         $params = array( $this->idCategoria);
         return Database::getRow( $sql, $params);

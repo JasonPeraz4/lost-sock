@@ -60,9 +60,7 @@ class Page {
                             <li>
                                 <a href="exclusive.php">Exclusivo</a>
                             </li>
-                            <li>
-                                <a href="suscription.php">Suscripción</a>
-                            </li>
+
                         </ul>
                     </div>
                     <!-- /Parte central del nav -->

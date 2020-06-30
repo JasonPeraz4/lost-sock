@@ -1,167 +1,105 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_PRODUCTO = '../../core/api/dashboard/producto.php?action=';
-const API_CATEGORIA = '../../core/api/dashboard/categoria.php?action=readAll';
-const API_TIPOPRODUCTO = '../../core/api/dashboard/tipoProducto.php?action=readAll';
-const API_DETALLEPRODUCTO = '../../core/api/dashboard/detalleProducto.php?action=';
+const API_PRODUCTO = '../../core/api/commerce/producto.php?action=';
 
-// Método que se ejecuta una vez la página este lista.
+// Método que se ejecuta cuando el documento está listo.
 $(document).ready(function () {
-    //Se llama a la función que verifica la existencia de administradores. Se ubica en el archivo account.js
-    readRows(API_PRODUCTO);
+    // Se busca en la URL las variables (parámetros) disponibles.
+    let params = new URLSearchParams(location.search);
+    // Se obtienen los datos localizados por medio de las variables.
+    const ID = params.get('id');
+    const NAME = params.get('nombre');
+    // Se llama a la función que muestra los productos de la categoría seleccionada previamente.
+    readProductosCategoria(ID, NAME);
 });
 
-function fillTable(dataset) {
-    if ($.fn.dataTable.isDataTable('#myTable')) {
-        $('#myTable').DataTable().clear();
-        $('#myTable').DataTable().destroy();
-    }
-    let content = '';
-    // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-    dataset.forEach(function (row) {
-        // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-        content += `
-            <tr>
-                <td><img src="../../resources/img/producto/${row.imagen}" alt="${row.imagen}" class="mr-3 rounded-circle img-avatar"></td>
-                <td>${row.nombre}</td>
-                <td>${row.descripcion}</td>
-                <td>
-                    <div>$${row.precio}</div>
-                    <div>${row.descuento}%</div>
-                </td>
-                <td>${row.categoria}</td>
-                <td>${row.tipo}</td>
-                <td><a class="text-success" href="#" onclick="openExistModal(${row.idproducto})">Ver existencias</a></td>
-                <td>
-                    <a href="comentarios.php?id=${row.idproducto}"><i class="fas fa-comments" data-toggle="tooltip" title="Comentarios"></i></a>
-                    <i class="fas fa-edit mx-1 text-warning" onclick="openUpdateModal(${row.idproducto})" data-toggle="tooltip" title="Editar"></i>
-                    <i class="fas fa-trash-alt text-danger" onclick="openDeleteDialog(${row.idproducto})" data-toggle="tooltip" title="Eliminar"></i>
-                </td>
-            </tr>
-        `;
-    });
-    // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-    $('#tbody-rows').html(content);
-    $('#myTable').DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json',
-            'search': 'Buscar administrador:',
-
-        }
-    });
-}
-
-
-// Función que prepara formulario para insertar un registro.
-function openCreateModal() {
-    // Se limpian los campos del formulario.
-    $('#save-form')[0].reset();
-    // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#save-modal').modal('show');
-    // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar producto');
-    // Se establece el campo de tipo archivo como obligatorio.
-    $('#imagen').prop('required', true);
-    // Se llama a la función que llenar los select del formulario. Se encuentra en el archivo components.js
-    fillSelect(API_CATEGORIA, 'categoria_producto', null);
-    fillSelect(API_TIPOPRODUCTO, 'tipo_producto', null);
-}
-
-// Función que prepara formulario para modificar un registro.
-function openUpdateModal(id) {
-    // Se limpian los campos del formulario.
-    $('#save-form')[0].reset();
-    // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#save-modal').modal('show');
-    // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Actualizar producto');
-    // Se establece el campo de tipo archivo como opcional.
-    $('#imagen').prop('required', false);
-
+// Función para obtener y mostrar los productos de acuerdo a la categoría seleccionada.
+function readProductosCategoria(id, categoria) {
     $.ajax({
         dataType: 'json',
-        url: API_PRODUCTO + 'readOne',
-        data: { idproducto: id },
+        url: API_CATALOGO + 'readProductosCategoria',
+        data: { idCategoria: id },
         type: 'post'
     })
         .done(function (response) {
-            // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+            // Se comprueba si la API ha retornado datos, de lo contrario se muestra un mensaje de error en pantalla.
             if (response.status) {
-                // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-                $('#idproducto').val(response.dataset.idproducto);
-                $('#nombre').val(response.dataset.nombre);
-                $('#descripcion').val(response.dataset.descripcion);
-                $('#precio').val(response.dataset.precio);
-                $('#descuento').val(response.dataset.descuento);
-                fillSelect(API_CATEGORIA, 'categoria_producto', response.dataset.idcategoria);
-                fillSelect(API_TIPOPRODUCTO, 'tipo_producto', response.dataset.idtipoproducto);
-            } else {
-                sweetAlert(2, result.exception, null);
-            }
-        })
-        .fail(function (jqXHR) {
-            // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
-            if (jqXHR.status == 200) {
-                console.log(jqXHR.responseText);
-            } else {
-                console.log(jqXHR.status + ' ' + jqXHR.statusText);
-            }
-        });
-}
-
-// Evento para crear o modificar un registro.
-$('#save-form').submit(function (event) {
-    event.preventDefault();
-    // Se llama a la función que crear o actualizar un registro. Se encuentra en el archivo components.js
-    // Se comprueba si el id del registro esta asignado en el formulario para actualizar, de lo contrario se crea un registro.
-    if ($('#idproducto').val()) {
-        saveRow(API_PRODUCTO, 'update', this, 'save-modal');
-    } else {
-        saveRow(API_PRODUCTO, 'create', this, 'save-modal');
-    }
-});
-
-// Función para establecer el registro a eliminar mediante el id recibido.
-function openDeleteDialog(id) {
-    // Se declara e inicializa un objeto con el id del registro que será borrado.
-    let identifier = { idproducto: id };
-    confirmDelete(API_PRODUCTO, identifier);
-}
-
-
-// Función para ver existencias
-function openExistModal(id) {
-    // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $('#existencias-modal').modal('show');
-
-    $.ajax({
-        dataType: 'json',
-        url: API_DETALLEPRODUCTO + 'readOne',
-        data: { idproductoe: id },
-        type: 'post'
-    })
-        .done(function (response) {
-            // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
-            if (response.status) {
-                // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-                $('#idproductoe').val(id);
                 let content = '';
-                // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+                // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
                 response.dataset.forEach(function (row) {
-                    // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+                    // Se crean y concatenan las tarjetas con los datos de cada producto.
                     content += `
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="i${row.iddetalleproducto}">${row.talla}</span>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+                    <div class="card product--detail custom--card">
+                        <img class="card-img-top" src="------" alt="Card image">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <!-- Título de la card -->
+                                    <h5 class="card-title" id="titulo-producto"></h5>
+                                </div>
+                                <div class="col-4">
+                                    <p class="float-right text-purple font-weight-bold" id="precio-producto"></p>
+                                </div>
+                            </div>
+                           <div class="row">
+                               <div class="col-5 text-center">
+                                    <!-- Colores -->
+                                    <div class="mb-3 float-left">
+                                        <span class="dot product--color bg--inactive" style="background-color: red!important;" id="color-producto"></span>
+                                        <span class="dot product--color bg--inactive" data-toggle="tooltip" title="Sin existencias"></span>
+                                    </div>
+                               </div>
+                               <div class="col-7 text-center">
+                                    <!-- Colores -->
+                                    <div class=" mb-3">
+                                        <div class="star--card float-right">
+                                            <span class="fa fa-star text-yellow" id="estrella-producto"></span>
+                                            <span class="fa fa-star text-yellow" id="estrella-producto"></span>
+                                            <span class="fa fa-star text-yellow" id="estrella-producto"></span>
+                                            <span class="fa fa-star text-yellow" id="estrella-producto"></span>
+                                            <span class="fa fa-star text-yellow" id="estrella-producto"></span>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                           <div class="row">
+                               <div class="col-6 text-center">
+                                <!-- Tallas -->
+                                <div class="dropdown">
+                                    <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Talla
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="talla-producto">
+                                        <a class="dropdown-item" href="#">S</a>
+                                        <a class="dropdown-item" href="#">M</a>
+                                        <a class="dropdown-item" href="#">L</a>
+                                    </div>
+                                </div>
+                               </div>
+                               <div class="col-6 text-center">
+                                    <input class="form-control form-control-sm float-right" type="number" id="cantidad-producto">
+                               </div>
+                            </div>
                         </div>
-                        <input type="text" class="form-control" value="${row.existencia}" aria-describedby="i${row.iddetalleproducto}" name="${row.iddetalleproducto}">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <div class="mb-3">
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php" id="agregar-producto">Agregar al carrito</button>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
+                </div>
                 `;
                 });
-                // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-                $('#existencias-body').html(content);
-
+                // Se asigna como título la categoría de los productos.
+                $('#title').text(`Categoría: ${categoria}`);
+                // Se agregan las tarjetas a la etiqueta div mediante su id para mostrar los productos.
+                $('#productos').html(content);
             } else {
-                sweetAlert(2, result.exception, null);
+                // Se presenta un mensaje de error cuando no existen datos para mostrar.
+                $('#title').html(`<i class="material-icons small">cloud_off</i><span class="red-text">${response.exception}</span>`);
             }
         })
         .fail(function (jqXHR) {
@@ -173,33 +111,3 @@ function openExistModal(id) {
             }
         });
 }
-
-// Evento que valida al administrador al presionar el botón de iniciar sesión.
-$('#existencias-form').submit(function (event) {
-    // Se evita recargar la página web de enviar formulario.
-    event.preventDefault();
-    $.ajax({
-        type: 'post',
-        url: API_DETALLEPRODUCTO + 'update',
-        data: $('#existencias-form').serialize(),
-        dataType: 'json'
-    })
-        .done(function (response) {
-            // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
-            if (response.status) {
-                sweetAlert(1, response.message, null);
-                // Se cierra la caja de dialogo (modal) donde está el formulario.
-                $('#existencias-modal').modal('hide');
-            } else {
-                sweetAlert(2, response.exception, null);
-            }
-        })
-        .fail(function (jqXHR) {
-            // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
-            if (jqXHR.status == 200) {
-                console.log(jqXHR.responseText);
-            } else {
-                console.log(jqXHR.status + ' ' + jqXHR.statusText);
-            }
-        })
-});

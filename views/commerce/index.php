@@ -31,8 +31,54 @@ Page::headerTemplate('Lost Sock');
                                                     <span class="fa fa-star text-yellow"></span>
                                                     <span class="fa fa-star text-yellow"></span>
                                                 </div>
-                                            <p class="card-text"><small class="text-purple font-weight-bold"">$5.00</small></p>
+                                            <p class="card-text"><small class="text-purple font-weight-bold">$5.00</small></p>
                                         </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Contenido del primer slider-->
+                        <div class="card product-slider-card">
+                            <div class="row no-gutters">
+                                <div class="col-5">
+                                    <img src="../../resources/img/socks.jpg" class="card-img" alt="...">
+                                </div>
+                                <div class="col-7">
+                                    <div class="card-body">
+                                        <div class="slider--card">
+                                            <p class="card-title text-secondary font-weight-bold">Banana Socks</p>
+                                                <div class="star--card">
+                                                    <span class="fa fa-star text-yellow"></span>
+                                                    <span class="fa fa-star text-yellow"></span>
+                                                    <span class="fa fa-star text-yellow"></span>
+                                                    <span class="fa fa-star text-yellow"></span>
+                                                    <span class="fa fa-star text-yellow"></span>
+                                                </div>
+                                            <p class="card-text"><small class="text-purple font-weight-bold">$5.00</small></p>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Contenido del primer slider-->
+                        <div class="card product-slider-card">
+                            <div class="row no-gutters">
+                                <div class="col-5">
+                                    <img src="../../resources/img/socks.jpg" class="card-img" alt="...">
+                                </div>
+                                <div class="col-7">
+                                    <div class="card-body">
+                                        <div class="slider--card">
+                                            <p class="card-title text-secondary font-weight-bold">Banana Socks</p>
+                                            <div class="star--card">
+                                                <span class="fa fa-star text-yellow"></span>
+                                                <span class="fa fa-star text-yellow"></span>
+                                                <span class="fa fa-star text-yellow"></span>
+                                                <span class="fa fa-star text-yellow"></span>
+                                                <span class="fa fa-star text-yellow"></span>
+                                            </div>
+                                            <p class="card-text"><small class="text-purple font-weight-bold"">$5.00</small></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -83,52 +129,7 @@ Page::headerTemplate('Lost Sock');
                                 </div>
                             </div>
                         </div> 
-                        <!--Contenido del primer slider-->
-                        <div class="card product-slider-card">
-                            <div class="row no-gutters">
-                                <div class="col-5">
-                                    <img src="../../resources/img/socks.jpg" class="card-img" alt="...">
-                                </div>
-                                <div class="col-7">
-                                    <div class="card-body">
-                                        <div class="slider--card">
-                                            <p class="card-title text-secondary font-weight-bold">Banana Socks</p>
-                                            <div class="star--card">
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                            </div>
-                                            <p class="card-text"><small class="text-purple font-weight-bold"">$5.00</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Contenido del primer slider-->
-                        <div class="card product-slider-card">
-                            <div class="row no-gutters">
-                                <div class="col-5">
-                                    <img src="../../resources/img/socks.jpg" class="card-img" alt="...">
-                                </div>
-                                <div class="col-7">
-                                    <div class="card-body">
-                                        <div class="slider--card">
-                                            <p class="card-title text-secondary font-weight-bold">Banana Socks</p>
-                                            <div class="star--card">
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                                <span class="fa fa-star text-yellow"></span>
-                                            </div>
-                                            <p class="card-text"><small class="text-purple font-weight-bold"">$5.00</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!--Slider de productos-->
@@ -203,44 +204,8 @@ Page::headerTemplate('Lost Sock');
                 <hr>
                 <div class="container mb-5">
                     <h3 class="text-center my-5 text-secondary">Exclusivos</h3>
-                    <div class="row">
+                    <div class="row" id="carousel-exclusivo">
                         <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="card custom--card">
-                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Penguin Sock</h5>
-                                        <p class="card-text text-center">$5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card custom--card">
-                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Penguin Sock</h5>
-                                        <p class="card-text text-center">$5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card custom--card">
-                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Penguin Sock</h5>
-                                        <p class="card-text text-center">$5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="card custom--card">
-                                    <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Penguin Sock</h5>
-                                        <p class="card-text text-center">$5</p>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="item">
                                 <div class="card custom--card">
                                     <img class="card-img-top img-fluid" src="../../resources/img/socks3.jpg" alt="Card image cap">
