@@ -121,7 +121,7 @@ class Orden extends Validator{
 
     public function getIdDetalleCompra()
     {
-        return $this->idDetallecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccCompra;
+        return $this->idDetalleCompra;
     }
 
     public function getNombre()
@@ -158,7 +158,28 @@ class Orden extends Validator{
     {
         return $this->apellidos;
     }
-
+    
+    // Método para verificar si existe un pedido pendiente del cliente para seguir comprando, de lo contrario crea uno.
+    public function readCompra()
+    {
+        $sql = 'SELECT idCompra FROM compra WHERE idCliente = ? AND idEstadoCompra = 1';
+        $params = array($this->idCliente);
+        if ($data = Database::getRow($sql, $params)) {
+            $this->idCompra = $data['idcompra'];
+            return true;
+        } else {
+            $sql = 'INSERT INTO pedidos(id_cliente)
+                    VALUES(?)';
+            $params = array($this->cliente);
+            if (Database::executeRow($sql, $params)) {
+                // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
+                $this->id_pedido = Database::getLastRowId();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
     
 /*Función para realizar un select de todos los clientes*/
     public function readAllOrden()

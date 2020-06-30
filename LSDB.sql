@@ -95,9 +95,9 @@ CREATE TABLE detalleProducto(
 
 CREATE TABLE compra(
 	idCompra SERIAL PRIMARY KEY,
-	fechaCompra DATE NOT NULL,
+	fechaCompra DATE DEFAULT NOW() NOT NULL,
 	fechaEnvio DATE NOT NULL,
-	total NUMERIC(6,2) NOT NULL,
+	total NUMERIC(6,2) DEFAULT 0.00 NOT NULL,
 	idEstadoCompra INTEGER REFERENCES estadoCompra(idEstadoCompra),
 	idCliente INTEGER REFERENCES cliente(idCliente),
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
