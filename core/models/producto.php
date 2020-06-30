@@ -227,14 +227,6 @@ class Producto extends Validator
         return Database::getRow( $sql, $params);
     }
 
-    public function readProductosCarousel()
-    {
-        $sql = 'SELECT nombre, precio, imagen FROM producto
-                WHERE idCategoria = ?';
-        $params = array( $this->idCategoria);
-        return Database::getRow( $sql, $params);
-    }
-
     public function updateProducto(){
         if ($this->saveFile($this->archivo, $this->ruta, $this->imagen)) {
             $sql = 'UPDATE producto 

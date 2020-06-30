@@ -266,12 +266,14 @@ class Page {
                             <div class="col-12">
                                 <div class="container">
                                     <p class="lead">
-                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                        non commodo luctus.
-                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                        non commodo luctus.
-                                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est
-                                        non commodo luctus.
+                                        Calcetines con su respectivo par desaparecido ¿a quién no le ha
+                                        sucedido esto más de alguna vez? A todos. Y aún cuando esto
+                                        sucede constantemente, nadie realmente se detiene a pensar en
+                                        esta pieza tan esencial, con muchas funciones, desde proteger
+                                        tus pies de aquellos molestos zapatos nuevos, hasta mantenerlos
+                                        calientes en aquellos días de invierno. Lost Sock nace como una
+                                        atrevida idea de negocio que busca innovar el diseño de estos,
+                                        convirtiéndolos en una pieza representativa de la identidad creativa de cada quien.
                                     </p>
                                 </div>
                             </div>
