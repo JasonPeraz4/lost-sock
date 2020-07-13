@@ -78,6 +78,13 @@ Page::headerTemplate('Gestión de productos', null);
                     </select>
                 </div>             
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="color_producto">Color</label>
+                    <select class="form-control" id="color_producto" name="color_producto">
+                    </select>
+                </div>            
+            </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="imagen" name="imagen" accept=".gif, .jpg, .png"/>
                 <label class="custom-file-label" for="imagen">Selecccionar imagen</label>

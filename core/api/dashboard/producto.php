@@ -28,27 +28,31 @@ if (isset($_GET['action'])) {
                     if ( $producto->setDescripcion( $_POST[ 'descripcion' ] ) ) {
                         if ( $producto->setPrecio( $_POST[ 'precio' ] ) ) {
                             if ( $producto->setDescuento( $_POST[ 'descuento' ] ) ) {
-                                if ( $producto->setIdCategoria( $_POST[ 'categoria_producto' ] ) ) {
-                                    if ( $producto->setIdTipoProducto( $_POST[ 'tipo_producto' ] ) ) {
-                                        if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
-                                            if ($producto->setImagen($_FILES['imagen'])) {
-                                                if ( $producto->createProducto() ) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Producto agregado correctamente';
+                                if ( $producto->setIdColor( $_POST[ 'color_producto' ] ) ) {    
+                                    if ( $producto->setIdCategoria( $_POST[ 'categoria_producto' ] ) ) {
+                                        if ( $producto->setIdTipoProducto( $_POST[ 'tipo_producto' ] ) ) {
+                                            if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+                                                if ($producto->setImagen($_FILES['imagen'])) {
+                                                    if ( $producto->createProducto() ) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Producto agregado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
                                                 } else {
-                                                    $result['exception'] = Database::getException();
+                                                    $result['exception'] = $producto->getImageError();
                                                 }
                                             } else {
-                                                $result['exception'] = $producto->getImageError();
+                                                $result['exception'] = 'Seleccione una imagen';
                                             }
                                         } else {
-                                            $result['exception'] = 'Seleccione una imagen';
+                                            $result['exception'] = 'Tipo seleccionado no válido';
                                         }
                                     } else {
-                                        $result['exception'] = 'Tipo seleccionado no válido';
+                                        $result['exception'] = 'Categoría seleccionada no válida';
                                     }
                                 } else {
-                                    $result['exception'] = 'Categoría seleccionada no válida';
+                                    $result['exception'] = 'Color seleccionado no válido';
                                 }
                             } else {
                                 $result['exception'] = 'Descuento ingresado no válido';
@@ -82,40 +86,44 @@ if (isset($_GET['action'])) {
                             if ( $producto->setDescripcion( $_POST[ 'descripcion' ] ) ) {
                                 if ( $producto->setPrecio( $_POST[ 'precio' ] ) ) {
                                     if ( $producto->setDescuento( $_POST[ 'descuento' ] ) ) {
-                                        if ( $producto->setIdCategoria( $_POST[ 'categoria_producto' ] ) ) {
-                                            if ( $producto->setIdTipoProducto( $_POST[ 'tipo_producto' ] ) ) {
-                                                if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
-                                                    if ($producto->setImagen($_FILES['imagen'])) {
-                                                        if ($producto->updateProducto()) {
-                                                            $result['status'] = 1;
-                                                            if ( $data['imagen'] == 'default.png' ) {
-                                                                $result['message'] = 'Producto actualizado correctamente';
-                                                            } else {
-                                                                if ($producto->deleteFile($producto->getRuta(), $data['imagen'])) {
-                                                                    $result['message'] = 'Producto modificado correctamente';
+                                        if ( $producto->setIdColor( $_POST[ 'color_producto' ] ) ) {
+                                            if ( $producto->setIdCategoria( $_POST[ 'categoria_producto' ] ) ) {
+                                                if ( $producto->setIdTipoProducto( $_POST[ 'tipo_producto' ] ) ) {
+                                                    if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+                                                        if ($producto->setImagen($_FILES['imagen'])) {
+                                                            if ($producto->updateProducto()) {
+                                                                $result['status'] = 1;
+                                                                if ( $data['imagen'] == 'default.png' ) {
+                                                                    $result['message'] = 'Producto actualizado correctamente';
                                                                 } else {
-                                                                    $result['message'] = 'Producto actualizado pero la imagen no';
+                                                                    if ($producto->deleteFile($producto->getRuta(), $data['imagen'])) {
+                                                                        $result['message'] = 'Producto modificado correctamente';
+                                                                    } else {
+                                                                        $result['message'] = 'Producto actualizado pero la imagen no';
+                                                                    }
                                                                 }
-                                                            }
+                                                            } else {
+                                                                $result['exception'] = Database::getException();
+                                                            } 
+                                                        } else {
+                                                            $result['exception'] = $producto->getImageError();
+                                                        }
+                                                    } else {
+                                                        if ( $producto->updateProducto() ) {
+                                                            $result['status'] = 1;
+                                                            $result['message'] = 'Producto actualizado correctamente';
                                                         } else {
                                                             $result['exception'] = Database::getException();
-                                                        } 
-                                                    } else {
-                                                        $result['exception'] = $producto->getImageError();
+                                                        }
                                                     }
                                                 } else {
-                                                    if ( $producto->updateProducto() ) {
-                                                        $result['status'] = 1;
-                                                        $result['message'] = 'Producto actualizado correctamente';
-                                                    } else {
-                                                        $result['exception'] = Database::getException();
-                                                    }
+                                                    $result['exception'] = 'Tipo seleccionado no válido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Tipo seleccionado no válido';
+                                                $result['exception'] = 'Categoría seleccionada no válida';
                                             }
                                         } else {
-                                            $result['exception'] = 'Categoría seleccionada no válida';
+                                            $result['exception'] = 'Color seleccionado no válido';
                                         }
                                     } else {
                                         $result['exception'] = 'Descuento ingresado no válido';

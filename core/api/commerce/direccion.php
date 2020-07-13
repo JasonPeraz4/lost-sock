@@ -16,12 +16,8 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                break;
-            case 'create':
-                break;
-            case 'readOne':
                 if ( $direccion->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
-                    if ($result['dataset'] = $direccion->readDireccion()) {
+                    if ($result['dataset'] = $direccion->readAllDirecciones()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'No hay direcciones registradas de este cliente';
@@ -30,36 +26,86 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cliente no válido';
                 }
                 break;
-            case 'update':
+            case 'readAllDepartamentos':
+                if ($result['dataset'] = $direccion->readAllDepartamento()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay departamentos registrados';
+                }
+                break;
+            case 'create':
                 $_POST = $direccion->validateForm( $_POST );
                 if ( $direccion->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
-                    if ( $data = $direccion->readAllDirecciones() ) {
-                        foreach ($data as $v1) {
-                            foreach ($v1 as $v2) {
-                                if ( $direccion->setIdDireccion( $v2 ) ) {
-                                    if ( $direccion->setDireccion( $_POST[ $v2 ] ) ) {
-                                        if ( $direccion->updateDireccion() ) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Dirección actualizada correctamente';
-                                        } else {
-                                            $result['exception'] = Database::getException();
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Dirección ingresada incorrecta';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Identificador de la dirección';
-                                }
+                    if ( $direccion->setDireccion( $_POST[ 'direccion' ] ) ) {
+                        if ( $direccion->setIdDepartamento( $_POST[ 'departamento_direccion' ] ) ) {
+                            if ( $direccion->createDireccion() ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Dirección agregada correctamente';
+                            } else {
+                                $result['exception'] = Database::getException();
                             }
+                        } else {
+                            $result['exception'] = 'Departamento selelcionado no válido';
                         }
                     } else {
-                        $result['exception'] = 'Direcciones inexistentes';
+                        $result['exception'] = 'Dirección no válida';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador del cliente no válido';
+                }
+                break;
+            case 'readOne':
+                if ( $direccion->setIdDireccion( $_POST[ 'iddireccion' ] ) ) {
+                    if ($result['dataset'] = $direccion->readDireccion()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay direcciones registradas de este cliente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador de la dirección no válido';
+                }
+                break;
+            case 'update':
+                $_POST = $direccion->validateForm( $_POST );
+                if ( $direccion->setIdDireccion( $_POST[ 'iddireccion' ] ) ) {
+                    if ( $data = $direccion->readDireccion() ) {
+                        if ( $direccion->setDireccion( $_POST[ 'direccion' ] ) ) {
+                            if ( $direccion->setIdDepartamento( $_POST[ 'departamento_direccion' ] ) ) {
+                                if ( $direccion->updateDireccion() ) {
+                                    $result['status'] = 1;
+                                    $result['message'] = 'Dirección actualizada correctamente';
+                                } else {
+                                    $result['exception'] = Database::getException();
+                                }
+                            } else {
+                                $result['exception'] = 'Departamento selelcionado no válido';
+                            }
+                        } else {
+                            $result['exception'] = 'Dirección no válida';
+                        }
+                    } else {
+                        $result['exception'] = 'Dirección inexistentes';
                     }
                 } else {
                     $result['exception'] = 'Identificador del cliente incorrecto';
                 }
                 break;
             case 'delete':
+                if ( $direccion->setIdDireccion( $_POST[ 'iddireccion' ] ) ) {
+                    if ( $data = $direccion->readDireccion() ) {
+                        if ( $direccion->deleteDireccion() ) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Dirección eliminada correctamente';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                        
+                    } else {
+                        $result['exception'] = 'Dirección inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador de la identificación incorrecto';
+                }
                 break;
             default:
                 exit('Acción no disponible');

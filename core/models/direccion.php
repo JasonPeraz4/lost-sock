@@ -26,7 +26,7 @@ class Direccion extends Validator
 
     public function setDireccion($value)
     {
-        if ( $this->validateAlphanumeric( $value, 10, 100 ) ) {
+        if ($this->validateString($value, 1, 100)) {
             $this->detalleDireccion = $value;
             return true;
         } else {
@@ -37,7 +37,7 @@ class Direccion extends Validator
     public function setIdDepartamento($value)
     {
         if ( $this->validateNaturalNumber( $value ) ) {
-            $this->idDireccion = $value;
+            $this->idDepartamento = $value;
             return true;
         } else {
             return false;
@@ -91,27 +91,36 @@ class Direccion extends Validator
 
     public function readAllDirecciones()
     {
-        $sql = 'SELECT iddireccion
+        $sql = 'SELECT idDireccion, detalleDireccion, idDepartamento
                 FROM direccion
-                WHERE idCliente = ?';
+                WHERE idCliente = ? ORDER BY iddireccion';
         $params = array( $this->idCliente );
         return Database::getRows( $sql, $params );
+    }
+
+    public function readAllDepartamento()
+    {
+        $sql = 'SELECT iddepartamento, departamento
+                FROM departamento
+                ORDER BY idDepartamento';
+        $params = null;
+        return Database::getRows($sql, $params);
     }
 
     public function readDireccion()
     {
-        $sql = 'SELECT idDireccion, detalleDireccion, idDepartamento
+        $sql = 'SELECT iddireccion, detalledireccion, iddepartamento
                 FROM direccion 
-                WHERE idCliente = ?';
-        $params = array( $this->idCliente );
-        return Database::getRows( $sql, $params );
+                WHERE idDireccion = ?';
+        $params = array( $this->idDireccion );
+        return Database::getRow( $sql, $params );
     }
 
     public function updateDireccion(){
         $sql = 'UPDATE direccion 
-                SET detalledireccion = ?
+                SET detalledireccion = ?, iddepartamento = ?
                 WHERE iddireccion = ?';
-        $params=array( $this->detalleDireccion, $this->idDireccion );
+        $params=array( $this->detalleDireccion, $this->idDepartamento, $this->idDireccion );
         return Database::executeRow( $sql, $params );
     }
 

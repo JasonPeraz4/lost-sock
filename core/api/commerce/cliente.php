@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'editProfile':
                 if ( $cliente->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
-                    if ( $cliente->readOneCliente() ) {
+                    if ( $data = $cliente->readOneCliente() ) {
                         $_POST = $cliente->validateForm( $_POST );
                         if ( $cliente->setNombres($_POST['nombres']) ) {
                             if ( $cliente->setApellidos($_POST['apellidos']) ) {
@@ -46,16 +46,42 @@ if (isset($_GET['action'])) {
                                             if ( !$cliente->checkProfile( 'email', $_POST[ 'email' ] ) ) {
                                                 if ( $cliente->setUsuario($_POST['usuario']) ) {
                                                     if ( !$cliente->checkProfile( 'usuario', $_POST[ 'usuario' ] ) ) {
-                                                        if ( $cliente->editProfile() ) {
-                                                            $_SESSION['email'] = $cliente->getEmail();
-                                                            $_SESSION['usuario'] = $cliente->getUsuario();
-                                                            $_SESSION['nombres'] = $cliente->getNombres();
-                                                            $_SESSION['apellidos'] = $cliente->getApellidos();
-                                                            $_SESSION['telefono'] = $cliente->getTelefono();
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'Perfil actualizado con éxito';
+                                                        if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+                                                            if ($cliente->setImagen($_FILES['imagen'])) {
+                                                                if ( $cliente->editProfile() ) {
+                                                                    $_SESSION['email'] = $cliente->getEmail();
+                                                                    $_SESSION['usuario'] = $cliente->getUsuario();
+                                                                    $_SESSION['nombres'] = $cliente->getNombres();
+                                                                    $_SESSION['apellidos'] = $cliente->getApellidos();
+                                                                    $_SESSION['telefono'] = $cliente->getTelefono();
+                                                                    $result['status'] = 1;
+                                                                    if ( $data['imagen'] == 'default.png' ) {
+                                                                        $result['message'] = 'Perfil actualizado actualizado correctamente';
+                                                                    } else {
+                                                                        if ($cliente->deleteFile($cliente->getRuta(), $data['imagen'])) {
+                                                                            $result['message'] = 'Perfil modificado correctamente';
+                                                                        } else {
+                                                                            $result['message'] = 'Perfil actualizado pero la imagen no';
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    $result['exception'] = Database::getException();
+                                                                }
+                                                            } else {
+                                                                $result['exception'] = $cliente->getImageError();
+                                                            }
                                                         } else {
-                                                            $result['exception'] = Database::getException();
+                                                            if ( $cliente->editProfile() ) {
+                                                                $_SESSION['email'] = $cliente->getEmail();
+                                                                $_SESSION['usuario'] = $cliente->getUsuario();
+                                                                $_SESSION['nombres'] = $cliente->getNombres();
+                                                                $_SESSION['apellidos'] = $cliente->getApellidos();
+                                                                $_SESSION['telefono'] = $cliente->getTelefono();
+                                                                $result['status'] = 1;
+                                                                $result['message'] = 'Perfil actualizado con éxito';
+                                                            } else {
+                                                                $result['exception'] = Database::getException();
+                                                            }
                                                         }
                                                     } else {
                                                         $result['exception'] = 'Este usuario ya se encuentra registrado';
