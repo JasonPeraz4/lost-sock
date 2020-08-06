@@ -298,7 +298,7 @@ function barGraph( canvas, xAxis, yAxis, legend, title )
                 data: yAxis,
                 backgroundColor: colors,
                 borderColor: '#000000',
-                borderWidth: 1
+                borderWidth: 0
             }]
         },
         options: {
