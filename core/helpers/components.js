@@ -272,6 +272,54 @@ function fillSelect( api, selectId, selected )
 }
 
 /*
+*   Función para cargar las opciones en un select de tallas, y validar que existan.
+*
+*   Parámetros: id (identificador del producto), selectId (identificador del select en el formulario) y selected (valor seleccionado).
+*
+*   Retorno: ninguno.
+*/
+function fillSelectTallas( api, id, selectId )
+{
+    $.ajax({
+        dataType: 'json',
+        url: api,
+        data: { idproducto: id },
+        type: 'post'
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado una respuesta satisfactoria para mostrar los datos, de lo contrario se muestra un mensaje de error.
+        if ( response.status ) {
+            let content = '';
+            // Si no existe un valor previo para seleccionar, se muestra una opción para indicarlo.
+            content += '<option value="0" disabled selected>Talla</option>';
+            // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+            response.dataset.forEach(function( row ) {
+                // Se obtiene el valor del primer campo de la sentencia SQL (valor para cada opción).
+                value = Object.values( row )[0];
+                // Se obtiene el valor del segundo campo de la sentencia SQL (texto para cada opción).
+                text = Object.values( row )[1];
+                // Se verifica si el valor de la API es diferente al valor seleccionado para enlistar una opción, de lo contrario se establece la opción como seleccionada.
+                content += `<option value="${value}">${text}</option>`;
+            });
+            // Se agregan las opciones a la etiqueta select mediante su id.
+            $( '#' + selectId ).html( content );
+        } else {
+            $( '#' + selectId ).html( '<option value="" disabled>Talla</option>' );
+        }
+        // Se inicializa el componente Select del formulario para que muestre las opciones.
+        //$( 'select' ).formSelect();
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+/*
 *   Función para generar una gráfica de barras. Requiere el archivo chart.js para funcionar.
 *
 *   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título del gráfico).

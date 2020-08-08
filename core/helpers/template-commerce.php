@@ -12,7 +12,7 @@ class Page {
             <!-- Se indica al navegador que la página web está optimizada para dispositivos móviles -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Título del documento -->
-            <title>'.$title.'</title>
+            <title>'.$title.' | Lost Sock</title>
             <!-- Importación de archivos CSS -->
             <link rel="stylesheet" href="../../resources/css/all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
@@ -49,16 +49,16 @@ class Page {
                                 <a href="index.php">Inicio</a>
                             </li>
                             <li>
-                                <a href="women.php">Mujeres</a>
+                                <a href="women.php?id=1">Mujeres</a>
                             </li>
                             <li>
-                                <a href="men.php">Hombres</a>
+                                <a href="men.php?id=2">Hombres</a>
                             </li>
                             <li>
-                                <a href="kids.php">Niños</a>
+                                <a href="kids.php?id=3">Niños</a>
                             </li>
                             <li>
-                                <a href="exclusive.php">Exclusivo</a>
+                                <a href="exclusive.php?id=4">Exclusivo</a>
                             </li>
                             <li>
                                 <a href="suscription.php">Suscripción</a>

@@ -98,34 +98,38 @@ Page::headerTemplate('Gestión de productos', null);
     </div>
 </div>
 </div>
-<!-- Modal agregar producto -->
+<!-- Modal agregar existencia producto -->
 <div class="modal fade" id="existencias-modal" tabindex="-1" role="dialog" aria-labelledby="existencias-modal" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="modal-title">Actualizar existencias del producto</h5>
+        <h5 class="modal-title" id="modal-title">Existencias del producto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form method="post" id="existencias-form">
-        <div class="modal-body p-md-4">
+    <div class="modal-body p-md-4">
+        <div id="existencias-body" class="mb-2"></div>
+        <form method="post" id="existencias-form">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idproductoe" name="idproductoe"/>
-            <div id="existencias-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                    </div>
-                    <input type="text" class="form-control" name="1" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="form-row px-auto">
+                <div class="form-group col-md-5">
+                    <label for="talla">Talla</label>
+                    <select class="form-control" id="talla" name="talla">
+                    </select>
                 </div>
-            </div>            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-purple">Actualizar existencias</button>
-        </div>
-    </form>   
+                <div class="form-group col-md-4">
+                    <label for="camtidad">Cantidad</label>
+                    <input type="number" class="form-control" placeholder="Cantidad" id="cantidad" name="cantidad" pattern="^[0-9]+$" title="Solo se permiten números naturales">
+                </div>
+                <button type="submit" class="btn btn-purple mt-auto mb-3 ml-2">Agregar</button>
+            </div>
+        </form>            
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    </div>   
     </div>
 </div>
 </div>
