@@ -2,8 +2,7 @@
 /*
 *	Clase para manejar la tabla detalle_compra de la base de datos. Es clase hija de la clase Validator.
 */
-class Orden extends Validator{
-    // 
+class Orden extends Validator{ 
     private $idCompra = null;
     private $idDetalleCompra = null;
     private $nombre = null;
@@ -13,7 +12,19 @@ class Orden extends Validator{
     private $estado = null; 
     private $nombres = null;
     private $apellidos = null;
+    private $idCliente = null;
+    private $idProducto = null;
+    private $idTalla = null;
+    private $cantidad = null;
+    private $precio = null;
     
+    /*
+    *   POSIBLES ESTADOS PARA UNA ORDEN
+    *   1. En proceso
+    *   2. Finalizada
+    *   3. Entregada
+    *   4. Cancelada
+    */
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -109,7 +120,55 @@ class Orden extends Validator{
         }
     }
 
-    
+    public function setIdCliente($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idCliente = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setIdProducto($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idProducto = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setIdTalla($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idTalla = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setCantidad($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->cantidad = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setPrecio($value)
+    {
+        if ($this->validateMoney($value)) {
+            $this->precio = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /*
     *   Métodos para obtener valores de los atributos.
@@ -168,20 +227,69 @@ class Orden extends Validator{
             $this->idCompra = $data['idcompra'];
             return true;
         } else {
-            $sql = 'INSERT INTO pedidos(id_cliente)
-                    VALUES(?)';
-            $params = array($this->cliente);
-            if (Database::executeRow($sql, $params)) {
+            $sql = 'INSERT INTO compra (fechacompra, idestadocompra, idcliente )
+                    VALUES( NOW(), 1, ? )';
+            $params = array($this->idCliente);
+            if (Database::executeRow($sql, $params)) {  
                 // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
-                $this->id_pedido = Database::getLastRowId();
+                $this->idCompra = Database::getLastRowId();
                 return true;
             } else {
                 return false;
             }
         }
     }
+
+    // Método para agregar un producto al carrito de compras.
+    public function createDetail()
+    {
+        $sql = 'INSERT INTO detalleCompra( cantidad, precio, idproducto, idcompra, idtalla)
+                VALUES(?, ?, ?, ?, ?)';
+        $params = array($this->cantidad, $this->precio, $this->idProducto, $this->idCompra, $this->idTalla);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Método para obtener los productos que se encuentran en el carrito de compras.
+    public function readCart()
+    {
+        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto
+                FROM compra 
+                INNER JOIN detalleCompra USING(idCompra) INNER JOIN producto USING(idproducto) INNER JOIN talla USING(idtalla)
+                WHERE idCompra = ? ORDER BY iddetallecompra ASC';
+        $params = array($this->idCompra);
+        return Database::getRows($sql, $params);
+    }
+
+    // Método para cambiar el estado de un pedido.
+    public function updateOrderStatus()
+    {
+        $sql = 'UPDATE compra
+                SET idestadocompra = ?
+                WHERE idCompra = ?';
+        $params = array($this->estado, $this->idCompra);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Método para actualizar la cantidad y la talla de un producto agregado al carrito de compras.
+    public function updateDetail()
+    {
+        $sql = 'UPDATE detalleCompra
+                SET cantidad = ?, idTalla = ?
+                WHERE idCompra = ? AND idDetalleCompra = ?';
+        $params = array($this->cantidad, $this->idTalla, $this->idCompra, $this->idDetalleCompra);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Método para eliminar un producto que se encuentra en el carrito de compras.
+    public function deleteDetail()
+    {
+        $sql = 'DELETE FROM detalleCompra
+                WHERE idCompra = ? AND idDetalleCompra = ?';
+        $params = array($this->idCompra, $this->idDetalleCompra);
+        return Database::executeRow($sql, $params);
+    }
     
-/*Función para realizar un select de todos los clientes*/
+    /*Función para realizar un select de todos as compras */
     public function readAllOrden()
     {
         $sql = 'SELECT idcompra, nombre, fechacompra, fechaenvio, total, ec.estado, nombres, apellidos

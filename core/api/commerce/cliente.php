@@ -196,26 +196,30 @@ if (isset($_GET['action'])) {
                 break;
             case 'login':
                 $_POST = $cliente->validateForm( $_POST );
-                if ( $cliente->checkEstado( $_POST['email'] )) {
-                    if ( $cliente->checkEmail( $_POST['email'] ) ) {
-                        if ( $cliente->checkClave( $_POST['clave'] ) ) {
-                            $_SESSION['idcliente'] = $cliente->getIdCliente();
-                            $_SESSION['email'] = $cliente->getEmail();
-                            $_SESSION['usuario'] = $cliente->getUsuario();
-                            $_SESSION['nombres'] = $cliente->getNombres();
-                            $_SESSION['apellidos'] = $cliente->getApellidos();
-                            $_SESSION['telefono'] = $cliente->getTelefono();
-                            $_SESSION['imagen'] = $cliente->getImagen();
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
+                if ( $cliente->setEmail($_POST['email']) ) {
+                    if ( $cliente->checkEmail( $_POST['email'] )) {
+                        if ( $cliente->checkEstado( $_POST['email'] ) ) {
+                            if ( $cliente->checkClave( $_POST['clave'] ) ) {
+                                $_SESSION['idcliente'] = $cliente->getIdCliente();
+                                $_SESSION['email'] = $cliente->getEmail();
+                                $_SESSION['usuario'] = $cliente->getUsuario();
+                                $_SESSION['nombres'] = $cliente->getNombres();
+                                $_SESSION['apellidos'] = $cliente->getApellidos();
+                                $_SESSION['telefono'] = $cliente->getTelefono();
+                                $_SESSION['imagen'] = $cliente->getImagen();
+                                $result['status'] = 1;
+                                $result['message'] = 'Autenticación correcta';
+                            } else {
+                                $result['exception'] = 'Contraseña incorrecta';
+                            }
                         } else {
-                            $result['exception'] = 'Contraseña incorrecta';
+                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                    $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';
                 }               
                 break;
             default:

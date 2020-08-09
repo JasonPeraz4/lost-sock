@@ -176,7 +176,7 @@ function fillTable(  ){
                     // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                     content += `
                         <div class="form-group">
-                            <label for="direccion${row.iddireccion}">Dirección ${n}</label><i class="fad fa-pen mx-1 text-purple" onclick="openUpdateModal(${row.iddireccion})"></i><i class="fad fa-trash mx-1 text-danger" onclick="openDeleteDialog(${row.iddireccion})"></i>
+                            <label for="direccion${row.iddireccion}">Dirección ${n}</label><i class="fad fa-pen mx-1 text-purple" onclick="openUpdateModal(${row.iddireccion})"></i><i class="fad fa-trash mx-1 text-danger" onclick="openDeleteAdressDialog(${row.iddireccion})"></i>
                             <textarea class="form-control" rows="2" id="direccion${row.iddireccion}" disabled>${row.detalledireccion}</textarea>
                         </div>
                         <div class="form-row">
@@ -187,7 +187,7 @@ function fillTable(  ){
                             </div>
                         </div>
                     `;
-                    if (n==5){
+                    if ( n==5 ){
                         $( '#lblAgregar' ).addClass( 'd-none' );
                     }
                     n++;
@@ -197,7 +197,7 @@ function fillTable(  ){
                 $( '#direcciones-body' ).html( content );
         
             } else {
-                sweetAlert( 2, result.exception, null );
+                //sweetAlert( 4, 'No hay direiones registradas', null );
             }
         })
         .fail(function( jqXHR ) {
@@ -273,10 +273,44 @@ $( '#save-form' ).submit(function( event ) {
     }
 });
 
-// Función para establecer el registro a eliminar mediante el id recibido.
-function openDeleteDialog( id )
+// Función que abre una caja de dialogo para confirmar la eliminación de un producto del carrito de compras.
+function openDeleteAdressDialog( id )
 {
-    // Se declara e inicializa un objeto con el id del registro que será borrado.
-    let identifier = { iddireccion: id };
-    confirmDelete( API_DIRECCION, identifier );
+    swal({
+        title: 'Advertencia',
+        text: '¿Está seguro que deseas remover el producto?',
+        icon: 'warning',
+        buttons: ['No', 'Sí'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    })
+    .then(function( value ) {
+        // Se verifica si fue cliqueado el botón Sí para realizar la petición respectiva, de lo contrario no se hace nada.
+        if ( value ) {
+            $.ajax({
+                type: 'post',
+                url: API_DIRECCION + 'delete',
+                data: { iddireccion: id },
+                dataType: 'json'
+            })
+            .done(function( response ) {
+                // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+                if ( response.status ) {
+                    // Se cargan nuevamente las filas en la tabla de la vista después de borrar un producto del pedido.
+                    fillTable();
+                    sweetAlert( 1, response.message, null );
+                } else {
+                    sweetAlert( 2, response.exception, null );
+                }
+            })
+            .fail(function( jqXHR ) {
+                // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+                if ( jqXHR.status == 200 ) {
+                    console.log( jqXHR.responseText );
+                } else {
+                    console.log( jqXHR.status + ' ' + jqXHR.statusText );
+                }
+            });
+        }
+    });
 }

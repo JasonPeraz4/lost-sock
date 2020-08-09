@@ -16,54 +16,60 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                break;
-            case 'create':
-                break;
-            case 'readOne':
                 if ( $dP->setIdProducto( $_POST[ 'idproductoe' ] ) ) {
-                    if ($result['dataset'] = $dP->readDetalleProducto()) {
+                    if ($result['dataset'] = $dP->readAllDetalleProducto()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'No hay detalles registrados para este producto';
+                        $result['exception'] = 'No hay existencias registrados para este producto.';
+                    }
+                } else {
+                    $result['exception'] = 'Detalle de producto no válido';
+                }
+                break;
+            case 'create':
+                $_POST = $dP->validateForm($_POST);
+                if ($dP->setIdProducto($_POST['idproductoe'])) {
+                    if ($dP->setIdTalla($_POST['talla'])) {
+                        if ($dP->readDetalleProducto()) {
+                            if ($dP->setExistencia($_POST['cantidad'])) {
+                                if ($dP->updateDetalleProducto()) {
+                                    $result['status'] = 1;
+                                    $result['message'] = 'Existencia agregado correctamente';
+                                } else {
+                                    $result['exception'] = 'Ocurrió un problema al agregar la cantidad';
+                                }
+                            } else {
+                                $result['exception'] = 'Cantidad incorrecta';
+                            }
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al obtener el detalle del producto';
+                        }
+                    } else {
+                        $result['exception'] = 'Identificador de talla incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador de producto incorrecto';
+                }
+                break;
+            case 'readOne':
+                if ( $dP->setIdProducto( $_POST[ 'idproducto' ] ) ) {
+                    if ($result['dataset'] = $dP->readOneDetalleProducto()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay existencias registrados para este producto.';
                     }
                 } else {
                     $result['exception'] = 'Detalle de producto no válido';
                 }
                 break;
             case 'update':
-                $_POST = $dP->validateForm( $_POST );
-                if ( $dP->setIdProducto( $_POST[ 'idproductoe' ] ) ) {
-                    if ( $data = $dP->readAllDetalleProducto() ) {
-                        foreach ($data as $v1) {
-                            foreach ($v1 as $v2) {
-                                if ( $dP->setIdDetalleProducto( $v2 ) ) {
-                                    if ( $dP->setExistencia( $_POST[ $v2 ] ) ) {
-                                        if ( $dP->updateDetalleProducto() ) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Existencia actualizada correctamente';
-                                        } else {
-                                            $result['exception'] = Database::getException();
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Existencia ingresada incorrecta';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Identificador del detalle incorrecto';
-                                }
-                            }
-                        }
-                    } else {
-                        $result['exception'] = 'Producto inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Identificador incorrecto';
-                }
+                
                 break;
             case 'delete':
                 break;
             default:
                 exit('Acción no disponible');
-        }
+        } 
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.

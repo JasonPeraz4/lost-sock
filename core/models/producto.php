@@ -20,6 +20,15 @@ class Producto extends Validator
     private $estado = null;
 
     /*
+    * ID's de las categorias
+    *   1. Mujeres
+    *   2. Hombres
+    *   3. Niños
+    *   4. Exclusivos
+    *   5. edición limitada
+    */
+
+    /*
     *   Métodos para asignar valores a los atributos.
     */
     public function setIdProducto($value)
@@ -217,17 +226,19 @@ class Producto extends Validator
 
     public function readProductosCategoria()
     {
-        $sql = 'SELECT nombre, p.precio, imagen, cantidad, talla, codigo, calificacion 
-                FROM producto p INNER JOIN detalleCompra USING(idproducto) 
-                INNER JOIN comentario USING(iddetallecompra) 
-                INNER JOIN color USING(idcolor) 
-                INNER JOIN talla USING(idtalla)
-                WHERE idCategoria = ?';*/
-        $sql = 'SELECT p.idproducto, nombre, p.precio, imagen, codigo 
-                FROM producto p 
-                JOIN color USING(idColor) 
-                WHERE idCategoria = ?';
+        $sql = 'SELECT producto.idproducto, nombre, imagen, producto.precio, codigo, valoracion(producto.idproducto) 
+                FROM producto INNER JOIN color USING(idColor)
+                WHERE producto.idcategoria = ?';
         $params = array( $this->idCategoria);
+        return Database::getRows( $sql, $params);
+    }
+
+    public function readProductoCategoria()
+    {
+        $sql = 'SELECT producto.idproducto, nombre, descripcion, imagen, producto.precio, codigo, valoracion(producto.idproducto), tipo 
+                FROM producto INNER JOIN color USING(idColor) INNER JOIN tipoProducto USING(idtipoproducto)
+                WHERE producto.idproducto = ?';
+        $params = array( $this->idProducto);
         return Database::getRow( $sql, $params);
     }
 

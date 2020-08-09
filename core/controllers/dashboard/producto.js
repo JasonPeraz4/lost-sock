@@ -4,6 +4,7 @@ const API_CATEGORIA = '../../core/api/dashboard/categoria.php?action=readAll';
 const API_TIPOPRODUCTO = '../../core/api/dashboard/tipoProducto.php?action=readAll';
 const API_COLOR = '../../core/api/dashboard/color.php?action=readAll';
 const API_DETALLEPRODUCTO = '../../core/api/dashboard/detalleProducto.php?action=';
+const API_TALLA = '../../core/api/dashboard/talla.php?action=readAll';
 
 // Método que se ejecuta una vez la página este lista.
 $( document ).ready( function(){
@@ -134,42 +135,42 @@ function openDeleteDialog( id )
     confirmDelete( API_PRODUCTO, identifier );
 }
 
-
+let idproducto;
 // Función para ver existencias
 function openExistModal( id ){
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#existencias-modal' ).modal( 'show' );
+    fillSelect( API_TALLA, 'talla', null );
+    idproducto = id;
+    showExist( id )
+}
 
+//Funcion para mostrar las existencias
+function showExist( id ){
     $.ajax({
         dataType: 'json',
-        url: API_DETALLEPRODUCTO + 'readOne',
+        url: API_DETALLEPRODUCTO + 'readAll',
         data: { idproductoe: id },
         type: 'post'
     })
     .done(function( response ) {
-        // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
-        if ( response.status ) {
-            // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-            $( '#idproductoe' ).val( id );
-            let content = '';
-            // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-            response.dataset.forEach(function( row ) {
-                // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-                content += `
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="i${row.iddetalleproducto}">${row.talla}</span>
-                        </div>
-                        <input type="text" class="form-control" value="${row.existencia}" aria-describedby="i${row.iddetalleproducto}" name="${row.iddetalleproducto}">
-                    </div>
-                `;
-            });
-            // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-            $( '#existencias-body' ).html( content );
-    
-        } else {
-            sweetAlert( 2, result.exception, null );
+        let content = '';
+        // Si no hay datos se muestra un mensaje indicando la situación.
+        if ( ! response.status ) {
+            content += `
+                <div">${response.exception}</div>
+            `;
         }
+        $( '#idproductoe' ).val( id );
+        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        response.dataset.forEach(function( row ) {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            content += `
+                <div">Talla ${row.talla}: ${row.existencia}</div>
+            `;
+        });
+        // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
+        $( '#existencias-body' ).html( content );
     })
     .fail(function( jqXHR ) {
         // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
@@ -187,7 +188,7 @@ $( '#existencias-form' ).submit( function( event ){
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_DETALLEPRODUCTO + 'update',
+        url: API_DETALLEPRODUCTO + 'create',
         data: $( '#existencias-form' ).serialize(),
         dataType: 'json'
     })
@@ -196,7 +197,7 @@ $( '#existencias-form' ).submit( function( event ){
         if ( response.status ) {
             sweetAlert( 1, response.message, null );
             // Se cierra la caja de dialogo (modal) donde está el formulario.
-            $( '#existencias-modal' ).modal( 'hide' );
+            showExist( idproducto );
         } else {
             sweetAlert( 2, response.exception, null );
         }

@@ -26,8 +26,8 @@ class DetalleProducto extends Validator
 
     public function setExistencia($value)
     {
-        if ( $this->validateNaturalNumber( $value ) ) {
-            $this->existencia = $value;
+        if ( $value > 0 ) {
+            $this->existencia += $value;
             return true;
         } else {
             return false;
@@ -81,28 +81,45 @@ class DetalleProducto extends Validator
     /*
     *   Métodos para realizar las operaciones CRUD (search, create, read, update, delete).
     */
-    public function createDetalleProducto()
+
+    // Método para verificar si existe un pedido pendiente del cliente para seguir comprando, de lo contrario crea uno.
+    public function readDetalleProducto()
     {
-        $sql = 'INSERT INTO producto(existencia, idtalla, idproducto)
-                VALUES(?, ?, ?)';
-        $params = array( $this->existencia, $this->idTalla, $this->idProducto );
-        return Database::executeRow( $sql, $params );
+        $sql = 'SELECT iddetalleproducto, existencia FROM detalleproducto WHERE idtalla = ? AND idproducto = ?';
+        $params = array($this->idTalla, $this->idProducto);
+        if ($data = Database::getRow($sql, $params)) {
+            $this->idDetalleProducto = $data['iddetalleproducto'];
+            $this->existencia = $data['existencia'];
+            return true;
+        } else {
+            $sql = 'INSERT INTO detalleproducto (existencia, idtalla, idproducto )
+                    VALUES( 0, ?, ? )';
+            $params = array($this->idTalla, $this->idProducto);
+            if (Database::executeRow($sql, $params)) {
+                // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
+                $this->idDetalleProducto = Database::getLastRowId();
+                $this->existencia = 0;
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     
     public function readAllDetalleProducto()
     {
-        $sql = 'SELECT idDetalleProducto
-                FROM detalleProducto
+        $sql = 'SELECT existencia, talla 
+                FROM detalleProducto INNER JOIN talla USING(idtalla)
                 WHERE idProducto = ?';
         $params = array( $this->idProducto );
         return Database::getRows( $sql, $params );
     }
 
-    public function readDetalleProducto()
+    public function readOneDetalleProducto()
     {
-        $sql = 'SELECT idDetalleProducto, existencia, idTalla, talla, idProducto
+        $sql = 'SELECT idtalla, talla 
                 FROM detalleProducto INNER JOIN talla USING(idtalla)
-                WHERE idProducto = ?';
+                WHERE idProducto = ? AND existencia > 0';
         $params = array( $this->idProducto );
         return Database::getRows( $sql, $params );
     }
@@ -112,14 +129,6 @@ class DetalleProducto extends Validator
                 SET existencia = ?
                 WHERE idDetalleProducto = ?';
         $params=array( $this->existencia, $this->idDetalleProducto );
-        return Database::executeRow( $sql, $params );
-    }
-
-    public function deleteDetalleProducto()
-    {
-        $sql = 'DELETE FROM detalleProducto
-                WHERE idDetalleProducto = ?';
-        $params = array( $this->idDetalleProducto );
         return Database::executeRow( $sql, $params );
     }
 }

@@ -270,24 +270,28 @@ if ( isset( $_GET['action'] ) ) {
             break;
             case 'login':
                 $_POST = $administrador->validateForm( $_POST );
-                if ( $administrador->checkEstado( $_POST['email'] )) {
-                    if ( $administrador->checkEmail( $_POST['email'] ) ) {
-                        if ( $administrador->checkClave( $_POST['clave'] ) ) {
-                            $_SESSION['idadministrador'] = $administrador->getId();
-                            $_SESSION['email'] = $administrador->getEmail();
-                            $_SESSION['usuario'] = $administrador->getUsuario();
-                            $_SESSION['nombres'] = $administrador->getNombres();
-                            $_SESSION['apellidos'] = $administrador->getApellidos();
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
+                if ( $administrador->setEmail($_POST['email']) ) {
+                    if ( $administrador->checkEmail( $_POST['email'] )) {
+                        if ( $administrador->checkEstado( $_POST['email'] ) ) {
+                            if ( $administrador->checkClave( $_POST['clave'] ) ) {
+                                $_SESSION['idadministrador'] = $administrador->getId();
+                                $_SESSION['email'] = $administrador->getEmail();
+                                $_SESSION['usuario'] = $administrador->getUsuario();
+                                $_SESSION['nombres'] = $administrador->getNombres();
+                                $_SESSION['apellidos'] = $administrador->getApellidos();
+                                $result['status'] = 1;
+                                $result['message'] = 'Autenticación correcta';
+                            } else {
+                                $result['exception'] = 'Contraseña incorrecta';
+                            }
                         } else {
-                            $result['exception'] = 'Contraseña incorrecta';
+                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                    $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';
                 }               
             break;
             default:
