@@ -29,13 +29,7 @@ function fillTable(dataset) {
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $('#tbody-rows').html(content);
-    $('#categoria-table').DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json',
-            'search': 'Buscar categoría:',
-
-        }
-    });
+    $('#categoria-table').DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -45,7 +39,7 @@ function openCreateModal() {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar categoría');
+    $('#modal-title').text('Add category');
 
 }
 
@@ -56,7 +50,7 @@ function openUpdateModal(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#categoria-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Actualizar categoría');
+    $('#modal-title').text('Update category');
 
     $.ajax({
         dataType: 'json',

@@ -33,7 +33,7 @@ function checkAdministradores(){
         } else {
             // Si ya existe al menos un usuario registrado se pide iniciar sesión, de lo contrario se envía a crear el primero.
             if ( response.status ) {
-                sweetAlert( 4, 'Debe autenticarse para ingresar', null );
+                sweetAlert(4, 'You must authenticate to proceed', null );
             } else {
                 sweetAlert( 3, response.exception, 'signin.php' );
             }
@@ -53,10 +53,10 @@ function checkAdministradores(){
 function signOff()
 {
     swal({
-        title: 'Advertencia',
-        text: '¿Estas seguro que deseas cerrar sesión?',
+        title: 'Warning',
+        text: 'Do you really want to sign off?',
         icon: 'warning',
-        buttons: [ 'Cancelar', 'Aceptar' ],
+        buttons: [ 'Cancel', 'Ok' ],
         closeOnClickOutside: false,
         closeOnEsc: false
     })

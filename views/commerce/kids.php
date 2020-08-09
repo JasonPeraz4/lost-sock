@@ -5,7 +5,7 @@ Page::headerTemplate('Hombres');
 <!-- Jumbotron -->
         <div class="jumbotron jumbotron-fluid jumbotron-cover cover-general cover-image">
             <div class="container">
-                <h2 class="font-weight-normal titulo--cover">Colección para hombres</h2>
+                <h2 class="font-weight-normal titulo--cover">Kids collection</h2>
             </div>
         </div>
         <!-- Grupo de cards para productos -->
@@ -50,11 +50,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                <!-- Tallas -->
+                                <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -71,7 +71,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -115,11 +115,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -136,7 +136,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -180,11 +180,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -201,7 +201,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -245,11 +245,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -266,7 +266,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -310,11 +310,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -331,7 +331,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -375,11 +375,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -396,7 +396,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -440,11 +440,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -461,7 +461,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -505,11 +505,11 @@ Page::headerTemplate('Hombres');
                             </div>
                            <div class="row">
                                <div class="col-6 text-center">
-                                    <!-- Tallas -->
+                                    <!-- Sizes -->
                                 <div class="dropdown">
                                     <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Talla
+                                        Size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">S</a>
@@ -526,7 +526,7 @@ Page::headerTemplate('Hombres');
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Agregar al carrito</button>
+                                        <button type="button" class="btn btn-primary btn-add custom--button" href="dashboard.php">Add to cart</button>
                                     </div>
                                 </div>
                             </div>

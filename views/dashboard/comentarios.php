@@ -1,12 +1,12 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de comentarios', null);
+Page::headerTemplate('Comments management', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <a href="product-inventory.php" class="text-secondary"><i class="fa fa-arrow-left fa-lg pt-auto mr-2" aria-hidden="true"></i></a>
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Comentarios</h3>
+        <h3 class="mr-md-3">Comentaries</h3>
         <!-- Grupo de dropdowns -->
         <!-- <div class="d-flex flex-row my-2 my-md-0"> -->
             <!-- Dropdown filtrar por estado -->
@@ -23,7 +23,7 @@ Page::headerTemplate('Gestión de comentarios', null);
     </div>
 </div>
 <div id="page-content">
-    <p>No hay comentarios sobre este producto.</p>
+    <p>There are no comments available.</p>
 </div>
 <!--
 <ul id="pagination-demo" class="pagination-sm"></ul>

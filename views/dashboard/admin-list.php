@@ -1,25 +1,25 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de administradores', null);
+Page::headerTemplate('Management', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Administradores</h3>
+        <h3 class="mr-md-3">Managers</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
-            Agregar
+            Add
         </button>
     </div>
 </div>
 <table id="myTable" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
-            <th>Información general</th>
-            <th>Usuario</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th>Personal information</th>
+            <th>User</th>
+            <th>User type</th>
+            <th>User status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
@@ -41,40 +41,40 @@ Page::headerTemplate('Gestión de administradores', null);
             <input class="d-none" type="text" id="idadministrador" name="idadministrador"/>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="nombres">Nombres</label>
-                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                    <label for="nombres">Name</label>
+                    <input type="text" class="form-control" placeholder="Name" id="nombres" name="nombres" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                    <label for="apellidos">Surname</label>
+                    <input type="text" class="form-control" placeholder="Surname" id="apellidos" name="apellidos" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email" title="Solo se permiten direcciones de correo válidas">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" id="email" name="email" title="Solo se permiten direcciones de correo válidas">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" pattern="^[a-z0-9_-]{3,15}$" title="Solo se permiten letras, y los caracteres - y _">
+                    <label for="usuario">User</label>
+                    <input type="text" class="form-control" placeholder="User" id="usuario" name="usuario" pattern="^[a-z0-9_-]{3,15}$" title="Solo se permiten letras, y los caracteres - y _">
                 </div>   
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="tipo_administrador">Tipo</label>
+                    <label for="tipo_administrador">User type</label>
                     <select class="form-control" id="tipo_administrador" name="tipo_administrador">
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label id="lblE" for="estado">Estado</label>
+                    <label id="lblE" for="estado">User status</label>
                     <select class="form-control" id="estado" name="estado">
                     </select>
                 </div>               
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-purple">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-purple">Save</button>
         </div>
     </form>   
     </div>

@@ -1,26 +1,26 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Pedidos', null);
+Page::headerTemplate('Orders', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Pedidos</h3>
+        <h3 class="mr-md-3">Orders</h3>
     </div>
 </div>
 <table id="orden-table" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
-            <th>No.°</th>
-            <th>Detalle</th>
+            <th>N.°</th>
+            <th>Detail</th>
             <th>
-                <div>Fecha de compra/</div>
-                <div>Fecha de entrega</div>
+                <div>Purchase date /</div>
+                <div>Delivery date</div>
             </th>
-            <th>Costo total</th>
-            <th>Estado</th>
-            <th>Cliente</th>
-            <th>Acciones</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Client</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
@@ -43,84 +43,84 @@ Page::headerTemplate('Pedidos', null);
                     <!-- <p class="text-secondary">INFORMACIÓN PERSONAL</p> -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nombres">Nombres</label>
-                            <input readonly type="text" class="form-control" placeholder="Nombres" id="nombres"
+                            <label for="nombres">Name</label>
+                            <input readonly type="text" class="form-control" placeholder="Name" id="nombres"
                                 name="nombres">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="apellidos">Apellidos</label>
-                            <input readonly type="text" class="form-control" placeholder="Apellidos" id="apellidos"
+                            <label for="apellidos">Surname</label>
+                            <input readonly type="text" class="form-control" placeholder="Surname" id="apellidos"
                                 name="apellidos">
                         </div>
                     </div>
                     <!-- <p class="text-secondary">INFORMACIÓN DE ENVÍO</p> -->
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="direccion">Dirección de envío</label>
-                            <input readonly type="direccion" class="form-control" placeholder="Dirección de envío"
+                            <label for="direccion">Shipping address</label>
+                            <input readonly type="direccion" class="form-control" placeholder="Shipping address"
                                 id="detalledireccion" name="detalledireccion">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="departamento">Departamento</label>
-                            <input readonly type="text" class="form-control" placeholder="Departamento"
+                            <label for="departamento">Department</label>
+                            <input readonly type="text" class="form-control" placeholder="Department"
                                 id="detalledepartamentoo" name="detalledepartamento">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="frecuencia">Frecuencia</label>
-                            <input readonly type="text" class="form-control" placeholder="Frecuencia" id="frecuencia"
+                            <label for="frecuencia">Frecuency</label>
+                            <input readonly type="text" class="form-control" placeholder="Frecuency" id="frecuencia"
                                 name="frecuencia">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="costoenvio">Costo de envío</label>
-                            <input readonly type="text" class="form-control" placeholder="Costo de envío"
+                            <label for="costoenvio">Shipping cost</label>
+                            <input readonly type="text" class="form-control" placeholder="Shipping cost"
                                 id="costoenvio" name="costoenvio">
                         </div>
                     </div>
                     <!-- <p class="text-secondary">INFORMACIÓN DEL PLAN DE SUSCRIPCIÓN</p> -->
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="tipoproducto">Tipo de producto</label>
-                            <input readonly type="text" class="form-control" placeholder="Tipo de producto"
+                            <label for="tipoproducto">Product type</label>
+                            <input readonly type="text" class="form-control" placeholder="Product type"
                                 id="tipoproducto" name="tipoproducto">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="categoria">Categoría</label>
-                            <input readonly type="text" class="form-control" placeholder="Categoría" id="categoria"
+                            <label for="categoria">Categories</label>
+                            <input readonly type="text" class="form-control" placeholder="Categories" id="categoria"
                                 name="categoria">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="estado">Estado</label>
+                            <label for="estado">Status</label>
                             <input readonly type="text" class="form-control" id="estado" name="estado"></select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="talla">Talla</label>
-                            <input readonly type="text" class="form-control" placeholder="Talla" id="talla"
+                            <label for="talla">Size</label>
+                            <input readonly type="text" class="form-control" placeholder="Size" id="talla"
                                 name="talla">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="cantidad">Cantidad</label>
-                            <input readonly type="text" class="form-control" placeholder="Cantidad" id="cantidad"
+                            <label for="cantidad">Quantity</label>
+                            <input readonly type="text" class="form-control" placeholder="Quantity" id="cantidad"
                                 name="cantidad">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="precio">Precio del producto</label>
-                            <input readonly type="text" class="form-control" placeholder="Precio ($)" id="precio"
+                            <label for="precio">Price</label>
+                            <input readonly type="text" class="form-control" placeholder="Price ($)" id="precio"
                                 name="precio">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="total">Total a pagar</label>
-                            <input readonly type="text" class="form-control" placeholder="Total ($)" id="total"
+                            <label for="total">Payment total</label>
+                            <input readonly type="text" class="form-control" placeholder="Payment total ($)" id="total"
                                 name="total">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-purple">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-purple">Save</button>
                 </div>
             </form>
         </div>

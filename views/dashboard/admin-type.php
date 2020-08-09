@@ -1,14 +1,14 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de tipos de usuario', null);
+Page::headerTemplate('User type management', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Tipos de usuario</h3>
+        <h3 class="mr-md-3">User type</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
-            Agregar
+            Add
         </button>
     </div>
 </div>
@@ -17,8 +17,8 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Tipo</th>
-                    <th>Acciones</th>
+                    <th class="pl-4">User type</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
@@ -41,13 +41,13 @@ Page::headerTemplate('Gestión de tipos de usuario', null);
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idtipousuario" name="idtipousuario"/>
             <div class="form-group">
-                <label for="tipo">Ingresa un tipo de usuario</label>
-                <input type="text" class="form-control" placeholder="Tipo de usuario" id="tipo" name="tipo" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                <label for="tipo">Enter a user type</label>
+                <input type="text" class="form-control" placeholder="User type" id="tipo" name="tipo" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-purple">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-purple">Save</button>
         </div>
     </form>   
     </div>

@@ -38,13 +38,7 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json' ,
-            'search': 'Buscar administrador:' ,
-            
-        }
-    });
+    $( '#myTable' ).DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.

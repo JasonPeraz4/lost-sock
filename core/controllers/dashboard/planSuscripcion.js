@@ -30,11 +30,7 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json'
-        }
-    });
+    $( '#myTable' ).DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -45,7 +41,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Agregar plan de suscripción' );
+    $( '#modal-title' ).text( 'Add suscription plan' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -56,7 +52,7 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Actualizar plan de suscripción' );
+    $('#modal-title').text( 'Update suscription plan' );
 
     $.ajax({
         dataType: 'json',

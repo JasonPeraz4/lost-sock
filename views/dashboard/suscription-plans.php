@@ -1,14 +1,14 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de planes de suscripción', null);
+Page::headerTemplate('Suscription plans management', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Planes de suscripción</h3>
+        <h3 class="mr-md-3">Suscription plans</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
-            Agregar
+            Add
         </button>
     </div>
 </div>
@@ -17,9 +17,9 @@ Page::headerTemplate('Gestión de planes de suscripción', null);
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Cantidad de pares</th>
-                    <th>Costo</th>
-                    <th>Acciones</th>
+                    <th class="pl-4">Number of pairs</th>
+                    <th>Cost</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
@@ -41,21 +41,21 @@ Page::headerTemplate('Gestión de planes de suscripción', null);
             <div class="modal-body p-md-4">
                 <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                 <input class="d-none" type="text" id="idplansuscripcion" name="idplansuscripcion"/>
-                <p>Ingresa la cantidad de pares de calcetines y el precio de envio</p>
+                <p>Enter the number of pairs of socks and the shipping price</p>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="cantidadpares">Cantidad de pares</label>
-                        <input type="text" class="form-control" placeholder="x pares" id="cantidadpares" name="cantidadpares" title="Solo se permiten números">
+                        <label for="cantidadpares">Number of pairs</label>
+                        <input type="text" class="form-control" placeholder="x pairs" id="cantidadpares" name="cantidadpares" title="Solo se permiten números">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="precio">Precio de envio</label>
-                        <input type="text" class="form-control" placeholder="Precio($)" id="precio" name="precio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
+                        <label for="precio">Shipping cost</label>
+                        <input type="text" class="form-control" placeholder="Shipping cost($)" id="precio" name="precio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
                     </div>
                 </div>            
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-purple">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-purple">Save</button>
             </div>
         </form>   
         </div>

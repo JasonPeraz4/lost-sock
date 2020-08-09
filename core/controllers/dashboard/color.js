@@ -29,13 +29,7 @@ function fillTable(dataset) {
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $('#tbody-rows').html(content);
-    $('#color-table').DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json',
-            'search': 'Buscar color:',
-
-        }
-    });
+    $('#color-table').DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -45,7 +39,7 @@ function openCreateModal() {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#color-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Agregar color');
+    $('#modal-title').text('Add color');
 
 }
 
@@ -56,7 +50,7 @@ function openUpdateModal(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#color-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Actualizar color');
+    $('#modal-title').text('Update color');
 
     $.ajax({
         dataType: 'json',

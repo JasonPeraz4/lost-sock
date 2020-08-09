@@ -29,11 +29,7 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable({
-        'language': {
-            'url': '../../core/helpers/Spanish.json'
-        }
-    });
+    $( '#myTable' ).DataTable();
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -44,7 +40,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Agregar tipo de usuario' );
+    $( '#modal-title' ).text( 'Add user type' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -55,7 +51,7 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Actualizar tipo de administrador' );
+    $('#modal-title').text( 'Update user type' );
 
     $.ajax({
         dataType: 'json',

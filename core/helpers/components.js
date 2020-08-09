@@ -129,10 +129,10 @@ function saveRow( api, action, form, modalId)
 function confirmDelete( api, identifier )
 {
     swal({
-        title: 'Advertencia',
-        text: '¿Estás seguro que deseas eliminarlo?',
+        title: 'Warning',
+        text: 'Do you really want to delete it?',
         icon: 'warning',
-        buttons: ['Cancelar', 'Aceptar'],
+        buttons: ['Cancel', 'Ok'],
         closeOnClickOutside: false,
         closeOnEsc: false
     })
@@ -179,7 +179,7 @@ function sweetAlert( type, text, url )
     // Se compara el tipo de mensaje a mostrar.
     switch ( type ) {
         case 1:
-            title = "Éxito";
+            title = "Success";
             icon = "success";
             break;
         case 2:
@@ -187,11 +187,11 @@ function sweetAlert( type, text, url )
             icon = "error";
             break;
         case 3:
-            title = "Advertencia";
+            title = "Warning";
             icon = "warning";
             break;
         case 4:
-            title = "Aviso";
+            title = "Info";
             icon = "info";
     }
     // Si existe una ruta definida, se muestra el mensaje y se direcciona a dicha ubicación, de lo contrario solo se muestra el mensaje.
@@ -200,7 +200,7 @@ function sweetAlert( type, text, url )
             title: title,
             text: text,
             icon: icon,
-            button: 'Aceptar',
+            button: 'Ok',
             closeOnClickOutside: false,
             closeOnEsc: false
         })
@@ -212,7 +212,7 @@ function sweetAlert( type, text, url )
             title: title,
             text: text,
             icon: icon,
-            button: 'Aceptar',
+            button: 'Ok',
             closeOnClickOutside: false,
             closeOnEsc: false
         });

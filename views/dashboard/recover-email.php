@@ -1,15 +1,15 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Recuperar contraseña','Necesitamos comprobar tu identidad')
+Page::headerTemplate('Recover password','We have to verify your identity')
 ?>
-<p>Ingresa tu correo electrónico asociado a tu cuenta. Te enviaremos un código para restablecer tu contraseña.</p>
+<p>Enter your email</p>
 <form method="post" id="login-form" class="mb-4">
     <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
     </div>
-    <a class="btn btn-outline-purple btn-block" href="index.php" role="button">Cancelar</a>
-    <button type="submit" class="btn btn-purple btn-block">Enviar código</button>
+    <a class="btn btn-outline-purple btn-block" href="index.php" role="button">Cancel</a>
+    <button type="submit" class="btn btn-purple btn-block">Send code</button>
 </form>
 <?php
 Page::footerSignIn('recoverpass.js');

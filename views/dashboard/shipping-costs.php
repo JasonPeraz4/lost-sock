@@ -1,14 +1,14 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Gestión de costos de envio', null);
+Page::headerTemplate('Shipping costs management', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Costos de envío</h3>
+        <h3 class="mr-md-3">Shipping costs</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
-            Agregar
+            Add
         </button>
     </div>
 </div>
@@ -17,9 +17,9 @@ Page::headerTemplate('Gestión de costos de envio', null);
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Departamento</th>
-                    <th>Costo de envío</th>
-                    <th>Acciones</th>
+                    <th class="pl-4">Department</th>
+                    <th>Shipping costs</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
@@ -41,21 +41,21 @@ Page::headerTemplate('Gestión de costos de envio', null);
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="iddepartamento" name="iddepartamento"/>
-            <p>Ingresa el nombre del departamento y el costo de envio</p>
+            <p>Enter department name</p>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="departamento">Departamento</label>
-                    <input type="text" class="form-control" placeholder="Departamaento" id="departamento" name="departamento" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                    <label for="departamento">Department</label>
+                    <input type="text" class="form-control" placeholder="Department" id="departamento" name="departamento" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="costoenvio">Costo de envio</label>
-                    <input type="text" class="form-control" placeholder="Costo de envio($)" id="costoenvio" name="costoenvio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
+                    <label for="costoenvio">Shipping costs</label>
+                    <input type="text" class="form-control" placeholder="Shipping costs($)" id="costoenvio" name="costoenvio" pattern="^[0-9]+(?:\.[0-9]{1,2})?$" title="Solo se permiten números con dos decimales">
                 </div>
             </div>            
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-purple">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-purple">Save</button>
         </div>
     </form>   
     </div>
