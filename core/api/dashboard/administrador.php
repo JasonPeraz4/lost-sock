@@ -271,8 +271,8 @@ if ( isset( $_GET['action'] ) ) {
             case 'login':
                 $_POST = $administrador->validateForm( $_POST );
                 if ( $administrador->setEmail($_POST['email']) ) {
-                    if ( $administrador->checkEstado( $_POST['email'] )) {
-                        if ( $administrador->checkEmail( $_POST['email'] ) ) {
+                    if ( $administrador->checkEmail( $_POST['email'] )) {
+                        if ( $administrador->checkEstado( $_POST['email'] ) ) {
                             if ( $administrador->checkClave( $_POST['clave'] ) ) {
                                 $_SESSION['idadministrador'] = $administrador->getId();
                                 $_SESSION['email'] = $administrador->getEmail();
@@ -285,10 +285,10 @@ if ( isset( $_GET['action'] ) ) {
                                 $result['exception'] = 'Contraseña incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Correo electrónico incorrecto';
+                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
                         }
                     } else {
-                        $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                        $result['exception'] = 'Correo electrónico incorrecto';
                     }
                 } else {
                     $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';

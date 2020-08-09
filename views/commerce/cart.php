@@ -6,42 +6,38 @@ Page::headerTemplate('Carrito de compra');
     <h3 class="text-center my-5">Carrito de compra</h3>
     <!-- row -->
     <div class="row mb-5">
-        <div class="col-12 col-md-7 mr-5 py-4 mb-sm-4 mb-md-0 p-4">
+        <div id="item-list" class="col-12 col-md-7 mr-5 py-4 mb-sm-4 mb-md-0 p-4">
+            <!-- Item  -->
             <div class="row shadow p-3 mb-3">
-                <div class="col-4">
-                    <img src="../../resources/img/socks.jpg" alt="" class="w-75">
+                <div class="col-md-4">
+                    <img src="../../resources/img/producto/" alt="Imagen del producto" class="w-75">
                 </div>
-                <div class="col-8">
+                <div class="col-md-8">
                     <div class="row  mb-3">
                         <div class="col-12">
-                            <h4>Penguin sock</h4>
+                            <h4 class="float-left"></h4>
+                            <div class="float-right">
+                                <i class="fad fa-pen mx-1 text-purple" onclick="openUpdateModal()"></i>
+                                <i class="fad fa-trash mx-1 text-danger" onclick="openDeleteDialog()"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="row  mb-3">
                         <div class="col-3">
                             <!-- Tallas -->
-                            <div class="dropdown">
-                                <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Talla
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="talla-producto">
-                                    <a class="dropdown-item" href="#">S</a>
-                                    <a class="dropdown-item" href="#">M</a>
-                                    <a class="dropdown-item" href="#">L</a>
-                                </div>
-                            </div>
+                            <select class="form-control form-control-sm" id="tallas" disabled>
+                            </select>
                         </div>
                         <div class="col-3">
-                                <input class="form-control form-control-sm float-right" type="number" id="cantidad-producto">
+                            <input type="number" class="form-control form-control-sm float-right" placeholder="Cantidad" id="cantidad" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p>Precio unitario: $5</p>
+                            <h6 class="text-secondary"><small class="text-secondary">Precio unitario</small> $</h6>
                         </div>
                         <div class="col-6">
-                                <p>Subtotal: $10</p>
+                            <h6 class="text-secondary"><small class="text-secondary">Subtotal</small> $</h6>
                         </div>
                     </div>
                 </div>
@@ -77,6 +73,40 @@ Page::headerTemplate('Carrito de compra');
     </div>
     <!-- end row -->
 </div>
+<!-- Modal editar producto -->
+<div class="modal fade" id="item-modal" tabindex="-1" role="dialog" aria-labelledby="item-modal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">Editar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="post" id="item-form" enctype="">
+        <div class="modal-body p-md-4">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input class="d-none" type="text" id="iddetallecompra" name="iddetallecompra"/>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="talla">Talla</label>
+                    <select class="form-control" id="talla" name="talla">
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" class="form-control" placeholder="Cantidad" id="cantidad" name="cantidad" min="1" title="Solo se permiten números naturales">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-purple">Guardar</button>
+        </div>
+    </form>   
+    </div>
+</div>
+</div>
 <?php
-Page::footerTemplate(null);
+Page::footerTemplate('cart.js');
 ?>

@@ -1,5 +1,6 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_COMPRA = '../../core/api/commerce/compra.php?action=';
+const API_CATALOGO = '../../core/api/commerce/catalogo.php?action=readTallas';
 
 // Método que se ejecuta cuando el documento está listo.
 $( document ).ready(function() {
@@ -12,7 +13,7 @@ function readCart()
 {
     $.ajax({
         dataType: 'json',
-        url: API_PEDIDOS + 'readCart'
+        url: API_COMPRA + 'readCart'
     })
     .done(function( response ) {
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje y se direcciona a la página principal.
@@ -21,32 +22,47 @@ function readCart()
             let content = '';
             // Se declara e inicializa una variable para calcular el importe por cada producto.
             let subtotal = 0;
-            // Se declara e inicializa una variable para ir sumando cada subtotal y obtener el monto final a pagar.
-            let total = 0;
             // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
             response.dataset.forEach(function( row ) {
-                subtotal = row.precio_producto * row.cantidad_producto;
-                total += subtotal;
+                subtotal = row.precio * row.cantidad;
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 content += `
-                    <tr>
-                        <td>${row.nombre_producto}</td>
-                        <td>${row.precio_producto}</td>
-                        <td>${row.cantidad_producto}</td>
-                        <td>${subtotal.toFixed(2)}</td>
-                        <td>
-                            <a href="#" onclick="openUpdateDialog(${row.id_detalle}, ${row.cantidad_producto})" class="btn waves-effect blue tooltipped" data-tooltip="Cambiar"><i class="material-icons">exposure</i></a>
-                            <a href="#" onclick="openDeleteDialog(${row.id_detalle})" class="btn waves-effect red tooltipped" data-tooltip="Remover"><i class="material-icons">remove_shopping_cart</i></a>
-                        </td>
-                    </tr>
+                    <div class="row shadow p-3 mb-3">
+                        <div class="col-md-4">
+                            <img src="../../resources/img/producto/${row.imagen}" alt="Imagen del producto" class="w-75">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row  mb-3">
+                                <div class="col-12">
+                                    <h4 class="float-left">${row.nombre}</h4>
+                                    <div class="float-right">
+                                        <i class="fad fa-pen mx-1 text-purple" onclick="openUpdateItemModal(${row.iddetallecompra}, ${row.idtalla}, ${row.cantidad}, ${row.idproducto})"></i>
+                                        <i class="fad fa-trash mx-1 text-danger" onclick="openDeleteItemDialog(${row.iddetallecompra})"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="text-secondary"><small class="text-secondary">Talla</small> ${row.talla}</h5>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="text-secondary"><small class="text-secondary">Cantidad</small> ${row.cantidad}</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h6 class="text-secondary"><small class="text-secondary">Precio unitario</small> $${row.precio}</h6>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="text-secondary"><small class="text-secondary">Subtotal</small> $${subtotal.toFixed(2)}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `;
             });
             // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-            $( '#tbody-rows' ).html( content );
-            // Se muestra el total a pagar con dos decimales.
-            $( '#pago' ).text( total.toFixed(2) );
-            // Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
-            $( '.tooltipped' ).tooltip();
+            $( '#item-list' ).html( content );
         } else {
             sweetAlert( 4, response.exception, 'index.php' );
         }
@@ -62,15 +78,14 @@ function readCart()
 }
 
 // Función que abre una caja de dialogo (modal) con formulario para modificar la cantidad de producto.
-function openUpdateDialog( id, quantity )
+function openUpdateItemModal( id, size, quantity, idproducto )
 {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
-    $( '#item-modal' ).modal( 'open' );
+    $( '#item-modal' ).modal( 'show' );
     // Se inicializan los campos del formulario con los datos del registro seleccionado previamente.
-    $( '#id_detalle' ).val( id );
-    $( '#cantidad_producto' ).val( quantity );
-    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
-    M.updateTextFields();
+    $( '#iddetallecompra' ).val( id );
+    $( '#cantidad' ).val( quantity );
+    fillSelectTallas( API_CATALOGO , idproducto, 'talla', size);
 }
 
 // Evento para cambiar la cantidad de producto.
@@ -79,7 +94,7 @@ $( '#item-form' ).submit(function( event ) {
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_PEDIDOS + 'updateDetail',
+        url: API_COMPRA + 'updateDetail',
         data: $( '#item-form' ).serialize(),
         dataType: 'json'
     })
@@ -89,7 +104,7 @@ $( '#item-form' ).submit(function( event ) {
             // Se actualiza la tabla en la vista para mostrar la modificación de la cantidad de producto.
             readCart();
             // Se cierra la caja de dialogo (modal).
-            $( '#item-modal' ).modal( 'close' );
+            $( '#item-modal' ).modal( 'hide' );
             sweetAlert( 1, response.message, null );
         } else {
             sweetAlert( 2, response.exception, null );
@@ -145,11 +160,11 @@ function finishOrder()
 }
 
 // Función que abre una caja de dialogo para confirmar la eliminación de un producto del carrito de compras.
-function openDeleteDialog( id )
+function openDeleteItemDialog( id )
 {
     swal({
         title: 'Advertencia',
-        text: '¿Está seguro de remover el producto?',
+        text: '¿Está seguro que deseas remover el producto?',
         icon: 'warning',
         buttons: ['No', 'Sí'],
         closeOnClickOutside: false,
@@ -160,8 +175,8 @@ function openDeleteDialog( id )
         if ( value ) {
             $.ajax({
                 type: 'post',
-                url: API_PEDIDOS + 'deleteDetail',
-                data: { id_detalle: id },
+                url: API_COMPRA + 'deleteDetail',
+                data: { iddetallecompra: id },
                 dataType: 'json'
             })
             .done(function( response ) {

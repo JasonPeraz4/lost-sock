@@ -96,8 +96,9 @@ CREATE TABLE detalleProducto(
 CREATE TABLE compra(
 	idCompra SERIAL PRIMARY KEY,
 	fechaCompra DATE DEFAULT NOW() NOT NULL,
-	fechaEnvio DATE NOT NULL,
-	total NUMERIC(6,2) DEFAULT 0.00 NOT NULL,
+	fechaEnvio DATE,
+	total NUMERIC(8,2) DEFAULT 0.00 NOT NULL,
+	costoEnvio NUMERIC(8,2) DEFAULT 0.00 NOT NULL,
 	idEstadoCompra INTEGER REFERENCES estadoCompra(idEstadoCompra),
 	idCliente INTEGER REFERENCES cliente(idCliente),
 	idDireccion INTEGER REFERENCES direccion(idDireccion)
@@ -147,6 +148,17 @@ $$
     SELECT to_char(to_timestamp(to_char($1, '999'), 'MM'), 'Month');
 $$ LANGUAGE SQL;
 
+-- Funión requerida para mostrar el promedio de la valoración de un producto
+
+CREATE OR REPLACE FUNCTION valoracion(integer)
+RETURNS integer AS $total$
+declare
+	total integer;
+BEGIN
+   SELECT AVG(calificacion) into total FROM detallecompra INNER JOIN comentario USING(iddetallecompra) WHERE idproducto = $1;
+   RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
 
 -- INSERT
 
@@ -203,11 +215,11 @@ VALUES	(DEFAULT, 'Mensual'),
 		(DEFAULT, 'Quincenal');
 
 INSERT INTO administrador
-VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1'),
+VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jason@peraza.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1'),
 		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1');
 
 INSERT INTO cliente 
-VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'japc@gmail.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'jason@peraza.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
 		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', '7957-0450', 'luunavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
 		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', '7967-4338', 'yanavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),
 		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', '7452-3010', 'djnavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT),

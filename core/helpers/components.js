@@ -278,7 +278,7 @@ function fillSelect( api, selectId, selected )
 *
 *   Retorno: ninguno.
 */
-function fillSelectTallas( api, id, selectId )
+function fillSelectTallas( api, id, selectId, selected )
 {
     $.ajax({
         dataType: 'json',
@@ -291,7 +291,9 @@ function fillSelectTallas( api, id, selectId )
         if ( response.status ) {
             let content = '';
             // Si no existe un valor previo para seleccionar, se muestra una opción para indicarlo.
-            content += '<option value="0" disabled selected>Talla</option>';
+            if ( ! selected ) {
+                content += '<option value="0" disabled selected>Talla</option>';
+            }
             // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
             response.dataset.forEach(function( row ) {
                 // Se obtiene el valor del primer campo de la sentencia SQL (valor para cada opción).
@@ -299,7 +301,11 @@ function fillSelectTallas( api, id, selectId )
                 // Se obtiene el valor del segundo campo de la sentencia SQL (texto para cada opción).
                 text = Object.values( row )[1];
                 // Se verifica si el valor de la API es diferente al valor seleccionado para enlistar una opción, de lo contrario se establece la opción como seleccionada.
-                content += `<option value="${value}">${text}</option>`;
+                if ( value != selected ) {
+                    content += `<option value="${value}">${text}</option>`;
+                } else {
+                    content += `<option value="${value}" selected>${text}</option>`;
+                }
             });
             // Se agregan las opciones a la etiqueta select mediante su id.
             $( '#' + selectId ).html( content );

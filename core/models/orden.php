@@ -230,7 +230,7 @@ class Orden extends Validator{
             $sql = 'INSERT INTO compra (fechacompra, idestadocompra, idcliente )
                     VALUES( NOW(), 1, ? )';
             $params = array($this->idCliente);
-            if (Database::executeRow($sql, $params)) {
+            if (Database::executeRow($sql, $params)) {  
                 // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
                 $this->idCompra = Database::getLastRowId();
                 return true;
@@ -244,7 +244,7 @@ class Orden extends Validator{
     public function createDetail()
     {
         $sql = 'INSERT INTO detalleCompra( cantidad, precio, idproducto, idcompra, idtalla)
-                VALUES(?, ?, ?, ?)';
+                VALUES(?, ?, ?, ?, ?)';
         $params = array($this->cantidad, $this->precio, $this->idProducto, $this->idCompra, $this->idTalla);
         return Database::executeRow($sql, $params);
     }
@@ -252,11 +252,10 @@ class Orden extends Validator{
     // Método para obtener los productos que se encuentran en el carrito de compras.
     public function readCart()
     {
-        $sql = 'SELECT idDetalleCompra, nombre, imagen, categoria, tipo, talla, color, detalleCompra.cantidad, detallecompra.precio
+        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto
                 FROM compra 
-                INNER JOIN detalleCompra USING(idCompra) INNER JOIN talla USING(idTalla) INNER JOIN producto USING(idproducto)
-                INNER JOIN tipoproducto USING(idtipoproducto) INNER JOIN color USING(idcolor) INNER JOIN categoria USING(idcategoria)
-                WHERE idCompra = 1';
+                INNER JOIN detalleCompra USING(idCompra) INNER JOIN producto USING(idproducto) INNER JOIN talla USING(idtalla)
+                WHERE idCompra = ? ORDER BY iddetallecompra ASC';
         $params = array($this->idCompra);
         return Database::getRows($sql, $params);
     }

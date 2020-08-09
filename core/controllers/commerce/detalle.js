@@ -24,13 +24,11 @@ function readOneProducto( id )
     .done(function( response ) {
         // Se comprueba si la API ha retornado datos, de lo contrario se muestra un mensaje de error en pantalla.
         if ( response.status ) {
-            const COLOR = document.getElementById( 'color' );
-            console.info(COLOR);
             // Se colocan los datos en la tarjeta de acuerdo al producto seleccionado previamente.
             $( '#imagen' ).prop( 'src', '../../resources/img/producto/' + response.dataset.imagen );
             $( '#nombre' ).text( response.dataset.nombre );
             $( '#descripcion' ).text( response.dataset.descripcion );
-            $( '#precio' ).text( '$' + response.dataset.precio );
+            $( '#precio_producto' ).text( '$' + response.dataset.precio );
             $( '#tipo' ).text( response.dataset.tipo );
             let valoracion = '';
             for (let i = 0; i < 5; i++) {
@@ -45,8 +43,11 @@ function readOneProducto( id )
                     `;
                 }
             }
-            fillSelectTallas( API_CATALOGO + 'readTallas', response.dataset.idproducto, 'tallas' );
+            const COLOR = document.getElementById( 'color' ).style.backgroundColor = response.dataset.codigo;
+            fillSelectTallas( API_CATALOGO + 'readTallas', response.dataset.idproducto, 'tallas', null );
             $( '#valoracion' ).html( valoracion );
+            $( '#idproducto' ).val( response.dataset.idproducto );
+            $( '#precio' ).val( response.dataset.precio );
         } else {
             // Se presenta un mensaje de error cuando no existen datos para mostrar.
             // $( '#title' ).html( `<i class="material-icons small">cloud_off</i><span class="red-text">${response.exception}</span>` );
@@ -70,7 +71,7 @@ $( '#shopping-form' ).submit(function( event ) {
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_PEDIDOS + 'createDetail',
+        url: API_COMPRA + 'createDetail',
         data: $( '#shopping-form' ).serialize(),
         dataType: 'json'
     })
