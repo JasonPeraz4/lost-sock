@@ -46,19 +46,19 @@ class Page {
                     <div class="nav-middle">
                         <ul>
                             <li>
-                                <a href="index.php">Home</a>
+                                <a href="index.php">Inicio</a>
                             </li>
                             <li>
-                                <a href="women.php">Women</a>
+                                <a href="women.php">Mujeres</a>
                             </li>
                             <li>
-                                <a href="men.php">Men</a>
+                                <a href="men.php">Hombres</a>
                             </li>
                             <li>
-                                <a href="kids.php">Kids</a>
+                                <a href="kids.php">Niños</a>
                             </li>
                             <li>
-                                <a href="exclusive.php">Exclusive</a>
+                                <a href="exclusive.php">Exclusivo</a>
                             </li>
 
                         </ul>
@@ -138,19 +138,22 @@ class Page {
                         <!-- Grid column -->
                         <div class="col-md-3 mb-md-0">
                             <!-- Links -->
-                            <p class="text-uppercase font-weight-bold">CATEGORIES</hp>
+                            <p class="text-uppercase font-weight-bold">CATEGORÍAS</hp>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="men.php">Men</a>
+                                    <a href="men.php">Hombres</a>
                                 </li>
                                 <li>
-                                    <a href="women.php">Women</a>
+                                    <a href="women.php">Mujeres</a>
                                 </li>
                                 <li>
-                                    <a href="kids.php">Kids</a>
+                                    <a href="kids.php">Niños</a>
                                 </li>
                                 <li>
-                                    <a href="exclusive.php">Exclusive</a>
+                                    <a href="exclusive.php">Exclusivos</a>
+                                </li>
+                                <li>
+                                    <a href="suscription.php">Suscripción</a>
                                 </li>
                             </ul>
                             <!-- Links -->
@@ -159,13 +162,13 @@ class Page {
                         <!-- Grid column -->
                         <div class="col-md-3 mb-md-0">
                             <!-- Links -->
-                            <p class="text-uppercase font-weight-bold">NAVIGATE</hp>
+                            <p class="text-uppercase font-weight-bold">NAVEGAR</hp>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a data-toggle="modal" data-target="#modalAbout">About us</a>
+                                    <a data-toggle="modal" data-target="#modalAbout">Sobre nosotros</a>
                                 </li>
                                 <li>
-                                    <a data-toggle="modal" data-target="#modalTerms">Terms and conditions</a>
+                                    <a data-toggle="modal" data-target="#modalTerms">Condiciones de envío</a>
                                 </li>
                             </ul>
                             <!-- Links -->
@@ -199,7 +202,7 @@ class Page {
                 </div>
                 <!-- Footer Links -->
                 <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">©2020 Copyright Lost Sock. All rights reserved.</div>
+                <div class="footer-copyright text-center py-3">©2020 Copyright Lost Sock. Todos los derechos reservados.</div>
                 <!-- Copyright -->
             </footer>
             <!-- Footer -->
@@ -254,9 +257,7 @@ class Page {
                             <div class="col-12">
                                 <div class="jumbotron jumbotron-fluid cover--about">
                                     <div class="container">
-                                        <h2 class="display-4 text-muted">Our story</h2>
-                                        <h6">Two friends, one objective
-                                        and creativity at their feet</h6>
+                                        <h2 class="display-4 text-muted">Nuestra historia</h2>
                                     </div>
                                 </div>
                             </div>
@@ -265,11 +266,14 @@ class Page {
                             <div class="col-12">
                                 <div class="container">
                                     <p class="lead">
-                                       Socks with their respective missing pair, to whom it has not happened more than once? To everybody. And while this is constantly happening, nobody really stops to think about this essential piece, with many functions, from protecting your feet from
-                                        those pesky new shoes, to keeping them warm on those winter
-                                        days and stuff. Lost Sock was born as a daring business idea that
-                                        seeks to innovate their design, turning them into a representative
-                                        piece of each persons creative identity.
+                                        Calcetines con su respectivo par desaparecido ¿a quién no le ha
+                                        sucedido esto más de alguna vez? A todos. Y aún cuando esto
+                                        sucede constantemente, nadie realmente se detiene a pensar en
+                                        esta pieza tan esencial, con muchas funciones, desde proteger
+                                        tus pies de aquellos molestos zapatos nuevos, hasta mantenerlos
+                                        calientes en aquellos días de invierno. Lost Sock nace como una
+                                        atrevida idea de negocio que busca innovar el diseño de estos,
+                                        convirtiéndolos en una pieza representativa de la identidad creativa de cada quien.
                                     </p>
                                 </div>
                             </div>
@@ -295,22 +299,26 @@ class Page {
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
                                         <div class="fad fa-box mb-5 fa-5x text-purple"></div>
-                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Refund</h4>
-                                            <p class="card-text mx-auto text-secondary">If after receiving your
-                                             order you are dissatisfied with our products, you have 5 days to 
-                                             request a refund of your money, but only if the product is in the 
-                                             original package and in well condition.
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Devoluciones</h2>
+                                            <p class="card-text mx-auto text-secondary">Si después de recibir tu pedido te
+                                                encuentras
+                                                insatisfecho con nuestros productos, tienes 5 días para solicitar un reembolso
+                                                de tu dinero, siempre
+                                                y cuando el producto se encuentre en el empaque orginal y en buen estado.
                                             </p>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
                                         <div class="fad fa-money-bill-wave mb-5 fa-5x text-purple"></div>
-                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Shipping price</h4>
-                                            <p class="card-text mx-auto text-secondary">Prices depend on where you are. For the metropolitan
-                                             area of ​​San Salvador, shipments are free, delivered by Lost Sock staff, otherwise shipments are made by Correos de El Salvador.
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Precios</h2>
+                                            <p class="card-text mx-auto text-secondary">Los precios dependen del lugar donde te
+                                                encuentres. Para el área metropolitana de San Salvador los envíos son gratuitos,
+                                                entregados
+                                                por el personal de Lost Sock, en caso contrario, los envíos son realizados por
+                                                Correos de El Salvador.
                                             </p>
                                     </div>
                                 </div>
@@ -319,10 +327,14 @@ class Page {
                                 <div class="card text-center custom--card">
                                     <div class="card-body">
                                         <div class="fad fa-box-fragile mb-5 fa-5x text-purple"></div>
-                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Damages</h4>
-                                            <p class="card-text mx-auto text-secondary">If the product is damaged due to mishandling of the postal service,
-                                             you have a period of 15 days from the date you received the package 
-                                             to make your claims and request an exchange or a refund.
+                                        <h4 class="card-title mb-4 text-secondary font-weight-light">Daños</h2>
+                                            <p class="card-text mx-auto text-secondary">Si el producto se encuentra dañado
+                                                debido
+                                                a mal manejo del servicio de correos, tienes un plazo de 15 días a partir de la
+                                                fecha
+                                                en la que recibiste el paquete para realizar tu reclamos y solicitar un cambio o
+                                                una
+                                                devolución.
                                             </p>
                                     </div>
                                 </div>

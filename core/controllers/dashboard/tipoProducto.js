@@ -29,7 +29,13 @@ function fillTable(dataset) {
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $('#tbody-rows').html(content);
-    $('#tipoproducto-table').DataTable();
+    $('#tipoproducto-table').DataTable({
+        'language': {
+            'url': '../../core/helpers/Spanish.json',
+            'search': 'Buscar tipo de producto:',
+
+        }
+    });
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -39,7 +45,7 @@ function openCreateModal() {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#tipoproducto-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Add product type');
+    $('#modal-title').text('Agregar tipo de producto');
 
 }
 
@@ -50,7 +56,7 @@ function openUpdateModal(id) {
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $('#tipoproducto-modal').modal('show');
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text('Update product type');
+    $('#modal-title').text('Actualizar tipo de producto');
 
     $.ajax({
         dataType: 'json',

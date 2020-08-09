@@ -43,7 +43,13 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable();
+    $( '#myTable' ).DataTable({
+        'language': {
+            'url': '../../core/helpers/Spanish.json' ,
+            'search': 'Buscar administrador:' ,
+            
+        }
+    });
 }
 
 
@@ -55,7 +61,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Add product' );
+    $( '#modal-title' ).text( 'Agregar producto' );
     // Se establece el campo de tipo archivo como obligatorio.
     $( '#imagen' ).prop( 'required', true );
     // Se llama a la función que llenar los select del formulario. Se encuentra en el archivo components.js
@@ -72,7 +78,7 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Update product' );
+    $( '#modal-title' ).text( 'Actualizar producto' );
     // Se establece el campo de tipo archivo como opcional.
     $( '#imagen' ).prop( 'required', false );
 

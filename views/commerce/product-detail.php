@@ -46,7 +46,10 @@ Page::headerTemplate('Lost Sock');
                             </div>
                         </div>
                         <!-- Descripción de producto -->
-                        <p class="text-muted mb-5">Funny penguin sock</p>
+                        <p class="text-muted mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Fuga quis voluptate eius labore sit tempore,
+                            in minus ullam iusto ipsum nemo officia aperiam laboriosam rerum fugit facilis rem beatae
+                            at.</p>
                         <!-- Colores -->
                         <div class="mb-3">
                             <span class="dot bg--purple"></span>
@@ -57,7 +60,7 @@ Page::headerTemplate('Lost Sock');
                             <div class="dropdown">
                                 <button class="btn btn-muted btn-sm dropdown-toggle float-left" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Size
+                                    Talla
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#">S</a>
@@ -71,13 +74,13 @@ Page::headerTemplate('Lost Sock');
                         </div>
                         <!-- Botón de añadir a la cesta -->
                         <div class="action-button mb-5">
-                            <button class="btn text-white custom--button" type="button">Add to cart</button>
+                            <button class="btn text-white custom--button" type="button">Añadir a la cesta</button>
                         </div>
-                        <!-- Descripción deSizeda del producto -->
+                        <!-- Descripción detallada del producto -->
                         <div>
-                            <h6><small class="text-secondary">Category: Men</small></h6>
-                            <h6><small class="text-secondary">Type: Socks</small></h6>
-                            <h6><small class="text-secondary">Referal code: #30930</small></h6>
+                            <h6><small class="text-secondary">Categoría: Hombres</small></h6>
+                            <h6><small class="text-secondary">Tipo: Calcetines</small></h6>
+                            <h6><small class="text-secondary">Código: #30930</small></h6>
                         </div>
                     </div>
                 </div>

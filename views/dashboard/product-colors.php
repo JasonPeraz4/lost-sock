@@ -1,15 +1,15 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Colors management', null);
+Page::headerTemplate('Gestión de colores', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h3 class="mr-md-3">Colors</h3>
+        <h3 class="mr-md-3">Colores</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <!-- Boton para llamar modal de agregar color -->
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
-            Add
+            Agregar
         </button>
     </div>
     <!-- Modal agregar color -->
@@ -28,14 +28,14 @@ Page::headerTemplate('Colors management', null);
                         <input class="d-none" type="text" id="idcolor" name="idcolor" />
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="color">Enter a color name</label>
+                                <label for="color">Ingresa el nombre del color</label>
                                 <input type="text" class="form-control" placeholder="Color" id="color" name="color" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,20}" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-purple">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -48,7 +48,7 @@ Page::headerTemplate('Colors management', null);
                 <thead>
                     <tr>
                         <th class="pl-4">Color</th>
-                        <th>Actions</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-rows" class="table-bordered">

@@ -1,15 +1,15 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Categories management', null);
+Page::headerTemplate('Gestión de categorías', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h3 class="mr-md-3">Categories</h3>
+        <h3 class="mr-md-3">Categorías</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <!-- Boton para llamar modal de agregar categoría -->
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
-            Add
+            Agregar
         </button>
     </div>
     <!-- Modal agregar cateogria de producto -->
@@ -28,14 +28,14 @@ Page::headerTemplate('Categories management', null);
                         <input class="d-none" type="text" id="idcategoria" name="idcategoria" />
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="categoria">Enter a category name</label>
-                                <input type="text" class="form-control" placeholder="Category" id="categoria" name="categoria" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}" required>
+                                <label for="categoria">Ingresa el nombre de la categoría</label>
+                                <input type="text" class="form-control" placeholder="Categoría" id="categoria" name="categoria" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-purple">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -47,8 +47,8 @@ Page::headerTemplate('Categories management', null);
         <table id="categoria-table" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Category</th>
-                    <th>Actions</th>
+                    <th class="pl-4">Categoría</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">

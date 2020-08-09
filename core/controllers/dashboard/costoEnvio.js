@@ -30,7 +30,11 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable();
+    $( '#myTable' ).DataTable({
+        'language': {
+            'url': '../../core/helpers/Spanish.json'
+        }
+    });
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -41,7 +45,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Add shipping cost' );
+    $( '#modal-title' ).text( 'Agregar costo de envio' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -52,7 +56,7 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text( 'Update shipping cost' );
+    $( '#modal-title' ).text( 'Actualizar costo de envio' );
 
     $.ajax({
         dataType: 'json',

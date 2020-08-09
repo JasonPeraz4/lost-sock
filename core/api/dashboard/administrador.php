@@ -17,7 +17,7 @@ if ( isset( $_GET['action'] ) ) {
             case 'logout':
                 if (session_destroy()) {
                     $result['status'] = 1;
-                    $result['message'] = 'You have signed off';
+                    $result['message'] = 'Sesión cerrada con exito';
                 } else {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
@@ -279,7 +279,7 @@ if ( isset( $_GET['action'] ) ) {
                             $_SESSION['nombres'] = $administrador->getNombres();
                             $_SESSION['apellidos'] = $administrador->getApellidos();
                             $result['status'] = 1;
-                            $result['message'] = 'Authenticated';
+                            $result['message'] = 'Autenticación correcta';
                         } else {
                             $result['exception'] = 'Contraseña incorrecta';
                         }

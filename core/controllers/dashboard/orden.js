@@ -46,7 +46,14 @@ function fillTable(dataset) {
     $('#tbody-rows').html(content);
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
 
-    $('#orden-table').DataTable();
+    $('#orden-table').DataTable({
+        responsive: true,
+        language: {
+            'url': '../../core/helpers/Spanish.json',
+            'search': 'Buscar órdenes:',
+
+        }
+    });
 
 }
 

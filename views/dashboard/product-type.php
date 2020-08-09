@@ -1,14 +1,14 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Product type management', null);
+Page::headerTemplate('Gestionar tipo de producto', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h3 class="mr-md-3">Product type</h3>
+        <h3 class="mr-md-3">Tipos de producto</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
-            Add
+            Agregar
         </button>
     </div>
     <!-- Modal agregar tipo de producto -->
@@ -27,14 +27,14 @@ Page::headerTemplate('Product type management', null);
                         <input class="d-none" type="text" id="idtipoproducto" name="idtipoproducto" />
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="tipoproducto">Enter a product type</label>
-                                <input type="text" class="form-control" placeholder="Product type" id="tipoproducto" name="tipoproducto" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,30}" required>
+                                <label for="tipoproducto">Ingresa el tipo del producto</label>
+                                <input type="text" class="form-control" placeholder="Tipo" id="tipoproducto" name="tipoproducto" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,30}" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-purple">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -46,8 +46,8 @@ Page::headerTemplate('Product type management', null);
         <table id="tipoproducto-table" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Product type</th>
-                    <th>Actions</th>
+                    <th class="pl-4">Tipo</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">

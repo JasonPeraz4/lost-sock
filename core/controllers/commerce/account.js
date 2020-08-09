@@ -19,10 +19,10 @@ $( document ).ready( function(){
 function logOut()
 {
     swal({
-        title: 'Warning',
-        text: 'Do you really want to log out?',
+        title: 'Advertencia',
+        text: '¿Está seguro de cerrar la sesión?',
         icon: 'warning',
-        buttons: [ 'No', 'Yes' ],
+        buttons: [ 'No', 'Sí' ],
         closeOnClickOutside: false,
         closeOnEsc: false
     })

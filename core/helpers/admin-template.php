@@ -51,69 +51,69 @@ class Page {
                         <li id="producto">
                             <a href="#productoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-socks"></i>
-                                <span class="menu-title">Products</span>
+                                <span class="menu-title">Productos</span>
                             </a>
                             <ul class="collapse list-unstyled" id="productoSubmenu">
                                 <li>
-                                    <a href="product-inventory.php">Inventory</a>
+                                    <a href="product-inventory.php">Inventario</a>
                                 </li>
                                 <li>
-                                    <a href="product-category.php">Product categories</a>
+                                    <a href="product-category.php">Categorías</a>
                                 </li>
                                 <li>
-                                    <a href="product-colors.php">Product colors</a>
+                                    <a href="product-colors.php">Colores</a>
                                 </li>
                                 <li>
-                                    <a href="product-sizes.php">Product sizes</a>
+                                    <a href="product-sizes.php">Tallas</a>
                                 </li>
                                 <li>
-                                    <a href="product-type.php">Product type</a>
+                                    <a href="product-type.php">Tipos</a>
                                 </li>
                             </ul>
                         </li>
                         <li id="pedido">
                             <a href="orders.php">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span class="menu-title">Orders</span>
+                                <span class="menu-title">Pedidos</span>
                             </a>
                         </li>
                         <li id="suscripcion">
                             <a href="#suscripcionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-shipping-fast"></i>
-                                <span class="menu-title">Suscriptions</span>
+                                <span class="menu-title">Suscripciones</span>
                             </a>
                             <ul class="collapse list-unstyled" id="suscripcionSubmenu">
                                 <li>
-                                    <a href="suscriptions.php">List</a>
+                                    <a href="suscriptions.php">Listado</a>
                                 </li>
                                 <li>
-                                    <a href="suscription-frecuency.php">Frecuency</a>
+                                    <a href="suscription-frecuency.php">Frecuencia</a>
                                 </li>
                                 <li>
-                                    <a href="suscription-plans.php">Plans</a>
+                                    <a href="suscription-plans.php">Planes</a>
                                 </li>
                                 <li>
-                                    <a href="shipping-costs.php">Shipping costs</a>
+                                    <a href="shipping-costs.php">Costos de envío</a>
                                 </li>
                             </ul>
                         </li>
                         <li id="clientes">
                             <a href="clients.php">
                                 <i class="fas fa-user"></i>
-                                <span class="menu-title">Clients</span>
+                                <span class="menu-title">Clientes</span>
                             </a>
                         </li>
                         <li id="administrador">
                             <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <i class="fas fa-user-shield"></i>
-                                <span class="menu-title">Managers</span>
+                                <span class="menu-title">Administradores</span>
                             </a>
                             <ul class="collapse list-unstyled" id="adminSubmenu">
                                 <li>
-                                    <a href="admin-list.php">List</a>
+                                    <a href="admin-list.php">Listado</a>
                                 </li>
                                 <li>
-                                    <a href="admin-type.php">User types</a>
+                                    <a href="admin-type.php">Tipos de usuario</a>
                                 </li>
                             </ul>
                         </li>
@@ -140,8 +140,8 @@ class Page {
                                         '.$_SESSION['nombres'].' '.$_SESSION['apellidos'].'
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="admin-settings.php">Settings</a>
-                                        <a class="dropdown-item" href="#" onclick="signOff()">Sign off</a>
+                                        <a class="dropdown-item" href="admin-settings.php">Ajustes</a>
+                                        <a class="dropdown-item" href="#" onclick="signOff()">Cerrar sesión</a>
                                     </div>
                                     </li>
                                 </ul>
@@ -167,7 +167,7 @@ class Page {
                         <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
                         Lost Sock
                     </a>
-                    <p class="my-auto ml-auto">Go to the <a href="../commerce/index.php">public site</a></p>
+                    <p class="my-auto ml-auto">Ir al <a href="../commerce/index.php">sitio público</a></p>
                 </nav>
             </header>
             <main class="sign-in-bg d-flex align-items-center">       

@@ -29,7 +29,11 @@ function fillTable( dataset )
     });
     // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
     $( '#tbody-rows' ).html( content );
-    $( '#myTable' ).DataTable();
+    $( '#myTable' ).DataTable({
+        'language': {
+            'url': '../../core/helpers/Spanish.json'
+        }
+    });
 }
 
 // Función que prepara formulario para insertar un registro.
@@ -40,7 +44,7 @@ function openCreateModal()
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $( '#modal-title' ).text( 'Add shipping frecuency' );
+    $( '#modal-title' ).text( 'Agregar frecuencia de envio' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -51,7 +55,7 @@ function openUpdateModal( id )
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     $( '#save-modal' ).modal( 'show' );
     // Se asigna el título para la caja de dialogo (modal).
-    $('#modal-title').text( 'Update shipping frecuency' );
+    $( '#modal-title' ).text( 'Actualizar frecuencia' );
 
     $.ajax({
         dataType: 'json',

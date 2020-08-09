@@ -1,21 +1,21 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Clients management', null);
+Page::headerTemplate('Clientes', null);
 ?>
 
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-row align-items-center">
-        <h3 class="mr-md-3">Clients</h3>
+        <h3 class="mr-md-3">Clientes</h3>
     </div>
 <table id="cliente-table" class="table table-responsive-sm table-hover">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone number</th>
-            <th>User</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>Nombre</th>
+            <th>Correo electrónico</th>
+            <th>Teléfono</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody id="tbody-rows" class="table-bordered">
@@ -34,10 +34,10 @@ Page::headerTemplate('Clients management', null);
                 <table id="suscripciones-table" class="table table-responsive-sm table-hover">
                     <thead>
                         <tr>
-                            <th>Categories</th>
-                            <th>Product type</th>
-                            <th>Product size</th>
-                            <th>Frecuency</th>
+                            <th>Categoría</th>
+                            <th>Tipo de producto</th>
+                            <th>Talla</th>
+                            <th>Frecuencia</th>
                             <th>Plan</th>
                         </tr>
                     </thead>
@@ -47,8 +47,8 @@ Page::headerTemplate('Clients management', null);
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-purple">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-purple">Guardar</button>
             </div>
         </div>
     </div>

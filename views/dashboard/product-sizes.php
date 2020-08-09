@@ -1,15 +1,15 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Sizes management', null);
+Page::headerTemplate('Gestión de tallas', null);
 ?>
 <div class="d-flex flex-row align-items-center flex-wrap mb-4">
     <div class="d-flex flex-row align-items-center">
-        <h3 class="mr-md-3">Sizes</h3>
+        <h3 class="mr-md-3">Tallas</h3>
     </div>
     <div class="d-flex flex-row align-items-center ml-md-auto">
         <!-- Boton para llamar modal de agregar talla -->
         <button type="button" class="btn btn-purple mx-2" data-toggle="modal" onclick="openCreateModal()">
-            Add
+            Agregar
         </button>
     </div>
     <!-- Modal agregar talla -->
@@ -29,14 +29,14 @@ Page::headerTemplate('Sizes management', null);
                         <input class="d-none" type="text" id="idtalla" name="idtalla" />
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="talla">Enter a size</label>
-                                <input type="text" class="form-control" placeholder="Size" id="talla" name="talla" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,5}" required>
+                                <label for="talla">Ingresa la talla</label>
+                                <input type="text" class="form-control" placeholder="Talla" id="talla" name="talla" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,5}" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-purple">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-purple">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -48,8 +48,8 @@ Page::headerTemplate('Sizes management', null);
             <table id="talla-table" class="table table-responsive-sm table-hover">
                 <thead>
                     <tr>
-                        <th class="pl-4">Size</th>
-                        <th>Actions</th>
+                        <th class="pl-4">Talla</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-rows" class="table-bordered">

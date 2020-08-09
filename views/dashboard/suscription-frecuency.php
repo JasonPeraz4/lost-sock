@@ -1,14 +1,14 @@
 <?php
 require_once('../../core/helpers/admin-template.php');
-Page::headerTemplate('Suscription frecuency management', null);
+Page::headerTemplate('Gestión de frecuencias de envío', null);
 ?>
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-wrap">
         <!-- Textbox de búsqueda -->
-        <h3 class="mr-md-3">Suscription frecuency</h3>
+        <h3 class="mr-md-3">Frecuencias de envío</h3>
         <!-- Botón agregar -->
         <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
-            Add
+            Agregar
         </button>
     </div>
 </div>
@@ -17,8 +17,8 @@ Page::headerTemplate('Suscription frecuency management', null);
         <table id="myTable" class="table table-responsive-sm table-hover">
             <thead>
                 <tr>
-                    <th class="pl-4">Frecuency</th>
-                    <th>Action</th>
+                    <th class="pl-4">Frecuencia</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tbody-rows" class="table-bordered">
@@ -40,15 +40,15 @@ Page::headerTemplate('Suscription frecuency management', null);
         <div class="modal-body p-md-4">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="d-none" type="text" id="idfrecuencia" name="idfrecuencia"/>
-            <p>Enter a suscription frecuency</p>
+            <p>Ingresa la frecuencia de envio</p>
             <div class="form-group">
-                <label for="frecuencia">Suscription frecuency</label>
-                <input type="text" class="form-control" placeholder="Ex: Weekly" id="frecuencia" name="frecuencia" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
+                <label for="frecuencia">Frecuencia de envío</label>
+                <input type="text" class="form-control" placeholder="Ej: Semanalmente" id="frecuencia" name="frecuencia" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{'1','25'}$" title="Solo se permiten letras">
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-purple">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-purple">Guardar</button>
         </div>
     </form>   
     </div>

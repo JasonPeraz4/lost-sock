@@ -1,6 +1,6 @@
 <?php
 require_once('../../core/helpers/template-commerce.php');
-Page::headerTemplate('Login | Lost Sock');
+Page::headerTemplate('Iniciar sesión | Lost Sock');
 ?>
 <div class="container-fluid">
     <div class="row justify-content-center my-auto">        
@@ -13,20 +13,20 @@ Page::headerTemplate('Login | Lost Sock');
                         <!-- Div de la derecha -->
                         <div class="col-lg-6 p-5">
                             <div class="d-flex flex-column justify-content-center my-auto">
-                                <h3 class="mb-4 mx-auto">Login</h3>
+                                <h3 class="mb-4 mx-auto">Iniciar sesión</h3>
                                 <form method="post" id="login-form" class="">
                                     <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" title="Solo se permiten direcciones de correo válidas">
+                                        <label for="email">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico" title="Solo se permiten direcciones de correo válidas">
                                     </div>
                                     <div class="form-group">
-                                        <label for="clave">Password</label>
-                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Password"  pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
+                                        <label for="clave">Contraseña</label>
+                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña"  pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial">
                                     </div>
-                                    <a class="mx-auto" href=""><small><span class="text-purple">Forgot your password?</span></small></a>
-                                    <button type="submit" class="btn btn-primary custom--button float-none w-100 mt-3 text-white">Login now</button>
+                                    <a class="mx-auto" href=""><small><span class="text-purple">¿Olvidaste tu contraseña?</span></small></a>
+                                    <button type="submit" class="btn btn-primary custom--button float-none w-100 mt-3 text-white">Iniciar sesión</button>
                                 </form>
-                                <a class="mx-auto mt-4" href="register.php"><small><span class="text-purple">Create an account</span> to buy in Lost Sock!</small></a>
+                                <a class="mx-auto mt-4" href="register.php"><small>¡<span class="text-purple">Crea una cuenta</span> para comprar en Lost Sock!</small></a>
                             </div>
                         </div>
                     </div>

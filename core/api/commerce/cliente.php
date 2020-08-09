@@ -18,7 +18,7 @@ if (isset($_GET['action'])) {
             case 'logout':
                 if (session_destroy()) {
                     $result['status'] = 1;
-                    $result['message'] = 'You have logged out';
+                    $result['message'] = 'Sesión eliminada correctamente';
                 } else {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
@@ -207,9 +207,9 @@ if (isset($_GET['action'])) {
                             $_SESSION['telefono'] = $cliente->getTelefono();
                             $_SESSION['imagen'] = $cliente->getImagen();
                             $result['status'] = 1;
-                            $result['message'] = 'Everything looks good!';
+                            $result['message'] = 'Autenticación correcta';
                         } else {
-                            $result['exception'] = 'Wrong password';
+                            $result['exception'] = 'Contraseña incorrecta';
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
