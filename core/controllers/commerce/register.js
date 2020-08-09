@@ -3,7 +3,7 @@ const API_CLIENTE = '../../core/api/commerce/cliente.php?action=';
 
 // Método que se ejecuta cuando el documento está listo.
 $( document ).ready(function() {
-    
+    fillSelect( API_DEPARTAMENTO, 'departamento_direccion', null );
 });
 
 // Evento para realizar el registro de un cliente.

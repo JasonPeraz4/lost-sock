@@ -110,13 +110,25 @@ if (isset($_GET['action'])) {
             default:
                 exit('Acción no disponible');
         }
-        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-        header('content-type: application/json; charset=utf-8');
-        // Se imprime el resultado en formato JSON y se retorna al controlador.
-        print(json_encode($result));
     } else {
-        exit('Acceso no disponible');
+        switch ($_GET['action']) {
+            case 'readAllDepartamentos':
+                case 'readAllDepartamentos':
+                    if ($result['dataset'] = $direccion->readAllDepartamento()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay departamentos registrados';
+                    }
+                break;
+            default:
+                exit('Acceso no disponible');
+                break;
+        }
     }
+    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+    header('content-type: application/json; charset=utf-8');
+    // Se imprime el resultado en formato JSON y se retorna al controlador.
+    print(json_encode($result));
 } else {
 	exit('Recurso denegado');
 }

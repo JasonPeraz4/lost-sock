@@ -32,6 +32,17 @@ Page::headerTemplate('Regístrarse | Lost Sock');
                                         <div class="invalid-feedback">Número con formato 0000-0000 e inicie con 2, 6 o 7</div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="direccion">Dirección</label>
+                                        <textarea class="form-control" rows="2" id="direccion" name="direccion" pattern="^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{1,120}$" title="Solo se permiten letras y números"></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="departamento_direccion">Departamento</label>
+                                            <select class="form-control" id="departamento_direccion" name="departamento_direccion">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="email">Correo electrónico</label>
                                         <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email" title="Solo se permiten direcciones de correo válidas">
                                     </div>
