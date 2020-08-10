@@ -6,6 +6,7 @@ const API_CATALOGO = '../../core/api/commerce/catalogo.php?action=readTallas';
 $( document ).ready(function() {
     // Se llama a la función que obtiene los productos del carrito de compras para llenar la tabla en la vista.
     readCart();
+    readCartDetail();
 });
 
 // Función para obtener el detalle del pedido (carrito de compras).
@@ -77,6 +78,33 @@ function readCart()
     });
 }
 
+function readCartDetail(){
+    $.ajax({
+        dataType: 'json',
+        url: API_COMPRA + 'readCompraDetail'
+    })
+    .done(function( response ){
+        // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+        if ( response.status ) {
+            // Se inicializan los campos del formulario con los datos del usuario que ha iniciado sesión.
+            $( '#subtotal' ).text( '$' + response.dataset.subtotal );
+            $( '#envio' ).text( '$' + response.dataset.costoenvio );
+            $( '#total' ).text( '$' + response.dataset.total );
+            fillSelect( API_DIRECCION + 'readDirecciones', 'direcciones', response.dataset.iddireccion );
+        } else {
+            sweetAlert( 2, response.exception, null );
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
 // Función que abre una caja de dialogo (modal) con formulario para modificar la cantidad de producto.
 function openUpdateItemModal( id, size, quantity, idproducto )
 {
@@ -103,6 +131,7 @@ $( '#item-form' ).submit(function( event ) {
         if ( response.status ) {
             // Se actualiza la tabla en la vista para mostrar la modificación de la cantidad de producto.
             readCart();
+            readCartDetail();
             // Se cierra la caja de dialogo (modal).
             $( '#item-modal' ).modal( 'hide' );
             sweetAlert( 1, response.message, null );
@@ -134,9 +163,11 @@ function finishOrder()
     .then(function( value ) {
         // Se verifica si fue cliqueado el botón Sí para realizar la petición respectiva, de lo contrario no se hace nada.
         if ( value ) {
+            let id = $( '#direcciones' ).val();
             $.ajax({
                 type: 'post',
-                url: API_PEDIDOS + 'finishOrder',
+                url: API_COMPRA + 'finishOrder',
+                data: { direccion : id },
                 dataType: 'json'
             })
             .done(function( response ) {

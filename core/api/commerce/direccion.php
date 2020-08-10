@@ -26,6 +26,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cliente no válido';
                 }
                 break;
+            case 'readDirecciones':
+                if ( $direccion->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
+                    if ($result['dataset'] = $direccion->readDireccionesCliente()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay direcciones registradas de este cliente';
+                    }
+                } else {
+                    $result['exception'] = 'Cliente no válido';
+                }
+                break;
             case 'readAllDepartamentos':
                 if ($result['dataset'] = $direccion->readAllDepartamento()) {
                     $result['status'] = 1;

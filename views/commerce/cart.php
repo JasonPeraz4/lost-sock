@@ -51,22 +51,22 @@ Page::headerTemplate('Carrito de compra');
                         <h5 class="float-left">Información de envío</h5>
                     </div>
                 </div>
-                <select class="form-control" id="categoria_producto"name="categoria_producto">
+                <select class="form-control" id="direcciones"name="direccion">
                 </select>
                 <div class="d-flex justify-content-between mt-5">
                     <h5>Subtotal:</h5>
-                    <h5>$15</h5>
+                    <h5 id="subtotal">$0.00</h5>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h5>Envío:</h5>
-                    <h5>$2.5</h5>
+                    <h5 id="envio">$0.00</h5>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h5>Total:</h5>
-                    <h5>$17.5</h5>
+                    <h5 id="total">$0.00</h5>
                 </div>
                 <div class="mb-2 mt-5">
-                    <button type="button" class="btn btn-primary custom--button">Procesar compra</button>
+                    <button type="button" class="btn btn-primary custom--button" onclick="finishOrder()">Procesar compra</button>
                 </div>
             </div>
        </div>

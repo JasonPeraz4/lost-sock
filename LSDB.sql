@@ -160,6 +160,19 @@ BEGIN
 END;
 $total$ LANGUAGE plpgsql;
 
+--TRIGGERS
+
+-- 1. Actualiza el precio de la compra según se agregan productos al detalle
+CREATE OR REPLACE FUNCTION actualizarTotal() RETURNS TRIGGER AS $actualizarCompra$
+   BEGIN
+      UPDATE compra SET total = (SELECT SUM(cantidad*precio) FROM detalleCompra WHERE idCompra = (SELECT idCompra FROM detalleCompra ORDER BY idDetalleCompra DESC LIMIT 1)) WHERE idCompra = (SELECT idCompra FROM detalleCompra ORDER BY idDetalleCompra DESC LIMIT 1);
+      RETURN null;
+   END;
+$actualizarCompra$ LANGUAGE plpgsql;
+
+CREATE TRIGGER actualizarCompra AFTER INSERT ON detalleCompra
+FOR EACH ROW EXECUTE PROCEDURE actualizarTotal();
+
 -- INSERT
 
 
