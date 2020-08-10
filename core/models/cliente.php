@@ -262,7 +262,13 @@ class Cliente extends Validator{
         $sql = 'INSERT INTO cliente( nombres, apellidos, email, telefono, usuario, clave)
         VALUES ( ?, ?, ?, ?, ?, ? )';
         $params = array( $this->nombres, $this->apellidos, $this->email, $this->telefono, $this->usuario, $hash );
-        return Database::executeRow($sql, $params);
+        if (Database::executeRow($sql, $params)) {  
+            // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
+            $this->idCliente = Database::getLastRowId();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function editProfile()

@@ -2,6 +2,7 @@
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/cliente.php');
+require_once('../../models/direccion.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -9,6 +10,7 @@ if (isset($_GET['action'])) {
     session_start();
     // Se instancia la clase correspondiente.
     $cliente = new Cliente;
+    $direccion = new Direccion;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
@@ -158,8 +160,24 @@ if (isset($_GET['action'])) {
                                                 if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
                                                     if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
                                                         if ( $cliente->createCliente() ) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = '¡Registrado correctamente! Inicia sesión con tu nueva cuenta';
+                                                            if ( $direccion->setIdCliente( $cliente->getIdCliente() ) ) {
+                                                                if ( $direccion->setDireccion( $_POST[ 'direccion' ] ) ) {
+                                                                    if ( $direccion->setIdDepartamento( $_POST[ 'departamento_direccion' ] ) ) {
+                                                                        if ( $direccion->createDireccion() ) {                
+                                                                            $result['status'] = 1;
+                                                                            $result['message'] = '¡Registrado correctamente! Inicia sesión con tu nueva cuenta';
+                                                                        } else {
+                                                                            $result['exception'] = Database::getException();
+                                                                        }
+                                                                    } else {
+                                                                        $result['exception'] = 'Departamento selelcionado no válido';
+                                                                    }
+                                                                } else {
+                                                                    $result['exception'] = 'Dirección no válida';
+                                                                }
+                                                            } else {
+                                                                $result['exception'] = 'Identificador del cliente no válido';
+                                                            }
                                                         } else {
                                                             $result['exception'] = Database::getException();
                                                         }

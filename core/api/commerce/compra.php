@@ -65,6 +65,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cliente incorrecto';
                 }
                 break;
+            case 'readCompraDetail':
+                if ( $compra->setIdCompra( $_SESSION['idcompra'] ) ) {
+                    if ( $result[ 'dataset' ] = $compra->readCompraDetail() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Compra no existente';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador no válido';
+                }
+                break;
             case 'updateDetail':
                 if ($compra->setIdCompra($_SESSION['idcompra'])) {
                     $_POST = $compra->validateForm($_POST);
@@ -106,14 +117,35 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Pedido incorrecto';
                 }
                 break;
-            case 'finishOrder':
+            case 'updateStatus':
                 if ($compra->setIdCompra($_SESSION['idcompra'])) {
                     if ($compra->setEstado(2)) {
                         if ($compra->updateOrderStatus()) {
                             $result['status'] = 1;
-                            $result['message'] = 'Compra finalizado correctamente';
+                            $result['message'] = 'Estado actualizado correctamente';
                         } else {
                             $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                        }
+                    } else {
+                        $result['exception'] = 'Estado incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Compra incorrecto';
+                }
+                break;
+            case 'finishOrder':
+                if ($compra->setIdCompra($_SESSION['idcompra'])) {
+                    if ($compra->setEstado(2)) {
+                        $_POST = $compra->validateForm( $_POST );
+                        if ( $compra->setIdDireccion( $_POST['direccion'] ) ) {
+                            if ($compra->finishOrder()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Compra finalizado correctamente';
+                            } else {
+                                $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                            }
+                        } else {
+                            $result['exception'] = 'Dirección incorrecta';
                         }
                     } else {
                         $result['exception'] = 'Estado incorrecto';

@@ -98,6 +98,16 @@ class Direccion extends Validator
         return Database::getRows( $sql, $params );
     }
 
+    public function readDireccionesCliente()
+    {
+        $sql = 'SELECT iddireccion, concat_ws(\', \', detalledireccion, departamento) 
+                FROM cliente
+                INNER JOIN direccion USING(idcliente) INNER JOIN departamento USING(iddepartamento)
+                WHERE cliente.idcliente = ? ORDER BY iddireccion ASC';
+        $params = array( $this->idCliente );
+        return Database::getRows( $sql, $params );
+    }
+
     public function readAllDepartamento()
     {
         $sql = 'SELECT iddepartamento, departamento

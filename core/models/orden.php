@@ -15,6 +15,7 @@ class Orden extends Validator{
     private $idCliente = null;
     private $idProducto = null;
     private $idTalla = null;
+    private $idDireccion = null;
     private $cantidad = null;
     private $precio = null;
     
@@ -150,6 +151,16 @@ class Orden extends Validator{
         }
     }
 
+    public function setIdDireccion($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idDireccion = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setCantidad($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -231,8 +242,15 @@ class Orden extends Validator{
                     VALUES( NOW(), 1, ? )';
             $params = array($this->idCliente);
             if (Database::executeRow($sql, $params)) {  
-                // Se obtiene el ultimo valor insertado en la llave primaria de la tabla pedidos.
+                // Se obtiene el ultimo valor insertado en la llave primaria de la tabla compra.
                 $this->idCompra = Database::getLastRowId();
+                // Se actualiza la dirección de la compra.
+                $sql = 'UPDATE compra SET 
+                        iddireccion = (SELECT iddireccion FROM cliente INNER JOIN direccion USING(idcliente) WHERE cliente.idcliente = ? ORDER BY iddireccion ASC LIMIT 1), 
+                        costoenvio = (SELECT costoenvio FROM cliente INNER JOIN direccion USING(idcliente) INNER JOIN departamento USING(iddepartamento) WHERE cliente.idcliente = ? ORDER BY iddireccion ASC LIMIT 1)
+                        WHERE idcompra = ?';
+                $params = array($this->idCliente, $this->idCliente, $this->idCompra);
+                Database::executeRow($sql, $params);
                 return true;
             } else {
                 return false;
@@ -260,6 +278,15 @@ class Orden extends Validator{
         return Database::getRows($sql, $params);
     }
 
+    // Método para mostra el detalle de la compra
+    public function readCompraDetail()
+    {
+        $sql = 'SELECT total as subtotal, costoenvio, (total+costoenvio) AS total, iddireccion 
+                FROM compra WHERE idCompra = ?';
+        $params = array($this->idCompra);
+        return Database::getRow($sql, $params);
+    }
+
     // Método para cambiar el estado de un pedido.
     public function updateOrderStatus()
     {
@@ -267,6 +294,17 @@ class Orden extends Validator{
                 SET idestadocompra = ?
                 WHERE idCompra = ?';
         $params = array($this->estado, $this->idCompra);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Método para cambiar el estado de un pedido.
+    public function finishOrder()
+    {
+        $sql = 'UPDATE compra
+                SET idestadocompra = ?, fechaEnvio = NOW(), iddireccion = ?,
+                costoenvio = (SELECT costoEnvio FROM direccion INNER JOIN departamento USING(iddepartamento) WHERE iddireccion = ?) 
+                WHERE idCompra = ?';
+        $params = array($this->estado, $this->idDireccion, $this->idDireccion, $this->idCompra);
         return Database::executeRow($sql, $params);
     }
 
