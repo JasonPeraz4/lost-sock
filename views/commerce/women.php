@@ -21,11 +21,11 @@ Page::headerTemplate('Calcetines de mujeres');
                         <div class="col-8">
                             <!-- Título de la card -->
                             <a href="product-detail.php">
-                                <h5 class="card-title">WHALE SOCK</h5>    
+                                <h5 class="card-title"></h5>    
                             </a>
                         </div>
                         <div class="col-4">
-                            <p class="float-right text-purple font-weight-bold">$5</p>
+                            <p class="float-right text-purple font-weight-bold">$0.00</p>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -36,10 +36,10 @@ Page::headerTemplate('Calcetines de mujeres');
                         <div class="col-8">
                             <!-- Valoración -->
                             <div class="star--card float-right">
-                                <span class="fa fa-star text-yellow" id="product--star"></span>
-                                <span class="fa fa-star text-yellow" id="product--star"></span>
-                                <span class="fa fa-star text-yellow" id="product--star"></span>
-                                <span class="fa fa-star text-yellow" id="product--star"></span>
+                                <span class="fa fa-star text-secondary" id="product--star"></span>
+                                <span class="fa fa-star text-secondary" id="product--star"></span>
+                                <span class="fa fa-star text-secondary" id="product--star"></span>
+                                <span class="fa fa-star text-secondary" id="product--star"></span>
                                 <span class="fa fa-star text-secondary" id="product--star"></span>
                             </div>
                         </div>
