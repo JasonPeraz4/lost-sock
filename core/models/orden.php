@@ -270,7 +270,7 @@ class Orden extends Validator{
     // Método para obtener los productos que se encuentran en el carrito de compras.
     public function readCart()
     {
-        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto
+        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto, (detalleCompra.cantidad*detallecompra.precio) AS subtotal
                 FROM compra 
                 INNER JOIN detalleCompra USING(idCompra) INNER JOIN producto USING(idproducto) INNER JOIN talla USING(idtalla)
                 WHERE idCompra = ? ORDER BY iddetallecompra ASC';
