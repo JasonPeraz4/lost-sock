@@ -598,27 +598,27 @@ $$ LANGUAGE SQL;
 /* 1. Cantidad de ventas realizadas por mes */
 
 SELECT to_month(date_part('month', fechaCompra)) AS "Mes", COUNT(date_part('month', fechaCompra)) AS "N° de compras" 
-FROM compra GROUP BY date_part('month', fechaCompra);
+FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra);
 
 /* 2. Nùmero de productos vendidos por cada tipo de producto */
 
-SELECT tipo AS "Tipo de producto", COUNT(p.idTipoProducto)  AS "Cantidad" FROM detalleCompra dC JOIN producto p 
-ON dc.idProducto = p.idProducto JOIN tipoProducto tP ON p.idTipoProducto = tP.idTipoProducto GROUP BY tipo
+SELECT tipo AS "Tipo de producto", COUNT(producto.idTipoProducto)  AS "Cantidad" 
+FROM detalleCompra JOIN producto USING(idProducto) JOIN tipoProducto USING(idTipoProducto) GROUP BY tipo
 
 /* 3. Nùmero de productos vendidos por cada categoria de producto */
 
-SELECT categoria AS "Categoria de producto", COUNT(p.idCategoria)  AS "Cantidad" FROM detalleCompra dC JOIN producto p 
-ON dc.idProducto = p.idProducto JOIN categoria cat ON p.idCategoria = cat.idCategoria GROUP BY categoria
+SELECT categoria AS "Categoria de producto", COUNT(producto.idCategoria)  AS "Cantidad" 
+FROM detalleCompra JOIN producto USING(idProducto) JOIN categoria USING(idCategoria) GROUP BY categoria
 
 /* 4. Ganancias total por compras mensuales */
 
 SELECT to_month(date_part('month', fechaCompra)) AS "Mes", concat('$',SUM(total)) AS "Ganancia" 
-FROM compra GROUP BY date_part('month', fechaCompra);
+FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra);
 
 /* 5. Ganancias por cada plan de suscripción */
 
-SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS "Plan", concat('$',SUM(precio)) AS "Ganancia" FROM suscripcion s 
-JOIN planSuscripcion pS ON s.idPlanSuscripcion = pS.idPlanSuscripcion GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')
+SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS "Plan", concat('$',SUM(precio)) AS "Ganancia" FROM suscripcion
+JOIN planSuscripcion USING(idPlanSuscripcion) GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')
 
 
 /*

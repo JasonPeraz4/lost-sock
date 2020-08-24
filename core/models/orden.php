@@ -270,7 +270,7 @@ class Orden extends Validator{
     // Método para obtener los productos que se encuentran en el carrito de compras.
     public function readCart()
     {
-        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto
+        $sql = 'SELECT idDetalleCompra, nombre, imagen, idtalla, talla, detalleCompra.cantidad, detallecompra.precio, detalleCompra.idproducto, (detalleCompra.cantidad*detallecompra.precio) AS subtotal
                 FROM compra 
                 INNER JOIN detalleCompra USING(idCompra) INNER JOIN producto USING(idproducto) INNER JOIN talla USING(idtalla)
                 WHERE idCompra = ? ORDER BY iddetallecompra ASC';
@@ -362,5 +362,22 @@ class Orden extends Validator{
         return Database::executeRow($sql, $params);
     }
     
+    public function gananciasMensuales()
+    {
+        $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, concat('$',SUM(total)) AS ganancia 
+                FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)        
+                ";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function gananciasPlanSuscripion()
+    {
+        $sql = "SELECT concat_ws(' ', cantidadPares, ' pares') AS plan, concat('$',SUM(precio)) AS ganancia FROM suscripcion 
+                JOIN planSuscripcion USING(idPlanSuscripcion) GROUP BY concat_ws(' ', cantidadPares, ' pares')
+                ";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }
 ?>

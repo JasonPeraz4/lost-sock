@@ -284,8 +284,28 @@ class Producto extends Validator
     public function cantidadVentas()
     {
         $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
-                FROM compra GROUP BY date_part('month', fechaCompra)
+                FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)
                 ";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function cantidadVentasProductosCategoria()
+    {
+        $sql = 'SELECT categoria, COUNT(producto.idCategoria)  AS "cantidad 
+                FROM detalleCompra 
+                JOIN producto USING(idProducto) JOIN categoria USING(idCategoria) GROUP BY categoria
+                ';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function cantidadVentasProductosTipo()
+    {
+        $sql = 'SELECT tipo, COUNT(producto.idTipoProducto)  AS cantidad 
+                FROM detalleCompra 
+                JOIN producto USING(idProducto) JOIN tipoProducto USING(idTipoProducto) GROUP BY tipo
+                ';
         $params = null;
         return Database::getRows($sql, $params);
     }
