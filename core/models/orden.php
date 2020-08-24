@@ -361,7 +361,7 @@ class Orden extends Validator{
         $params = array($this->estado, $this->idCompra);
         return Database::executeRow($sql, $params);
     }
-    
+    //Consulta gráfico
     public function gananciasMensuales()
     {
         $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, concat('$',SUM(total)) AS ganancia 
@@ -370,7 +370,7 @@ class Orden extends Validator{
         $params = null;
         return Database::getRows($sql, $params);
     }
-
+    //Consulta gráfico
     public function gananciasPlanSuscripion()
     {
         $sql = "SELECT concat_ws(' ', cantidadPares, ' pares') AS plan, concat('$',SUM(precio)) AS ganancia FROM suscripcion 
