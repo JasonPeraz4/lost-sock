@@ -22,9 +22,16 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay órdenes registradas';
                 }
                 break;
+            case 'readOrdenesCliente':
+                if ($result['dataset'] = $plan->readOrdenesCliente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay órdenes registradas para este cliente';
+                }
+                break;
             case 'readOne':
                 if ( $plan->setIdCompra( $_POST[ 'idcompra' ] ) ) {
-                    if ( $result[ 'dataset' ] = $plan->readOneOrden() ) {
+                    if ( $result[ 'dataset' ] = $plan->readOneOrden()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Orden no existente';
@@ -35,7 +42,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'status':
                 if ( $plan->setEstado( $_POST[ 'estado' ] ) && $plan->setIdCompra( $_POST[ 'id' ] ) ) {
-                    if ( $result[ 'dataset' ] = $plan->disableOrden() ) {
+                    if ( $result[ 'dataset' ] = $plan->disableOrden()) {
                         $result['status'] = 1;
                         $result['message'] = 'Estado actualizado correctamente';
                     } else {
