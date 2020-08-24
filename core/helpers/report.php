@@ -25,7 +25,7 @@ class Report extends FPDF
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a main.php
-        if (isset($_SESSION['id_usuario'])) {
+        if (isset($_SESSION['idadministrador'])) {
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
@@ -37,7 +37,7 @@ class Report extends FPDF
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->AliasNbPages();
         } else {
-            header('location: ../../views/dashboard/main.php');
+            header('location: ../../views/dashboard/product-inventory.php');
         }
     }
 
@@ -48,7 +48,7 @@ class Report extends FPDF
     public function Header()
     {
         // Se establece el logo.
-        $this->Image('../../../resources/img/logos.svg', 15, 15, 20);
+        $this->Image('../../../resources/img/500x500.jpg', 15, 15, 20);
         // Se ubica el título.
         $this->Cell(20);
         $this->SetFont('Arial', 'B', 15);
