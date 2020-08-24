@@ -4,6 +4,7 @@ const API_PRODUCTO = '../../core/api/dashboard/producto.php?action=';
 // Método que se ejecuta una vez la página este lista.
 $( document ).ready( function(){
     graficaVentas();
+    graficaGanancias();
     cantidadPedidos();
     cantidadSuscripciones();
     readTopProductos();
@@ -33,6 +34,41 @@ function graficaVentas()
             barGraph( 'chVentas', meses, cantidad, 'Cantidad de ventas', 'Cantidad de ventas realizadas por mes' );
         } else {
             $( '#chVentas' ).remove();
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+function graficaGanancias()
+{
+    $.ajax({
+        dataType: 'json',
+        url: API_PRODUCTO + 'gananciasMes',
+        data: null
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado datos, de lo contrario se remueve la etiqueta canvas asignada para la gráfica.
+        if ( response.status ) {
+            // Se declaran los arreglos para guardar los datos por gráficar.
+            let mes = [];
+            let ganancia = [];
+            // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+            response.dataset.forEach(function( row ) {
+                // Se asignan los datos a los arreglos.
+                mes.push( row.mes );
+                ganancia.push( row.ganancia );
+            });
+            // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
+            barGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (dolares)', 'Ganancias por mes' );
+        } else {
+            $( '#chGanacias' ).remove();
         }
     })
     .fail(function( jqXHR ) {

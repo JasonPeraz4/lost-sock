@@ -43,14 +43,17 @@ if (isset($_SESSION['idadministrador'])) {
     // Se imprime una celda vacía ficticia como un espaciador vertical
     $pdf->Cell(123,10,'',0,0,'L');//Esta línea sirve para acomodar elementos
     $pdf->Cell(14,20,'San Salvador, El Salvador',0,0,'L');
-    $pdf->Cell(40,30,'Fecha: '.date('d-m-Y'),0,0,'L');
-    $pdf->Cell(5,60,'____________________________________________________________________________________',0,0,'R');
+    $pdf->Cell(40,30,'Fecha: '.date('d-m-Y'),0,1,'L');//end line
+    $pdf->Cell(0,5,'_______________________________________________________________________________',0,1);//end line
+    
+    /*
     //Se leen los datos del cliente
-    $cliente->setIdCliente($_SESSION['idcliente']);
+    $cliente->setIdCliente('');
     $dataCliente = $cliente->readOneCliente();
     //Se imprime el nombre y el apellido del cliente
-    $pdf->Cell(-129,78,utf8_decode('Nombre del cliente: '.$dataCliente['nombres'].' '.$dataCliente['apellidos']),0,0,'R');//end of line
-
+    $pdf->Cell(10,15,utf8_decode('Nombre del cliente: '.$dataCliente['nombres'].' '.$dataCliente['apellidos']),0,0);//end of line
+    */
+    
     //Se consultan las ordenes relacionadas a este cliente
     /*$compra->setIdCliente($_SESSION['idcliente']);
     if ($dataOrdenes = $compra->readOrdenesCliente()) {

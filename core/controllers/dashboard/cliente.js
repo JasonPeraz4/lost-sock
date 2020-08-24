@@ -151,3 +151,4 @@ function openDeleteDialog(id) {
     let identifier = { idcategoria: id };
     confirmDelete(API_CLIENTE, identifier);
 }
+
