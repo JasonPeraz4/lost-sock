@@ -1,4 +1,7 @@
 <?php
+
+//POR QUE ESTE ARCHIVO ESTA EN LA CARPTETA reports/dashboard? 
+
 require('../../helpers/database.php');
 require('../../helpers/validator.php');
 require('../../models/orden.php');
@@ -9,7 +12,7 @@ require('../../../libraries/fpdf181/fpdf.php');
 //Espaciuo horizontal : 219-(15*2)=189mm
 
 //Se instancia la libreria
-$pdf = new FPDF('P','mm','A4');
+$pdf = new FPDF('P','mm','A4'); //POR QUE MANDAS A LLAMAR UN A4?
 
 // Se instancia el módelo Client para obtener los datos.
 $cliente = new Cliente;
@@ -125,7 +128,7 @@ if (isset($_SESSION['idcompra'])) {
     $pdf->Cell(25 ,10,'Total',0,0);
     $pdf->Cell(34 ,10,'$'.$dataCompra['total'],1,1,'R');//end of line
 } else {
-    header('location: ../../views/dashboard/index.php');
+    header('location: ../../views/dashboard/index.php'); // PORQUE LO ESTAS REDIRIGIENDO A UNA DE LAS VISTAS DEL DASHBOARD?
 }
 
 //output the result

@@ -2,7 +2,8 @@
 /*
 *	Clase para manejar la tabla detalle_compra de la base de datos. Es clase hija de la clase Validator.
 */
-class Orden extends Validator{ 
+class Orden extends Validator
+{ 
     private $idCompra = null;
     private $idDetalleCompra = null;
     private $nombre = null;
@@ -344,7 +345,7 @@ class Orden extends Validator{
     {
         $sql = 'SELECT idcompra, nombre, fechacompra, fechaenvio, total, ec.estado, ec.idEstadoCompra, nombres, apellidos
                 FROM detallecompra
-                JOIN compra USING(idcompra)
+                JOIN compra c
                 JOIN estadocompra ec USING(idestadocompra)
                 JOIN cliente USING(idcliente)
                 JOIN producto USING(idproducto)
@@ -379,5 +380,21 @@ class Orden extends Validator{
         $params = null;
         return Database::getRows($sql, $params);
     }
+
+    //Reporte de ordenes usando idCliente como parametro 
+    public function readOrdenesCliente()
+    {
+        $sql = "SELECT idcompra , nombres , apellidos ,detalleDireccion, departamento, fechaCompra, ec.estado, total
+                FROM compra c 
+                JOIN cliente cl USING(idcliente)
+                JOIN direccion d USING(iddireccion)
+                JOIN estadoCompra ec USING(idestadocompra)
+                JOIN departamento depto USING(iddepartamento)
+                WHERE cl.idcliente = ?";
+        $params = array($this->idCliente);
+        return Database::getRow($sql, $params);
+    }
+
+    
 }
 ?>

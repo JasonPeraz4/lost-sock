@@ -32,6 +32,7 @@ function fillTable(dataset) {
                 <td>
                     <i class="fas fa-info mx-1 text-info" onclick="openSuscripciones(${row.idcliente})" data-toggle="tooltip" title="Más información"></i>
                     <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"  data-toggle="tooltip" title="Estado"></i>
+                    <a class="btn btn-transparent custom--button" href="../../core/reports/dashboard/ordenesCliente.php" target="_blank" role="button" onclick="finishOrder()"><i class= "far fa-file"></i></a>
                 </td>
             </tr>
         `;
