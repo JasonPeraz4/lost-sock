@@ -8,8 +8,8 @@ require('../../models/orden.php');
 require('../../models/cliente.php');
 require('../../../libraries/fpdf181/fpdf.php');
 
-//Ancho de formato A4: 219mm
-//Espaciuo horizontal : 219-(15*2)=189mm
+//Ancho de formato de carta: 216mm
+//Espaciuo horizontal : 216-(15*2)=186mm
 
 //Se instancia la libreria
 $pdf = new FPDF('P','mm','A4'); //POR QUE MANDAS A LLAMAR UN A4?
