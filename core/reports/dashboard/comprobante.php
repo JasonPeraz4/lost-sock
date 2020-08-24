@@ -5,10 +5,10 @@ require('../../models/orden.php');
 require('../../models/cliente.php');
 require('../../../libraries/fpdf181/fpdf.php');
 
-//A4 width : 219mm
-//writable horizontal : 219-(10*2)=189mm
+//Ancho de formato A4: 219mm
+//Espaciuo horizontal : 219-(15*2)=189mm
 
-//create pdf object
+//Se instancia la libreria
 $pdf = new FPDF('P','mm','A4');
 
 // Se instancia el módelo Client para obtener los datos.
