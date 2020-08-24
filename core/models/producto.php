@@ -289,7 +289,7 @@ class Producto extends Validator
         $params = null;
         return Database::getRows($sql, $params);
     }
-
+    //Consulta gráfico
     public function cantidadVentasProductosCategoria()
     {
         $sql = 'SELECT categoria, COUNT(producto.idCategoria)  AS "cantidad 
@@ -299,7 +299,7 @@ class Producto extends Validator
         $params = null;
         return Database::getRows($sql, $params);
     }
-
+    //Consulta gráfico
     public function cantidadVentasProductosTipo()
     {
         $sql = 'SELECT tipo, COUNT(producto.idTipoProducto)  AS cantidad 
