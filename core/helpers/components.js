@@ -335,7 +335,7 @@ function fillSelectTallas( api, id, selectId, selected )
 function barGraph( canvas, xAxis, yAxis, legend, title )
 {
     // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
-    let colors = [];
+    var colors = ['#a044ff', '#8916ff', '#8916ff', '#942cff', '#9f43ff', '#ab59ff', '#b66fff', '#c185ff', '#cc9bff', '#d8b1ff', '#e3c8ff', '#eedeff', '#f9f4ff'];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar en el eje X y se van agregando al arreglo.
     // for ( i = 0; i < xAxis.length; i++ ) {
     //     colors.push( '#' + ( Math.random().toString( 16 )).substring( 2, 8 ) );
