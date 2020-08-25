@@ -337,9 +337,9 @@ function barGraph( canvas, xAxis, yAxis, legend, title )
     // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
     let colors = [];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar en el eje X y se van agregando al arreglo.
-    for ( i = 0; i < xAxis.length; i++ ) {
-        colors.push( '#' + ( Math.random().toString( 16 )).substring( 2, 8 ) );
-    }
+    // for ( i = 0; i < xAxis.length; i++ ) {
+    //     colors.push( '#' + ( Math.random().toString( 16 )).substring( 2, 8 ) );
+    // }
     // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
     const context = $( '#' + canvas );
     // Se crea una instancia para generar la gráfica con los datos recibidos.
@@ -350,7 +350,7 @@ function barGraph( canvas, xAxis, yAxis, legend, title )
             datasets: [{
                 label: legend,
                 data: yAxis,
-                backgroundColor: '#a044ff',
+                backgroundColor: colors,
                 borderColor: '#000000',
                 borderWidth: 0
             }]
@@ -371,6 +371,49 @@ function barGraph( canvas, xAxis, yAxis, legend, title )
                     }
                 }]
             }
+        }
+    });
+}
+
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+    sidebarActive();
+});
+
+function pieGraph( canvas, xAxis, yAxis, legend, title)
+{
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar en el eje X y se van agregando al arreglo.
+    for ( i = 0; i < xAxis.length; i++ ) {
+        colors.push( '#' + ( Math.random().toString( 16 )).substring( 2, 8 ) );
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = $( '#' + canvas );
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart( context, {
+        type: 'pie',
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                backgroundColor: colors,
+                borderColor: '#000000',
+                borderWidth: 0
+            }]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            title: {
+                display: true,
+                text: title
+            },
         }
     });
 }

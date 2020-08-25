@@ -290,9 +290,9 @@ class Producto extends Validator
         return Database::getRows($sql, $params);
     }
     //Consulta gráfico
-    public function cantidadVentasProductosCategoria()
+    public function cantidadCategoria()
     {
-        $sql = 'SELECT categoria, COUNT(producto.idCategoria)  AS "cantidad 
+        $sql = 'SELECT categoria, COUNT(producto.idCategoria)  AS cantidad 
                 FROM detalleCompra 
                 JOIN producto USING(idProducto) JOIN categoria USING(idCategoria) GROUP BY categoria
                 ';
@@ -300,12 +300,11 @@ class Producto extends Validator
         return Database::getRows($sql, $params);
     }
     //Consulta gráfico
-    public function cantidadVentasProductosTipo()
+    public function cantidadTipo()
     {
         $sql = 'SELECT tipo, COUNT(producto.idTipoProducto)  AS cantidad 
                 FROM detalleCompra 
-                JOIN producto USING(idProducto) JOIN tipoProducto USING(idTipoProducto) GROUP BY tipo
-                ';
+                JOIN producto USING(idProducto) JOIN tipoProducto USING(idTipoProducto) GROUP BY tipo';
         $params = null;
         return Database::getRows($sql, $params);
     }

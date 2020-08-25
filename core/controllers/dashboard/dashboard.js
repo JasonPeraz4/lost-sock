@@ -5,12 +5,14 @@ const API_PRODUCTO = '../../core/api/dashboard/producto.php?action=';
 $( document ).ready( function(){
     graficaVentas();
     graficaGanancias();
+    graficaCategorias();
+    graficaTipo();
     cantidadPedidos();
     cantidadSuscripciones();
     readTopProductos();
 });
 
-// Función para graficar la cantidad de productos por categoría.
+// Función para graficar las ventas mensuales
 function graficaVentas()
 {
     $.ajax({
@@ -46,6 +48,7 @@ function graficaVentas()
     });
 }
 
+// Función para graficar las ganancias mensuales.
 function graficaGanancias()
 {
     $.ajax({
@@ -66,9 +69,81 @@ function graficaGanancias()
                 ganancia.push( row.ganancia );
             });
             // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
-            barGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (dolares)', 'Ganancias por mes' );
+            barGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (en dólares)', 'Ganancias por mes' );
         } else {
             $( '#chGanacias' ).remove();
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+// Función para graficar la cantidad de productos por categoría.
+function graficaCategorias()
+{
+    $.ajax({
+        dataType: 'json',
+        url: API_PRODUCTO + 'cantidadCategoria',
+        data: null
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado datos, de lo contrario se remueve la etiqueta canvas asignada para la gráfica.
+        if ( response.status ) {
+            // Se declaran los arreglos para guardar los datos por gráficar.
+            let categoria = [];
+            let cantidad = [];
+            // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+            response.dataset.forEach(function( row ) {
+                // Se asignan los datos a los arreglos.
+                categoria.push( row.categoria );
+                cantidad.push( row.cantidad );
+            });
+            // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
+            pieGraph( 'chCategoria', categoria, cantidad, 'Cantidad', 'Cantidad de productos según su categoría' );
+        } else {
+            $( '#chCategoria' ).remove();
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+// Función para graficar la cantidad de productos por categoría.
+function graficaTipo()
+{
+    $.ajax({
+        dataType: 'json',
+        url: API_PRODUCTO + 'cantidadTipo',
+        data: null
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado datos, de lo contrario se remueve la etiqueta canvas asignada para la gráfica.
+        if ( response.status ) {
+            // Se declaran los arreglos para guardar los datos por gráficar.
+            let tipo = [];
+            let cantidad = [];
+            // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+            response.dataset.forEach(function( row ) {
+                // Se asignan los datos a los arreglos.
+                tipo.push( row.tipo );
+                cantidad.push( row.cantidad );
+            });
+            // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
+            pieGraph( 'chTipo', tipo, cantidad, 'Cantidad', 'Cantidad de productos según su tipo' );
+        } else {
+            $( '#chTipo' ).remove();
         }
     })
     .fail(function( jqXHR ) {
