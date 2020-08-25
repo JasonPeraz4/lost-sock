@@ -226,6 +226,13 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay productos registradas disponibles';
                 }
                 break;
+            case 'ingresoSuscripciones':
+                if ($result['dataset'] = $producto->ingresoSuscripciones()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay ventas registradas disponibles';
+                }
+                break;
             case 'readTopProductos':
                 if ($result['dataset'] = $producto->readTopProductos()) {
                     $result['status'] = 1;
