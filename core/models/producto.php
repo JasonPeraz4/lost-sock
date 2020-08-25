@@ -281,11 +281,11 @@ class Producto extends Validator
         return Database::executeRow( $sql, $params );
     }
 
+    //Consulta gráfico
     public function cantidadVentas()
     {
         $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, COUNT(date_part('month', fechaCompra)) AS cantidad 
-                FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)
-                ";
+                FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)";
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -310,6 +310,14 @@ class Producto extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function gananciasMes()
+    {
+        $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, SUM(total) AS ganancia 
+                FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)";
+        $params = null;
+        return Database::getRows( $sql, $params);
+    }
+
     public function cantidadPedidos()
     {
         $sql = "SELECT COUNT(idcompra) AS cantidad, SUM(total) AS ganancias
@@ -318,7 +326,7 @@ class Producto extends Validator
         $params = null;
         return Database::getRow( $sql, $params );
     }
-
+    
     public function cantidadSuscripciones()
     {
         $sql = "SELECT COUNT(idsuscripcion) AS cantidad, SUM(precio) AS ganancias FROM suscripcion 
