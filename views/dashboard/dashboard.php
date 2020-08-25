@@ -40,8 +40,8 @@ Page::headerTemplate('Dashboard', null);
 </div>
 <div class="row mt-4">
     <div class="col-md-6">
-        <h5 class="mb-2">Ganancias mensuales</h5>
-        <canvas id="chGanancias" class="border p-2"></canvas>
+        <h5 class="mb-2">Total de productos por tipo</h5>
+        <canvas id="chTipo" class="border p-2"></canvas>
     </div>
     <div class="col-md-6">
         <h5 class="mb-2">Total de productos por categoría</h5>
@@ -50,8 +50,12 @@ Page::headerTemplate('Dashboard', null);
 </div>
 <div class="row mt-4">
     <div class="col-md-6">
-        <h5 class="mb-2">Total de productos por tipo</h5>
-        <canvas id="chTipo" class="border p-2"></canvas>
+        <h5 class="mb-2">Ganancias mensuales</h5>
+        <canvas id="chGanancias" class="border p-2"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h5 class="mb-2">Ingresos por suscripciones</h5>
+        <canvas id="chSuscripciones" class="border p-2"></canvas>
     </div>
 </div>
 <div class="row mt-4">

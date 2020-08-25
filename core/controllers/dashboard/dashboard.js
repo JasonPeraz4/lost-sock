@@ -107,7 +107,7 @@ function graficaSuscripciones()
                 console.log(ganancia);
             });
             // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
-            barGraph( 'chSuscripciones', plan, ganancia, 'Ganancias (dolares)', 'Ingresos por suscripciones' );
+            barGraph( 'chSuscripciones', plan, ganancia, 'Ganancias (dólares)', 'Ingresos por suscripciones' );
         } else {
             $( '#chSuscripciones' ).remove();
         }
