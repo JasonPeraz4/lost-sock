@@ -224,6 +224,7 @@ class Producto extends Validator
         return Database::getRow( $sql, $params );
     }
 
+    //Consulta de reporte productos por categoría
     public function readProductosCategoria()
     {
         $sql = 'SELECT producto.idproducto, nombre, imagen, producto.precio, codigo, valoracion(producto.idproducto) 
@@ -233,6 +234,7 @@ class Producto extends Validator
         return Database::getRows( $sql, $params);
     }
 
+    //Consulta de reporte productos por tipo
     public function readProductosTipo()
     {
         $sql = 'SELECT nombre, imagen, producto.precio, SUM(detalleCompra.precio*detalleCompra.cantidad) as ganancia

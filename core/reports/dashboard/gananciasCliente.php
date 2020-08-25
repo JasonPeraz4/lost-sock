@@ -10,6 +10,7 @@ $pdf->startReport('Ganancias por cliente');
 // Se instancia el módelo Cliente para obtener los datos.
 $cliente = new Cliente;
 // Se verifica si existen registros (compras) para mostrar, de lo contrario se imprime un mensaje.
+
 if ($dataClientes = $cliente->gananciasCliente()) {
     // Colores, ancho de línea y fuente en negrita y tamaño de fuente el encabezado
     $pdf->SetFillColor(146,80,247);
