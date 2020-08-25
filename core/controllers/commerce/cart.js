@@ -173,6 +173,7 @@ function finishOrder()
             .done(function( response ) {
                 // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
                 if ( response.status ) {
+                    window.open('../../core/reports/commerce/comprobante.php', '_blank');
                     sweetAlert( 1, response.message, 'index.php' );
                 } else {
                     sweetAlert( 2, response.exception, null );
