@@ -68,7 +68,7 @@ Page::headerTemplate('Regístrarse | Lost Sock');
                                             <label class="custom-control-label" for="condiciones"> <a href="conditions.php">He leído y acepto los <span class="text-purple">términos y condiciones</span></a></label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn custom--button float-none w-100 mt-3 text-white">Registrarse</button>
+                                    <button type="submit" class="btn btn- primary custom--button float-none w-100 mt-3 text-white">Registrarse</button>
                                 </form>
                                 <a class="mx-auto mt-4" href="login.php"><small>¿Ya tienes una cuenta?  <span class="text-purple">Inicia sesión aquí.</span></small></a>
                             </div>
