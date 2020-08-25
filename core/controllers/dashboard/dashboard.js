@@ -8,6 +8,7 @@ $( document ).ready( function(){
     cantidadPedidos();
     cantidadSuscripciones();
     readTopProductos();
+    graficaSuscripciones();
 });
 
 // Función para graficar la cantidad de productos por categoría.
@@ -69,6 +70,43 @@ function graficaGanancias()
             barGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (dolares)', 'Ganancias por mes' );
         } else {
             $( '#chGanacias' ).remove();
+        }
+    })
+    .fail(function( jqXHR ) {
+        // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+        if ( jqXHR.status == 200 ) {
+            console.log( jqXHR.responseText );
+        } else {
+            console.log( jqXHR.status + ' ' + jqXHR.statusText );
+        }
+    });
+}
+
+function graficaSuscripciones()
+{
+    $.ajax({
+        dataType: 'json',
+        url: API_PRODUCTO + 'ingresoSuscripciones',
+        data: null
+    })
+    .done(function( response ) {
+        // Se comprueba si la API ha retornado datos, de lo contrario se remueve la etiqueta canvas asignada para la gráfica.
+        if ( response.status ) {
+            // Se declaran los arreglos para guardar los datos por gráficar.
+            let plan = [];
+            let ganancia = [];
+            // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+            response.dataset.forEach(function( row ) {
+                // Se asignan los datos a los arreglos.
+                plan.push (String( row.plan ));
+                console.log (plan);
+                ganancia.push( row.ganancia );
+                console.log(ganancia);
+            });
+            // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
+            barGraph( 'chSuscripciones', plan, ganancia, 'Ganancias (dolares)', 'Ingresos por suscripciones' );
+        } else {
+            $( '#chSuscripciones' ).remove();
         }
     })
     .fail(function( jqXHR ) {

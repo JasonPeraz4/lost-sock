@@ -310,10 +310,20 @@ class Producto extends Validator
         return Database::getRows($sql, $params);
     }
 
+    //Consulta gráfico (Ganancias por mes)
     public function gananciasMes()
     {
         $sql = "SELECT to_month(date_part('month', fechaCompra)) AS mes, SUM(total) AS ganancia 
                 FROM compra GROUP BY date_part('month', fechaCompra) ORDER BY date_part('month', fechaCompra)";
+        $params = null;
+        return Database::getRows( $sql, $params);
+    }
+
+    //Consulta de gráfico (Ingresos por suscripciones)
+    public function ingresoSuscripciones()
+    {
+        $sql = "SELECT concat_ws(' ', 'Plan de ', cantidadPares, ' pares') AS plan, SUM(precio) AS ganancia FROM suscripcion
+                JOIN planSuscripcion USING(idPlanSuscripcion) GROUP BY concat_ws(' ', 'Plan de ', cantidadPares, ' pares')";
         $params = null;
         return Database::getRows( $sql, $params);
     }
