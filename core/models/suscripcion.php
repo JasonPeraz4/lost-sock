@@ -167,5 +167,18 @@ class Suscripcion extends Validator{
         return Database::executeRow($sql, $params);
     }
     
+    public function readSuscripcionPlan()
+    {
+        $sql = "SELECT CASE 
+                        WHEN suscripcion.estado = '1'  THEN 'Activa'
+                        ELSE 'Inactiva'
+                END AS estado, concat_ws(' ', nombres, apellidos) as cliente,fecha, talla, frecuencia, categoria, tipo
+                FROM suscripcion
+                JOIN talla USING(idtalla) JOIN frecuencia USING(idfrecuencia) JOIN categoria USING(idcategoria)
+                JOIN cliente USING(idcliente) JOIN tipoproducto USING(idtipoproducto)
+                WHERE idplansuscripcion = ?";
+        $params = array( $this->idPlanSuscripcion);
+        return Database::getRows( $sql, $params);
+    }
 }
 ?>

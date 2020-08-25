@@ -338,5 +338,16 @@ class Cliente extends Validator{
         return Database::executeRow($sql, $params);
     }
     
+    public function gananciasCliente()
+    {
+        $sql = "SELECT concat_ws(' ', nombres, apellidos) AS nombre, SUM(precio*cantidad) AS total , SUM(cantidad) AS cantidad 
+                FROM cliente
+                JOIN compra USING(idcliente) JOIN detallecompra USING(idcompra)
+                GROUP BY concat_ws(' ', nombres, apellidos), cliente.idcliente, costoenvio 
+                ORDER BY SUM(precio*cantidad) DESC
+        ";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }
 ?>

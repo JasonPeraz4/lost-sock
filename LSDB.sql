@@ -510,9 +510,13 @@ JOIN cliente cl ON c.idCliente = cl.idCliente JOIN direccion d ON c.idDireccion 
 JOIN estadoCompra ec ON c.idEstadoCompra = ec.idEstadoCompra JOIN departamento depto 
 ON d.idDepartamento = depto.idDepartamento WHERE c.idCliente = 1
 
-/* 2. Reporte que muestra la existencia de productos por la talla que recibe como parametro el id del producto */
+/* 2. Reporte que muestra la el dinero obtenido y la cantidad de productos comprados por cada cliente */
 
-SELECT talla, existencia FROM detalleProducto dP JOIN talla ON dP.idTalla = talla.idTalla WHERE idProducto = 1
+SELECT concat_ws(' ', nombres, apellidos) AS nombre, SUM(precio*cantidad) AS total , SUM(cantidad) AS cantidad 
+FROM cliente
+JOIN compra USING(idcliente) JOIN detallecompra USING(idcompra)
+GROUP BY concat_ws(' ', nombres, apellidos), cliente.idcliente, costoenvio ORDER BY SUM(precio*cantidad) DESC
+
 
 /* 3. Obtiene los productos agrupados por su categoría */
 

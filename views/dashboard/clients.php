@@ -6,6 +6,9 @@ Page::headerTemplate('Clientes', null);
 <div class="d-flex flex-column mb-3">
     <div class="d-flex flex-row align-items-center">
         <h3 class="mr-md-3">Clientes</h3>
+        <div class="d-flex flex-row my-2 my-md-0">
+            <a class="btn btn-light text-white" href="../../core/reports/dashboard/gananciasCliente.php" target="_blank" role="button" data-toggle="tooltip" title="Generar reporte"><i class="fad fa-file-chart-line text-purple"></i></a>
+        </div>
     </div>
 <table id="cliente-table" class="table table-responsive-sm table-hover">
     <thead>

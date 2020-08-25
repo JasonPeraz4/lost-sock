@@ -233,6 +233,16 @@ class Producto extends Validator
         return Database::getRows( $sql, $params);
     }
 
+    public function readProductosTipo()
+    {
+        $sql = 'SELECT nombre, imagen, producto.precio, SUM(detalleCompra.precio*detalleCompra.cantidad) as ganancia
+                FROM producto JOIN detalleCompra USING(idproducto)
+                WHERE producto.idtipoproducto = ? GROUP BY nombre, imagen, producto.precio
+                ORDER BY SUM(detalleCompra.precio*detalleCompra.cantidad) DESC';
+        $params = array( $this->idTipoProducto);
+        return Database::getRows( $sql, $params);
+    }
+
     public function readProductoCategoria()
     {
         $sql = 'SELECT producto.idproducto, nombre, descripcion, imagen, producto.precio, codigo, valoracion(producto.idproducto), tipo 

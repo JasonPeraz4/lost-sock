@@ -14,6 +14,7 @@ class Page {
             <!-- Título del documento -->
             <title>'.$title.' | Lost Sock</title>
             <!-- Importación de archivos CSS -->
+            <link rel="stylesheet" href="../../resources/css/all.min.css">
             <link rel="stylesheet" href="../../resources/css/fontawesome-all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
@@ -204,6 +205,7 @@ class Page {
                 <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/all.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/jquery.twbsPagination.min.js" type="text/javascript"></script>

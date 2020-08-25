@@ -8,7 +8,8 @@ Page::headerTemplate('Suscripciones', null);
         <h3 class="mr-md-3">Suscripciones</h3>
         <!-- Grupo de dropdowns -->
         <div class="d-flex flex-row my-2 my-md-0">
-    </div>
+            <a class="btn btn-light" href="../../core/reports/dashboard/suscripcionPlan.php" target="_blank" role="button" data-toggle="tooltip" title="Generar reporte"><i class="fad fa-file-chart-line text-purple"></i></a>
+        </div>
     </div>
 </div>
 <table id="suscripcion-table" class="table table-responsive-sm table-hover">

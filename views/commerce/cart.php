@@ -66,7 +66,7 @@ Page::headerTemplate('Carrito de compra');
                     <h5 id="total">$0.00</h5>
                 </div>
                 <div class="mb-2 mt-5">
-                    <a class="btn btn-primary text-white custom--button" href="../../core/reports/commerce/comprobante.php" target="_blank" role="button" onclick="finishOrder()">Procesar compra</a>
+                    <a class="btn btn-primary text-white custom--button" role="button" onclick="finishOrder()">Procesar compra</a>
                 </div>
             </div>
        </div>
