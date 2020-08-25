@@ -106,5 +106,15 @@ class CostoEnvio extends Validator
         $params = array($this->idDepartamento);
         return Database::executeRow($sql, $params);
     }
+
+    //Función de reporte
+    public function enviosDepartamento()
+    {
+        $sql = "SELECT concat_ws(' ', cl.nombres, cl.apellidos) AS nombre, d.departamento, d.costoenvio, dir.detalledireccion, co.fechaenvio, co.idcompra  FROM departamento d INNER JOIN direccion dir USING(iddepartamento)
+                JOIN cliente cl USING (idcliente)
+                JOIN compra co USING(iddireccion)";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }
 ?>
