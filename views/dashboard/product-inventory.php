@@ -17,7 +17,7 @@ Page::headerTemplate('Gestión de productos', null);
                 <a class="dropdown-item" href="../../core/reports/dashboard/productosTipo.php" target="_blank">Productos por tipo</a>
             </div>
         </div>
-        <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-3 my-auto">
+        <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-auto ml-md-3 my-auto">
             Agregar
         </button>
     </div>
