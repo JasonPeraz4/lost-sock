@@ -9,7 +9,8 @@ CREATE TABLE cliente(
 	usuario VARCHAR(25) UNIQUE NOT NULL,
 	clave VARCHAR(100) NOT NULL,
 	imagen VARCHAR(100) DEFAULT 'default.png',
-	estado BIT DEFAULT '1'
+	estado INT NOT NULL,
+	fecha_clave DATE 	
 );
 
 CREATE TABLE talla(
@@ -64,8 +65,9 @@ CREATE TABLE administrador(
 	email VARCHAR(100) NOT NULL,
 	usuario VARCHAR(25) NOT NULL,
 	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL,
-	estado BIT DEFAULT '1',
-	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario)
+	estado INT NOT NULL,
+	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario),
+	fecha_clave DATE
 );
 
 CREATE TABLE color(
