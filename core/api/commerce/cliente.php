@@ -18,11 +18,24 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'logout':
-                if (session_destroy()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
+                if ($cliente->setEstado(0)) {
+                    if ($cliente->setIdCliente($_SESSION['idcliente'])) {
+                        if ($cliente->updateEstado()) {
+                            unset($_SESSION['idcliente']);
+                            if ( !isset( $_SESSION['idcliente']) ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Sesión cerrada con exito';
+                            } else {
+                                $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                            }
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al cerrar la sesión en el servidor';
+                        }
+                    } else {
+                        $result['exception'] = 'Identificador del cliente inválido';
+                    }
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                    $result['exception'] = 'Estado inválido';
                 }
                 break;
             case 'readProfile':
@@ -225,13 +238,15 @@ if (isset($_GET['action'])) {
                                 $_SESSION['apellidos'] = $cliente->getApellidos();
                                 $_SESSION['telefono'] = $cliente->getTelefono();
                                 $_SESSION['imagen'] = $cliente->getImagen();
+                                $cliente->setEstado(1);
+                                $cliente->updateEstado();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {
                                 $result['exception'] = 'Contraseña incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                            $result['exception'] = $cliente->getEstadoError();
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';

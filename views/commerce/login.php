@@ -14,7 +14,7 @@ Page::headerTemplate('Iniciar sesión | Lost Sock');
                         <div class="col-lg-6 p-5">
                             <div class="d-flex flex-column justify-content-center my-auto">
                                 <h3 class="mb-4 mx-auto">Iniciar sesión</h3>
-                                <form method="post" id="login-form" class="">
+                                <form method="post" id="login-form" class="" autocomplete="off">
                                     <div class="form-group">
                                         <label for="email">Correo electrónico</label>
                                         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico" title="Solo se permiten direcciones de correo válidas">

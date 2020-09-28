@@ -11,6 +11,7 @@ class Administrador extends Validator{
     private $usuario = null;
     private $clave = null;
     private $estado = null;
+    private $estadoError = null;
     private $tipo = null;
 
     /*
@@ -79,7 +80,7 @@ class Administrador extends Validator{
 
     public function setEstado($value)
     {
-        if ($this->validateBoolean($value)) {
+        if ($value >= 0) {
             $this->estado = $value;
             return true;
         } else {
@@ -135,6 +136,11 @@ class Administrador extends Validator{
         return $this->estado;
     }
 
+    public function getEstadoError()
+    {
+        return $this->estadoError;
+    }
+
     public function getTipo()
     {
         return $this->tipo;
@@ -156,12 +162,34 @@ class Administrador extends Validator{
         $sql = 'SELECT estado FROM administrador WHERE email = ?';
         $params = array($email);
         $data = Database::getRow($sql, $params);
-        if ( $data['estado'] == 1 ) {
-            return true;
-        } else {
-            return false;
+        // Se compara el número del estado para establecer un mensaje de error.
+        switch ($data['estado']) {
+            case 1:
+                $this->estadoError = 'Existe una sesión activa en esta cuenta';
+                return false;
+                break;
+            case 2:
+                $this->estadoError = 'La cuenta se encuentra bloqueada temporalmente';
+                return false;
+                break;
+            case 3:
+                $this->estadoError = 'La cuenta ha sido deshabilitada';
+                return false;
+                break;
+            default:
+                return true;
         }
     }
+
+    public function updateEstado()
+    {
+        $sql = 'UPDATE administrador 
+                SET estado = ?
+                WHERE idadministrador = ?';
+        $params = array($this->estado, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function checkEmail( $email ){
         $sql = 'SELECT idAdministrador, nombres, apellidos FROM administrador WHERE email = ?';
         $params = array($email);
@@ -181,11 +209,7 @@ class Administrador extends Validator{
         $sql = 'SELECT clave FROM administrador WHERE idAdministrador = ?';
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
-        if (password_verify( $clave, $data[ 'clave' ] )) {
-            return true;
-        } else {
-            return false;
-        }
+        return password_verify( $clave, $data[ 'clave' ] );
     }
 
     public function editProfile()
@@ -201,7 +225,7 @@ class Administrador extends Validator{
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'UPDATE administrador 
-                SET clave = ? WHERE idadministrador = ?';
+                SET clave = ?, fecha_clave = NOW() WHERE idadministrador = ?';
         $params = array($hash, $this->id);
         return Database::executeRow($sql, $params);
     }
@@ -222,24 +246,12 @@ class Administrador extends Validator{
         return Database::getRows($sql, $params);
     }
 
-    public function checkExist($value){
-        switch ($value) {
-            case 'value':
-                # code...
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
-
     public function createAdministrador()
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO administrador( nombres, apellidos, email, usuario, clave, estado, idTipoUsuario)
-        VALUES ( ?, ?, ?, ?, ?, DEFAULT, ? )';
+        $sql = 'INSERT INTO administrador( nombres, apellidos, email, usuario, clave, idTipoUsuario, fecha_clave)
+        VALUES ( ?, ?, ?, ?, ?, ?, NOW() )';
         $params = array( $this->nombres, $this->apellidos, $this->email, $this->usuario, $hash, $this->tipo );
         return Database::executeRow($sql, $params);
     }

@@ -15,11 +15,24 @@ if ( isset( $_GET['action'] ) ) {
     if ( isset( $_SESSION['idadministrador'] ) ) {
         switch ( $_GET['action'] ){
             case 'logout':
-                if (session_destroy()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Sesión cerrada con exito';
+                if ($administrador->setEstado(0)) {
+                    if ($administrador->setId($_SESSION['idadministrador'])) {
+                        if ($administrador->updateEstado()) {
+                            unset($_SESSION['idadministrador']);
+                            if ( !isset( $_SESSION['idadministrador']) ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Sesión cerrada con exito';
+                            } else {
+                                $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                            }
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al cerrar la sesión en el servidor';
+                        }
+                    } else {
+                        $result['exception'] = 'Identificador del administrador inválido';
+                    }
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                    $result['exception'] = 'Estado inválido';
                 }
             break;
             case 'readProfile':
@@ -195,6 +208,23 @@ if ( isset( $_GET['action'] ) ) {
                     $result['exception'] = 'Administrador no válido';
                 }
             break;
+            case 'updateEstado':
+                $_POST = $administrador->validateForm($_POST);
+                if ($administrador->setEstado($_POST['estado'])) {
+                    if ($administrador->setId($_POST['idadministrador'])) {
+                        if ($administrador->updateEstado()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Estado actualizado';
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al cerrar la sesión en el servidor';
+                        }
+                    } else {
+                        $result['exception'] = 'Identificador del administrador inválido';
+                    }
+                } else {
+                    $result['exception'] = 'Estado inválido';
+                }
+            break;
             case 'delete':
                 if ( isset( $_POST[ 'idadministrador' ] ) ) {
                     if ( $administrador->setId( $_POST[ 'idadministrador' ] ) ) {
@@ -233,39 +263,47 @@ if ( isset( $_GET['action'] ) ) {
             break;
             case 'signin':
                 $_POST = $administrador->validateForm( $_POST );
-                if ( $administrador->setNombres($_POST['nombres']) ) {
-                    if ( $administrador->setApellidos($_POST['apellidos']) ) {
-                        if ( $administrador->setEmail($_POST['email']) ) {
-                            if ( $administrador->setUsuario($_POST['usuario']) ) {
-                                if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
-                                    if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
-                                        if ( $administrador->setTipo(1) ) {
-                                            if ( $administrador->createAdministrador() ) {
-                                                $result['status'] = 1;
-                                                $result['message'] = 'Administrador registrado correctamente';
+                if ( !$administrador->readAllAdministradores() ) {
+                    if ( $administrador->setNombres($_POST['nombres']) ) {
+                        if ( $administrador->setApellidos($_POST['apellidos']) ) {
+                            if ( $administrador->setEmail($_POST['email']) ) {
+                                if ( $administrador->setUsuario($_POST['usuario']) ) {
+                                    if ( $_POST['email'] != $_POST['clave1'] ) {
+                                        if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                            if ( $administrador->setClave( $_POST[ 'clave1' ] ) ) {
+                                                if ( $administrador->setTipo(1) ) {
+                                                    if ( $administrador->createAdministrador() ) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Administrador registrado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Error al establecer el tipo de usuario';
+                                                }
                                             } else {
-                                                $result['exception'] = Database::getException();
+                                                $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
                                             }
                                         } else {
-                                            $result['exception'] = 'Error al establecer el tipo de usuario';
+                                            $result['exception'] = 'Las contraseñas no coinciden';
                                         }
                                     } else {
-                                        $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                                        $result['exception'] = 'La dirección de correo electrónico no es una contraseña segura';
                                     }
                                 } else {
-                                    $result['exception'] = 'Las contraseñas no coinciden';
+                                    $result['exception'] = 'Usuario no válido';
                                 }
                             } else {
-                                $result['exception'] = 'Usuario no válido';
+                                $result['exception'] = 'Dirección de correo no válida';
                             }
                         } else {
-                            $result['exception'] = 'Dirección de correo no válida';
+                            $result['exception'] = 'Los apellidos solo deben contener letras';
                         }
                     } else {
-                        $result['exception'] = 'Los apellidos solo deben contener letras';
+                        $result['exception'] = 'Los nombres solo deben contener letras';
                     }
                 } else {
-                    $result['exception'] = 'Los nombres solo deben contener letras';
+                    $result['exception'] = 'Existe más de un administrador registrado';
                 }
             break;
             case 'login':
@@ -279,13 +317,15 @@ if ( isset( $_GET['action'] ) ) {
                                 $_SESSION['usuario'] = $administrador->getUsuario();
                                 $_SESSION['nombres'] = $administrador->getNombres();
                                 $_SESSION['apellidos'] = $administrador->getApellidos();
+                                $administrador->setEstado(1);
+                                $administrador->updateEstado();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {
                                 $result['exception'] = 'Contraseña incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                            $result['exception'] = $administrador->getEstadoError();
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';

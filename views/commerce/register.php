@@ -14,7 +14,7 @@ Page::headerTemplate('Regístrarse | Lost Sock');
                         <div class="col-lg-6 p-md-5">
                             <div class="d-flex flex-column justify-content-center my-auto">
                                 <h3 class="mb-4 mx-auto">Regístrate</h3>
-                                <form method="post" id="signin-form" class="p-md-4">
+                                <form method="post" id="signin-form" class="p-md-4" autocomplete="off">
                                     <div class="form-group">
                                         <label for="nombres">Nombres</label>
                                         <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="^[a-zA-ZñÑáÁéÉíÍóÓúÚ\s]{1,25}$" title="Solo se permiten letras">
