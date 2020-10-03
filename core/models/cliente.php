@@ -11,6 +11,7 @@ class Cliente extends Validator{
     private $telefono = null; 
     private $usuario = null;
     private $estado = null;
+    private $estadoError = null;
     private $clave = null;
     private $imagen = null;
     private $archivo = null;
@@ -94,7 +95,7 @@ class Cliente extends Validator{
 
     public function setEstado($value)
     {
-        if ($this->validateBoolean($value)) {
+        if ($value >= 0) {
             $this->estado = $value;
             return true;
         } else {
@@ -154,6 +155,11 @@ class Cliente extends Validator{
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    public function getEstadoError()
+    {
+        return $this->estadoError;
     }
 
     public function getImagen()
@@ -220,12 +226,34 @@ class Cliente extends Validator{
         $sql = 'SELECT estado FROM cliente WHERE email = ?';
         $params = array($email);
         $data = Database::getRow($sql, $params);
-        if ( $data['estado'] == 1 ) {
-            return true;
-        } else {
-            return false;
+        // Se compara el número del estado para establecer un mensaje de error.
+        switch ($data['estado']) {
+            case 1:
+                $this->estadoError = 'Existe una sesión activa en esta cuenta';
+                return false;
+                break;
+            case 2:
+                $this->estadoError = 'La cuenta se encuentra bloqueada temporalmente';
+                return false;
+                break;
+            case 3:
+                $this->estadoError = 'La cuenta ha sido deshabilitada';
+                return false;
+                break;
+            default:
+                return true;
         }
     }
+
+    public function updateEstado()
+    {
+        $sql = 'UPDATE cliente 
+                SET estado = ?
+                WHERE idcliente = ?';
+        $params = array($this->estado, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
     public function checkEmail( $email ){
         $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen FROM cliente WHERE email = ?';
         $params = array($email);
@@ -248,11 +276,7 @@ class Cliente extends Validator{
         $sql = 'SELECT clave FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         $data = Database::getRow($sql, $params);
-        if (password_verify( $clave, $data[ 'clave' ] )) {
-            return true;
-        } else {
-            return false;
-        }
+        return password_verify( $clave, $data[ 'clave' ] );
     }
 
     public function createCliente()
@@ -291,7 +315,7 @@ class Cliente extends Validator{
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'UPDATE cliente 
-                SET clave = ? WHERE idcliente = ?';
+                SET clave = ?, fecha_clave = NOW() WHERE idcliente = ?';
         $params = array($hash, $this->idCliente);
         return Database::executeRow($sql, $params);
     }
@@ -338,5 +362,17 @@ class Cliente extends Validator{
         return Database::executeRow($sql, $params);
     }
     
+    //Funcion de reporte
+    public function gananciasCliente()
+    {
+        $sql = "SELECT concat_ws(' ', nombres, apellidos) AS nombre, SUM(precio*cantidad) AS total , SUM(cantidad) AS cantidad 
+                FROM cliente
+                JOIN compra USING(idcliente) JOIN detallecompra USING(idcompra)
+                GROUP BY concat_ws(' ', nombres, apellidos), cliente.idcliente, costoenvio 
+                ORDER BY SUM(precio*cantidad) DESC
+        ";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }
 ?>

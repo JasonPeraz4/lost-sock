@@ -53,7 +53,7 @@ class Validator
     {
         foreach ($fields as $index => $value) {
             $value = trim($value);
-            $fields[$index] = $value;
+            $fields[$index] = strip_tags($value);
         }
         return $fields;
     }
@@ -194,6 +194,23 @@ class Validator
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
         if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]{'.$minimum.','.$maximum.'}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+    *   Método para validar un dato alfanumérico (letras, dígitos y de 8 caracteres de longitud).
+    *
+    *   Parámetros: $value (dato a validar)
+    *   
+    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+    */
+    public function validateToken($value)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (preg_match('/^[A-Z0-9]{8,8}$/', $value)) {
             return true;
         } else {
             return false;

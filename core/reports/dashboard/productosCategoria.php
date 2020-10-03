@@ -14,10 +14,12 @@ $categoria = new Categoria;
 if ($dataCategorias = $categoria->readAllCategoria()) {
     // Se recorren los registros ($dataCategorias) fila por fila ($rowCategoria).
     foreach ($dataCategorias as $rowCategoria) {
-        // Se establece un color de relleno para mostrar el nombre de la categoría.
-        $pdf->SetFillColor(175);
-        // Se establece la fuente para el nombre de la categoría.
-        $pdf->SetFont('Times', 'B', 12);
+        // Colores, ancho de línea y fuente en negrita y tamaño de fuente para la categoria
+        $pdf->SetFillColor(96,15,218);
+        $pdf->SetTextColor(255);
+        $pdf->SetDrawColor(232,232,232);
+        $pdf->SetLineWidth(.4);
+        $pdf->SetFont('Arial','B',12);
         // Se imprime una celda con el nombre de la categoría.
         $pdf->Cell(0, 10, utf8_decode('Categoría: '.$rowCategoria['categoria']), 1, 1, 'C', 1);
         // Se instancia el módelo Productos para obtener los datos.
@@ -27,20 +29,23 @@ if ($dataCategorias = $categoria->readAllCategoria()) {
             // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
             if ($dataProductos = $producto->readProductosCategoria()) {
                 // Se establece un color de relleno para los encabezados.
-                $pdf->SetFillColor(225);
+                $pdf->SetFillColor(146,80,247);
                 // Se establece la fuente para los encabezados.
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->SetFont('Arial', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->Cell(140, 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
-                $pdf->Cell(46, 10, utf8_decode('Precio (US$)'), 1, 1, 'C', 1);
-                // Se establece la fuente para los datos de los productos.
-                $pdf->SetFont('Times', '', 11);
+                $pdf->Cell(46, 10, utf8_decode('Precio'), 1, 1, 'C', 1);
+                // Se establece la fuente y el color para los datos de los productos.
+                $pdf->SetTextColor(0);
+                $pdf->SetFont('Arial', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataProductos as $rowProducto) {
                     // Se imprimen las celdas con los datos de los productos.
                     $pdf->Cell(140, 10, utf8_decode($rowProducto['nombre']), 1, 0);
-                    $pdf->Cell(46, 10, $rowProducto['precio'], 1, 1);
+                    $pdf->Cell(46, 10, '$'.$rowProducto['precio'], 1, 1);
                 }
+                // Se imprime una celda vacía ficticia como un espaciador vertical
+                $pdf->Cell(186 ,5,'',0,1);//end of line
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay productos para esta categoría'), 1, 1);
             }

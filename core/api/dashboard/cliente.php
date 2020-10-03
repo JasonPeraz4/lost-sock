@@ -45,7 +45,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'status':
-                if ( $plan->setEstado( $_POST[ 'estado' ] ) && $plan->setIdCliente( $_POST[ 'id' ] ) ) {
+                if ( $plan->setEstado( $_POST[ 'estado' ] ) && $plan->setIdCliente( $_POST[ 'idcliente' ] ) ) {
                     if ( $result[ 'dataset' ] = $plan->disableCliente() ) {
                         $result['status'] = 1;
                         $result['message'] = 'Estado actualizado correctamente';

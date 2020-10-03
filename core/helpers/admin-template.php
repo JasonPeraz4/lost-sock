@@ -14,6 +14,7 @@ class Page {
             <!-- Título del documento -->
             <title>'.$title.' | Lost Sock</title>
             <!-- Importación de archivos CSS -->
+            <link rel="stylesheet" href="../../resources/css/all.min.css">
             <link rel="stylesheet" href="../../resources/css/fontawesome-all.min.css">
             <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
@@ -29,8 +30,6 @@ class Page {
         if (isset($_SESSION['idadministrador'])) {
             // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para no iniciar sesión otra vez, de lo contrario se direcciona a main.php
             if ($filename != 'index.php' && $filename != 'signin.php') {
-                // Se llama al método que contiene el código de las cajas de dialogo (modals).
-                
                 // Se imprime el código HTML para el encabezado del documento con el menú de opciones.
                 print('
                 <div class="wrapper">
@@ -151,12 +150,19 @@ class Page {
                     <!-- Contenido principal -->
                     <main class="container-fluid px-md-5 pb-md-5 mt-5">
                 ');
+                if ($_SESSION['diff_days'] > 90 || $_SESSION['diff_days'] ==  null) {
+                    print('
+                    <div class="alert alert-danger" role="alert">
+                        Han pasado más de 90 días desde la última vez que iniciaste sesión o iniciaste con una contraseña por defecto. Dirigete a <a href="admin-settings.php" class="alert-link">ajustes aquí</a> para actualizar tu contraseña.
+                    </div>
+                    ');
+                }
             } else {
                 header('location: dashboard.php');
             }
         } else {
             // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
-            if ( $filename != 'index.php' && $filename != 'signin.php' && $filename != 'recover-email.php' && $filename != 'recover-pass.php' ) {
+            if ( $filename != 'index.php' && $filename != 'signin.php' && $filename != 'recover-email.php' && $filename != 'recover-code.php' && ($filename != 'recover-pass.php' && isset($_SESSION[ 'idadminrecuperar' ]))) {
                 header('location: index.php');
             } else {
                 // Se imprime el código HTML para el encabezado del documento con un menú vacío cuando sea iniciar sesión o registrar el primer usuario.
@@ -204,6 +210,7 @@ class Page {
                 <script src="../../resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/popper.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="../../resources/js/all.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/Chart.bundle.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/datatables.min.js" type="text/javascript"></script>
                 <script src="../../resources/js/jquery.twbsPagination.min.js" type="text/javascript"></script>

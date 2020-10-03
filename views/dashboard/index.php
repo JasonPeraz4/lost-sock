@@ -3,7 +3,7 @@ require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Iniciar sesión', 'Iniciar sesión')
 ?>
 <!-- Formulario de inicio de sesión -->
-<form method="post" id="login-form" class="mb-4">
+<form method="post" id="login-form" class="mb-4" autocomplete="off">
     <div class="form-group">
         <label for="email">Correo electrónico</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico" title="Solo se permiten direcciones de correo válidas">

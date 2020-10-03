@@ -18,7 +18,7 @@ function fillTable( dataset )
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.forEach(function( row ) {
         // Se establece un icono para el estado del producto.
-        ( row.estado == 1 ) ? txt = 'Activo' : txt = 'Inactivo';
+        ( row.estado == 0 ) ? txt = 'Desconectado' : ( row.estado == 1 ) ? txt = 'Conectado' : ( row.estado == 2 ) ? txt = 'Bloqueado' : txt = 'Deshabilitado';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
@@ -30,6 +30,7 @@ function fillTable( dataset )
                 <td>${row.tipo}</td>
                 <td>${txt}</td>
                 <td>
+                    <i class="fas ${row.estado == 3 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${row.estado}, ${row.idadministrador})"  data-toggle="tooltip" title="Estado"></i>
                     <i class="fas fa-edit mx-1" onclick="openUpdateModal(${row.idadministrador})"></i>
                     <i class="fas fa-trash-alt" onclick="openDeleteDialog(${row.idadministrador})"></i>
                 </td>
@@ -60,8 +61,6 @@ function openCreateModal()
     //$( '#foto_administrador' ).prop( 'required', true );
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
     fillSelect( API_TIPOUSUARIO, 'tipo_administrador', null );
-    $( '#estado' ).addClass( 'd-none' );
-    $( '#lblE' ).addClass( 'd-none' );
 }
 
 // Función que prepara formulario para modificar un registro.
@@ -92,9 +91,6 @@ function openUpdateModal( id )
             $( '#email' ).val( response.dataset.email );
             $( '#usuario' ).val( response.dataset.usuario );
             fillSelect( API_TIPOUSUARIO, 'tipo_administrador', response.dataset.idtipousuario );
-            // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
-            llenarEstado( 'estado', response.dataset.estado );
-            //M.updateTextFields();
         } else {
             sweetAlert( 2, result.exception, null );
         }
@@ -109,21 +105,6 @@ function openUpdateModal( id )
     });
 }
 
-function llenarEstado( selectId, estado ){
-    let content;
-    if ( estado == 1 ) {
-        content+=  `
-            <option value="1" selected>Activo</option>
-            <option value="0">Inactivo</option>
-        `;
-    } else {
-        content+=  `
-            <option value="1">Activo</option>
-            <option value="0" selected>Inactivo</option>
-        `;
-    }
-    $( '#' + selectId ).html( content );
-}
 
 // Evento para crear o modificar un registro.
 $( '#save-form' ).submit(function( event ) {
@@ -143,4 +124,31 @@ function openDeleteDialog( id )
     // Se declara e inicializa un objeto con el id del registro que será borrado.
     let identifier = { idadministrador: id };
     confirmDelete( API_ADMINISTRADOR, identifier );
+}
+
+function updateEstado(estado, id) {
+    ( estado == 3 ) ? estado = 0 : estado = 3;
+    $.ajax({
+        dataType: 'json',
+        url: API_ADMINISTRADOR + 'updateEstado',
+        data: { estado: estado, idadministrador: id },
+        type: 'post'
+    })
+        .done(function (response) {
+            // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
+            if (response.status) {
+                sweetAlert(1, response.message, null);
+                readRows( API_ADMINISTRADOR );
+            } else {
+                sweetAlert(2, response.exception, null);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se verifica si la API ha respondido para mostrar la respuesta, de lo contrario se presenta el estado de la petición.
+            if (jqXHR.status == 200) {
+                console.log(jqXHR.responseText);
+            } else {
+                console.log(jqXHR.status + ' ' + jqXHR.statusText);
+            }
+        });
 }

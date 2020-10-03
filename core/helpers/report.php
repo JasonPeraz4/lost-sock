@@ -47,6 +47,27 @@ class Report extends FPDF
     */
     public function Header()
     {
+
+        $this->Image('../../../resources/img/logos.png',15,15,-305);
+        $this->SetFont('Arial','B',15);
+        //Se le da color al titulo principal
+        $this->SetTextColor(69, 0, 94);
+        //Se establece el encabezado 
+        $this->Cell(150,30,'LOST SOCK ',0,0, 'C');
+        //Se le da color al titulo secundario
+        $this->SetFont('Arial','',15);
+        $this->SetTextColor(50);
+        //Se establece el titulo secundario
+        $this->Cell(-137,44,utf8_decode($this->title),0,0, 'C');   
+        //Datos del día del reporte
+        $this->SetFont('Arial','',12);
+        // Se imprime una celda vacía ficticia como un espaciador vertical
+        $this->Cell(123,10,'',0,0,'L');//Esta línea sirve para acomodar elementos
+        $this->Cell(14,20,'San Salvador, El Salvador',0,0,'L');
+        $this->Cell(40,30,'Fecha: '.date('d-m-Y'),0,1,'L');//final del linea
+        $this->Cell(0,5,'_______________________________________________________________________________',0,1);//final de linea
+        $this->Cell(0,5,'',0,1);//espaciado
+        /*
         // Se establece el logo.
         $this->Image('../../../resources/img/500x500.jpg', 15, 15, 20);
         // Se ubica el título.
@@ -59,6 +80,7 @@ class Report extends FPDF
         $this->Cell(166, 10, 'Fecha/Hora: '.date('d-m-Y H:i:s'), 0, 1, 'C');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->Ln(10);
+        /*/
     }
 
     /*
@@ -71,6 +93,7 @@ class Report extends FPDF
         $this->SetY(-15);
         // Se establece la fuente para el número de página.
         $this->SetFont('Arial', 'I', 8);
+        $this->SetTextColor(40);
         // Se imprime una celda con el número de página.
         $this->Cell(0, 10, utf8_decode('Página ').$this->PageNo().'/{nb}', 0, 0, 'C');
     }

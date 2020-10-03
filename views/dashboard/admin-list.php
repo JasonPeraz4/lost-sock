@@ -64,12 +64,7 @@ Page::headerTemplate('Gestión de administradores', null);
                     <label for="tipo_administrador">Tipo</label>
                     <select class="form-control" id="tipo_administrador" name="tipo_administrador">
                     </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label id="lblE" for="estado">Estado</label>
-                    <select class="form-control" id="estado" name="estado">
-                    </select>
-                </div>               
+                </div>              
             </div>
         </div>
         <div class="modal-footer">

@@ -43,8 +43,8 @@ if (isset($_SESSION['idadministrador'])) {
     // Se imprime una celda vacía ficticia como un espaciador vertical
     $pdf->Cell(123,10,'',0,0,'L');//Esta línea sirve para acomodar elementos
     $pdf->Cell(14,20,'San Salvador, El Salvador',0,0,'L');
-    $pdf->Cell(40,30,'Fecha: '.date('d-m-Y'),0,1,'L');//end line
-    $pdf->Cell(0,5,'_______________________________________________________________________________',0,1);//end line
+    $pdf->Cell(40,30,'Fecha: '.date('d-m-Y'),0,1,'L');//final del linea
+    $pdf->Cell(0,5,'_______________________________________________________________________________',0,1);//final de linea
     
     /*
     //Se leen los datos del cliente

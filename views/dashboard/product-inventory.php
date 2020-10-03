@@ -7,17 +7,17 @@ Page::headerTemplate('Gestión de productos', null);
         <!-- Textbox de búsqueda -->
         <h3 class="mr-md-3">Productos</h3>
         <!-- Botón agregar -->
-        <div class="btn-group">
-            <button type="button" class="btn btn-purple dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="btn-group ml-md-auto">
+            <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Reportes">
                 <i class="fad fa-file-chart-line text-purple"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <h6 class="dropdown-header">Reporte</h6>
                 <a class="dropdown-item"  href="../../core/reports/dashboard/productosCategoria.php" target="_blank">Productos por categoria</a>
-                <a class="dropdown-item" href="admin-settings.php">Productos por tipo</a>
+                <a class="dropdown-item" href="../../core/reports/dashboard/productosTipo.php" target="_blank">Productos por tipo</a>
             </div>
         </div>
-        <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-md-auto my-auto">
+        <button type="button" onclick="openCreateModal()" class="btn btn-purple ml-auto ml-md-3 my-auto">
             Agregar
         </button>
     </div>

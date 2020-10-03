@@ -3,7 +3,7 @@ require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Recuperar contraseña','Necesitamos comprobar tu identidad')
 ?>
 <p>Ingresa tu correo electrónico asociado a tu cuenta. Te enviaremos un código para restablecer tu contraseña.</p>
-<form method="post" id="login-form" class="mb-4">
+<form method="post" id="sendmail-form" class="mb-4">
     <div class="form-group">
         <label for="email">Correo electrónico</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
