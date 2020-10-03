@@ -67,7 +67,9 @@ CREATE TABLE administrador(
 	clave VARCHAR(100) DEFAULT 'LostSock20$20' NOT NULL,
 	estado INT DEFAULT 0 NOT NULL,
 	idTipoUsuario INTEGER REFERENCES tipoUsuario(idTipoUsuario),
-	fecha_clave DATE
+	fecha_clave DATE,
+	token_recuperar_clave VARCHAR(25),
+	fecha_token TIMESTAMP DEFAULT (NOW()+interval '5 min')
 );
 
 CREATE TABLE color(
@@ -230,7 +232,7 @@ VALUES	(DEFAULT, 'Mensual'),
 		(DEFAULT, 'Quincenal');
 
 INSERT INTO administrador
-VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapc@gmail.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1', NOW()),
+VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonperaza', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO' ,DEFAULT, '1', NOW()),
 		(DEFAULT, 'Laura Ana', 'Cañas Navas', 'lauranavasv@gmail.com', 'lauranavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1', NOW()),
 		(DEFAULT, 'Rafael Alejandro', 'Anaya Romero', 'rafaelanayomero@gmail.com', 'rafaelanaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1', NOW());
 

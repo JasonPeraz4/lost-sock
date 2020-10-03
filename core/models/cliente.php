@@ -276,11 +276,7 @@ class Cliente extends Validator{
         $sql = 'SELECT clave FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         $data = Database::getRow($sql, $params);
-        if (password_verify( $clave, $data[ 'clave' ] )) {
-            return true;
-        } else {
-            return false;
-        }
+        return password_verify( $clave, $data[ 'clave' ] );
     }
 
     public function createCliente()

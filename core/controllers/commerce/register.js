@@ -3,6 +3,18 @@ const API_CLIENTE = '../../core/api/commerce/cliente.php?action=';
 
 // Método que se ejecuta cuando el documento está listo.
 $( document ).ready(function() {
+    // Método que se ejecuta cuando carga la biblioteca reCAPTCHA.
+    grecaptcha.ready(function() {
+        // Se declara e inicializa una variable para guardar la llave pública del reCAPTCHA.
+        let publicKey = '6LfnctEZAAAAAPjlz27x0w0b1WnuPxCNmKe3aIiq';
+        // Se obtiene un token para la página web mediante la llave pública.
+        grecaptcha.execute( publicKey, { action: 'homepage' } )
+        .then(function( token ) {
+            // Se asigna el valor del token al campo oculto del formulario
+            $( '#g-recaptcha-response' ).val( token );
+            console.log(token)
+        });
+    });
     fillSelect( API_DEPARTAMENTO, 'departamento_direccion', null );
 });
 
