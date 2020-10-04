@@ -10,7 +10,9 @@ CREATE TABLE cliente(
 	clave VARCHAR(100) NOT NULL,
 	imagen VARCHAR(100) DEFAULT 'default.png',
 	estado INT DEFAULT 0 NOT NULL,
-	fecha_clave DATE DEFAULT NOW()	
+	fecha_clave DATE DEFAULT NOW(),
+	token_recuperar_clave VARCHAR(25),
+	fecha_token TIMESTAMP DEFAULT (NOW()+interval '5 min')	
 );
 
 CREATE TABLE talla(
@@ -237,7 +239,7 @@ VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonp
 		(DEFAULT, 'Rafael Alejandro', 'Anaya Romero', 'rafaelanayomero@gmail.com', 'rafaelanaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1', NOW());
 
 INSERT INTO cliente 
-VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'jason@peraza.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'jasonapcx@gmail.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
 		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', '7957-0450', 'luunavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
 		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', '7967-4338', 'yanavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
 		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', '7452-3010', 'djnavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),

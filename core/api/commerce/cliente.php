@@ -3,6 +3,7 @@ require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/cliente.php');
 require_once('../../models/direccion.php');
+require_once('../../helpers/mail.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -11,6 +12,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new Cliente;
     $direccion = new Direccion;
+    $mail = new Mail;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
@@ -139,6 +141,7 @@ if (isset($_GET['action'])) {
                                     if ( $cliente->changePassword() ) {
                                         $result['status'] = 1;
                                         $result['message'] = 'Contraseña actualizada con correctamente';
+                                        $_SESSION['diff_days_cliente'] = 0;
                                     } else {
                                         $result['exception'] = Database::getException();
                                     }
@@ -278,6 +281,7 @@ if (isset($_GET['action'])) {
                                 $_SESSION['apellidos'] = $cliente->getApellidos();
                                 $_SESSION['telefono'] = $cliente->getTelefono();
                                 $_SESSION['imagen'] = $cliente->getImagen();
+                                $_SESSION['diff_days_cliente'] = $cliente->getDiffDays();
                                 $cliente->setEstado(1);
                                 $cliente->updateEstado();
                                 $result['status'] = 1;
@@ -295,6 +299,63 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';
                 }               
                 break;
+            case 'sendMail':
+                $_POST = $cliente->validateForm( $_POST );
+                if ( $cliente->setEmail($_POST['email']) ) {
+                    if ( $cliente->checkEmail( $_POST['email'] )) {
+                        if ( $cliente->addToken() ) {
+                            if ( $mail->sendMail($cliente->getEmail(), $cliente->getNombres().' '.$cliente->getApellidos(), $cliente->getToken()) ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Código de recuperación enviado. Revisa tu e-mail';
+                            } else {
+                                $result['exception'] = 'Ocurrio un error al enviar el código de recuperación enviado';
+                            }
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'Correo electrónico incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Ingresa tu dirección de correo electrónico';
+                }               
+            break;
+            case 'verifyToken':
+                $_POST = $cliente->validateForm( $_POST );
+                if ( $cliente->setToken($_POST['token']) ) {
+                    if ( $cliente->checkToken()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Código de recuperación correcto';
+                        $_SESSION['idclientrecuperar'] = $cliente->getIdCliente();
+                    } else {
+                        $result['exception'] = Database::getException().' Código incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Asegurate de ingresar el código correctamente';
+                }               
+            break;
+            case 'changePassword':
+                if ( $cliente->setIdCliente( $_SESSION[ 'idclientrecuperar' ] ) ) {
+                    $_POST = $cliente->validateForm( $_POST );
+                    if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                        if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
+                            if ( $cliente->changePassword() ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Contraseña actualizada con correctamente';
+                                unset($_SESSION['idclientrecuperar']);
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                        }
+                    } else {
+                        $result['exception'] = 'Las contraseñas no coinciden';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+            break;
             default:
                 exit('Acción no disponible fuera de la sesión');
         }

@@ -1,5 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_ADMINISTRADOR = '../../core/api/dashboard/administrador.php?action=';
+const API_CLIENTE = '../../core/api/commerce/cliente.php?action=';
 
 // Método que se ejecuta una vez la página este lista.
 $( document ).ready( function(){
@@ -12,7 +12,7 @@ $( '#sendmail-form' ).submit( function( event ){
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_ADMINISTRADOR + 'sendMail',
+        url: API_CLIENTE + 'sendMail',
         data: $( '#sendmail-form' ).serialize(),
         dataType: 'json'
     })
@@ -39,7 +39,7 @@ $( '#token-form' ).submit( function( event ){
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_ADMINISTRADOR + 'verifyToken',
+        url: API_CLIENTE + 'verifyToken',
         data: $( '#token-form' ).serialize(),
         dataType: 'json'
     })
@@ -67,7 +67,7 @@ $( '#recoverpass-form' ).submit(function( event ) {
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: API_ADMINISTRADOR + 'changePassword',
+        url: API_CLIENTE + 'changePassword',
         data: $( '#recoverpass-form' ).serialize(),
         dataType: 'json'
     })
@@ -75,7 +75,7 @@ $( '#recoverpass-form' ).submit(function( event ) {
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
         if ( response.status ) {
             $( '#recoverpass-form' )[0].reset();
-            sweetAlert( 1, response.message, 'index.php' );
+            sweetAlert( 1, response.message, 'login.php' );
         } else {
             sweetAlert( 2, response.exception, null );
         }

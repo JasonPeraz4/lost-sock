@@ -13,6 +13,8 @@ class Cliente extends Validator{
     private $estado = null;
     private $estadoError = null;
     private $clave = null;
+    private $token = null;
+    private $diff_days = null;
     private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/clientes/';
@@ -103,6 +105,16 @@ class Cliente extends Validator{
         }
     }
 
+    public function setToken($value)
+    {
+        if ($this->validateToken($value)) {
+            $this->token = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setImagen($file)
     {
         if ($this->validateImageFile($file, 500, 500)) {
@@ -160,6 +172,16 @@ class Cliente extends Validator{
     public function getEstadoError()
     {
         return $this->estadoError;
+    }
+    
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function getDiffDays()
+    {
+        return $this->diff_days;
     }
 
     public function getImagen()
@@ -255,7 +277,7 @@ class Cliente extends Validator{
     }
 
     public function checkEmail( $email ){
-        $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen FROM cliente WHERE email = ?';
+        $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen, abs(fecha_clave :: date - NOW() :: date ) as diff_days FROM cliente WHERE email = ?';
         $params = array($email);
         if ($data = Database::getRow($sql, $params)) {
             $this->idCliente = $data['idcliente'];
@@ -265,6 +287,7 @@ class Cliente extends Validator{
             $this->telefono = $data['telefono'];
             $this->usuario = $data['usuario'];
             $this->imagen = $data['imagen'];
+            $this->diff_days = $data['diff_days'];
             return true;
         } else {
             return false;
@@ -277,6 +300,27 @@ class Cliente extends Validator{
         $params = array($this->idCliente);
         $data = Database::getRow($sql, $params);
         return password_verify( $clave, $data[ 'clave' ] );
+    }
+
+    public function addToken()
+    {
+        $this->token = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 8));
+        $sql = 'UPDATE cliente 
+                SET token_recuperar_clave = ?, fecha_token = DEFAULT 
+                WHERE idcliente = ?';
+        $params = array($this->token, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function checkToken(){
+        $sql = 'SELECT idcliente FROM cliente WHERE token_recuperar_clave = ? AND fecha_token >= NOW()';
+        $params = array($this->token);
+        if ($data = Database::getRow($sql, $params)) {
+            $this->idCliente = $data['idcliente'];
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function createCliente()

@@ -355,7 +355,7 @@ if ( isset( $_GET['action'] ) ) {
                                 $result['exception'] = 'Ocurrio un error al enviar el código de recuperación enviado';
                             }
                         } else {
-                            $result['exception'] = Database::getException();
+                            $result['exception'] = Database::getException().' Código incorrecto';
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';

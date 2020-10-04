@@ -110,18 +110,6 @@ class Administrador extends Validator{
         }
     }
 
-    public function setFechaClave($value)
-    {
-        if ($value != null) {
-            $value = new DateTime($value);
-            $today = new DateTime(date('Y-m-d'));
-            $this->fecha_clave = $value->diff($today);
-            //echo $this->fecha_clave->format('%R%a');
-        } else {
-            $this->fecha_clave = '+90';
-        }
-    }
-
     /*
     *   Métodos para obtener valores de los atributos.
     */
