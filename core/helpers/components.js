@@ -383,6 +383,51 @@ $(document).ready(function () {
     sidebarActive();
 });
 
+function lineGraph( canvas, xAxis, yAxis, legend, title )
+{
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = $( '#' + canvas );
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart( context, {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                backgroundColor: '#c185ff',
+                borderColor: '#a044ff',
+                borderWidth: 0
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: title
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+    });
+}
+
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+    sidebarActive();
+});
+
 function pieGraph( canvas, xAxis, yAxis, legend, title)
 {
     // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.

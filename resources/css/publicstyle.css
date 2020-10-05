@@ -214,6 +214,7 @@ footer .logo{
 	height: 100vh;
 }
 
+
 .cover--sizing{
 	height: calc(100vh + 70px);
 }
@@ -459,7 +460,7 @@ footer .logo{
 	background-image: linear-gradient(to right, rgba(175,122,255,1) 0%, rgba(146,80,247,1) 40%, rgba(96,15,218,1) 100%);
 	border: none;
 	height: 2.5rem;
-	width: 12rem;
+	width: 10em;
 	border-radius: 45px;
 	transition: 0.5s;
 	background-size: 200% auto;
@@ -509,6 +510,10 @@ footer .logo{
 
 .bg--purple{
 	background-color: rgba(146,80,247,1)!important;
+}
+
+.bg--pink{
+	background-color: #f5afb6;!important;
 }
 
 .bg--light-blue{
@@ -589,3 +594,14 @@ footer .logo{
 .image-upload>input {
   display: none;
 }
+
+img.img--sizing{
+	max-width: 300px!important;
+}
+
+.text--big {
+  font-size: 7.5em;
+  margin: 15px 0px;
+  font-weight:bold;
+}
+

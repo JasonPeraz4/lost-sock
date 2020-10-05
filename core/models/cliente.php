@@ -11,7 +11,10 @@ class Cliente extends Validator{
     private $telefono = null; 
     private $usuario = null;
     private $estado = null;
+    private $estadoError = null;
     private $clave = null;
+    private $token = null;
+    private $diff_days = null;
     private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/clientes/';
@@ -94,8 +97,18 @@ class Cliente extends Validator{
 
     public function setEstado($value)
     {
-        if ($this->validateBoolean($value)) {
+        if ($value >= 0) {
             $this->estado = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setToken($value)
+    {
+        if ($this->validateToken($value)) {
+            $this->token = $value;
             return true;
         } else {
             return false;
@@ -154,6 +167,21 @@ class Cliente extends Validator{
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    public function getEstadoError()
+    {
+        return $this->estadoError;
+    }
+    
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function getDiffDays()
+    {
+        return $this->diff_days;
     }
 
     public function getImagen()
@@ -220,14 +248,36 @@ class Cliente extends Validator{
         $sql = 'SELECT estado FROM cliente WHERE email = ?';
         $params = array($email);
         $data = Database::getRow($sql, $params);
-        if ( $data['estado'] == 1 ) {
-            return true;
-        } else {
-            return false;
+        // Se compara el número del estado para establecer un mensaje de error.
+        switch ($data['estado']) {
+            case 1:
+                $this->estadoError = 'Existe una sesión activa en esta cuenta';
+                return false;
+                break;
+            case 2:
+                $this->estadoError = 'La cuenta se encuentra bloqueada temporalmente';
+                return false;
+                break;
+            case 3:
+                $this->estadoError = 'La cuenta ha sido deshabilitada';
+                return false;
+                break;
+            default:
+                return true;
         }
     }
+
+    public function updateEstado()
+    {
+        $sql = 'UPDATE cliente 
+                SET estado = ?
+                WHERE idcliente = ?';
+        $params = array($this->estado, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
     public function checkEmail( $email ){
-        $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen FROM cliente WHERE email = ?';
+        $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen, abs(fecha_clave :: date - NOW() :: date ) as diff_days FROM cliente WHERE email = ?';
         $params = array($email);
         if ($data = Database::getRow($sql, $params)) {
             $this->idCliente = $data['idcliente'];
@@ -237,6 +287,7 @@ class Cliente extends Validator{
             $this->telefono = $data['telefono'];
             $this->usuario = $data['usuario'];
             $this->imagen = $data['imagen'];
+            $this->diff_days = $data['diff_days'];
             return true;
         } else {
             return false;
@@ -248,7 +299,24 @@ class Cliente extends Validator{
         $sql = 'SELECT clave FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         $data = Database::getRow($sql, $params);
-        if (password_verify( $clave, $data[ 'clave' ] )) {
+        return password_verify( $clave, $data[ 'clave' ] );
+    }
+
+    public function addToken()
+    {
+        $this->token = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 8));
+        $sql = 'UPDATE cliente 
+                SET token_recuperar_clave = ?, fecha_token = DEFAULT 
+                WHERE idcliente = ?';
+        $params = array($this->token, $this->idCliente);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function checkToken(){
+        $sql = 'SELECT idcliente FROM cliente WHERE token_recuperar_clave = ? AND fecha_token >= NOW()';
+        $params = array($this->token);
+        if ($data = Database::getRow($sql, $params)) {
+            $this->idCliente = $data['idcliente'];
             return true;
         } else {
             return false;
@@ -291,7 +359,7 @@ class Cliente extends Validator{
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'UPDATE cliente 
-                SET clave = ? WHERE idcliente = ?';
+                SET clave = ?, fecha_clave = NOW() WHERE idcliente = ?';
         $params = array($hash, $this->idCliente);
         return Database::executeRow($sql, $params);
     }

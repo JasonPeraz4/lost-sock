@@ -3,6 +3,7 @@ require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/cliente.php');
 require_once('../../models/direccion.php');
+require_once('../../helpers/mail.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -11,6 +12,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new Cliente;
     $direccion = new Direccion;
+    $mail = new Mail;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
@@ -18,11 +20,24 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'logout':
-                if (session_destroy()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
+                if ($cliente->setEstado(0)) {
+                    if ($cliente->setIdCliente($_SESSION['idcliente'])) {
+                        if ($cliente->updateEstado()) {
+                            unset($_SESSION['idcliente']);
+                            if ( !isset( $_SESSION['idcliente']) ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Sesión cerrada con exito';
+                            } else {
+                                $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                            }
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al cerrar la sesión en el servidor';
+                        }
+                    } else {
+                        $result['exception'] = 'Identificador del cliente inválido';
+                    }
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                    $result['exception'] = 'Estado inválido';
                 }
                 break;
             case 'readProfile':
@@ -120,19 +135,24 @@ if (isset($_GET['action'])) {
                 if ( $cliente->setIdCliente( $_SESSION[ 'idcliente' ] ) ) {
                     $_POST = $cliente->validateForm( $_POST );
                     if ( $cliente->checkClave( $_POST[ 'claveactual' ] ) ) {
-                        if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
-                            if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
-                                if ( $cliente->changePassword() ) {
-                                    $result['status'] = 1;
-                                    $result['message'] = 'Contraseña actualizada con correctamente';
+                        if ( $_POST[ 'clave1' ] != $_POST[ 'claveactual' ] ) {
+                            if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
+                                    if ( $cliente->changePassword() ) {
+                                        $result['status'] = 1;
+                                        $result['message'] = 'Contraseña actualizada con correctamente';
+                                        $_SESSION['diff_days_cliente'] = 0;
+                                    } else {
+                                        $result['exception'] = Database::getException();
+                                    }
                                 } else {
-                                    $result['exception'] = Database::getException();
+                                    $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
                                 }
                             } else {
-                                $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                                $result['exception'] = 'Las contraseñas no coinciden';
                             }
                         } else {
-                            $result['exception'] = 'Las contraseñas no coinciden';
+                            $result['exception'] = 'Asegurate de ingresar una contraseña diferente a la actual';
                         }
                     } else {
                         $result['exception'] = 'Contraseña actual incorrecta';
@@ -149,67 +169,103 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'register':
                 $_POST = $cliente->validateForm($_POST);
-                if ( $cliente->setNombres($_POST['nombres']) ) {
-                    if ( $cliente->setApellidos($_POST['apellidos']) ) {
-                        if ( $cliente->setTelefono( $_POST[ 'telefono' ] ) ) {
-                            if ( !$cliente->checkExist( 'telefono', $_POST[ 'telefono' ] ) ) {
-                                if ( $cliente->setEmail($_POST['email']) ) {
-                                    if ( !$cliente->checkExist( 'email', $_POST[ 'email' ] ) ) {
-                                        if ( $cliente->setUsuario($_POST['usuario']) ) {
-                                            if ( !$cliente->checkExist( 'usuario', $_POST[ 'usuario' ] ) ) {
-                                                if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
-                                                    if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
-                                                        if ( $cliente->createCliente() ) {
-                                                            if ( $direccion->setIdCliente( $cliente->getIdCliente() ) ) {
-                                                                if ( $direccion->setDireccion( $_POST[ 'direccion' ] ) ) {
-                                                                    if ( $direccion->setIdDepartamento( $_POST[ 'departamento_direccion' ] ) ) {
-                                                                        if ( $direccion->createDireccion() ) {                
-                                                                            $result['status'] = 1;
-                                                                            $result['message'] = '¡Registrado correctamente! Inicia sesión con tu nueva cuenta';
+                // Se sanea el valor del token para evitar datos maliciosos.
+                $token = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
+                if ($token) {
+                    $secretKey = '6LfnctEZAAAAAFAie5FVHAjBivq9KzXLwsJ5-LZ6';
+                    $ip = $_SERVER['REMOTE_ADDR'];
+
+                    $data = array(
+                        'secret' => $secretKey,
+                        'response' => $token,
+                        'remoteip' => $ip
+                    );
+
+                    $options = array(
+                        'http' => array(
+                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                            'method'  => 'POST',
+                            'content' => http_build_query($data)
+                        ),
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false
+                        )
+                    );
+
+                    $url = 'https://www.google.com/recaptcha/api/siteverify';
+                    $context  = stream_context_create($options);
+                    $response = file_get_contents($url, false, $context);
+                    $captcha = json_decode($response, true);
+
+                    if ($captcha['success']) {
+                        if ( $cliente->setNombres($_POST['nombres']) ) {
+                            if ( $cliente->setApellidos($_POST['apellidos']) ) {
+                                if ( $cliente->setTelefono( $_POST[ 'telefono' ] ) ) {
+                                    if ( !$cliente->checkExist( 'telefono', $_POST[ 'telefono' ] ) ) {
+                                        if ( $cliente->setEmail($_POST['email']) ) {
+                                            if ( !$cliente->checkExist( 'email', $_POST[ 'email' ] ) ) {
+                                                if ( $cliente->setUsuario($_POST['usuario']) ) {
+                                                    if ( !$cliente->checkExist( 'usuario', $_POST[ 'usuario' ] ) ) {
+                                                        if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                                                            if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
+                                                                if ( $cliente->createCliente() ) {
+                                                                    if ( $direccion->setIdCliente( $cliente->getIdCliente() ) ) {
+                                                                        if ( $direccion->setDireccion( $_POST[ 'direccion' ] ) ) {
+                                                                            if ( $direccion->setIdDepartamento( $_POST[ 'departamento_direccion' ] ) ) {
+                                                                                if ( $direccion->createDireccion() ) {                
+                                                                                    $result['status'] = 1;
+                                                                                    $result['message'] = '¡Registrado correctamente! Inicia sesión con tu nueva cuenta';
+                                                                                } else {
+                                                                                    $result['exception'] = Database::getException();
+                                                                                }
+                                                                            } else {
+                                                                                $result['exception'] = 'Departamento selelcionado no válido';
+                                                                            }
                                                                         } else {
-                                                                            $result['exception'] = Database::getException();
+                                                                            $result['exception'] = 'Dirección no válida';
                                                                         }
                                                                     } else {
-                                                                        $result['exception'] = 'Departamento selelcionado no válido';
+                                                                        $result['exception'] = 'Identificador del cliente no válido';
                                                                     }
                                                                 } else {
-                                                                    $result['exception'] = 'Dirección no válida';
+                                                                    $result['exception'] = Database::getException();
                                                                 }
                                                             } else {
-                                                                $result['exception'] = 'Identificador del cliente no válido';
+                                                                $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
                                                             }
                                                         } else {
-                                                            $result['exception'] = Database::getException();
+                                                            $result['exception'] = 'Las contraseñas no coinciden';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                                                        $result['exception'] = 'Este usuario ya se encuentra registrado';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Las contraseñas no coinciden';
+                                                    $result['exception'] = 'Usuario no válido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Este usuario ya se encuentra registrado';
+                                                $result['exception'] = 'Este correo electrónico ya se encuentra registrado';
                                             }
                                         } else {
-                                            $result['exception'] = 'Usuario no válido';
+                                            $result['exception'] = 'Dirección de correo no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Este correo electrónico ya se encuentra registrado';
+                                        $result['exception'] = 'Este teléfono ya se encuentra registrado';
                                     }
                                 } else {
-                                    $result['exception'] = 'Dirección de correo no válida';
+                                    $result['exception'] = 'Teléfono no válido';
                                 }
                             } else {
-                                $result['exception'] = 'Este teléfono ya se encuentra registrado';
+                                $result['exception'] = 'Los apellidos solo deben contener letras';
                             }
                         } else {
-                            $result['exception'] = 'Teléfono no válido';
+                            $result['exception'] = 'Los nombres solo deben contener letras';
                         }
                     } else {
-                        $result['exception'] = 'Los apellidos solo deben contener letras';
+                        $result['exception'] = 'No eres un humano';
                     }
                 } else {
-                    $result['exception'] = 'Los nombres solo deben contener letras';
+                    $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
             case 'login':
@@ -225,13 +281,16 @@ if (isset($_GET['action'])) {
                                 $_SESSION['apellidos'] = $cliente->getApellidos();
                                 $_SESSION['telefono'] = $cliente->getTelefono();
                                 $_SESSION['imagen'] = $cliente->getImagen();
+                                $_SESSION['diff_days_cliente'] = $cliente->getDiffDays();
+                                $cliente->setEstado(1);
+                                $cliente->updateEstado();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {
                                 $result['exception'] = 'Contraseña incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Tu cuenta se encuentra inhabilitada';
+                            $result['exception'] = $cliente->getEstadoError();
                         }
                     } else {
                         $result['exception'] = 'Correo electrónico incorrecto';
@@ -240,6 +299,63 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';
                 }               
                 break;
+            case 'sendMail':
+                $_POST = $cliente->validateForm( $_POST );
+                if ( $cliente->setEmail($_POST['email']) ) {
+                    if ( $cliente->checkEmail( $_POST['email'] )) {
+                        if ( $cliente->addToken() ) {
+                            if ( $mail->sendMail($cliente->getEmail(), $cliente->getNombres().' '.$cliente->getApellidos(), $cliente->getToken()) ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Código de recuperación enviado. Revisa tu e-mail';
+                            } else {
+                                $result['exception'] = 'Ocurrio un error al enviar el código de recuperación enviado';
+                            }
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'Correo electrónico incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Ingresa tu dirección de correo electrónico';
+                }               
+            break;
+            case 'verifyToken':
+                $_POST = $cliente->validateForm( $_POST );
+                if ( $cliente->setToken($_POST['token']) ) {
+                    if ( $cliente->checkToken()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Código de recuperación correcto';
+                        $_SESSION['idclientrecuperar'] = $cliente->getIdCliente();
+                    } else {
+                        $result['exception'] = Database::getException().' Código incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Asegurate de ingresar el código correctamente';
+                }               
+            break;
+            case 'changePassword':
+                if ( $cliente->setIdCliente( $_SESSION[ 'idclientrecuperar' ] ) ) {
+                    $_POST = $cliente->validateForm( $_POST );
+                    if ( $_POST[ 'clave1' ] == $_POST[ 'clave2' ] ) {
+                        if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
+                            if ( $cliente->changePassword() ) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Contraseña actualizada con correctamente';
+                                unset($_SESSION['idclientrecuperar']);
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = 'La contraseña no cumple con los requerimientos mínimos';
+                        }
+                    } else {
+                        $result['exception'] = 'Las contraseñas no coinciden';
+                    }
+                } else {
+                    $result['exception'] = 'Identificador incorrecto';
+                }
+            break;
             default:
                 exit('Acción no disponible fuera de la sesión');
         }

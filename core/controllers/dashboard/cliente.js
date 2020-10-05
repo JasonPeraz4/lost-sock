@@ -18,7 +18,7 @@ function fillTable(dataset) {
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.forEach(function (row) {
         // Se establece un icono para el estado del producto.
-        (row.estado == 1) ? txt = 'Activo' : txt = 'Inactivo';
+        ( row.estado == 0 ) ? txt = 'Desconectado' : ( row.estado == 1 ) ? txt = 'Conectado' : ( row.estado == 2 ) ? txt = 'Bloqueado' : txt = 'Deshabilitado';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
@@ -31,7 +31,7 @@ function fillTable(dataset) {
                 <td>${txt}</td>
                 <td>
                     <i class="fas fa-info mx-1 text-info" onclick="openSuscripciones(${row.idcliente})" data-toggle="tooltip" title="Más información"></i>
-                    <i class="fas ${row.estado == 1 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${+!(Number(row.estado))}, ${row.idcliente})"  data-toggle="tooltip" title="Estado"></i>
+                    <i class="fas ${row.estado == 3 ? "fa-eye-slash" : "fa-eye"} mx-1 text-danger" onclick="updateEstado(${row.estado}, ${row.idcliente})"  data-toggle="tooltip" title="Estado"></i>
                     <a class="btn btn-transparent custom--button" href="../../core/reports/dashboard/ordenesCliente.php" target="_blank" role="button" onclick="finishOrder()"><i class= "far fa-file"></i></a>
                 </td>
             </tr>
@@ -63,10 +63,11 @@ function fillTable(dataset) {
 
 // Función que prepara formulario para modificar un registro.
 function updateEstado(estado, id) {
+    ( estado == 3 ) ? estado = 0 : estado = 3;
     $.ajax({
         dataType: 'json',
         url: API_CLIENTE + 'status',
-        data: { estado: estado, id: id },
+        data: { estado: estado, idcliente: id },
         type: 'post'
     })
         .done(function (response) {

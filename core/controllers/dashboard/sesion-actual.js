@@ -166,7 +166,7 @@ $( '#password-form' ).submit(function( event ) {
         // Se comprueba si la API ha retornado una respuesta satisfactoria, de lo contrario se muestra un mensaje de error.
         if ( response.status ) {
             $( '#password-form' )[0].reset();
-            sweetAlert( 1, response.message, null );
+            sweetAlert( 1, response.message, 'admin-settings.php' );
         } else {
             sweetAlert( 2, response.exception, null );
         }

@@ -3,7 +3,7 @@ require_once('../../core/helpers/admin-template.php');
 Page::headerTemplate('Registrarse', 'Registrarse')
 ?>
 <!-- Formulario de inicio de sesión -->
-<form method="post" id="signin-form">
+<form method="post" id="signin-form" autocomplete="off">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="nombres">Nombres</label>
