@@ -47,7 +47,7 @@ class Report extends FPDF
     */
     public function Header()
     {
-
+        //se coloca el logo de la tienda  
         $this->Image('../../../resources/img/logos.png',15,15,-305);
         $this->SetFont('Arial','B',15);
         //Se le da color al titulo principal
@@ -58,7 +58,9 @@ class Report extends FPDF
         $this->SetFont('Arial','',15);
         $this->SetTextColor(50);
         //Se establece el titulo secundario
-        $this->Cell(-137,44,utf8_decode($this->title),0,0, 'C');   
+        $this->Cell(-137,44,($this->$title),0,0, 'C');   
+        //Se establece el titulo del documento
+        $this->SetTitle('Ordenes del cliente', true);
         //Datos del día del reporte
         $this->SetFont('Arial','',12);
         // Se imprime una celda vacía ficticia como un espaciador vertical
@@ -93,6 +95,7 @@ class Report extends FPDF
         $this->SetY(-15);
         // Se establece la fuente para el número de página.
         $this->SetFont('Arial', 'I', 8);
+        //Se le da color a la fuente del pie 
         $this->SetTextColor(40);
         // Se imprime una celda con el número de página.
         $this->Cell(0, 10, utf8_decode('Página ').$this->PageNo().'/{nb}', 0, 0, 'C');

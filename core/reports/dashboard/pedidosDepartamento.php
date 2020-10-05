@@ -18,7 +18,6 @@ ini_set('date.timezone', 'America/El_Salvador');
 // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en las páginas web.
 session_start();
 
-
 // Se verifica si un cliente ha iniciado sesión para generar el documento, de lo contrario se direcciona a main.php
 if (isset($_SESSION['idadministrador'])) {   
     $pdf->AliasNbPages();
@@ -99,11 +98,10 @@ if (isset($_SESSION['idadministrador'])) {
     } else {
         $pdf->Cell(0, 10, utf8_decode('No hay tipos para mostrar'), 1, 1);
     }
-    //Se envia el proyecto al navegador y se manda a llamar el método footer
-
-    // Se establece la posición para el número de página (a 15 milimetros del final).
-    $pdf->Output();   
     
+
+    //Se envia el proyecto al navegador y se manda a llamar el método footer
+    $pdf->Output();   
 } else {
     header('location:../../../views/dashboard/clients.php');
 }
