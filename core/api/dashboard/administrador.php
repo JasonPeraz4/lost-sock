@@ -5,20 +5,45 @@ require_once('../../models/administrador.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if ( isset( $_GET['action'] ) ) {
-    // Se crea una sesión o se reanuda la sesión actual para poder utilizar variables sde sesión en el script.
+    // Se crea una sesión o se reanuda la sesión actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se intancia la clase correspondiente.
     $administrador = new Administrador;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if ( isset( $_SESSION['idadministrador'] ) ) {
+    if ( isset( $_SESSION['idadministrador']) /*&& isset($_SESSION['tiempo'])*/) {
+        
+        /*
+        //Tiempo en segundos para dar vida a la sesión.
+        $inactivo = 60;//1 min en este caso.
+
+        //Calculamos tiempo de vida inactivo.
+        $vida_session = time() - $_SESSION['tiempo'];
+
+            //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
+            if($vida_session > $inactivo)
+            {
+                //Removemos sesión.
+                unset($_SESSION['idadministrador']);             
+                //Redirigimos pagina.
+                header('Location: ../../../views/dashboard/index.php');
+
+                exit();
+            } else {  // si no ha caducado la sesion, actualizamos
+                $_SESSION['tiempo'] = time();
+                exit();
+            }
+        
+            */
+
         switch ( $_GET['action'] ){
             case 'logout':
-                if (session_destroy()) {
+                if ( 1 === 1 ){
+                    unset($_SESSION['idadministrador']);
                     $result['status'] = 1;
                     $result['message'] = 'Sesión cerrada con exito';
-                } else {
+                } else{
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
             break;
@@ -222,6 +247,8 @@ if ( isset( $_GET['action'] ) ) {
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+        
+
         switch ( $_GET['action'] ){
             case 'readAll':
                 if ( $administrador->readAllAdministradores() ) {
@@ -279,6 +306,7 @@ if ( isset( $_GET['action'] ) ) {
                                 $_SESSION['usuario'] = $administrador->getUsuario();
                                 $_SESSION['nombres'] = $administrador->getNombres();
                                 $_SESSION['apellidos'] = $administrador->getApellidos();
+                                $_SESSION['tiempo'] = time();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {
