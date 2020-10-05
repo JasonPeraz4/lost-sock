@@ -70,7 +70,7 @@ function graficaGanancias()
                 ganancia.push( row.ganancia );
             });
             // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
-            barGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (en dólares)', 'Ganancias por mes' );
+            lineGraph( 'chGanancias', mes, ganancia, 'Ganancias del mes (en dólares)', 'Ganancias por mes' );
         } else {
             $( '#chGanacias' ).remove();
         }
@@ -107,7 +107,7 @@ function graficaSuscripciones()
                 console.log(ganancia);
             });
             // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
-            barGraph( 'chSuscripciones', plan, ganancia, 'Ganancias (dólares)', 'Ingresos por suscripciones' );
+            lineGraph( 'chSuscripciones', plan, ganancia, 'Ganancias (dólares)', 'Ingresos por suscripciones' );
         } else {
             $( '#chSuscripciones' ).remove();
         }
