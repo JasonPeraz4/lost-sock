@@ -293,7 +293,8 @@ if (isset($_GET['action'])) {
                             $result['exception'] = $cliente->getEstadoError();
                         }
                     } else {
-                        $result['exception'] = 'Correo electrónico incorrecto';
+                        ($cliente->getIntentos()==3) ? $result['exception'] = 'Has ingresado 3 veces mal la contraseña, tu cuenta ha sido bloqueada'
+                                : $result['exception'] = 'Contraseña incorrecta';
                     }
                 } else {
                     $result['exception'] = 'Asegurate de ingresar tus datos para iniciar sesión';

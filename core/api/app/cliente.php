@@ -63,7 +63,8 @@ if( $method == 'POST' || $method == 'GET' ){
                                 $result['exception'] = 'Cliente inexistente';
                             }
                         } else {
-                            $result['exception'] = 'Contraseña incorrecta';
+                            ($cliente->getIntentos()==3) ? $result['exception'] = 'Has ingresado 3 veces mal la contraseña, tu cuenta ha sido bloqueada'
+                                : $result['exception'] = 'Contraseña incorrecta';
                         }
                     } else {
                         $result['exception'] = $cliente->getEstadoError();

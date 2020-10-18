@@ -15,6 +15,7 @@ class Cliente extends Validator{
     private $clave = null;
     private $token = null;
     private $diff_days = null;
+    private $intentos = 0;
     private $imagen = null;
     private $archivo = null;
     private $ruta = '../../../resources/img/clientes/';
@@ -184,6 +185,11 @@ class Cliente extends Validator{
         return $this->diff_days;
     }
 
+    public function getIntentos()
+    {
+        return $this->intentos;
+    }
+
     public function getImagen()
     {
         return $this->imagen;
@@ -277,10 +283,14 @@ class Cliente extends Validator{
     }
 
     public function checkEmail( $email ){
-        $sql = 'SELECT idCliente, nombres, apellidos, telefono, usuario, imagen, abs(fecha_clave :: date - NOW() :: date ) as diff_days FROM cliente WHERE email = ?';
+        $sql = 'SELECT idCliente, nombres, apellidos, telefono, email, usuario, imagen, intentos_inicio_sesion, abs(fecha_clave :: date - NOW() :: date ) as diff_days FROM cliente WHERE email = ?';
         $params = array($email);
         if ($data = Database::getRow($sql, $params)) {
             $this->idCliente = $data['idcliente'];
+            $this->intentos = $data['intentos_inicio_sesion'];
+            if ($this->email == $data['email']) {
+                $this->intentos++;
+            }
             $this->email = $email;
             $this->nombres = $data['nombres'];
             $this->apellidos = $data['apellidos'];
@@ -299,7 +309,26 @@ class Cliente extends Validator{
         $sql = 'SELECT clave FROM cliente WHERE idcliente = ?';
         $params = array($this->idCliente);
         $data = Database::getRow($sql, $params);
-        return password_verify( $clave, $data[ 'clave' ] );
+        if (password_verify( $clave, $data[ 'clave'] )) {
+            $this->intentos = 0;
+            $this->handleIntentosInicio();
+            return true;
+        } else {
+            if ($this->intentos == 3) {
+                $this->setEstado(2);
+                $this->updateEstado();
+                $this->intentos = 0;
+            }
+            $this->handleIntentosInicio();
+            return false;
+        }
+    }
+
+    public function handleIntentosInicio( )
+    {
+        $sql = 'UPDATE cliente SET intentos_inicio_sesion = ? WHERE idcliente = ?';
+        $params = array($this->intentos, $this->idCliente);
+        Database::executeRow($sql, $params);
     }
 
     public function addToken()

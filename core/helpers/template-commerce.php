@@ -99,7 +99,7 @@ class Page {
             }
         } else {
             // Se verifica si la página web actual es diferente a cart.php (Carrito) y a account.php (Ajustes del cliente) para direccionar a index.php, de lo contrario se muestra un menú vacío.
-            if ($filename != 'cart.php' && $filename != 'account.php' && ($filename != 'recover-pass.php' && isset($_SESSION[ 'idadminrecuperar' ]))) {
+            if ($filename != 'cart.php' && $filename != 'account.php' && $filename != 'recover-pass.php') {
                 print('
                     <!-- Parte derecha del nav -->
                     <div class="nav-right">

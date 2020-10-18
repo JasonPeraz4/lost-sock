@@ -12,7 +12,8 @@ CREATE TABLE cliente(
 	estado INT DEFAULT 0 NOT NULL,
 	fecha_clave DATE DEFAULT NOW(),
 	token_recuperar_clave VARCHAR(25),
-	fecha_token TIMESTAMP DEFAULT (NOW()+interval '5 min')	
+	fecha_token TIMESTAMP DEFAULT (NOW()+interval '5 min'),
+	intentos_inicio_sesion INTEGER DEFAULT 0	
 );
 
 CREATE TABLE talla(
@@ -239,19 +240,19 @@ VALUES	(DEFAULT, 'Jason Anthony ', 'Peraza Cruz', 'jasonapcx@gmail.com', 'jasonp
 		(DEFAULT, 'Rafael Alejandro', 'Anaya Romero', 'rafaelanayomero@gmail.com', 'rafaelanaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, '1', NOW());
 
 INSERT INTO cliente 
-VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'jasonapcx@gmail.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', '7957-0450', 'luunavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', '7967-4338', 'yanavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', '7452-3010', 'djnavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', '7033-6064', 'albacanas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', '6153-2318', 'davidnavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', '7020-6064', 'sofianavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', '7033-7064', 'alitanavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com','7845-1304','rufux','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', '7815-6714', 'juananaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', '7754-1264', 'marcosdvm', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', '6678-4983', 'victorventura', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW()),
-		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com','7934-5127','marcosgranillo','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT, NOW());
+VALUES	(DEFAULT, 'Jason Anthony', 'Peraza Cruz', 'jasonapcx@gmail.com', '7878-9562', 'jasonpcx', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Ana Laura', 'Navas Cañas', 'luunavasv@gmail.com', '7957-0450', 'luunavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Yoselin Abigail', 'Navas Cañas', 'yanavasv@gmail.com', '7967-4338', 'yanavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'David José', 'Navas Cañas', 'djnavas@gmail.com', '7452-3010', 'djnavasv', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Alba Milagro', 'Cañas de Navas', 'alba@gmail.com', '7033-6064', 'albacanas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'José David', 'Navas Chavarría', 'david@gmail.com', '6153-2318', 'davidnavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Sofía Camila', 'Navas Perla', 'sofi@gmail.com', '7020-6064', 'sofianavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Angela Isabel', 'Navas Perla', 'alita@gmail.com', '7033-7064', 'alitanavas', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Rafael Alejandro','Anaya Romero','rafael@gmail.com','7845-1304','rufux','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Juan Carlos', 'Anaya Rodriguez', 'juan@gmail.com', '7815-6714', 'juananaya', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Marcos Javier', 'Hernandez Menjivar', 'marcos@hernandez.com', '7754-1264', 'marcosdvm', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Victor Alejandro', 'Ventura de Paz', 'victor@ventura.com', '6678-4983', 'victorventura', '$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO', DEFAULT, DEFAULT, NOW(), DEFAULT),
+		(DEFAULT, 'Marcos Benjamin','Granillo Flores','marcos@gmail.com','7934-5127','marcosgranillo','$2y$10$dhPILZIJgBKY4x5GaOLDsuQV56JCb1zpKtjL6cQTLpy5RicBJmWeO',DEFAULT, DEFAULT, NOW(), DEFAULT);
 
 INSERT INTO direccion
 VALUES	(DEFAULT, 'Final autopista nte. y quinta avenida nte.', 1, 1),
