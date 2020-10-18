@@ -140,7 +140,7 @@ if (isset($_GET['action'])) {
                                 if ( $cliente->setClave( $_POST[ 'clave1' ] ) ) {
                                     if ( $cliente->changePassword() ) {
                                         $result['status'] = 1;
-                                        $result['message'] = 'Contraseña actualizada con correctamente';
+                                        $result['message'] = 'Contraseña actualizada correctamente';
                                         $_SESSION['diff_days_cliente'] = 0;
                                     } else {
                                         $result['exception'] = Database::getException();
