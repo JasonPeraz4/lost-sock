@@ -282,7 +282,7 @@ class Orden extends Validator
     // Método para mostra el detalle de la compra
     public function readCompraDetail()
     {
-        $sql = 'SELECT total as subtotal, costoenvio, (total+costoenvio) AS total, iddireccion 
+        $sql = 'SELECT idcompra, total as subtotal, costoenvio, (total+costoenvio) AS total, iddireccion 
                 FROM compra WHERE idCompra = ?';
         $params = array($this->idCompra);
         return Database::getRow($sql, $params);
