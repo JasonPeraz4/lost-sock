@@ -82,14 +82,18 @@ if( $method == 'POST' || $method == 'GET' ){
             }
             break;
         case 'readCompraDetail':
-            if ( $compra->setIdCompra( $objArray['idcompra'] ) ) {
-                if ( $result[ 'dataset' ] = $compra->readCompraDetail() ) {
-                    $result['status'] = 1;
+        if ($compra->setIdCliente($objArray['idcliente'])) {
+                if ($compra->readCompra()) {
+                    if ( $result[ 'dataset' ] = $compra->readCompraDetail() ) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Compra no existente';
+                    }
                 } else {
-                    $result['exception'] = 'Compra no existente';
+                    $result['exception'] = 'Ocurrió un problema al obtener el pedido';
                 }
             } else {
-                $result['exception'] = 'Identificador no válido';
+                $result['exception'] = 'Cliente incorrecto';
             }
             break;
         case 'updateDetail':
@@ -151,7 +155,7 @@ if( $method == 'POST' || $method == 'GET' ){
         case 'finishOrder':
             if ($compra->setIdCompra($objArray['idcompra'])) {
                 if ($compra->setEstado(2)) {
-                    if ( $compra->setIdDireccion( $objArray['direccion'] ) ) {
+                    if ( $compra->setIdDireccion( $objArray['iddireccion'] ) ) {
                         if ($compra->finishOrder()) {
                             $result['status'] = 1;
                             $result['message'] = 'Compra finalizado correctamente';

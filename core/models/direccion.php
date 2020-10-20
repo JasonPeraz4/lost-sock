@@ -100,7 +100,7 @@ class Direccion extends Validator
 
     public function readDireccionesCliente()
     {
-        $sql = 'SELECT iddireccion, concat_ws(\', \', detalledireccion, departamento) 
+        $sql = 'SELECT iddireccion, concat_ws(\', \', detalledireccion, departamento) as direccion
                 FROM cliente
                 INNER JOIN direccion USING(idcliente) INNER JOIN departamento USING(iddepartamento)
                 WHERE cliente.idcliente = ? ORDER BY iddireccion ASC';
