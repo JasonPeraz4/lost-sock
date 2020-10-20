@@ -30,11 +30,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 if( $method == 'POST' || $method == 'GET' ){
     //Decodifica un string de JSON
     $objArray = json_decode(file_get_contents('php://input'), true);
+    $objArray = $compra->validateForm( $objArray );
+                
     switch ($_REQUEST['action']) {
         case 'createDetail':
             if ($compra->setIdCliente($objArray['idcliente'])) {
                 if ($compra->readCompra()) {
-                    $objArray = $cliente->validateForm( $objArray );
                     if ($compra->setIdProducto($objArray['idproducto'])) {
                         if ($compra->setCantidad($objArray['cantidad'])) {
                             if ($compra->setPrecio($objArray['precio'])) {
@@ -93,7 +94,6 @@ if( $method == 'POST' || $method == 'GET' ){
             break;
         case 'updateDetail':
             if ($compra->setIdCompra($objArray['idcompra'])) {
-                $objArray = $cliente->validateForm( $objArray );
                 if ($compra->setIdDetalleCompra($objArray['iddetallecompra'])) {
                     if ($compra->setCantidad($objArray['cantidad'])) {
                         if ($compra->setIdTalla($objArray['talla'])) {
@@ -151,7 +151,6 @@ if( $method == 'POST' || $method == 'GET' ){
         case 'finishOrder':
             if ($compra->setIdCompra($objArray['idcompra'])) {
                 if ($compra->setEstado(2)) {
-                    $objArray = $cliente->validateForm( $objArray );
                     if ( $compra->setIdDireccion( $objArray['direccion'] ) ) {
                         if ($compra->finishOrder()) {
                             $result['status'] = 1;
