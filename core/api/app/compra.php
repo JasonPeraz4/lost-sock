@@ -179,6 +179,18 @@ if( $method == 'POST' || $method == 'GET' ){
                 $result['exception'] = 'Cliente no válido';
             }
             break;
+        case 'orderList':
+            if ($compra->setIdCliente($objArray['idcliente'])) {
+                if ($result['dataset'] = $compra->readOrdenesCliente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay órdenes registradas para este cliente';
+                }
+                break;
+            } else {
+                $result['exception'] = 'Cliente incorrecto';
+            }
+            break;
         default:
             exit('Acceso no disponible');
     }

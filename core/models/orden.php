@@ -390,9 +390,10 @@ class Orden extends Validator
                 JOIN direccion d USING(iddireccion)
                 JOIN estadoCompra ec USING(idestadocompra)
                 JOIN departamento depto USING(iddepartamento)
-                WHERE cl.idcliente = ?";
+                WHERE cl.idcliente = ? 
+                ORDER BY idcompra";
         $params = array($this->idCliente);
-        return Database::getRow($sql, $params);
+        return Database::getRows($sql, $params);
     }
 
     
