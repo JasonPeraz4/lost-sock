@@ -384,7 +384,7 @@ class Orden extends Validator
     //Reporte de ordenes usando idCliente como parametro 
     public function readOrdenesCliente()
     {
-        $sql = "SELECT idcompra , nombres , apellidos ,detalleDireccion, departamento, fechaCompra, ec.estado, total
+        $sql = "SELECT DISTINCT idcompra ,detalleDireccion, departamento, fechaCompra, ec.estado, (total+c.costoenvio) AS total 
                 FROM compra c 
                 JOIN cliente cl USING(idcliente)
                 JOIN direccion d USING(iddireccion)
